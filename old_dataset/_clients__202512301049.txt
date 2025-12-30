@@ -1,5 +1,6 @@
 |id |client_name           |country|city          |address             |zip_code|email                           |phone        |comment                   |
 |---|----------------------|-------|--------------|--------------------|--------|--------------------------------|-------------|--------------------------|
+|0  |default               |       |              |                    |        |                                |             |                          |
 |1  |CCONET                |BR     |VILA VELHA    |                    |        |cconet@cconet.com.br            |             |"Demo"                    |
 |4  |Megavig               |BR     |São Paulo     |                    |        |                                |             |"Demo Project"            |
 |6  |SERVIP TECNOLOGIA     |BR     |Serra         |                    |        |servip@serviptecnologia.com.br  |             |"Customer"                |

@@ -1,0 +1,3 @@
+|id |role_name|permissions|client_id|description|
+|---|---------|-----------|---------|-----------|
+|1  |root     |[]         |0        |[NULL]     |
