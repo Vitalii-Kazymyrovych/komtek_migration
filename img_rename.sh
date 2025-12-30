@@ -28,34 +28,59 @@ mkdir -p "${TARGET_ROOT}"
 tmpfile="$(mktemp)"
 trap 'rm -f "${tmpfile}"' EXIT
 
-jq -c '.items[] | {dir: .target_dir, name: .name_sanitized, images: .images}' "${MANIFEST}" > "${tmpfile}"
+# Build a lookup from image filename -> {name, dir}.
+jq -c '.items[] | {image: .images[], dir: .target_dir, name: .name_sanitized}' "${MANIFEST}" > "${tmpfile}"
+
+declare -A IMAGE_TO_NAME
+declare -A IMAGE_TO_DIR
 
 while IFS= read -r line; do
+  image="$(printf '%s' "${line}" | jq -r '.image')"
   dir="$(printf '%s' "${line}" | jq -r '.dir')"
   name="$(printf '%s' "${line}" | jq -r '.name')"
-  mkdir -p "${TARGET_ROOT}/${dir}"
 
-  printf '%s' "${line}" | jq -r '.images[]' | while IFS= read -r image; do
-    src="${SOURCE_DIR}/${image}"
-    if [[ ! -f "${src}" ]]; then
-      echo "Warning: missing source ${src}" >&2
-      continue
-    fi
+  if [[ -n "${IMAGE_TO_NAME[${image}]:-}" ]]; then
+    echo "Warning: duplicate mapping for ${image}; keeping first entry (${IMAGE_TO_DIR[${image}]}) and ignoring ${dir}" >&2
+    continue
+  fi
 
-    ext="${src##*.}"
-    dest="${TARGET_ROOT}/${dir}/${name}.${ext}"
-
-    # Avoid overwriting distinct files for the same person; add numeric suffix if needed.
-    if [[ -f "${dest}" ]]; then
-      idx=1
-      while [[ -f "${TARGET_ROOT}/${dir}/${name}_${idx}.${ext}" ]]; do
-        ((idx++))
-      done
-      dest="${TARGET_ROOT}/${dir}/${name}_${idx}.${ext}"
-    fi
-
-    mv "${src}" "${dest}"
-  done
+  IMAGE_TO_NAME["${image}"]="${name}"
+  IMAGE_TO_DIR["${image}"]="${dir}"
 done < "${tmpfile}"
 
-echo "Image renaming and relocation complete."
+shopt -s nullglob
+moved=0
+unmapped=0
+
+for src in "${SOURCE_DIR}"/*; do
+  [[ -f "${src}" ]] || continue
+
+  filename="$(basename "${src}")"
+  name="${IMAGE_TO_NAME[${filename}]:-}"
+  dir="${IMAGE_TO_DIR[${filename}]:-}"
+
+  if [[ -z "${name}" || -z "${dir}" ]]; then
+    echo "Warning: no mapping found for ${filename}; skipping" >&2
+    ((unmapped++))
+    continue
+  fi
+
+  mkdir -p "${TARGET_ROOT}/${dir}"
+
+  ext="${filename##*.}"
+  dest="${TARGET_ROOT}/${dir}/${name}.${ext}"
+
+  # Avoid overwriting distinct files for the same person; add numeric suffix if needed.
+  if [[ -e "${dest}" ]]; then
+    idx=1
+    while [[ -e "${TARGET_ROOT}/${dir}/${name}_${idx}.${ext}" ]]; do
+      ((idx++))
+    done
+    dest="${TARGET_ROOT}/${dir}/${name}_${idx}.${ext}"
+  fi
+
+  mv "${src}" "${dest}"
+  ((moved++))
+done
+
+echo "Completed. Moved ${moved} files; ${unmapped} files had no mapping."

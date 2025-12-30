@@ -34,3 +34,4 @@
 - 20:32 UTC — Created img_rename.sh to rename and move face list images into face_lists_new using the generated manifest.
 - 21:56 UTC — Updated /helper_scripts/face_list_items_assets.py to parse comma-separated legacy IDs so all items are retained in the manifest.
 - 21:56 UTC — Regenerated docs/face_list_items_images.json and refreshed face_lists_new directories to include all 1,596 active face list items for image renaming.
+- 22:30 UTC — Updated img_rename.sh to map face_lists files by filename against the manifest, warning on unmapped assets and avoiding duplicate moves.
