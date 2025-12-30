@@ -16,3 +16,5 @@
 - 15:28 UTC — Regenerated new_dataset/streams_202512301039.txt (existing 4 rows retained, 414 legacy rows appended), sql/streams_inserts.sql (legacy inserts only, ids >=5), and maps/streams.json (documenting preserved new rows as unmapped_new and legacy unmapped due to status/client gaps).
 - 17:05 UTC — Updated /helper_scripts/streams_migration.py to preserve only ids 1–4 from the existing dataset while rebuilding streams and to default missing addresses to empty strings for non-null inserts.
 - 17:05 UTC — Regenerated new_dataset/streams_202512301039.txt, sql/streams_inserts.sql, and maps/streams.json with non-null addresses for migrated streams; preserved ids 1–4 as unmapped_new.
+- 17:48 UTC — Added /helper_scripts/analytics_migration.py to clone stream_groups per plugin, remap client/stream/user references, and build analytics+analytics_groups artifacts.
+- 17:48 UTC — Generated analytics_groups (1875 plugin-scoped rows) and migrated analytics (698 mapped, 626 unmapped; 9 existing preserved) updating datasets, SQL scripts, and mapping files.
