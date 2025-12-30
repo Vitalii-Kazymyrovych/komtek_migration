@@ -20,3 +20,6 @@
 - 17:48 UTC — Generated analytics_groups (1875 plugin-scoped rows) and migrated analytics (698 mapped, 626 unmapped; 9 existing preserved) updating datasets, SQL scripts, and mapping files.
 - 18:12 UTC — Added /helper_scripts/event_manager_migration.py to normalize event manager rows, remap client_ids, and emit dataset/SQL/mapping outputs.
 - 18:12 UTC — Migrated event_manager (327 mapped, 5 unmapped legacy due to missing clients; 2 existing preserved) regenerating new_dataset/event_manager_202512301039.txt, sql/event_manager_inserts.sql, and maps/event_manager.json.
+- 18:32 UTC — Added /helper_scripts/alpr_lists_migration.py to normalize ALPR lists/items, remap clients/users/analytics references, and regenerate datasets/SQL/mapping artifacts.
+- 18:32 UTC — Migrated active alpr_lists (14 rows) into new_dataset/alpr_lists_202512301039.txt, generated sql/alpr_lists_inserts.sql, and created maps/alpr_lists.json with unmapped legacy lists recorded for status=-1 or missing streams.
+- 18:32 UTC — Migrated ALPR list items (466 rows tied to migrated lists) into new_dataset/alpr_list_items_202512301039.txt, generated sql/alpr_list_items_inserts.sql, and created maps/alpr_list_items.json.

@@ -1,0 +1,314 @@
+{
+  "match_keys": [
+    "name to name",
+    "client_id to client_id",
+    "status to status",
+    "streams to analytics_ids via analytics mapping",
+    "created_at to created_at"
+  ],
+  "mapped": [
+    {
+      "old_id": 2,
+      "new_id": 2,
+      "name": "",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [
+        629
+      ],
+      "unmapped_stream_ids": [
+        546
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 45,
+      "new_id": 3,
+      "name": "Truck",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 46,
+      "new_id": 4,
+      "name": "POC VSG",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 79,
+      "new_id": 5,
+      "name": "Moradores",
+      "old_client_id": 46,
+      "new_client_id": 46,
+      "analytics_ids": [
+        236
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 80,
+      "new_id": 6,
+      "name": "618 - Altos do Ipe - Garagem",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 82,
+      "new_id": 7,
+      "name": "MORADORES",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [
+        297,
+        298
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 86,
+      "new_id": 8,
+      "name": "Lista Negra",
+      "old_client_id": 87,
+      "new_client_id": 87,
+      "analytics_ids": [
+        305,
+        309,
+        310,
+        374
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 87,
+      "new_id": 9,
+      "name": "ESPANHA PLACAS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        534,
+        558
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 88,
+      "new_id": 10,
+      "name": "ANIMA PLACAS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        523
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 89,
+      "new_id": 11,
+      "name": "ANTONIO M. MACHADO PLACAS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        277,
+        344
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 90,
+      "new_id": 12,
+      "name": "GARDENS PLACAS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        551
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 92,
+      "new_id": 13,
+      "name": "SOLAR SERRANO PLACAS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 93,
+      "new_id": 14,
+      "name": "LEAF PLACAS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        607
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 94,
+      "new_id": 15,
+      "name": "teste",
+      "old_client_id": 96,
+      "new_client_id": 96,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [
+        898
+      ],
+      "status": 1
+    }
+  ],
+  "unmapped_old": [
+    {
+      "old_id": 1,
+      "name": "MORADORES",
+      "old_client_id": 0,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 34,
+      "name": "MORADORES",
+      "old_client_id": 3,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 35,
+      "name": "PRESTADOR DE SERVICOS",
+      "old_client_id": 0,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 36,
+      "name": "PLACAS CLONADAS",
+      "old_client_id": 0,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 37,
+      "name": "PLACAS CLONADAS",
+      "old_client_id": 0,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 38,
+      "name": "TERCEIRIZADOS",
+      "old_client_id": 0,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 39,
+      "name": "CAPIXABA",
+      "old_client_id": 80,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 40,
+      "name": "AEROPORTO",
+      "old_client_id": 0,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 41,
+      "name": "SEGURANCA",
+      "old_client_id": 0,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 42,
+      "name": "SUSPEITOS",
+      "old_client_id": 0,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 43,
+      "name": "TRANSPORTES",
+      "old_client_id": 0,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 44,
+      "name": "MEGAVIG SEDE",
+      "old_client_id": 0,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 47,
+      "name": "DGT Tecnologia",
+      "old_client_id": 0,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 81,
+      "name": "testkk",
+      "old_client_id": 0,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 83,
+      "name": "PRESTADORES DE SERVICOS",
+      "old_client_id": 0,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 84,
+      "name": "Placa",
+      "old_client_id": 87,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 85,
+      "name": "Placa",
+      "old_client_id": 87,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 91,
+      "name": "ESPANHA",
+      "old_client_id": 8,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 95,
+      "name": "VEICULOS COLABORADORES",
+      "old_client_id": 6,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 96,
+      "name": "FROTA SERVIP",
+      "old_client_id": 6,
+      "reason": "status -1"
+    },
+    {
+      "old_id": 97,
+      "name": "VISITANTES",
+      "old_client_id": 6,
+      "reason": "status -1"
+    }
+  ],
+  "unmapped_new": [
+    {
+      "new_id": 1,
+      "name": "",
+      "reason": "pre-existing new_dataset row"
+    }
+  ]
+}
