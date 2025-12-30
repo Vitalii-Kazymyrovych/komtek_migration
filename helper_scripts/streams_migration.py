@@ -23,6 +23,7 @@ STREAM_GROUP_MAP_PATH = Path("maps/stream_groups.json")
 USER_MAP_PATH = Path("maps/users.json")
 SQL_OUTPUT_PATH = Path("sql/streams_inserts.sql")
 MAP_OUTPUT_PATH = Path("maps/streams.json")
+PRESERVE_EXISTING_IDS = {1, 2, 3, 4}
 
 SUBSTITUTIONS = str.maketrans(
     {
@@ -148,7 +149,7 @@ def parse_pipe_table(path: Path) -> List[Dict[str, Optional[str]]]:
 
 
 def parse_existing_dataset(
-    path: Path,
+    path: Path, preserve_ids: Optional[set[int]] = None
 ) -> Tuple[Sequence[str], List[str], List[Dict[str, Any]], int]:
     """Read the current new_dataset file, preserving existing rows.
 
@@ -164,6 +165,7 @@ def parse_existing_dataset(
     headers = [header.strip() for header in header_lines[0].strip("|").split("|")]
     parsed_rows: List[Dict[str, Any]] = []
     max_id = 0
+    preserved_lines: List[str] = []
     for line in data_lines:
         cells = [cell.strip() for cell in line.strip("|").split("|")]
         row = dict(zip(headers, cells))
@@ -171,6 +173,9 @@ def parse_existing_dataset(
             row_id = int(row["id"].replace(",", ""))
         except Exception:
             continue
+        if preserve_ids is not None and row_id not in preserve_ids:
+            continue
+        preserved_lines.append(line)
         max_id = max(max_id, row_id)
         parsed_rows.append(
             {
@@ -181,7 +186,7 @@ def parse_existing_dataset(
             }
         )
 
-    return header_lines, data_lines, parsed_rows, max_id
+    return header_lines, preserved_lines, parsed_rows, max_id
 
 
 def load_id_map(path: Path) -> Dict[int, int]:
@@ -263,6 +268,8 @@ def build_records(
         if restrictions is not None:
             restrictions = {**restrictions, "creator_id": new_creator_id}
 
+        normalized_address = normalize_text(strip_outer_quotes(row.get("address"))) or ""
+
         record = StreamRecord(
             id=next_id,
             old_id=to_int(row.get("id")) or 0,
@@ -277,7 +284,7 @@ def build_records(
             lng=clean_value(row.get("lng")),
             type=normalize_text(row.get("type")),
             uuid=normalize_text(row.get("uuid")),
-            address=normalize_text(strip_outer_quotes(row.get("address"))),
+            address=normalized_address,
             params=parse_json_field(row.get("params")),
             auth=parse_json_field(row.get("auth")),
             direction=to_int(row.get("direction")),
@@ -459,7 +466,7 @@ def main() -> None:
     stream_group_map = load_id_map(STREAM_GROUP_MAP_PATH)
     user_map = load_id_map(USER_MAP_PATH)
     header_lines, existing_lines, existing_rows, max_existing_id = parse_existing_dataset(
-        NEW_STREAMS_PATH
+        NEW_STREAMS_PATH, PRESERVE_EXISTING_IDS
     )
 
     legacy_rows = parse_pipe_table(OLD_STREAMS_PATH)

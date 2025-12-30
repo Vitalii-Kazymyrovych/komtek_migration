@@ -14,3 +14,5 @@
 - 15:19 UTC — Migrated streams (414 mapped, 373 unmapped: 357 status=-1, 16 with missing client mappings) into new_dataset/streams_202512301039.txt, generated sql/streams_inserts.sql, and created maps/streams.json with creator_id remaps (unmapped creators stored as null).
 - 15:28 UTC — Updated streams migration to preserve existing new_dataset rows and remap legacy streams with new sequential ids (starting at 5) to avoid collisions.
 - 15:28 UTC — Regenerated new_dataset/streams_202512301039.txt (existing 4 rows retained, 414 legacy rows appended), sql/streams_inserts.sql (legacy inserts only, ids >=5), and maps/streams.json (documenting preserved new rows as unmapped_new and legacy unmapped due to status/client gaps).
+- 17:05 UTC — Updated /helper_scripts/streams_migration.py to preserve only ids 1–4 from the existing dataset while rebuilding streams and to default missing addresses to empty strings for non-null inserts.
+- 17:05 UTC — Regenerated new_dataset/streams_202512301039.txt, sql/streams_inserts.sql, and maps/streams.json with non-null addresses for migrated streams; preserved ids 1–4 as unmapped_new.
