@@ -1,2 +1,1877 @@
 |id |name|parent_id|plugin_name|client_id|
 |---|----|---------|-----------|---------|
+|1|ASSALTOS|0|alpr|1|
+|2|SIMULACOES|0|alpr|1|
+|3|ULTRAFARMA SANTO AMARO|0|alpr|4|
+|4|IPMED|0|alpr|6|
+|5|ESPIRAL|0|alpr|6|
+|6|SERVIP|0|alpr|6|
+|7|LUVEP|0|alpr|6|
+|8|GM INDUSTRIAL|0|alpr|6|
+|9|KOMTEK|0|alpr|0|
+|10|SHOPP LARANJEIRAS|0|alpr|6|
+|11|APRESENTACAO|0|alpr|0|
+|12|6002 - SHOWROOM|0|alpr|40|
+|13|SHOPPING VITORIA TESTE|0|alpr|40|
+|14|GDL LOGISTICA|0|alpr|40|
+|15|CAPIXABA|0|alpr|0|
+|16|0992 - COPAG|0|alpr|80|
+|17|PHD Vila Velha|0|alpr|6|
+|18|PROJETO GDL|0|alpr|0|
+|19|ESCOLA SANTA TEREZINHA|0|alpr|6|
+|20|GRUPOSEI|0|alpr|0|
+|21|BANCO SICOOB|0|alpr|84|
+|22|EPI|0|alpr|0|
+|23|ALERTAS OCR|0|alpr|1|
+|24|RIVIERA|0|alpr|6|
+|25|POC GRUPO SEI|0|alpr|84|
+|26|ANTONIO. M. MACHADO|0|alpr|8|
+|27|SEGEAGLE|0|alpr|0|
+|28|GTTAN|0|alpr|0|
+|29|CASA BRANCA|0|alpr|6|
+|30|EUROVIDROS|0|alpr|6|
+|31|AGGREGATION|0|alpr|0|
+|32|HOMOLOGACOES|0|alpr|0|
+|33|PRAIA FORT|0|alpr|0|
+|34|COND. ROSENGARTEN|0|alpr|8|
+|35|COND. SUPREMO VILA YARA|0|alpr|8|
+|36|FINERAX|0|alpr|8|
+|37|COND. SOLAR SERRANO|0|alpr|8|
+|38|COND. CINTIA|0|alpr|8|
+|39|BASE OPERACAO|0|alpr|8|
+|40|COND. ANNUNCIATA|0|alpr|8|
+|41|COND. ART ECO VIDA|0|alpr|8|
+|42|COND. ATLANTA|0|alpr|8|
+|43|COND. VILA YARA|0|alpr|8|
+|44|COND. UPTOWN|0|alpr|8|
+|45|COND. SHALON|0|alpr|8|
+|46|COND. AUSTRIA|0|alpr|8|
+|47|COND. SCORPIUS|0|alpr|8|
+|48|COND. ROMA|0|alpr|8|
+|49|COND. PRISCILA|0|alpr|8|
+|50|COND. PORTAL SAO FRANCISCO|0|alpr|8|
+|51|COND. ORQUIDEAS|0|alpr|8|
+|52|COND. MORADA DO SOL|0|alpr|8|
+|53|COND. MATRIZ|0|alpr|8|
+|54|COND. MARAPASSU|0|alpr|8|
+|55|COND. IPANEMA|0|alpr|8|
+|56|COND. FLORENCA|0|alpr|8|
+|57|COND. ESPANHA|0|alpr|8|
+|58|COND. CAMILA|0|alpr|8|
+|59|COND. BORBA GATO|0|alpr|8|
+|60|COND. BEIJA FLOR|0|alpr|8|
+|61|COND. BANDEIRANTES|0|alpr|8|
+|62|COND. ANIMA|0|alpr|8|
+|63|COND. 28 DE MAIO|0|alpr|8|
+|64|COND. AMERICA|0|alpr|8|
+|65|COND. BONFIGLIOLI|0|alpr|8|
+|66|COND. BOULEVARD|0|alpr|8|
+|67|COND. CAMPO GRANDE|0|alpr|8|
+|68|COND. CANTA GALO|0|alpr|8|
+|69|COND. CASA FLORA|0|alpr|8|
+|70|COND. CASCAIS|0|alpr|8|
+|71|COND. COQUEIROS|0|alpr|8|
+|72|COND. DIVA|0|alpr|8|
+|73|COND. FLOR DE LIRIO|0|alpr|8|
+|74|COND. GARDENS|0|alpr|8|
+|75|COND. GIUSEPPE|0|alpr|8|
+|76|COND. GOLDEN GATE|0|alpr|8|
+|77|COND. GRAND CANAL|0|alpr|8|
+|78|COND. HORTENCIAS|0|alpr|8|
+|79|COND. LA VILLETE|0|alpr|8|
+|80|COND. LIFE STYLE|0|alpr|8|
+|81|COND. MAGGIORE|0|alpr|8|
+|82|COND. MARIE|0|alpr|8|
+|83|COND. MATIAZZO|0|alpr|8|
+|84|COND. OPTION HOME|0|alpr|8|
+|85|COND. PLANALTO BUTANTA|0|alpr|8|
+|86|COND. PLAZA MORUMBI|0|alpr|8|
+|87|COND. PURUS|0|alpr|8|
+|88|COND. QUINTA DE SILVEIRAS|0|alpr|8|
+|89|COND. ROLDAO|0|alpr|8|
+|90|COND. SANTA RITA|0|alpr|8|
+|91|COND. SANTANNA|0|alpr|8|
+|92|COND. SPAZIO|0|alpr|8|
+|93|COND. TENERIFE|0|alpr|8|
+|94|COND. TERRA BRASILIS|0|alpr|8|
+|95|COND. UPSIDE|0|alpr|8|
+|96|COND. VILA ITU|0|alpr|8|
+|97|COND. VILA MARIANA|0|alpr|8|
+|98|COND. VILA VERDE|0|alpr|8|
+|99|COND. VILLAGIO|0|alpr|8|
+|100|HARAS|0|alpr|8|
+|101|PAULO TEST|0|alpr|0|
+|102|JACKPOT|0|alpr|8|
+|103|Eduacandario|0|alpr|93|
+|104|AUTOBAHN|0|alpr|6|
+|105|CN LOG|0|alpr|6|
+|106|1Project|0|alpr|0|
+|107|MONUV|0|alpr|0|
+|108|COND. LEAF|0|alpr|8|
+|109|COND. COLLINE DE NICE|0|alpr|8|
+|110|9000 - MARTEL SEGURANCA|0|alpr|96|
+|111|2000 - casa das ferragens|0|alpr|96|
+|112|8608 - GTTAM|0|alpr|97|
+|113|1147 - UBS BOA VISTA|0|alpr|4|
+|114|Stratum|0|alpr|98|
+|115|CASA DO CONSTRUTOR|0|alpr|4|
+|116|0076 - Proeng Hall|0|alpr|97|
+|117|5050 - LOJA SOLUTION|0|alpr|100|
+|118|0123 - AFFETTO PAPELARIA|0|alpr|97|
+|119|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|alpr|97|
+|120|ESTOQUE VERTEX|0|alpr|8|
+|121|ATCOM- SHOPPINGS|0|alpr|101|
+|122|MARCELO|0|alpr|90|
+|123|0085 - VITORIA FUTEBOL CLUBE|0|alpr|97|
+|124|AGRALE GALPAO|0|alpr|6|
+|125|SCARDUA|0|alpr|6|
+|126|ASSALTOS|0|face|1|
+|127|SIMULACOES|0|face|1|
+|128|ULTRAFARMA SANTO AMARO|0|face|4|
+|129|IPMED|0|face|6|
+|130|ESPIRAL|0|face|6|
+|131|SERVIP|0|face|6|
+|132|LUVEP|0|face|6|
+|133|GM INDUSTRIAL|0|face|6|
+|134|KOMTEK|0|face|0|
+|135|SHOPP LARANJEIRAS|0|face|6|
+|136|APRESENTACAO|0|face|0|
+|137|6002 - SHOWROOM|0|face|40|
+|138|SHOPPING VITORIA TESTE|0|face|40|
+|139|GDL LOGISTICA|0|face|40|
+|140|CAPIXABA|0|face|0|
+|141|0992 - COPAG|0|face|80|
+|142|PHD Vila Velha|0|face|6|
+|143|PROJETO GDL|0|face|0|
+|144|ESCOLA SANTA TEREZINHA|0|face|6|
+|145|GRUPOSEI|0|face|0|
+|146|BANCO SICOOB|0|face|84|
+|147|EPI|0|face|0|
+|148|ALERTAS OCR|0|face|1|
+|149|RIVIERA|0|face|6|
+|150|POC GRUPO SEI|0|face|84|
+|151|ANTONIO. M. MACHADO|0|face|8|
+|152|SEGEAGLE|0|face|0|
+|153|GTTAN|0|face|0|
+|154|CASA BRANCA|0|face|6|
+|155|EUROVIDROS|0|face|6|
+|156|AGGREGATION|0|face|0|
+|157|HOMOLOGACOES|0|face|0|
+|158|PRAIA FORT|0|face|0|
+|159|COND. ROSENGARTEN|0|face|8|
+|160|COND. SUPREMO VILA YARA|0|face|8|
+|161|FINERAX|0|face|8|
+|162|COND. SOLAR SERRANO|0|face|8|
+|163|COND. CINTIA|0|face|8|
+|164|BASE OPERACAO|0|face|8|
+|165|COND. ANNUNCIATA|0|face|8|
+|166|COND. ART ECO VIDA|0|face|8|
+|167|COND. ATLANTA|0|face|8|
+|168|COND. VILA YARA|0|face|8|
+|169|COND. UPTOWN|0|face|8|
+|170|COND. SHALON|0|face|8|
+|171|COND. AUSTRIA|0|face|8|
+|172|COND. SCORPIUS|0|face|8|
+|173|COND. ROMA|0|face|8|
+|174|COND. PRISCILA|0|face|8|
+|175|COND. PORTAL SAO FRANCISCO|0|face|8|
+|176|COND. ORQUIDEAS|0|face|8|
+|177|COND. MORADA DO SOL|0|face|8|
+|178|COND. MATRIZ|0|face|8|
+|179|COND. MARAPASSU|0|face|8|
+|180|COND. IPANEMA|0|face|8|
+|181|COND. FLORENCA|0|face|8|
+|182|COND. ESPANHA|0|face|8|
+|183|COND. CAMILA|0|face|8|
+|184|COND. BORBA GATO|0|face|8|
+|185|COND. BEIJA FLOR|0|face|8|
+|186|COND. BANDEIRANTES|0|face|8|
+|187|COND. ANIMA|0|face|8|
+|188|COND. 28 DE MAIO|0|face|8|
+|189|COND. AMERICA|0|face|8|
+|190|COND. BONFIGLIOLI|0|face|8|
+|191|COND. BOULEVARD|0|face|8|
+|192|COND. CAMPO GRANDE|0|face|8|
+|193|COND. CANTA GALO|0|face|8|
+|194|COND. CASA FLORA|0|face|8|
+|195|COND. CASCAIS|0|face|8|
+|196|COND. COQUEIROS|0|face|8|
+|197|COND. DIVA|0|face|8|
+|198|COND. FLOR DE LIRIO|0|face|8|
+|199|COND. GARDENS|0|face|8|
+|200|COND. GIUSEPPE|0|face|8|
+|201|COND. GOLDEN GATE|0|face|8|
+|202|COND. GRAND CANAL|0|face|8|
+|203|COND. HORTENCIAS|0|face|8|
+|204|COND. LA VILLETE|0|face|8|
+|205|COND. LIFE STYLE|0|face|8|
+|206|COND. MAGGIORE|0|face|8|
+|207|COND. MARIE|0|face|8|
+|208|COND. MATIAZZO|0|face|8|
+|209|COND. OPTION HOME|0|face|8|
+|210|COND. PLANALTO BUTANTA|0|face|8|
+|211|COND. PLAZA MORUMBI|0|face|8|
+|212|COND. PURUS|0|face|8|
+|213|COND. QUINTA DE SILVEIRAS|0|face|8|
+|214|COND. ROLDAO|0|face|8|
+|215|COND. SANTA RITA|0|face|8|
+|216|COND. SANTANNA|0|face|8|
+|217|COND. SPAZIO|0|face|8|
+|218|COND. TENERIFE|0|face|8|
+|219|COND. TERRA BRASILIS|0|face|8|
+|220|COND. UPSIDE|0|face|8|
+|221|COND. VILA ITU|0|face|8|
+|222|COND. VILA MARIANA|0|face|8|
+|223|COND. VILA VERDE|0|face|8|
+|224|COND. VILLAGIO|0|face|8|
+|225|HARAS|0|face|8|
+|226|PAULO TEST|0|face|0|
+|227|JACKPOT|0|face|8|
+|228|Eduacandario|0|face|93|
+|229|AUTOBAHN|0|face|6|
+|230|CN LOG|0|face|6|
+|231|1Project|0|face|0|
+|232|MONUV|0|face|0|
+|233|COND. LEAF|0|face|8|
+|234|COND. COLLINE DE NICE|0|face|8|
+|235|9000 - MARTEL SEGURANCA|0|face|96|
+|236|2000 - casa das ferragens|0|face|96|
+|237|8608 - GTTAM|0|face|97|
+|238|1147 - UBS BOA VISTA|0|face|4|
+|239|Stratum|0|face|98|
+|240|CASA DO CONSTRUTOR|0|face|4|
+|241|0076 - Proeng Hall|0|face|97|
+|242|5050 - LOJA SOLUTION|0|face|100|
+|243|0123 - AFFETTO PAPELARIA|0|face|97|
+|244|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|face|97|
+|245|ESTOQUE VERTEX|0|face|8|
+|246|ATCOM- SHOPPINGS|0|face|101|
+|247|MARCELO|0|face|90|
+|248|0085 - VITORIA FUTEBOL CLUBE|0|face|97|
+|249|AGRALE GALPAO|0|face|6|
+|250|SCARDUA|0|face|6|
+|251|ASSALTOS|0|fallen_people|1|
+|252|SIMULACOES|0|fallen_people|1|
+|253|ULTRAFARMA SANTO AMARO|0|fallen_people|4|
+|254|IPMED|0|fallen_people|6|
+|255|ESPIRAL|0|fallen_people|6|
+|256|SERVIP|0|fallen_people|6|
+|257|LUVEP|0|fallen_people|6|
+|258|GM INDUSTRIAL|0|fallen_people|6|
+|259|KOMTEK|0|fallen_people|0|
+|260|SHOPP LARANJEIRAS|0|fallen_people|6|
+|261|APRESENTACAO|0|fallen_people|0|
+|262|6002 - SHOWROOM|0|fallen_people|40|
+|263|SHOPPING VITORIA TESTE|0|fallen_people|40|
+|264|GDL LOGISTICA|0|fallen_people|40|
+|265|CAPIXABA|0|fallen_people|0|
+|266|0992 - COPAG|0|fallen_people|80|
+|267|PHD Vila Velha|0|fallen_people|6|
+|268|PROJETO GDL|0|fallen_people|0|
+|269|ESCOLA SANTA TEREZINHA|0|fallen_people|6|
+|270|GRUPOSEI|0|fallen_people|0|
+|271|BANCO SICOOB|0|fallen_people|84|
+|272|EPI|0|fallen_people|0|
+|273|ALERTAS OCR|0|fallen_people|1|
+|274|RIVIERA|0|fallen_people|6|
+|275|POC GRUPO SEI|0|fallen_people|84|
+|276|ANTONIO. M. MACHADO|0|fallen_people|8|
+|277|SEGEAGLE|0|fallen_people|0|
+|278|GTTAN|0|fallen_people|0|
+|279|CASA BRANCA|0|fallen_people|6|
+|280|EUROVIDROS|0|fallen_people|6|
+|281|AGGREGATION|0|fallen_people|0|
+|282|HOMOLOGACOES|0|fallen_people|0|
+|283|PRAIA FORT|0|fallen_people|0|
+|284|COND. ROSENGARTEN|0|fallen_people|8|
+|285|COND. SUPREMO VILA YARA|0|fallen_people|8|
+|286|FINERAX|0|fallen_people|8|
+|287|COND. SOLAR SERRANO|0|fallen_people|8|
+|288|COND. CINTIA|0|fallen_people|8|
+|289|BASE OPERACAO|0|fallen_people|8|
+|290|COND. ANNUNCIATA|0|fallen_people|8|
+|291|COND. ART ECO VIDA|0|fallen_people|8|
+|292|COND. ATLANTA|0|fallen_people|8|
+|293|COND. VILA YARA|0|fallen_people|8|
+|294|COND. UPTOWN|0|fallen_people|8|
+|295|COND. SHALON|0|fallen_people|8|
+|296|COND. AUSTRIA|0|fallen_people|8|
+|297|COND. SCORPIUS|0|fallen_people|8|
+|298|COND. ROMA|0|fallen_people|8|
+|299|COND. PRISCILA|0|fallen_people|8|
+|300|COND. PORTAL SAO FRANCISCO|0|fallen_people|8|
+|301|COND. ORQUIDEAS|0|fallen_people|8|
+|302|COND. MORADA DO SOL|0|fallen_people|8|
+|303|COND. MATRIZ|0|fallen_people|8|
+|304|COND. MARAPASSU|0|fallen_people|8|
+|305|COND. IPANEMA|0|fallen_people|8|
+|306|COND. FLORENCA|0|fallen_people|8|
+|307|COND. ESPANHA|0|fallen_people|8|
+|308|COND. CAMILA|0|fallen_people|8|
+|309|COND. BORBA GATO|0|fallen_people|8|
+|310|COND. BEIJA FLOR|0|fallen_people|8|
+|311|COND. BANDEIRANTES|0|fallen_people|8|
+|312|COND. ANIMA|0|fallen_people|8|
+|313|COND. 28 DE MAIO|0|fallen_people|8|
+|314|COND. AMERICA|0|fallen_people|8|
+|315|COND. BONFIGLIOLI|0|fallen_people|8|
+|316|COND. BOULEVARD|0|fallen_people|8|
+|317|COND. CAMPO GRANDE|0|fallen_people|8|
+|318|COND. CANTA GALO|0|fallen_people|8|
+|319|COND. CASA FLORA|0|fallen_people|8|
+|320|COND. CASCAIS|0|fallen_people|8|
+|321|COND. COQUEIROS|0|fallen_people|8|
+|322|COND. DIVA|0|fallen_people|8|
+|323|COND. FLOR DE LIRIO|0|fallen_people|8|
+|324|COND. GARDENS|0|fallen_people|8|
+|325|COND. GIUSEPPE|0|fallen_people|8|
+|326|COND. GOLDEN GATE|0|fallen_people|8|
+|327|COND. GRAND CANAL|0|fallen_people|8|
+|328|COND. HORTENCIAS|0|fallen_people|8|
+|329|COND. LA VILLETE|0|fallen_people|8|
+|330|COND. LIFE STYLE|0|fallen_people|8|
+|331|COND. MAGGIORE|0|fallen_people|8|
+|332|COND. MARIE|0|fallen_people|8|
+|333|COND. MATIAZZO|0|fallen_people|8|
+|334|COND. OPTION HOME|0|fallen_people|8|
+|335|COND. PLANALTO BUTANTA|0|fallen_people|8|
+|336|COND. PLAZA MORUMBI|0|fallen_people|8|
+|337|COND. PURUS|0|fallen_people|8|
+|338|COND. QUINTA DE SILVEIRAS|0|fallen_people|8|
+|339|COND. ROLDAO|0|fallen_people|8|
+|340|COND. SANTA RITA|0|fallen_people|8|
+|341|COND. SANTANNA|0|fallen_people|8|
+|342|COND. SPAZIO|0|fallen_people|8|
+|343|COND. TENERIFE|0|fallen_people|8|
+|344|COND. TERRA BRASILIS|0|fallen_people|8|
+|345|COND. UPSIDE|0|fallen_people|8|
+|346|COND. VILA ITU|0|fallen_people|8|
+|347|COND. VILA MARIANA|0|fallen_people|8|
+|348|COND. VILA VERDE|0|fallen_people|8|
+|349|COND. VILLAGIO|0|fallen_people|8|
+|350|HARAS|0|fallen_people|8|
+|351|PAULO TEST|0|fallen_people|0|
+|352|JACKPOT|0|fallen_people|8|
+|353|Eduacandario|0|fallen_people|93|
+|354|AUTOBAHN|0|fallen_people|6|
+|355|CN LOG|0|fallen_people|6|
+|356|1Project|0|fallen_people|0|
+|357|MONUV|0|fallen_people|0|
+|358|COND. LEAF|0|fallen_people|8|
+|359|COND. COLLINE DE NICE|0|fallen_people|8|
+|360|9000 - MARTEL SEGURANCA|0|fallen_people|96|
+|361|2000 - casa das ferragens|0|fallen_people|96|
+|362|8608 - GTTAM|0|fallen_people|97|
+|363|1147 - UBS BOA VISTA|0|fallen_people|4|
+|364|Stratum|0|fallen_people|98|
+|365|CASA DO CONSTRUTOR|0|fallen_people|4|
+|366|0076 - Proeng Hall|0|fallen_people|97|
+|367|5050 - LOJA SOLUTION|0|fallen_people|100|
+|368|0123 - AFFETTO PAPELARIA|0|fallen_people|97|
+|369|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|fallen_people|97|
+|370|ESTOQUE VERTEX|0|fallen_people|8|
+|371|ATCOM- SHOPPINGS|0|fallen_people|101|
+|372|MARCELO|0|fallen_people|90|
+|373|0085 - VITORIA FUTEBOL CLUBE|0|fallen_people|97|
+|374|AGRALE GALPAO|0|fallen_people|6|
+|375|SCARDUA|0|fallen_people|6|
+|376|ASSALTOS|0|gender_age|1|
+|377|SIMULACOES|0|gender_age|1|
+|378|ULTRAFARMA SANTO AMARO|0|gender_age|4|
+|379|IPMED|0|gender_age|6|
+|380|ESPIRAL|0|gender_age|6|
+|381|SERVIP|0|gender_age|6|
+|382|LUVEP|0|gender_age|6|
+|383|GM INDUSTRIAL|0|gender_age|6|
+|384|KOMTEK|0|gender_age|0|
+|385|SHOPP LARANJEIRAS|0|gender_age|6|
+|386|APRESENTACAO|0|gender_age|0|
+|387|6002 - SHOWROOM|0|gender_age|40|
+|388|SHOPPING VITORIA TESTE|0|gender_age|40|
+|389|GDL LOGISTICA|0|gender_age|40|
+|390|CAPIXABA|0|gender_age|0|
+|391|0992 - COPAG|0|gender_age|80|
+|392|PHD Vila Velha|0|gender_age|6|
+|393|PROJETO GDL|0|gender_age|0|
+|394|ESCOLA SANTA TEREZINHA|0|gender_age|6|
+|395|GRUPOSEI|0|gender_age|0|
+|396|BANCO SICOOB|0|gender_age|84|
+|397|EPI|0|gender_age|0|
+|398|ALERTAS OCR|0|gender_age|1|
+|399|RIVIERA|0|gender_age|6|
+|400|POC GRUPO SEI|0|gender_age|84|
+|401|ANTONIO. M. MACHADO|0|gender_age|8|
+|402|SEGEAGLE|0|gender_age|0|
+|403|GTTAN|0|gender_age|0|
+|404|CASA BRANCA|0|gender_age|6|
+|405|EUROVIDROS|0|gender_age|6|
+|406|AGGREGATION|0|gender_age|0|
+|407|HOMOLOGACOES|0|gender_age|0|
+|408|PRAIA FORT|0|gender_age|0|
+|409|COND. ROSENGARTEN|0|gender_age|8|
+|410|COND. SUPREMO VILA YARA|0|gender_age|8|
+|411|FINERAX|0|gender_age|8|
+|412|COND. SOLAR SERRANO|0|gender_age|8|
+|413|COND. CINTIA|0|gender_age|8|
+|414|BASE OPERACAO|0|gender_age|8|
+|415|COND. ANNUNCIATA|0|gender_age|8|
+|416|COND. ART ECO VIDA|0|gender_age|8|
+|417|COND. ATLANTA|0|gender_age|8|
+|418|COND. VILA YARA|0|gender_age|8|
+|419|COND. UPTOWN|0|gender_age|8|
+|420|COND. SHALON|0|gender_age|8|
+|421|COND. AUSTRIA|0|gender_age|8|
+|422|COND. SCORPIUS|0|gender_age|8|
+|423|COND. ROMA|0|gender_age|8|
+|424|COND. PRISCILA|0|gender_age|8|
+|425|COND. PORTAL SAO FRANCISCO|0|gender_age|8|
+|426|COND. ORQUIDEAS|0|gender_age|8|
+|427|COND. MORADA DO SOL|0|gender_age|8|
+|428|COND. MATRIZ|0|gender_age|8|
+|429|COND. MARAPASSU|0|gender_age|8|
+|430|COND. IPANEMA|0|gender_age|8|
+|431|COND. FLORENCA|0|gender_age|8|
+|432|COND. ESPANHA|0|gender_age|8|
+|433|COND. CAMILA|0|gender_age|8|
+|434|COND. BORBA GATO|0|gender_age|8|
+|435|COND. BEIJA FLOR|0|gender_age|8|
+|436|COND. BANDEIRANTES|0|gender_age|8|
+|437|COND. ANIMA|0|gender_age|8|
+|438|COND. 28 DE MAIO|0|gender_age|8|
+|439|COND. AMERICA|0|gender_age|8|
+|440|COND. BONFIGLIOLI|0|gender_age|8|
+|441|COND. BOULEVARD|0|gender_age|8|
+|442|COND. CAMPO GRANDE|0|gender_age|8|
+|443|COND. CANTA GALO|0|gender_age|8|
+|444|COND. CASA FLORA|0|gender_age|8|
+|445|COND. CASCAIS|0|gender_age|8|
+|446|COND. COQUEIROS|0|gender_age|8|
+|447|COND. DIVA|0|gender_age|8|
+|448|COND. FLOR DE LIRIO|0|gender_age|8|
+|449|COND. GARDENS|0|gender_age|8|
+|450|COND. GIUSEPPE|0|gender_age|8|
+|451|COND. GOLDEN GATE|0|gender_age|8|
+|452|COND. GRAND CANAL|0|gender_age|8|
+|453|COND. HORTENCIAS|0|gender_age|8|
+|454|COND. LA VILLETE|0|gender_age|8|
+|455|COND. LIFE STYLE|0|gender_age|8|
+|456|COND. MAGGIORE|0|gender_age|8|
+|457|COND. MARIE|0|gender_age|8|
+|458|COND. MATIAZZO|0|gender_age|8|
+|459|COND. OPTION HOME|0|gender_age|8|
+|460|COND. PLANALTO BUTANTA|0|gender_age|8|
+|461|COND. PLAZA MORUMBI|0|gender_age|8|
+|462|COND. PURUS|0|gender_age|8|
+|463|COND. QUINTA DE SILVEIRAS|0|gender_age|8|
+|464|COND. ROLDAO|0|gender_age|8|
+|465|COND. SANTA RITA|0|gender_age|8|
+|466|COND. SANTANNA|0|gender_age|8|
+|467|COND. SPAZIO|0|gender_age|8|
+|468|COND. TENERIFE|0|gender_age|8|
+|469|COND. TERRA BRASILIS|0|gender_age|8|
+|470|COND. UPSIDE|0|gender_age|8|
+|471|COND. VILA ITU|0|gender_age|8|
+|472|COND. VILA MARIANA|0|gender_age|8|
+|473|COND. VILA VERDE|0|gender_age|8|
+|474|COND. VILLAGIO|0|gender_age|8|
+|475|HARAS|0|gender_age|8|
+|476|PAULO TEST|0|gender_age|0|
+|477|JACKPOT|0|gender_age|8|
+|478|Eduacandario|0|gender_age|93|
+|479|AUTOBAHN|0|gender_age|6|
+|480|CN LOG|0|gender_age|6|
+|481|1Project|0|gender_age|0|
+|482|MONUV|0|gender_age|0|
+|483|COND. LEAF|0|gender_age|8|
+|484|COND. COLLINE DE NICE|0|gender_age|8|
+|485|9000 - MARTEL SEGURANCA|0|gender_age|96|
+|486|2000 - casa das ferragens|0|gender_age|96|
+|487|8608 - GTTAM|0|gender_age|97|
+|488|1147 - UBS BOA VISTA|0|gender_age|4|
+|489|Stratum|0|gender_age|98|
+|490|CASA DO CONSTRUTOR|0|gender_age|4|
+|491|0076 - Proeng Hall|0|gender_age|97|
+|492|5050 - LOJA SOLUTION|0|gender_age|100|
+|493|0123 - AFFETTO PAPELARIA|0|gender_age|97|
+|494|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|gender_age|97|
+|495|ESTOQUE VERTEX|0|gender_age|8|
+|496|ATCOM- SHOPPINGS|0|gender_age|101|
+|497|MARCELO|0|gender_age|90|
+|498|0085 - VITORIA FUTEBOL CLUBE|0|gender_age|97|
+|499|AGRALE GALPAO|0|gender_age|6|
+|500|SCARDUA|0|gender_age|6|
+|501|ASSALTOS|0|gun_detection|1|
+|502|SIMULACOES|0|gun_detection|1|
+|503|ULTRAFARMA SANTO AMARO|0|gun_detection|4|
+|504|IPMED|0|gun_detection|6|
+|505|ESPIRAL|0|gun_detection|6|
+|506|SERVIP|0|gun_detection|6|
+|507|LUVEP|0|gun_detection|6|
+|508|GM INDUSTRIAL|0|gun_detection|6|
+|509|KOMTEK|0|gun_detection|0|
+|510|SHOPP LARANJEIRAS|0|gun_detection|6|
+|511|APRESENTACAO|0|gun_detection|0|
+|512|6002 - SHOWROOM|0|gun_detection|40|
+|513|SHOPPING VITORIA TESTE|0|gun_detection|40|
+|514|GDL LOGISTICA|0|gun_detection|40|
+|515|CAPIXABA|0|gun_detection|0|
+|516|0992 - COPAG|0|gun_detection|80|
+|517|PHD Vila Velha|0|gun_detection|6|
+|518|PROJETO GDL|0|gun_detection|0|
+|519|ESCOLA SANTA TEREZINHA|0|gun_detection|6|
+|520|GRUPOSEI|0|gun_detection|0|
+|521|BANCO SICOOB|0|gun_detection|84|
+|522|EPI|0|gun_detection|0|
+|523|ALERTAS OCR|0|gun_detection|1|
+|524|RIVIERA|0|gun_detection|6|
+|525|POC GRUPO SEI|0|gun_detection|84|
+|526|ANTONIO. M. MACHADO|0|gun_detection|8|
+|527|SEGEAGLE|0|gun_detection|0|
+|528|GTTAN|0|gun_detection|0|
+|529|CASA BRANCA|0|gun_detection|6|
+|530|EUROVIDROS|0|gun_detection|6|
+|531|AGGREGATION|0|gun_detection|0|
+|532|HOMOLOGACOES|0|gun_detection|0|
+|533|PRAIA FORT|0|gun_detection|0|
+|534|COND. ROSENGARTEN|0|gun_detection|8|
+|535|COND. SUPREMO VILA YARA|0|gun_detection|8|
+|536|FINERAX|0|gun_detection|8|
+|537|COND. SOLAR SERRANO|0|gun_detection|8|
+|538|COND. CINTIA|0|gun_detection|8|
+|539|BASE OPERACAO|0|gun_detection|8|
+|540|COND. ANNUNCIATA|0|gun_detection|8|
+|541|COND. ART ECO VIDA|0|gun_detection|8|
+|542|COND. ATLANTA|0|gun_detection|8|
+|543|COND. VILA YARA|0|gun_detection|8|
+|544|COND. UPTOWN|0|gun_detection|8|
+|545|COND. SHALON|0|gun_detection|8|
+|546|COND. AUSTRIA|0|gun_detection|8|
+|547|COND. SCORPIUS|0|gun_detection|8|
+|548|COND. ROMA|0|gun_detection|8|
+|549|COND. PRISCILA|0|gun_detection|8|
+|550|COND. PORTAL SAO FRANCISCO|0|gun_detection|8|
+|551|COND. ORQUIDEAS|0|gun_detection|8|
+|552|COND. MORADA DO SOL|0|gun_detection|8|
+|553|COND. MATRIZ|0|gun_detection|8|
+|554|COND. MARAPASSU|0|gun_detection|8|
+|555|COND. IPANEMA|0|gun_detection|8|
+|556|COND. FLORENCA|0|gun_detection|8|
+|557|COND. ESPANHA|0|gun_detection|8|
+|558|COND. CAMILA|0|gun_detection|8|
+|559|COND. BORBA GATO|0|gun_detection|8|
+|560|COND. BEIJA FLOR|0|gun_detection|8|
+|561|COND. BANDEIRANTES|0|gun_detection|8|
+|562|COND. ANIMA|0|gun_detection|8|
+|563|COND. 28 DE MAIO|0|gun_detection|8|
+|564|COND. AMERICA|0|gun_detection|8|
+|565|COND. BONFIGLIOLI|0|gun_detection|8|
+|566|COND. BOULEVARD|0|gun_detection|8|
+|567|COND. CAMPO GRANDE|0|gun_detection|8|
+|568|COND. CANTA GALO|0|gun_detection|8|
+|569|COND. CASA FLORA|0|gun_detection|8|
+|570|COND. CASCAIS|0|gun_detection|8|
+|571|COND. COQUEIROS|0|gun_detection|8|
+|572|COND. DIVA|0|gun_detection|8|
+|573|COND. FLOR DE LIRIO|0|gun_detection|8|
+|574|COND. GARDENS|0|gun_detection|8|
+|575|COND. GIUSEPPE|0|gun_detection|8|
+|576|COND. GOLDEN GATE|0|gun_detection|8|
+|577|COND. GRAND CANAL|0|gun_detection|8|
+|578|COND. HORTENCIAS|0|gun_detection|8|
+|579|COND. LA VILLETE|0|gun_detection|8|
+|580|COND. LIFE STYLE|0|gun_detection|8|
+|581|COND. MAGGIORE|0|gun_detection|8|
+|582|COND. MARIE|0|gun_detection|8|
+|583|COND. MATIAZZO|0|gun_detection|8|
+|584|COND. OPTION HOME|0|gun_detection|8|
+|585|COND. PLANALTO BUTANTA|0|gun_detection|8|
+|586|COND. PLAZA MORUMBI|0|gun_detection|8|
+|587|COND. PURUS|0|gun_detection|8|
+|588|COND. QUINTA DE SILVEIRAS|0|gun_detection|8|
+|589|COND. ROLDAO|0|gun_detection|8|
+|590|COND. SANTA RITA|0|gun_detection|8|
+|591|COND. SANTANNA|0|gun_detection|8|
+|592|COND. SPAZIO|0|gun_detection|8|
+|593|COND. TENERIFE|0|gun_detection|8|
+|594|COND. TERRA BRASILIS|0|gun_detection|8|
+|595|COND. UPSIDE|0|gun_detection|8|
+|596|COND. VILA ITU|0|gun_detection|8|
+|597|COND. VILA MARIANA|0|gun_detection|8|
+|598|COND. VILA VERDE|0|gun_detection|8|
+|599|COND. VILLAGIO|0|gun_detection|8|
+|600|HARAS|0|gun_detection|8|
+|601|PAULO TEST|0|gun_detection|0|
+|602|JACKPOT|0|gun_detection|8|
+|603|Eduacandario|0|gun_detection|93|
+|604|AUTOBAHN|0|gun_detection|6|
+|605|CN LOG|0|gun_detection|6|
+|606|1Project|0|gun_detection|0|
+|607|MONUV|0|gun_detection|0|
+|608|COND. LEAF|0|gun_detection|8|
+|609|COND. COLLINE DE NICE|0|gun_detection|8|
+|610|9000 - MARTEL SEGURANCA|0|gun_detection|96|
+|611|2000 - casa das ferragens|0|gun_detection|96|
+|612|8608 - GTTAM|0|gun_detection|97|
+|613|1147 - UBS BOA VISTA|0|gun_detection|4|
+|614|Stratum|0|gun_detection|98|
+|615|CASA DO CONSTRUTOR|0|gun_detection|4|
+|616|0076 - Proeng Hall|0|gun_detection|97|
+|617|5050 - LOJA SOLUTION|0|gun_detection|100|
+|618|0123 - AFFETTO PAPELARIA|0|gun_detection|97|
+|619|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|gun_detection|97|
+|620|ESTOQUE VERTEX|0|gun_detection|8|
+|621|ATCOM- SHOPPINGS|0|gun_detection|101|
+|622|MARCELO|0|gun_detection|90|
+|623|0085 - VITORIA FUTEBOL CLUBE|0|gun_detection|97|
+|624|AGRALE GALPAO|0|gun_detection|6|
+|625|SCARDUA|0|gun_detection|6|
+|626|ASSALTOS|0|hardhat|1|
+|627|SIMULACOES|0|hardhat|1|
+|628|ULTRAFARMA SANTO AMARO|0|hardhat|4|
+|629|IPMED|0|hardhat|6|
+|630|ESPIRAL|0|hardhat|6|
+|631|SERVIP|0|hardhat|6|
+|632|LUVEP|0|hardhat|6|
+|633|GM INDUSTRIAL|0|hardhat|6|
+|634|KOMTEK|0|hardhat|0|
+|635|SHOPP LARANJEIRAS|0|hardhat|6|
+|636|APRESENTACAO|0|hardhat|0|
+|637|6002 - SHOWROOM|0|hardhat|40|
+|638|SHOPPING VITORIA TESTE|0|hardhat|40|
+|639|GDL LOGISTICA|0|hardhat|40|
+|640|CAPIXABA|0|hardhat|0|
+|641|0992 - COPAG|0|hardhat|80|
+|642|PHD Vila Velha|0|hardhat|6|
+|643|PROJETO GDL|0|hardhat|0|
+|644|ESCOLA SANTA TEREZINHA|0|hardhat|6|
+|645|GRUPOSEI|0|hardhat|0|
+|646|BANCO SICOOB|0|hardhat|84|
+|647|EPI|0|hardhat|0|
+|648|ALERTAS OCR|0|hardhat|1|
+|649|RIVIERA|0|hardhat|6|
+|650|POC GRUPO SEI|0|hardhat|84|
+|651|ANTONIO. M. MACHADO|0|hardhat|8|
+|652|SEGEAGLE|0|hardhat|0|
+|653|GTTAN|0|hardhat|0|
+|654|CASA BRANCA|0|hardhat|6|
+|655|EUROVIDROS|0|hardhat|6|
+|656|AGGREGATION|0|hardhat|0|
+|657|HOMOLOGACOES|0|hardhat|0|
+|658|PRAIA FORT|0|hardhat|0|
+|659|COND. ROSENGARTEN|0|hardhat|8|
+|660|COND. SUPREMO VILA YARA|0|hardhat|8|
+|661|FINERAX|0|hardhat|8|
+|662|COND. SOLAR SERRANO|0|hardhat|8|
+|663|COND. CINTIA|0|hardhat|8|
+|664|BASE OPERACAO|0|hardhat|8|
+|665|COND. ANNUNCIATA|0|hardhat|8|
+|666|COND. ART ECO VIDA|0|hardhat|8|
+|667|COND. ATLANTA|0|hardhat|8|
+|668|COND. VILA YARA|0|hardhat|8|
+|669|COND. UPTOWN|0|hardhat|8|
+|670|COND. SHALON|0|hardhat|8|
+|671|COND. AUSTRIA|0|hardhat|8|
+|672|COND. SCORPIUS|0|hardhat|8|
+|673|COND. ROMA|0|hardhat|8|
+|674|COND. PRISCILA|0|hardhat|8|
+|675|COND. PORTAL SAO FRANCISCO|0|hardhat|8|
+|676|COND. ORQUIDEAS|0|hardhat|8|
+|677|COND. MORADA DO SOL|0|hardhat|8|
+|678|COND. MATRIZ|0|hardhat|8|
+|679|COND. MARAPASSU|0|hardhat|8|
+|680|COND. IPANEMA|0|hardhat|8|
+|681|COND. FLORENCA|0|hardhat|8|
+|682|COND. ESPANHA|0|hardhat|8|
+|683|COND. CAMILA|0|hardhat|8|
+|684|COND. BORBA GATO|0|hardhat|8|
+|685|COND. BEIJA FLOR|0|hardhat|8|
+|686|COND. BANDEIRANTES|0|hardhat|8|
+|687|COND. ANIMA|0|hardhat|8|
+|688|COND. 28 DE MAIO|0|hardhat|8|
+|689|COND. AMERICA|0|hardhat|8|
+|690|COND. BONFIGLIOLI|0|hardhat|8|
+|691|COND. BOULEVARD|0|hardhat|8|
+|692|COND. CAMPO GRANDE|0|hardhat|8|
+|693|COND. CANTA GALO|0|hardhat|8|
+|694|COND. CASA FLORA|0|hardhat|8|
+|695|COND. CASCAIS|0|hardhat|8|
+|696|COND. COQUEIROS|0|hardhat|8|
+|697|COND. DIVA|0|hardhat|8|
+|698|COND. FLOR DE LIRIO|0|hardhat|8|
+|699|COND. GARDENS|0|hardhat|8|
+|700|COND. GIUSEPPE|0|hardhat|8|
+|701|COND. GOLDEN GATE|0|hardhat|8|
+|702|COND. GRAND CANAL|0|hardhat|8|
+|703|COND. HORTENCIAS|0|hardhat|8|
+|704|COND. LA VILLETE|0|hardhat|8|
+|705|COND. LIFE STYLE|0|hardhat|8|
+|706|COND. MAGGIORE|0|hardhat|8|
+|707|COND. MARIE|0|hardhat|8|
+|708|COND. MATIAZZO|0|hardhat|8|
+|709|COND. OPTION HOME|0|hardhat|8|
+|710|COND. PLANALTO BUTANTA|0|hardhat|8|
+|711|COND. PLAZA MORUMBI|0|hardhat|8|
+|712|COND. PURUS|0|hardhat|8|
+|713|COND. QUINTA DE SILVEIRAS|0|hardhat|8|
+|714|COND. ROLDAO|0|hardhat|8|
+|715|COND. SANTA RITA|0|hardhat|8|
+|716|COND. SANTANNA|0|hardhat|8|
+|717|COND. SPAZIO|0|hardhat|8|
+|718|COND. TENERIFE|0|hardhat|8|
+|719|COND. TERRA BRASILIS|0|hardhat|8|
+|720|COND. UPSIDE|0|hardhat|8|
+|721|COND. VILA ITU|0|hardhat|8|
+|722|COND. VILA MARIANA|0|hardhat|8|
+|723|COND. VILA VERDE|0|hardhat|8|
+|724|COND. VILLAGIO|0|hardhat|8|
+|725|HARAS|0|hardhat|8|
+|726|PAULO TEST|0|hardhat|0|
+|727|JACKPOT|0|hardhat|8|
+|728|Eduacandario|0|hardhat|93|
+|729|AUTOBAHN|0|hardhat|6|
+|730|CN LOG|0|hardhat|6|
+|731|1Project|0|hardhat|0|
+|732|MONUV|0|hardhat|0|
+|733|COND. LEAF|0|hardhat|8|
+|734|COND. COLLINE DE NICE|0|hardhat|8|
+|735|9000 - MARTEL SEGURANCA|0|hardhat|96|
+|736|2000 - casa das ferragens|0|hardhat|96|
+|737|8608 - GTTAM|0|hardhat|97|
+|738|1147 - UBS BOA VISTA|0|hardhat|4|
+|739|Stratum|0|hardhat|98|
+|740|CASA DO CONSTRUTOR|0|hardhat|4|
+|741|0076 - Proeng Hall|0|hardhat|97|
+|742|5050 - LOJA SOLUTION|0|hardhat|100|
+|743|0123 - AFFETTO PAPELARIA|0|hardhat|97|
+|744|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|hardhat|97|
+|745|ESTOQUE VERTEX|0|hardhat|8|
+|746|ATCOM- SHOPPINGS|0|hardhat|101|
+|747|MARCELO|0|hardhat|90|
+|748|0085 - VITORIA FUTEBOL CLUBE|0|hardhat|97|
+|749|AGRALE GALPAO|0|hardhat|6|
+|750|SCARDUA|0|hardhat|6|
+|751|ASSALTOS|0|heatmap|1|
+|752|SIMULACOES|0|heatmap|1|
+|753|ULTRAFARMA SANTO AMARO|0|heatmap|4|
+|754|IPMED|0|heatmap|6|
+|755|ESPIRAL|0|heatmap|6|
+|756|SERVIP|0|heatmap|6|
+|757|LUVEP|0|heatmap|6|
+|758|GM INDUSTRIAL|0|heatmap|6|
+|759|KOMTEK|0|heatmap|0|
+|760|SHOPP LARANJEIRAS|0|heatmap|6|
+|761|APRESENTACAO|0|heatmap|0|
+|762|6002 - SHOWROOM|0|heatmap|40|
+|763|SHOPPING VITORIA TESTE|0|heatmap|40|
+|764|GDL LOGISTICA|0|heatmap|40|
+|765|CAPIXABA|0|heatmap|0|
+|766|0992 - COPAG|0|heatmap|80|
+|767|PHD Vila Velha|0|heatmap|6|
+|768|PROJETO GDL|0|heatmap|0|
+|769|ESCOLA SANTA TEREZINHA|0|heatmap|6|
+|770|GRUPOSEI|0|heatmap|0|
+|771|BANCO SICOOB|0|heatmap|84|
+|772|EPI|0|heatmap|0|
+|773|ALERTAS OCR|0|heatmap|1|
+|774|RIVIERA|0|heatmap|6|
+|775|POC GRUPO SEI|0|heatmap|84|
+|776|ANTONIO. M. MACHADO|0|heatmap|8|
+|777|SEGEAGLE|0|heatmap|0|
+|778|GTTAN|0|heatmap|0|
+|779|CASA BRANCA|0|heatmap|6|
+|780|EUROVIDROS|0|heatmap|6|
+|781|AGGREGATION|0|heatmap|0|
+|782|HOMOLOGACOES|0|heatmap|0|
+|783|PRAIA FORT|0|heatmap|0|
+|784|COND. ROSENGARTEN|0|heatmap|8|
+|785|COND. SUPREMO VILA YARA|0|heatmap|8|
+|786|FINERAX|0|heatmap|8|
+|787|COND. SOLAR SERRANO|0|heatmap|8|
+|788|COND. CINTIA|0|heatmap|8|
+|789|BASE OPERACAO|0|heatmap|8|
+|790|COND. ANNUNCIATA|0|heatmap|8|
+|791|COND. ART ECO VIDA|0|heatmap|8|
+|792|COND. ATLANTA|0|heatmap|8|
+|793|COND. VILA YARA|0|heatmap|8|
+|794|COND. UPTOWN|0|heatmap|8|
+|795|COND. SHALON|0|heatmap|8|
+|796|COND. AUSTRIA|0|heatmap|8|
+|797|COND. SCORPIUS|0|heatmap|8|
+|798|COND. ROMA|0|heatmap|8|
+|799|COND. PRISCILA|0|heatmap|8|
+|800|COND. PORTAL SAO FRANCISCO|0|heatmap|8|
+|801|COND. ORQUIDEAS|0|heatmap|8|
+|802|COND. MORADA DO SOL|0|heatmap|8|
+|803|COND. MATRIZ|0|heatmap|8|
+|804|COND. MARAPASSU|0|heatmap|8|
+|805|COND. IPANEMA|0|heatmap|8|
+|806|COND. FLORENCA|0|heatmap|8|
+|807|COND. ESPANHA|0|heatmap|8|
+|808|COND. CAMILA|0|heatmap|8|
+|809|COND. BORBA GATO|0|heatmap|8|
+|810|COND. BEIJA FLOR|0|heatmap|8|
+|811|COND. BANDEIRANTES|0|heatmap|8|
+|812|COND. ANIMA|0|heatmap|8|
+|813|COND. 28 DE MAIO|0|heatmap|8|
+|814|COND. AMERICA|0|heatmap|8|
+|815|COND. BONFIGLIOLI|0|heatmap|8|
+|816|COND. BOULEVARD|0|heatmap|8|
+|817|COND. CAMPO GRANDE|0|heatmap|8|
+|818|COND. CANTA GALO|0|heatmap|8|
+|819|COND. CASA FLORA|0|heatmap|8|
+|820|COND. CASCAIS|0|heatmap|8|
+|821|COND. COQUEIROS|0|heatmap|8|
+|822|COND. DIVA|0|heatmap|8|
+|823|COND. FLOR DE LIRIO|0|heatmap|8|
+|824|COND. GARDENS|0|heatmap|8|
+|825|COND. GIUSEPPE|0|heatmap|8|
+|826|COND. GOLDEN GATE|0|heatmap|8|
+|827|COND. GRAND CANAL|0|heatmap|8|
+|828|COND. HORTENCIAS|0|heatmap|8|
+|829|COND. LA VILLETE|0|heatmap|8|
+|830|COND. LIFE STYLE|0|heatmap|8|
+|831|COND. MAGGIORE|0|heatmap|8|
+|832|COND. MARIE|0|heatmap|8|
+|833|COND. MATIAZZO|0|heatmap|8|
+|834|COND. OPTION HOME|0|heatmap|8|
+|835|COND. PLANALTO BUTANTA|0|heatmap|8|
+|836|COND. PLAZA MORUMBI|0|heatmap|8|
+|837|COND. PURUS|0|heatmap|8|
+|838|COND. QUINTA DE SILVEIRAS|0|heatmap|8|
+|839|COND. ROLDAO|0|heatmap|8|
+|840|COND. SANTA RITA|0|heatmap|8|
+|841|COND. SANTANNA|0|heatmap|8|
+|842|COND. SPAZIO|0|heatmap|8|
+|843|COND. TENERIFE|0|heatmap|8|
+|844|COND. TERRA BRASILIS|0|heatmap|8|
+|845|COND. UPSIDE|0|heatmap|8|
+|846|COND. VILA ITU|0|heatmap|8|
+|847|COND. VILA MARIANA|0|heatmap|8|
+|848|COND. VILA VERDE|0|heatmap|8|
+|849|COND. VILLAGIO|0|heatmap|8|
+|850|HARAS|0|heatmap|8|
+|851|PAULO TEST|0|heatmap|0|
+|852|JACKPOT|0|heatmap|8|
+|853|Eduacandario|0|heatmap|93|
+|854|AUTOBAHN|0|heatmap|6|
+|855|CN LOG|0|heatmap|6|
+|856|1Project|0|heatmap|0|
+|857|MONUV|0|heatmap|0|
+|858|COND. LEAF|0|heatmap|8|
+|859|COND. COLLINE DE NICE|0|heatmap|8|
+|860|9000 - MARTEL SEGURANCA|0|heatmap|96|
+|861|2000 - casa das ferragens|0|heatmap|96|
+|862|8608 - GTTAM|0|heatmap|97|
+|863|1147 - UBS BOA VISTA|0|heatmap|4|
+|864|Stratum|0|heatmap|98|
+|865|CASA DO CONSTRUTOR|0|heatmap|4|
+|866|0076 - Proeng Hall|0|heatmap|97|
+|867|5050 - LOJA SOLUTION|0|heatmap|100|
+|868|0123 - AFFETTO PAPELARIA|0|heatmap|97|
+|869|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|heatmap|97|
+|870|ESTOQUE VERTEX|0|heatmap|8|
+|871|ATCOM- SHOPPINGS|0|heatmap|101|
+|872|MARCELO|0|heatmap|90|
+|873|0085 - VITORIA FUTEBOL CLUBE|0|heatmap|97|
+|874|AGRALE GALPAO|0|heatmap|6|
+|875|SCARDUA|0|heatmap|6|
+|876|ASSALTOS|0|motion|1|
+|877|SIMULACOES|0|motion|1|
+|878|ULTRAFARMA SANTO AMARO|0|motion|4|
+|879|IPMED|0|motion|6|
+|880|ESPIRAL|0|motion|6|
+|881|SERVIP|0|motion|6|
+|882|LUVEP|0|motion|6|
+|883|GM INDUSTRIAL|0|motion|6|
+|884|KOMTEK|0|motion|0|
+|885|SHOPP LARANJEIRAS|0|motion|6|
+|886|APRESENTACAO|0|motion|0|
+|887|6002 - SHOWROOM|0|motion|40|
+|888|SHOPPING VITORIA TESTE|0|motion|40|
+|889|GDL LOGISTICA|0|motion|40|
+|890|CAPIXABA|0|motion|0|
+|891|0992 - COPAG|0|motion|80|
+|892|PHD Vila Velha|0|motion|6|
+|893|PROJETO GDL|0|motion|0|
+|894|ESCOLA SANTA TEREZINHA|0|motion|6|
+|895|GRUPOSEI|0|motion|0|
+|896|BANCO SICOOB|0|motion|84|
+|897|EPI|0|motion|0|
+|898|ALERTAS OCR|0|motion|1|
+|899|RIVIERA|0|motion|6|
+|900|POC GRUPO SEI|0|motion|84|
+|901|ANTONIO. M. MACHADO|0|motion|8|
+|902|SEGEAGLE|0|motion|0|
+|903|GTTAN|0|motion|0|
+|904|CASA BRANCA|0|motion|6|
+|905|EUROVIDROS|0|motion|6|
+|906|AGGREGATION|0|motion|0|
+|907|HOMOLOGACOES|0|motion|0|
+|908|PRAIA FORT|0|motion|0|
+|909|COND. ROSENGARTEN|0|motion|8|
+|910|COND. SUPREMO VILA YARA|0|motion|8|
+|911|FINERAX|0|motion|8|
+|912|COND. SOLAR SERRANO|0|motion|8|
+|913|COND. CINTIA|0|motion|8|
+|914|BASE OPERACAO|0|motion|8|
+|915|COND. ANNUNCIATA|0|motion|8|
+|916|COND. ART ECO VIDA|0|motion|8|
+|917|COND. ATLANTA|0|motion|8|
+|918|COND. VILA YARA|0|motion|8|
+|919|COND. UPTOWN|0|motion|8|
+|920|COND. SHALON|0|motion|8|
+|921|COND. AUSTRIA|0|motion|8|
+|922|COND. SCORPIUS|0|motion|8|
+|923|COND. ROMA|0|motion|8|
+|924|COND. PRISCILA|0|motion|8|
+|925|COND. PORTAL SAO FRANCISCO|0|motion|8|
+|926|COND. ORQUIDEAS|0|motion|8|
+|927|COND. MORADA DO SOL|0|motion|8|
+|928|COND. MATRIZ|0|motion|8|
+|929|COND. MARAPASSU|0|motion|8|
+|930|COND. IPANEMA|0|motion|8|
+|931|COND. FLORENCA|0|motion|8|
+|932|COND. ESPANHA|0|motion|8|
+|933|COND. CAMILA|0|motion|8|
+|934|COND. BORBA GATO|0|motion|8|
+|935|COND. BEIJA FLOR|0|motion|8|
+|936|COND. BANDEIRANTES|0|motion|8|
+|937|COND. ANIMA|0|motion|8|
+|938|COND. 28 DE MAIO|0|motion|8|
+|939|COND. AMERICA|0|motion|8|
+|940|COND. BONFIGLIOLI|0|motion|8|
+|941|COND. BOULEVARD|0|motion|8|
+|942|COND. CAMPO GRANDE|0|motion|8|
+|943|COND. CANTA GALO|0|motion|8|
+|944|COND. CASA FLORA|0|motion|8|
+|945|COND. CASCAIS|0|motion|8|
+|946|COND. COQUEIROS|0|motion|8|
+|947|COND. DIVA|0|motion|8|
+|948|COND. FLOR DE LIRIO|0|motion|8|
+|949|COND. GARDENS|0|motion|8|
+|950|COND. GIUSEPPE|0|motion|8|
+|951|COND. GOLDEN GATE|0|motion|8|
+|952|COND. GRAND CANAL|0|motion|8|
+|953|COND. HORTENCIAS|0|motion|8|
+|954|COND. LA VILLETE|0|motion|8|
+|955|COND. LIFE STYLE|0|motion|8|
+|956|COND. MAGGIORE|0|motion|8|
+|957|COND. MARIE|0|motion|8|
+|958|COND. MATIAZZO|0|motion|8|
+|959|COND. OPTION HOME|0|motion|8|
+|960|COND. PLANALTO BUTANTA|0|motion|8|
+|961|COND. PLAZA MORUMBI|0|motion|8|
+|962|COND. PURUS|0|motion|8|
+|963|COND. QUINTA DE SILVEIRAS|0|motion|8|
+|964|COND. ROLDAO|0|motion|8|
+|965|COND. SANTA RITA|0|motion|8|
+|966|COND. SANTANNA|0|motion|8|
+|967|COND. SPAZIO|0|motion|8|
+|968|COND. TENERIFE|0|motion|8|
+|969|COND. TERRA BRASILIS|0|motion|8|
+|970|COND. UPSIDE|0|motion|8|
+|971|COND. VILA ITU|0|motion|8|
+|972|COND. VILA MARIANA|0|motion|8|
+|973|COND. VILA VERDE|0|motion|8|
+|974|COND. VILLAGIO|0|motion|8|
+|975|HARAS|0|motion|8|
+|976|PAULO TEST|0|motion|0|
+|977|JACKPOT|0|motion|8|
+|978|Eduacandario|0|motion|93|
+|979|AUTOBAHN|0|motion|6|
+|980|CN LOG|0|motion|6|
+|981|1Project|0|motion|0|
+|982|MONUV|0|motion|0|
+|983|COND. LEAF|0|motion|8|
+|984|COND. COLLINE DE NICE|0|motion|8|
+|985|9000 - MARTEL SEGURANCA|0|motion|96|
+|986|2000 - casa das ferragens|0|motion|96|
+|987|8608 - GTTAM|0|motion|97|
+|988|1147 - UBS BOA VISTA|0|motion|4|
+|989|Stratum|0|motion|98|
+|990|CASA DO CONSTRUTOR|0|motion|4|
+|991|0076 - Proeng Hall|0|motion|97|
+|992|5050 - LOJA SOLUTION|0|motion|100|
+|993|0123 - AFFETTO PAPELARIA|0|motion|97|
+|994|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|motion|97|
+|995|ESTOQUE VERTEX|0|motion|8|
+|996|ATCOM- SHOPPINGS|0|motion|101|
+|997|MARCELO|0|motion|90|
+|998|0085 - VITORIA FUTEBOL CLUBE|0|motion|97|
+|999|AGRALE GALPAO|0|motion|6|
+|1000|SCARDUA|0|motion|6|
+|1001|ASSALTOS|0|object_in_zone|1|
+|1002|SIMULACOES|0|object_in_zone|1|
+|1003|ULTRAFARMA SANTO AMARO|0|object_in_zone|4|
+|1004|IPMED|0|object_in_zone|6|
+|1005|ESPIRAL|0|object_in_zone|6|
+|1006|SERVIP|0|object_in_zone|6|
+|1007|LUVEP|0|object_in_zone|6|
+|1008|GM INDUSTRIAL|0|object_in_zone|6|
+|1009|KOMTEK|0|object_in_zone|0|
+|1010|SHOPP LARANJEIRAS|0|object_in_zone|6|
+|1011|APRESENTACAO|0|object_in_zone|0|
+|1012|6002 - SHOWROOM|0|object_in_zone|40|
+|1013|SHOPPING VITORIA TESTE|0|object_in_zone|40|
+|1014|GDL LOGISTICA|0|object_in_zone|40|
+|1015|CAPIXABA|0|object_in_zone|0|
+|1016|0992 - COPAG|0|object_in_zone|80|
+|1017|PHD Vila Velha|0|object_in_zone|6|
+|1018|PROJETO GDL|0|object_in_zone|0|
+|1019|ESCOLA SANTA TEREZINHA|0|object_in_zone|6|
+|1020|GRUPOSEI|0|object_in_zone|0|
+|1021|BANCO SICOOB|0|object_in_zone|84|
+|1022|EPI|0|object_in_zone|0|
+|1023|ALERTAS OCR|0|object_in_zone|1|
+|1024|RIVIERA|0|object_in_zone|6|
+|1025|POC GRUPO SEI|0|object_in_zone|84|
+|1026|ANTONIO. M. MACHADO|0|object_in_zone|8|
+|1027|SEGEAGLE|0|object_in_zone|0|
+|1028|GTTAN|0|object_in_zone|0|
+|1029|CASA BRANCA|0|object_in_zone|6|
+|1030|EUROVIDROS|0|object_in_zone|6|
+|1031|AGGREGATION|0|object_in_zone|0|
+|1032|HOMOLOGACOES|0|object_in_zone|0|
+|1033|PRAIA FORT|0|object_in_zone|0|
+|1034|COND. ROSENGARTEN|0|object_in_zone|8|
+|1035|COND. SUPREMO VILA YARA|0|object_in_zone|8|
+|1036|FINERAX|0|object_in_zone|8|
+|1037|COND. SOLAR SERRANO|0|object_in_zone|8|
+|1038|COND. CINTIA|0|object_in_zone|8|
+|1039|BASE OPERACAO|0|object_in_zone|8|
+|1040|COND. ANNUNCIATA|0|object_in_zone|8|
+|1041|COND. ART ECO VIDA|0|object_in_zone|8|
+|1042|COND. ATLANTA|0|object_in_zone|8|
+|1043|COND. VILA YARA|0|object_in_zone|8|
+|1044|COND. UPTOWN|0|object_in_zone|8|
+|1045|COND. SHALON|0|object_in_zone|8|
+|1046|COND. AUSTRIA|0|object_in_zone|8|
+|1047|COND. SCORPIUS|0|object_in_zone|8|
+|1048|COND. ROMA|0|object_in_zone|8|
+|1049|COND. PRISCILA|0|object_in_zone|8|
+|1050|COND. PORTAL SAO FRANCISCO|0|object_in_zone|8|
+|1051|COND. ORQUIDEAS|0|object_in_zone|8|
+|1052|COND. MORADA DO SOL|0|object_in_zone|8|
+|1053|COND. MATRIZ|0|object_in_zone|8|
+|1054|COND. MARAPASSU|0|object_in_zone|8|
+|1055|COND. IPANEMA|0|object_in_zone|8|
+|1056|COND. FLORENCA|0|object_in_zone|8|
+|1057|COND. ESPANHA|0|object_in_zone|8|
+|1058|COND. CAMILA|0|object_in_zone|8|
+|1059|COND. BORBA GATO|0|object_in_zone|8|
+|1060|COND. BEIJA FLOR|0|object_in_zone|8|
+|1061|COND. BANDEIRANTES|0|object_in_zone|8|
+|1062|COND. ANIMA|0|object_in_zone|8|
+|1063|COND. 28 DE MAIO|0|object_in_zone|8|
+|1064|COND. AMERICA|0|object_in_zone|8|
+|1065|COND. BONFIGLIOLI|0|object_in_zone|8|
+|1066|COND. BOULEVARD|0|object_in_zone|8|
+|1067|COND. CAMPO GRANDE|0|object_in_zone|8|
+|1068|COND. CANTA GALO|0|object_in_zone|8|
+|1069|COND. CASA FLORA|0|object_in_zone|8|
+|1070|COND. CASCAIS|0|object_in_zone|8|
+|1071|COND. COQUEIROS|0|object_in_zone|8|
+|1072|COND. DIVA|0|object_in_zone|8|
+|1073|COND. FLOR DE LIRIO|0|object_in_zone|8|
+|1074|COND. GARDENS|0|object_in_zone|8|
+|1075|COND. GIUSEPPE|0|object_in_zone|8|
+|1076|COND. GOLDEN GATE|0|object_in_zone|8|
+|1077|COND. GRAND CANAL|0|object_in_zone|8|
+|1078|COND. HORTENCIAS|0|object_in_zone|8|
+|1079|COND. LA VILLETE|0|object_in_zone|8|
+|1080|COND. LIFE STYLE|0|object_in_zone|8|
+|1081|COND. MAGGIORE|0|object_in_zone|8|
+|1082|COND. MARIE|0|object_in_zone|8|
+|1083|COND. MATIAZZO|0|object_in_zone|8|
+|1084|COND. OPTION HOME|0|object_in_zone|8|
+|1085|COND. PLANALTO BUTANTA|0|object_in_zone|8|
+|1086|COND. PLAZA MORUMBI|0|object_in_zone|8|
+|1087|COND. PURUS|0|object_in_zone|8|
+|1088|COND. QUINTA DE SILVEIRAS|0|object_in_zone|8|
+|1089|COND. ROLDAO|0|object_in_zone|8|
+|1090|COND. SANTA RITA|0|object_in_zone|8|
+|1091|COND. SANTANNA|0|object_in_zone|8|
+|1092|COND. SPAZIO|0|object_in_zone|8|
+|1093|COND. TENERIFE|0|object_in_zone|8|
+|1094|COND. TERRA BRASILIS|0|object_in_zone|8|
+|1095|COND. UPSIDE|0|object_in_zone|8|
+|1096|COND. VILA ITU|0|object_in_zone|8|
+|1097|COND. VILA MARIANA|0|object_in_zone|8|
+|1098|COND. VILA VERDE|0|object_in_zone|8|
+|1099|COND. VILLAGIO|0|object_in_zone|8|
+|1100|HARAS|0|object_in_zone|8|
+|1101|PAULO TEST|0|object_in_zone|0|
+|1102|JACKPOT|0|object_in_zone|8|
+|1103|Eduacandario|0|object_in_zone|93|
+|1104|AUTOBAHN|0|object_in_zone|6|
+|1105|CN LOG|0|object_in_zone|6|
+|1106|1Project|0|object_in_zone|0|
+|1107|MONUV|0|object_in_zone|0|
+|1108|COND. LEAF|0|object_in_zone|8|
+|1109|COND. COLLINE DE NICE|0|object_in_zone|8|
+|1110|9000 - MARTEL SEGURANCA|0|object_in_zone|96|
+|1111|2000 - casa das ferragens|0|object_in_zone|96|
+|1112|8608 - GTTAM|0|object_in_zone|97|
+|1113|1147 - UBS BOA VISTA|0|object_in_zone|4|
+|1114|Stratum|0|object_in_zone|98|
+|1115|CASA DO CONSTRUTOR|0|object_in_zone|4|
+|1116|0076 - Proeng Hall|0|object_in_zone|97|
+|1117|5050 - LOJA SOLUTION|0|object_in_zone|100|
+|1118|0123 - AFFETTO PAPELARIA|0|object_in_zone|97|
+|1119|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|object_in_zone|97|
+|1120|ESTOQUE VERTEX|0|object_in_zone|8|
+|1121|ATCOM- SHOPPINGS|0|object_in_zone|101|
+|1122|MARCELO|0|object_in_zone|90|
+|1123|0085 - VITORIA FUTEBOL CLUBE|0|object_in_zone|97|
+|1124|AGRALE GALPAO|0|object_in_zone|6|
+|1125|SCARDUA|0|object_in_zone|6|
+|1126|ASSALTOS|0|parking|1|
+|1127|SIMULACOES|0|parking|1|
+|1128|ULTRAFARMA SANTO AMARO|0|parking|4|
+|1129|IPMED|0|parking|6|
+|1130|ESPIRAL|0|parking|6|
+|1131|SERVIP|0|parking|6|
+|1132|LUVEP|0|parking|6|
+|1133|GM INDUSTRIAL|0|parking|6|
+|1134|KOMTEK|0|parking|0|
+|1135|SHOPP LARANJEIRAS|0|parking|6|
+|1136|APRESENTACAO|0|parking|0|
+|1137|6002 - SHOWROOM|0|parking|40|
+|1138|SHOPPING VITORIA TESTE|0|parking|40|
+|1139|GDL LOGISTICA|0|parking|40|
+|1140|CAPIXABA|0|parking|0|
+|1141|0992 - COPAG|0|parking|80|
+|1142|PHD Vila Velha|0|parking|6|
+|1143|PROJETO GDL|0|parking|0|
+|1144|ESCOLA SANTA TEREZINHA|0|parking|6|
+|1145|GRUPOSEI|0|parking|0|
+|1146|BANCO SICOOB|0|parking|84|
+|1147|EPI|0|parking|0|
+|1148|ALERTAS OCR|0|parking|1|
+|1149|RIVIERA|0|parking|6|
+|1150|POC GRUPO SEI|0|parking|84|
+|1151|ANTONIO. M. MACHADO|0|parking|8|
+|1152|SEGEAGLE|0|parking|0|
+|1153|GTTAN|0|parking|0|
+|1154|CASA BRANCA|0|parking|6|
+|1155|EUROVIDROS|0|parking|6|
+|1156|AGGREGATION|0|parking|0|
+|1157|HOMOLOGACOES|0|parking|0|
+|1158|PRAIA FORT|0|parking|0|
+|1159|COND. ROSENGARTEN|0|parking|8|
+|1160|COND. SUPREMO VILA YARA|0|parking|8|
+|1161|FINERAX|0|parking|8|
+|1162|COND. SOLAR SERRANO|0|parking|8|
+|1163|COND. CINTIA|0|parking|8|
+|1164|BASE OPERACAO|0|parking|8|
+|1165|COND. ANNUNCIATA|0|parking|8|
+|1166|COND. ART ECO VIDA|0|parking|8|
+|1167|COND. ATLANTA|0|parking|8|
+|1168|COND. VILA YARA|0|parking|8|
+|1169|COND. UPTOWN|0|parking|8|
+|1170|COND. SHALON|0|parking|8|
+|1171|COND. AUSTRIA|0|parking|8|
+|1172|COND. SCORPIUS|0|parking|8|
+|1173|COND. ROMA|0|parking|8|
+|1174|COND. PRISCILA|0|parking|8|
+|1175|COND. PORTAL SAO FRANCISCO|0|parking|8|
+|1176|COND. ORQUIDEAS|0|parking|8|
+|1177|COND. MORADA DO SOL|0|parking|8|
+|1178|COND. MATRIZ|0|parking|8|
+|1179|COND. MARAPASSU|0|parking|8|
+|1180|COND. IPANEMA|0|parking|8|
+|1181|COND. FLORENCA|0|parking|8|
+|1182|COND. ESPANHA|0|parking|8|
+|1183|COND. CAMILA|0|parking|8|
+|1184|COND. BORBA GATO|0|parking|8|
+|1185|COND. BEIJA FLOR|0|parking|8|
+|1186|COND. BANDEIRANTES|0|parking|8|
+|1187|COND. ANIMA|0|parking|8|
+|1188|COND. 28 DE MAIO|0|parking|8|
+|1189|COND. AMERICA|0|parking|8|
+|1190|COND. BONFIGLIOLI|0|parking|8|
+|1191|COND. BOULEVARD|0|parking|8|
+|1192|COND. CAMPO GRANDE|0|parking|8|
+|1193|COND. CANTA GALO|0|parking|8|
+|1194|COND. CASA FLORA|0|parking|8|
+|1195|COND. CASCAIS|0|parking|8|
+|1196|COND. COQUEIROS|0|parking|8|
+|1197|COND. DIVA|0|parking|8|
+|1198|COND. FLOR DE LIRIO|0|parking|8|
+|1199|COND. GARDENS|0|parking|8|
+|1200|COND. GIUSEPPE|0|parking|8|
+|1201|COND. GOLDEN GATE|0|parking|8|
+|1202|COND. GRAND CANAL|0|parking|8|
+|1203|COND. HORTENCIAS|0|parking|8|
+|1204|COND. LA VILLETE|0|parking|8|
+|1205|COND. LIFE STYLE|0|parking|8|
+|1206|COND. MAGGIORE|0|parking|8|
+|1207|COND. MARIE|0|parking|8|
+|1208|COND. MATIAZZO|0|parking|8|
+|1209|COND. OPTION HOME|0|parking|8|
+|1210|COND. PLANALTO BUTANTA|0|parking|8|
+|1211|COND. PLAZA MORUMBI|0|parking|8|
+|1212|COND. PURUS|0|parking|8|
+|1213|COND. QUINTA DE SILVEIRAS|0|parking|8|
+|1214|COND. ROLDAO|0|parking|8|
+|1215|COND. SANTA RITA|0|parking|8|
+|1216|COND. SANTANNA|0|parking|8|
+|1217|COND. SPAZIO|0|parking|8|
+|1218|COND. TENERIFE|0|parking|8|
+|1219|COND. TERRA BRASILIS|0|parking|8|
+|1220|COND. UPSIDE|0|parking|8|
+|1221|COND. VILA ITU|0|parking|8|
+|1222|COND. VILA MARIANA|0|parking|8|
+|1223|COND. VILA VERDE|0|parking|8|
+|1224|COND. VILLAGIO|0|parking|8|
+|1225|HARAS|0|parking|8|
+|1226|PAULO TEST|0|parking|0|
+|1227|JACKPOT|0|parking|8|
+|1228|Eduacandario|0|parking|93|
+|1229|AUTOBAHN|0|parking|6|
+|1230|CN LOG|0|parking|6|
+|1231|1Project|0|parking|0|
+|1232|MONUV|0|parking|0|
+|1233|COND. LEAF|0|parking|8|
+|1234|COND. COLLINE DE NICE|0|parking|8|
+|1235|9000 - MARTEL SEGURANCA|0|parking|96|
+|1236|2000 - casa das ferragens|0|parking|96|
+|1237|8608 - GTTAM|0|parking|97|
+|1238|1147 - UBS BOA VISTA|0|parking|4|
+|1239|Stratum|0|parking|98|
+|1240|CASA DO CONSTRUTOR|0|parking|4|
+|1241|0076 - Proeng Hall|0|parking|97|
+|1242|5050 - LOJA SOLUTION|0|parking|100|
+|1243|0123 - AFFETTO PAPELARIA|0|parking|97|
+|1244|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|parking|97|
+|1245|ESTOQUE VERTEX|0|parking|8|
+|1246|ATCOM- SHOPPINGS|0|parking|101|
+|1247|MARCELO|0|parking|90|
+|1248|0085 - VITORIA FUTEBOL CLUBE|0|parking|97|
+|1249|AGRALE GALPAO|0|parking|6|
+|1250|SCARDUA|0|parking|6|
+|1251|ASSALTOS|0|person_reid|1|
+|1252|SIMULACOES|0|person_reid|1|
+|1253|ULTRAFARMA SANTO AMARO|0|person_reid|4|
+|1254|IPMED|0|person_reid|6|
+|1255|ESPIRAL|0|person_reid|6|
+|1256|SERVIP|0|person_reid|6|
+|1257|LUVEP|0|person_reid|6|
+|1258|GM INDUSTRIAL|0|person_reid|6|
+|1259|KOMTEK|0|person_reid|0|
+|1260|SHOPP LARANJEIRAS|0|person_reid|6|
+|1261|APRESENTACAO|0|person_reid|0|
+|1262|6002 - SHOWROOM|0|person_reid|40|
+|1263|SHOPPING VITORIA TESTE|0|person_reid|40|
+|1264|GDL LOGISTICA|0|person_reid|40|
+|1265|CAPIXABA|0|person_reid|0|
+|1266|0992 - COPAG|0|person_reid|80|
+|1267|PHD Vila Velha|0|person_reid|6|
+|1268|PROJETO GDL|0|person_reid|0|
+|1269|ESCOLA SANTA TEREZINHA|0|person_reid|6|
+|1270|GRUPOSEI|0|person_reid|0|
+|1271|BANCO SICOOB|0|person_reid|84|
+|1272|EPI|0|person_reid|0|
+|1273|ALERTAS OCR|0|person_reid|1|
+|1274|RIVIERA|0|person_reid|6|
+|1275|POC GRUPO SEI|0|person_reid|84|
+|1276|ANTONIO. M. MACHADO|0|person_reid|8|
+|1277|SEGEAGLE|0|person_reid|0|
+|1278|GTTAN|0|person_reid|0|
+|1279|CASA BRANCA|0|person_reid|6|
+|1280|EUROVIDROS|0|person_reid|6|
+|1281|AGGREGATION|0|person_reid|0|
+|1282|HOMOLOGACOES|0|person_reid|0|
+|1283|PRAIA FORT|0|person_reid|0|
+|1284|COND. ROSENGARTEN|0|person_reid|8|
+|1285|COND. SUPREMO VILA YARA|0|person_reid|8|
+|1286|FINERAX|0|person_reid|8|
+|1287|COND. SOLAR SERRANO|0|person_reid|8|
+|1288|COND. CINTIA|0|person_reid|8|
+|1289|BASE OPERACAO|0|person_reid|8|
+|1290|COND. ANNUNCIATA|0|person_reid|8|
+|1291|COND. ART ECO VIDA|0|person_reid|8|
+|1292|COND. ATLANTA|0|person_reid|8|
+|1293|COND. VILA YARA|0|person_reid|8|
+|1294|COND. UPTOWN|0|person_reid|8|
+|1295|COND. SHALON|0|person_reid|8|
+|1296|COND. AUSTRIA|0|person_reid|8|
+|1297|COND. SCORPIUS|0|person_reid|8|
+|1298|COND. ROMA|0|person_reid|8|
+|1299|COND. PRISCILA|0|person_reid|8|
+|1300|COND. PORTAL SAO FRANCISCO|0|person_reid|8|
+|1301|COND. ORQUIDEAS|0|person_reid|8|
+|1302|COND. MORADA DO SOL|0|person_reid|8|
+|1303|COND. MATRIZ|0|person_reid|8|
+|1304|COND. MARAPASSU|0|person_reid|8|
+|1305|COND. IPANEMA|0|person_reid|8|
+|1306|COND. FLORENCA|0|person_reid|8|
+|1307|COND. ESPANHA|0|person_reid|8|
+|1308|COND. CAMILA|0|person_reid|8|
+|1309|COND. BORBA GATO|0|person_reid|8|
+|1310|COND. BEIJA FLOR|0|person_reid|8|
+|1311|COND. BANDEIRANTES|0|person_reid|8|
+|1312|COND. ANIMA|0|person_reid|8|
+|1313|COND. 28 DE MAIO|0|person_reid|8|
+|1314|COND. AMERICA|0|person_reid|8|
+|1315|COND. BONFIGLIOLI|0|person_reid|8|
+|1316|COND. BOULEVARD|0|person_reid|8|
+|1317|COND. CAMPO GRANDE|0|person_reid|8|
+|1318|COND. CANTA GALO|0|person_reid|8|
+|1319|COND. CASA FLORA|0|person_reid|8|
+|1320|COND. CASCAIS|0|person_reid|8|
+|1321|COND. COQUEIROS|0|person_reid|8|
+|1322|COND. DIVA|0|person_reid|8|
+|1323|COND. FLOR DE LIRIO|0|person_reid|8|
+|1324|COND. GARDENS|0|person_reid|8|
+|1325|COND. GIUSEPPE|0|person_reid|8|
+|1326|COND. GOLDEN GATE|0|person_reid|8|
+|1327|COND. GRAND CANAL|0|person_reid|8|
+|1328|COND. HORTENCIAS|0|person_reid|8|
+|1329|COND. LA VILLETE|0|person_reid|8|
+|1330|COND. LIFE STYLE|0|person_reid|8|
+|1331|COND. MAGGIORE|0|person_reid|8|
+|1332|COND. MARIE|0|person_reid|8|
+|1333|COND. MATIAZZO|0|person_reid|8|
+|1334|COND. OPTION HOME|0|person_reid|8|
+|1335|COND. PLANALTO BUTANTA|0|person_reid|8|
+|1336|COND. PLAZA MORUMBI|0|person_reid|8|
+|1337|COND. PURUS|0|person_reid|8|
+|1338|COND. QUINTA DE SILVEIRAS|0|person_reid|8|
+|1339|COND. ROLDAO|0|person_reid|8|
+|1340|COND. SANTA RITA|0|person_reid|8|
+|1341|COND. SANTANNA|0|person_reid|8|
+|1342|COND. SPAZIO|0|person_reid|8|
+|1343|COND. TENERIFE|0|person_reid|8|
+|1344|COND. TERRA BRASILIS|0|person_reid|8|
+|1345|COND. UPSIDE|0|person_reid|8|
+|1346|COND. VILA ITU|0|person_reid|8|
+|1347|COND. VILA MARIANA|0|person_reid|8|
+|1348|COND. VILA VERDE|0|person_reid|8|
+|1349|COND. VILLAGIO|0|person_reid|8|
+|1350|HARAS|0|person_reid|8|
+|1351|PAULO TEST|0|person_reid|0|
+|1352|JACKPOT|0|person_reid|8|
+|1353|Eduacandario|0|person_reid|93|
+|1354|AUTOBAHN|0|person_reid|6|
+|1355|CN LOG|0|person_reid|6|
+|1356|1Project|0|person_reid|0|
+|1357|MONUV|0|person_reid|0|
+|1358|COND. LEAF|0|person_reid|8|
+|1359|COND. COLLINE DE NICE|0|person_reid|8|
+|1360|9000 - MARTEL SEGURANCA|0|person_reid|96|
+|1361|2000 - casa das ferragens|0|person_reid|96|
+|1362|8608 - GTTAM|0|person_reid|97|
+|1363|1147 - UBS BOA VISTA|0|person_reid|4|
+|1364|Stratum|0|person_reid|98|
+|1365|CASA DO CONSTRUTOR|0|person_reid|4|
+|1366|0076 - Proeng Hall|0|person_reid|97|
+|1367|5050 - LOJA SOLUTION|0|person_reid|100|
+|1368|0123 - AFFETTO PAPELARIA|0|person_reid|97|
+|1369|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|person_reid|97|
+|1370|ESTOQUE VERTEX|0|person_reid|8|
+|1371|ATCOM- SHOPPINGS|0|person_reid|101|
+|1372|MARCELO|0|person_reid|90|
+|1373|0085 - VITORIA FUTEBOL CLUBE|0|person_reid|97|
+|1374|AGRALE GALPAO|0|person_reid|6|
+|1375|SCARDUA|0|person_reid|6|
+|1376|ASSALTOS|0|railroad|1|
+|1377|SIMULACOES|0|railroad|1|
+|1378|ULTRAFARMA SANTO AMARO|0|railroad|4|
+|1379|IPMED|0|railroad|6|
+|1380|ESPIRAL|0|railroad|6|
+|1381|SERVIP|0|railroad|6|
+|1382|LUVEP|0|railroad|6|
+|1383|GM INDUSTRIAL|0|railroad|6|
+|1384|KOMTEK|0|railroad|0|
+|1385|SHOPP LARANJEIRAS|0|railroad|6|
+|1386|APRESENTACAO|0|railroad|0|
+|1387|6002 - SHOWROOM|0|railroad|40|
+|1388|SHOPPING VITORIA TESTE|0|railroad|40|
+|1389|GDL LOGISTICA|0|railroad|40|
+|1390|CAPIXABA|0|railroad|0|
+|1391|0992 - COPAG|0|railroad|80|
+|1392|PHD Vila Velha|0|railroad|6|
+|1393|PROJETO GDL|0|railroad|0|
+|1394|ESCOLA SANTA TEREZINHA|0|railroad|6|
+|1395|GRUPOSEI|0|railroad|0|
+|1396|BANCO SICOOB|0|railroad|84|
+|1397|EPI|0|railroad|0|
+|1398|ALERTAS OCR|0|railroad|1|
+|1399|RIVIERA|0|railroad|6|
+|1400|POC GRUPO SEI|0|railroad|84|
+|1401|ANTONIO. M. MACHADO|0|railroad|8|
+|1402|SEGEAGLE|0|railroad|0|
+|1403|GTTAN|0|railroad|0|
+|1404|CASA BRANCA|0|railroad|6|
+|1405|EUROVIDROS|0|railroad|6|
+|1406|AGGREGATION|0|railroad|0|
+|1407|HOMOLOGACOES|0|railroad|0|
+|1408|PRAIA FORT|0|railroad|0|
+|1409|COND. ROSENGARTEN|0|railroad|8|
+|1410|COND. SUPREMO VILA YARA|0|railroad|8|
+|1411|FINERAX|0|railroad|8|
+|1412|COND. SOLAR SERRANO|0|railroad|8|
+|1413|COND. CINTIA|0|railroad|8|
+|1414|BASE OPERACAO|0|railroad|8|
+|1415|COND. ANNUNCIATA|0|railroad|8|
+|1416|COND. ART ECO VIDA|0|railroad|8|
+|1417|COND. ATLANTA|0|railroad|8|
+|1418|COND. VILA YARA|0|railroad|8|
+|1419|COND. UPTOWN|0|railroad|8|
+|1420|COND. SHALON|0|railroad|8|
+|1421|COND. AUSTRIA|0|railroad|8|
+|1422|COND. SCORPIUS|0|railroad|8|
+|1423|COND. ROMA|0|railroad|8|
+|1424|COND. PRISCILA|0|railroad|8|
+|1425|COND. PORTAL SAO FRANCISCO|0|railroad|8|
+|1426|COND. ORQUIDEAS|0|railroad|8|
+|1427|COND. MORADA DO SOL|0|railroad|8|
+|1428|COND. MATRIZ|0|railroad|8|
+|1429|COND. MARAPASSU|0|railroad|8|
+|1430|COND. IPANEMA|0|railroad|8|
+|1431|COND. FLORENCA|0|railroad|8|
+|1432|COND. ESPANHA|0|railroad|8|
+|1433|COND. CAMILA|0|railroad|8|
+|1434|COND. BORBA GATO|0|railroad|8|
+|1435|COND. BEIJA FLOR|0|railroad|8|
+|1436|COND. BANDEIRANTES|0|railroad|8|
+|1437|COND. ANIMA|0|railroad|8|
+|1438|COND. 28 DE MAIO|0|railroad|8|
+|1439|COND. AMERICA|0|railroad|8|
+|1440|COND. BONFIGLIOLI|0|railroad|8|
+|1441|COND. BOULEVARD|0|railroad|8|
+|1442|COND. CAMPO GRANDE|0|railroad|8|
+|1443|COND. CANTA GALO|0|railroad|8|
+|1444|COND. CASA FLORA|0|railroad|8|
+|1445|COND. CASCAIS|0|railroad|8|
+|1446|COND. COQUEIROS|0|railroad|8|
+|1447|COND. DIVA|0|railroad|8|
+|1448|COND. FLOR DE LIRIO|0|railroad|8|
+|1449|COND. GARDENS|0|railroad|8|
+|1450|COND. GIUSEPPE|0|railroad|8|
+|1451|COND. GOLDEN GATE|0|railroad|8|
+|1452|COND. GRAND CANAL|0|railroad|8|
+|1453|COND. HORTENCIAS|0|railroad|8|
+|1454|COND. LA VILLETE|0|railroad|8|
+|1455|COND. LIFE STYLE|0|railroad|8|
+|1456|COND. MAGGIORE|0|railroad|8|
+|1457|COND. MARIE|0|railroad|8|
+|1458|COND. MATIAZZO|0|railroad|8|
+|1459|COND. OPTION HOME|0|railroad|8|
+|1460|COND. PLANALTO BUTANTA|0|railroad|8|
+|1461|COND. PLAZA MORUMBI|0|railroad|8|
+|1462|COND. PURUS|0|railroad|8|
+|1463|COND. QUINTA DE SILVEIRAS|0|railroad|8|
+|1464|COND. ROLDAO|0|railroad|8|
+|1465|COND. SANTA RITA|0|railroad|8|
+|1466|COND. SANTANNA|0|railroad|8|
+|1467|COND. SPAZIO|0|railroad|8|
+|1468|COND. TENERIFE|0|railroad|8|
+|1469|COND. TERRA BRASILIS|0|railroad|8|
+|1470|COND. UPSIDE|0|railroad|8|
+|1471|COND. VILA ITU|0|railroad|8|
+|1472|COND. VILA MARIANA|0|railroad|8|
+|1473|COND. VILA VERDE|0|railroad|8|
+|1474|COND. VILLAGIO|0|railroad|8|
+|1475|HARAS|0|railroad|8|
+|1476|PAULO TEST|0|railroad|0|
+|1477|JACKPOT|0|railroad|8|
+|1478|Eduacandario|0|railroad|93|
+|1479|AUTOBAHN|0|railroad|6|
+|1480|CN LOG|0|railroad|6|
+|1481|1Project|0|railroad|0|
+|1482|MONUV|0|railroad|0|
+|1483|COND. LEAF|0|railroad|8|
+|1484|COND. COLLINE DE NICE|0|railroad|8|
+|1485|9000 - MARTEL SEGURANCA|0|railroad|96|
+|1486|2000 - casa das ferragens|0|railroad|96|
+|1487|8608 - GTTAM|0|railroad|97|
+|1488|1147 - UBS BOA VISTA|0|railroad|4|
+|1489|Stratum|0|railroad|98|
+|1490|CASA DO CONSTRUTOR|0|railroad|4|
+|1491|0076 - Proeng Hall|0|railroad|97|
+|1492|5050 - LOJA SOLUTION|0|railroad|100|
+|1493|0123 - AFFETTO PAPELARIA|0|railroad|97|
+|1494|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|railroad|97|
+|1495|ESTOQUE VERTEX|0|railroad|8|
+|1496|ATCOM- SHOPPINGS|0|railroad|101|
+|1497|MARCELO|0|railroad|90|
+|1498|0085 - VITORIA FUTEBOL CLUBE|0|railroad|97|
+|1499|AGRALE GALPAO|0|railroad|6|
+|1500|SCARDUA|0|railroad|6|
+|1501|ASSALTOS|0|smart_va|1|
+|1502|SIMULACOES|0|smart_va|1|
+|1503|ULTRAFARMA SANTO AMARO|0|smart_va|4|
+|1504|IPMED|0|smart_va|6|
+|1505|ESPIRAL|0|smart_va|6|
+|1506|SERVIP|0|smart_va|6|
+|1507|LUVEP|0|smart_va|6|
+|1508|GM INDUSTRIAL|0|smart_va|6|
+|1509|KOMTEK|0|smart_va|0|
+|1510|SHOPP LARANJEIRAS|0|smart_va|6|
+|1511|APRESENTACAO|0|smart_va|0|
+|1512|6002 - SHOWROOM|0|smart_va|40|
+|1513|SHOPPING VITORIA TESTE|0|smart_va|40|
+|1514|GDL LOGISTICA|0|smart_va|40|
+|1515|CAPIXABA|0|smart_va|0|
+|1516|0992 - COPAG|0|smart_va|80|
+|1517|PHD Vila Velha|0|smart_va|6|
+|1518|PROJETO GDL|0|smart_va|0|
+|1519|ESCOLA SANTA TEREZINHA|0|smart_va|6|
+|1520|GRUPOSEI|0|smart_va|0|
+|1521|BANCO SICOOB|0|smart_va|84|
+|1522|EPI|0|smart_va|0|
+|1523|ALERTAS OCR|0|smart_va|1|
+|1524|RIVIERA|0|smart_va|6|
+|1525|POC GRUPO SEI|0|smart_va|84|
+|1526|ANTONIO. M. MACHADO|0|smart_va|8|
+|1527|SEGEAGLE|0|smart_va|0|
+|1528|GTTAN|0|smart_va|0|
+|1529|CASA BRANCA|0|smart_va|6|
+|1530|EUROVIDROS|0|smart_va|6|
+|1531|AGGREGATION|0|smart_va|0|
+|1532|HOMOLOGACOES|0|smart_va|0|
+|1533|PRAIA FORT|0|smart_va|0|
+|1534|COND. ROSENGARTEN|0|smart_va|8|
+|1535|COND. SUPREMO VILA YARA|0|smart_va|8|
+|1536|FINERAX|0|smart_va|8|
+|1537|COND. SOLAR SERRANO|0|smart_va|8|
+|1538|COND. CINTIA|0|smart_va|8|
+|1539|BASE OPERACAO|0|smart_va|8|
+|1540|COND. ANNUNCIATA|0|smart_va|8|
+|1541|COND. ART ECO VIDA|0|smart_va|8|
+|1542|COND. ATLANTA|0|smart_va|8|
+|1543|COND. VILA YARA|0|smart_va|8|
+|1544|COND. UPTOWN|0|smart_va|8|
+|1545|COND. SHALON|0|smart_va|8|
+|1546|COND. AUSTRIA|0|smart_va|8|
+|1547|COND. SCORPIUS|0|smart_va|8|
+|1548|COND. ROMA|0|smart_va|8|
+|1549|COND. PRISCILA|0|smart_va|8|
+|1550|COND. PORTAL SAO FRANCISCO|0|smart_va|8|
+|1551|COND. ORQUIDEAS|0|smart_va|8|
+|1552|COND. MORADA DO SOL|0|smart_va|8|
+|1553|COND. MATRIZ|0|smart_va|8|
+|1554|COND. MARAPASSU|0|smart_va|8|
+|1555|COND. IPANEMA|0|smart_va|8|
+|1556|COND. FLORENCA|0|smart_va|8|
+|1557|COND. ESPANHA|0|smart_va|8|
+|1558|COND. CAMILA|0|smart_va|8|
+|1559|COND. BORBA GATO|0|smart_va|8|
+|1560|COND. BEIJA FLOR|0|smart_va|8|
+|1561|COND. BANDEIRANTES|0|smart_va|8|
+|1562|COND. ANIMA|0|smart_va|8|
+|1563|COND. 28 DE MAIO|0|smart_va|8|
+|1564|COND. AMERICA|0|smart_va|8|
+|1565|COND. BONFIGLIOLI|0|smart_va|8|
+|1566|COND. BOULEVARD|0|smart_va|8|
+|1567|COND. CAMPO GRANDE|0|smart_va|8|
+|1568|COND. CANTA GALO|0|smart_va|8|
+|1569|COND. CASA FLORA|0|smart_va|8|
+|1570|COND. CASCAIS|0|smart_va|8|
+|1571|COND. COQUEIROS|0|smart_va|8|
+|1572|COND. DIVA|0|smart_va|8|
+|1573|COND. FLOR DE LIRIO|0|smart_va|8|
+|1574|COND. GARDENS|0|smart_va|8|
+|1575|COND. GIUSEPPE|0|smart_va|8|
+|1576|COND. GOLDEN GATE|0|smart_va|8|
+|1577|COND. GRAND CANAL|0|smart_va|8|
+|1578|COND. HORTENCIAS|0|smart_va|8|
+|1579|COND. LA VILLETE|0|smart_va|8|
+|1580|COND. LIFE STYLE|0|smart_va|8|
+|1581|COND. MAGGIORE|0|smart_va|8|
+|1582|COND. MARIE|0|smart_va|8|
+|1583|COND. MATIAZZO|0|smart_va|8|
+|1584|COND. OPTION HOME|0|smart_va|8|
+|1585|COND. PLANALTO BUTANTA|0|smart_va|8|
+|1586|COND. PLAZA MORUMBI|0|smart_va|8|
+|1587|COND. PURUS|0|smart_va|8|
+|1588|COND. QUINTA DE SILVEIRAS|0|smart_va|8|
+|1589|COND. ROLDAO|0|smart_va|8|
+|1590|COND. SANTA RITA|0|smart_va|8|
+|1591|COND. SANTANNA|0|smart_va|8|
+|1592|COND. SPAZIO|0|smart_va|8|
+|1593|COND. TENERIFE|0|smart_va|8|
+|1594|COND. TERRA BRASILIS|0|smart_va|8|
+|1595|COND. UPSIDE|0|smart_va|8|
+|1596|COND. VILA ITU|0|smart_va|8|
+|1597|COND. VILA MARIANA|0|smart_va|8|
+|1598|COND. VILA VERDE|0|smart_va|8|
+|1599|COND. VILLAGIO|0|smart_va|8|
+|1600|HARAS|0|smart_va|8|
+|1601|PAULO TEST|0|smart_va|0|
+|1602|JACKPOT|0|smart_va|8|
+|1603|Eduacandario|0|smart_va|93|
+|1604|AUTOBAHN|0|smart_va|6|
+|1605|CN LOG|0|smart_va|6|
+|1606|1Project|0|smart_va|0|
+|1607|MONUV|0|smart_va|0|
+|1608|COND. LEAF|0|smart_va|8|
+|1609|COND. COLLINE DE NICE|0|smart_va|8|
+|1610|9000 - MARTEL SEGURANCA|0|smart_va|96|
+|1611|2000 - casa das ferragens|0|smart_va|96|
+|1612|8608 - GTTAM|0|smart_va|97|
+|1613|1147 - UBS BOA VISTA|0|smart_va|4|
+|1614|Stratum|0|smart_va|98|
+|1615|CASA DO CONSTRUTOR|0|smart_va|4|
+|1616|0076 - Proeng Hall|0|smart_va|97|
+|1617|5050 - LOJA SOLUTION|0|smart_va|100|
+|1618|0123 - AFFETTO PAPELARIA|0|smart_va|97|
+|1619|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|smart_va|97|
+|1620|ESTOQUE VERTEX|0|smart_va|8|
+|1621|ATCOM- SHOPPINGS|0|smart_va|101|
+|1622|MARCELO|0|smart_va|90|
+|1623|0085 - VITORIA FUTEBOL CLUBE|0|smart_va|97|
+|1624|AGRALE GALPAO|0|smart_va|6|
+|1625|SCARDUA|0|smart_va|6|
+|1626|ASSALTOS|0|smoke_fire|1|
+|1627|SIMULACOES|0|smoke_fire|1|
+|1628|ULTRAFARMA SANTO AMARO|0|smoke_fire|4|
+|1629|IPMED|0|smoke_fire|6|
+|1630|ESPIRAL|0|smoke_fire|6|
+|1631|SERVIP|0|smoke_fire|6|
+|1632|LUVEP|0|smoke_fire|6|
+|1633|GM INDUSTRIAL|0|smoke_fire|6|
+|1634|KOMTEK|0|smoke_fire|0|
+|1635|SHOPP LARANJEIRAS|0|smoke_fire|6|
+|1636|APRESENTACAO|0|smoke_fire|0|
+|1637|6002 - SHOWROOM|0|smoke_fire|40|
+|1638|SHOPPING VITORIA TESTE|0|smoke_fire|40|
+|1639|GDL LOGISTICA|0|smoke_fire|40|
+|1640|CAPIXABA|0|smoke_fire|0|
+|1641|0992 - COPAG|0|smoke_fire|80|
+|1642|PHD Vila Velha|0|smoke_fire|6|
+|1643|PROJETO GDL|0|smoke_fire|0|
+|1644|ESCOLA SANTA TEREZINHA|0|smoke_fire|6|
+|1645|GRUPOSEI|0|smoke_fire|0|
+|1646|BANCO SICOOB|0|smoke_fire|84|
+|1647|EPI|0|smoke_fire|0|
+|1648|ALERTAS OCR|0|smoke_fire|1|
+|1649|RIVIERA|0|smoke_fire|6|
+|1650|POC GRUPO SEI|0|smoke_fire|84|
+|1651|ANTONIO. M. MACHADO|0|smoke_fire|8|
+|1652|SEGEAGLE|0|smoke_fire|0|
+|1653|GTTAN|0|smoke_fire|0|
+|1654|CASA BRANCA|0|smoke_fire|6|
+|1655|EUROVIDROS|0|smoke_fire|6|
+|1656|AGGREGATION|0|smoke_fire|0|
+|1657|HOMOLOGACOES|0|smoke_fire|0|
+|1658|PRAIA FORT|0|smoke_fire|0|
+|1659|COND. ROSENGARTEN|0|smoke_fire|8|
+|1660|COND. SUPREMO VILA YARA|0|smoke_fire|8|
+|1661|FINERAX|0|smoke_fire|8|
+|1662|COND. SOLAR SERRANO|0|smoke_fire|8|
+|1663|COND. CINTIA|0|smoke_fire|8|
+|1664|BASE OPERACAO|0|smoke_fire|8|
+|1665|COND. ANNUNCIATA|0|smoke_fire|8|
+|1666|COND. ART ECO VIDA|0|smoke_fire|8|
+|1667|COND. ATLANTA|0|smoke_fire|8|
+|1668|COND. VILA YARA|0|smoke_fire|8|
+|1669|COND. UPTOWN|0|smoke_fire|8|
+|1670|COND. SHALON|0|smoke_fire|8|
+|1671|COND. AUSTRIA|0|smoke_fire|8|
+|1672|COND. SCORPIUS|0|smoke_fire|8|
+|1673|COND. ROMA|0|smoke_fire|8|
+|1674|COND. PRISCILA|0|smoke_fire|8|
+|1675|COND. PORTAL SAO FRANCISCO|0|smoke_fire|8|
+|1676|COND. ORQUIDEAS|0|smoke_fire|8|
+|1677|COND. MORADA DO SOL|0|smoke_fire|8|
+|1678|COND. MATRIZ|0|smoke_fire|8|
+|1679|COND. MARAPASSU|0|smoke_fire|8|
+|1680|COND. IPANEMA|0|smoke_fire|8|
+|1681|COND. FLORENCA|0|smoke_fire|8|
+|1682|COND. ESPANHA|0|smoke_fire|8|
+|1683|COND. CAMILA|0|smoke_fire|8|
+|1684|COND. BORBA GATO|0|smoke_fire|8|
+|1685|COND. BEIJA FLOR|0|smoke_fire|8|
+|1686|COND. BANDEIRANTES|0|smoke_fire|8|
+|1687|COND. ANIMA|0|smoke_fire|8|
+|1688|COND. 28 DE MAIO|0|smoke_fire|8|
+|1689|COND. AMERICA|0|smoke_fire|8|
+|1690|COND. BONFIGLIOLI|0|smoke_fire|8|
+|1691|COND. BOULEVARD|0|smoke_fire|8|
+|1692|COND. CAMPO GRANDE|0|smoke_fire|8|
+|1693|COND. CANTA GALO|0|smoke_fire|8|
+|1694|COND. CASA FLORA|0|smoke_fire|8|
+|1695|COND. CASCAIS|0|smoke_fire|8|
+|1696|COND. COQUEIROS|0|smoke_fire|8|
+|1697|COND. DIVA|0|smoke_fire|8|
+|1698|COND. FLOR DE LIRIO|0|smoke_fire|8|
+|1699|COND. GARDENS|0|smoke_fire|8|
+|1700|COND. GIUSEPPE|0|smoke_fire|8|
+|1701|COND. GOLDEN GATE|0|smoke_fire|8|
+|1702|COND. GRAND CANAL|0|smoke_fire|8|
+|1703|COND. HORTENCIAS|0|smoke_fire|8|
+|1704|COND. LA VILLETE|0|smoke_fire|8|
+|1705|COND. LIFE STYLE|0|smoke_fire|8|
+|1706|COND. MAGGIORE|0|smoke_fire|8|
+|1707|COND. MARIE|0|smoke_fire|8|
+|1708|COND. MATIAZZO|0|smoke_fire|8|
+|1709|COND. OPTION HOME|0|smoke_fire|8|
+|1710|COND. PLANALTO BUTANTA|0|smoke_fire|8|
+|1711|COND. PLAZA MORUMBI|0|smoke_fire|8|
+|1712|COND. PURUS|0|smoke_fire|8|
+|1713|COND. QUINTA DE SILVEIRAS|0|smoke_fire|8|
+|1714|COND. ROLDAO|0|smoke_fire|8|
+|1715|COND. SANTA RITA|0|smoke_fire|8|
+|1716|COND. SANTANNA|0|smoke_fire|8|
+|1717|COND. SPAZIO|0|smoke_fire|8|
+|1718|COND. TENERIFE|0|smoke_fire|8|
+|1719|COND. TERRA BRASILIS|0|smoke_fire|8|
+|1720|COND. UPSIDE|0|smoke_fire|8|
+|1721|COND. VILA ITU|0|smoke_fire|8|
+|1722|COND. VILA MARIANA|0|smoke_fire|8|
+|1723|COND. VILA VERDE|0|smoke_fire|8|
+|1724|COND. VILLAGIO|0|smoke_fire|8|
+|1725|HARAS|0|smoke_fire|8|
+|1726|PAULO TEST|0|smoke_fire|0|
+|1727|JACKPOT|0|smoke_fire|8|
+|1728|Eduacandario|0|smoke_fire|93|
+|1729|AUTOBAHN|0|smoke_fire|6|
+|1730|CN LOG|0|smoke_fire|6|
+|1731|1Project|0|smoke_fire|0|
+|1732|MONUV|0|smoke_fire|0|
+|1733|COND. LEAF|0|smoke_fire|8|
+|1734|COND. COLLINE DE NICE|0|smoke_fire|8|
+|1735|9000 - MARTEL SEGURANCA|0|smoke_fire|96|
+|1736|2000 - casa das ferragens|0|smoke_fire|96|
+|1737|8608 - GTTAM|0|smoke_fire|97|
+|1738|1147 - UBS BOA VISTA|0|smoke_fire|4|
+|1739|Stratum|0|smoke_fire|98|
+|1740|CASA DO CONSTRUTOR|0|smoke_fire|4|
+|1741|0076 - Proeng Hall|0|smoke_fire|97|
+|1742|5050 - LOJA SOLUTION|0|smoke_fire|100|
+|1743|0123 - AFFETTO PAPELARIA|0|smoke_fire|97|
+|1744|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|smoke_fire|97|
+|1745|ESTOQUE VERTEX|0|smoke_fire|8|
+|1746|ATCOM- SHOPPINGS|0|smoke_fire|101|
+|1747|MARCELO|0|smoke_fire|90|
+|1748|0085 - VITORIA FUTEBOL CLUBE|0|smoke_fire|97|
+|1749|AGRALE GALPAO|0|smoke_fire|6|
+|1750|SCARDUA|0|smoke_fire|6|
+|1751|ASSALTOS|0|traffic|1|
+|1752|SIMULACOES|0|traffic|1|
+|1753|ULTRAFARMA SANTO AMARO|0|traffic|4|
+|1754|IPMED|0|traffic|6|
+|1755|ESPIRAL|0|traffic|6|
+|1756|SERVIP|0|traffic|6|
+|1757|LUVEP|0|traffic|6|
+|1758|GM INDUSTRIAL|0|traffic|6|
+|1759|KOMTEK|0|traffic|0|
+|1760|SHOPP LARANJEIRAS|0|traffic|6|
+|1761|APRESENTACAO|0|traffic|0|
+|1762|6002 - SHOWROOM|0|traffic|40|
+|1763|SHOPPING VITORIA TESTE|0|traffic|40|
+|1764|GDL LOGISTICA|0|traffic|40|
+|1765|CAPIXABA|0|traffic|0|
+|1766|0992 - COPAG|0|traffic|80|
+|1767|PHD Vila Velha|0|traffic|6|
+|1768|PROJETO GDL|0|traffic|0|
+|1769|ESCOLA SANTA TEREZINHA|0|traffic|6|
+|1770|GRUPOSEI|0|traffic|0|
+|1771|BANCO SICOOB|0|traffic|84|
+|1772|EPI|0|traffic|0|
+|1773|ALERTAS OCR|0|traffic|1|
+|1774|RIVIERA|0|traffic|6|
+|1775|POC GRUPO SEI|0|traffic|84|
+|1776|ANTONIO. M. MACHADO|0|traffic|8|
+|1777|SEGEAGLE|0|traffic|0|
+|1778|GTTAN|0|traffic|0|
+|1779|CASA BRANCA|0|traffic|6|
+|1780|EUROVIDROS|0|traffic|6|
+|1781|AGGREGATION|0|traffic|0|
+|1782|HOMOLOGACOES|0|traffic|0|
+|1783|PRAIA FORT|0|traffic|0|
+|1784|COND. ROSENGARTEN|0|traffic|8|
+|1785|COND. SUPREMO VILA YARA|0|traffic|8|
+|1786|FINERAX|0|traffic|8|
+|1787|COND. SOLAR SERRANO|0|traffic|8|
+|1788|COND. CINTIA|0|traffic|8|
+|1789|BASE OPERACAO|0|traffic|8|
+|1790|COND. ANNUNCIATA|0|traffic|8|
+|1791|COND. ART ECO VIDA|0|traffic|8|
+|1792|COND. ATLANTA|0|traffic|8|
+|1793|COND. VILA YARA|0|traffic|8|
+|1794|COND. UPTOWN|0|traffic|8|
+|1795|COND. SHALON|0|traffic|8|
+|1796|COND. AUSTRIA|0|traffic|8|
+|1797|COND. SCORPIUS|0|traffic|8|
+|1798|COND. ROMA|0|traffic|8|
+|1799|COND. PRISCILA|0|traffic|8|
+|1800|COND. PORTAL SAO FRANCISCO|0|traffic|8|
+|1801|COND. ORQUIDEAS|0|traffic|8|
+|1802|COND. MORADA DO SOL|0|traffic|8|
+|1803|COND. MATRIZ|0|traffic|8|
+|1804|COND. MARAPASSU|0|traffic|8|
+|1805|COND. IPANEMA|0|traffic|8|
+|1806|COND. FLORENCA|0|traffic|8|
+|1807|COND. ESPANHA|0|traffic|8|
+|1808|COND. CAMILA|0|traffic|8|
+|1809|COND. BORBA GATO|0|traffic|8|
+|1810|COND. BEIJA FLOR|0|traffic|8|
+|1811|COND. BANDEIRANTES|0|traffic|8|
+|1812|COND. ANIMA|0|traffic|8|
+|1813|COND. 28 DE MAIO|0|traffic|8|
+|1814|COND. AMERICA|0|traffic|8|
+|1815|COND. BONFIGLIOLI|0|traffic|8|
+|1816|COND. BOULEVARD|0|traffic|8|
+|1817|COND. CAMPO GRANDE|0|traffic|8|
+|1818|COND. CANTA GALO|0|traffic|8|
+|1819|COND. CASA FLORA|0|traffic|8|
+|1820|COND. CASCAIS|0|traffic|8|
+|1821|COND. COQUEIROS|0|traffic|8|
+|1822|COND. DIVA|0|traffic|8|
+|1823|COND. FLOR DE LIRIO|0|traffic|8|
+|1824|COND. GARDENS|0|traffic|8|
+|1825|COND. GIUSEPPE|0|traffic|8|
+|1826|COND. GOLDEN GATE|0|traffic|8|
+|1827|COND. GRAND CANAL|0|traffic|8|
+|1828|COND. HORTENCIAS|0|traffic|8|
+|1829|COND. LA VILLETE|0|traffic|8|
+|1830|COND. LIFE STYLE|0|traffic|8|
+|1831|COND. MAGGIORE|0|traffic|8|
+|1832|COND. MARIE|0|traffic|8|
+|1833|COND. MATIAZZO|0|traffic|8|
+|1834|COND. OPTION HOME|0|traffic|8|
+|1835|COND. PLANALTO BUTANTA|0|traffic|8|
+|1836|COND. PLAZA MORUMBI|0|traffic|8|
+|1837|COND. PURUS|0|traffic|8|
+|1838|COND. QUINTA DE SILVEIRAS|0|traffic|8|
+|1839|COND. ROLDAO|0|traffic|8|
+|1840|COND. SANTA RITA|0|traffic|8|
+|1841|COND. SANTANNA|0|traffic|8|
+|1842|COND. SPAZIO|0|traffic|8|
+|1843|COND. TENERIFE|0|traffic|8|
+|1844|COND. TERRA BRASILIS|0|traffic|8|
+|1845|COND. UPSIDE|0|traffic|8|
+|1846|COND. VILA ITU|0|traffic|8|
+|1847|COND. VILA MARIANA|0|traffic|8|
+|1848|COND. VILA VERDE|0|traffic|8|
+|1849|COND. VILLAGIO|0|traffic|8|
+|1850|HARAS|0|traffic|8|
+|1851|PAULO TEST|0|traffic|0|
+|1852|JACKPOT|0|traffic|8|
+|1853|Eduacandario|0|traffic|93|
+|1854|AUTOBAHN|0|traffic|6|
+|1855|CN LOG|0|traffic|6|
+|1856|1Project|0|traffic|0|
+|1857|MONUV|0|traffic|0|
+|1858|COND. LEAF|0|traffic|8|
+|1859|COND. COLLINE DE NICE|0|traffic|8|
+|1860|9000 - MARTEL SEGURANCA|0|traffic|96|
+|1861|2000 - casa das ferragens|0|traffic|96|
+|1862|8608 - GTTAM|0|traffic|97|
+|1863|1147 - UBS BOA VISTA|0|traffic|4|
+|1864|Stratum|0|traffic|98|
+|1865|CASA DO CONSTRUTOR|0|traffic|4|
+|1866|0076 - Proeng Hall|0|traffic|97|
+|1867|5050 - LOJA SOLUTION|0|traffic|100|
+|1868|0123 - AFFETTO PAPELARIA|0|traffic|97|
+|1869|0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA|0|traffic|97|
+|1870|ESTOQUE VERTEX|0|traffic|8|
+|1871|ATCOM- SHOPPINGS|0|traffic|101|
+|1872|MARCELO|0|traffic|90|
+|1873|0085 - VITORIA FUTEBOL CLUBE|0|traffic|97|
+|1874|AGRALE GALPAO|0|traffic|6|
+|1875|SCARDUA|0|traffic|6|
