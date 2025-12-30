@@ -18,3 +18,5 @@
 - 17:05 UTC — Regenerated new_dataset/streams_202512301039.txt, sql/streams_inserts.sql, and maps/streams.json with non-null addresses for migrated streams; preserved ids 1–4 as unmapped_new.
 - 17:48 UTC — Added /helper_scripts/analytics_migration.py to clone stream_groups per plugin, remap client/stream/user references, and build analytics+analytics_groups artifacts.
 - 17:48 UTC — Generated analytics_groups (1875 plugin-scoped rows) and migrated analytics (698 mapped, 626 unmapped; 9 existing preserved) updating datasets, SQL scripts, and mapping files.
+- 18:12 UTC — Added /helper_scripts/event_manager_migration.py to normalize event manager rows, remap client_ids, and emit dataset/SQL/mapping outputs.
+- 18:12 UTC — Migrated event_manager (327 mapped, 5 unmapped legacy due to missing clients; 2 existing preserved) regenerating new_dataset/event_manager_202512301039.txt, sql/event_manager_inserts.sql, and maps/event_manager.json.
