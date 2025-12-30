@@ -1,0 +1,1145 @@
+{
+  "match_keys": [
+    "id preserved 1:1 to id",
+    "name (ASCII normalized) to name",
+    "client_id remapped via clients.json to client_id",
+    "parent_id preserved to parent_id"
+  ],
+  "mapped": [
+    {
+      "old_id": 6,
+      "new_id": 6,
+      "name": "ASSALTOS",
+      "old_client_id": 1,
+      "new_client_id": 1,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 7,
+      "new_id": 7,
+      "name": "SIMULACOES",
+      "old_client_id": 1,
+      "new_client_id": 1,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 37,
+      "new_id": 37,
+      "name": "ULTRAFARMA SANTO AMARO",
+      "old_client_id": 4,
+      "new_client_id": 4,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 38,
+      "new_id": 38,
+      "name": "IPMED",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 39,
+      "new_id": 39,
+      "name": "ESPIRAL",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 40,
+      "new_id": 40,
+      "name": "SERVIP",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 41,
+      "new_id": 41,
+      "name": "LUVEP",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 42,
+      "new_id": 42,
+      "name": "GM INDUSTRIAL",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 46,
+      "new_id": 46,
+      "name": "KOMTEK",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 47,
+      "new_id": 47,
+      "name": "SHOPP LARANJEIRAS",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 81,
+      "new_id": 81,
+      "name": "APRESENTACAO",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 82,
+      "new_id": 82,
+      "name": "6002 - SHOWROOM",
+      "old_client_id": 40,
+      "new_client_id": 40,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 86,
+      "new_id": 86,
+      "name": "SHOPPING VITORIA TESTE",
+      "old_client_id": 40,
+      "new_client_id": 40,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 87,
+      "new_id": 87,
+      "name": "GDL LOGISTICA",
+      "old_client_id": 40,
+      "new_client_id": 40,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 88,
+      "new_id": 88,
+      "name": "CAPIXABA",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 89,
+      "new_id": 89,
+      "name": "0992 - COPAG",
+      "old_client_id": 80,
+      "new_client_id": 80,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 91,
+      "new_id": 91,
+      "name": "PHD Vila Velha",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 92,
+      "new_id": 92,
+      "name": "PROJETO GDL",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 93,
+      "new_id": 93,
+      "name": "ESCOLA SANTA TEREZINHA",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 96,
+      "new_id": 96,
+      "name": "GRUPOSEI",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 97,
+      "new_id": 97,
+      "name": "BANCO SICOOB",
+      "old_client_id": 84,
+      "new_client_id": 84,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 98,
+      "new_id": 98,
+      "name": "EPI",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 99,
+      "new_id": 99,
+      "name": "ALERTAS OCR",
+      "old_client_id": 1,
+      "new_client_id": 1,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 101,
+      "new_id": 101,
+      "name": "RIVIERA",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 102,
+      "new_id": 102,
+      "name": "POC GRUPO SEI",
+      "old_client_id": 84,
+      "new_client_id": 84,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 105,
+      "new_id": 105,
+      "name": "ANTONIO. M. MACHADO",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 109,
+      "new_id": 109,
+      "name": "SEGEAGLE",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 110,
+      "new_id": 110,
+      "name": "GTTAN",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 111,
+      "new_id": 111,
+      "name": "CASA BRANCA",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 145,
+      "new_id": 145,
+      "name": "EUROVIDROS",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 148,
+      "new_id": 148,
+      "name": "AGGREGATION",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 151,
+      "new_id": 151,
+      "name": "HOMOLOGACOES",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 152,
+      "new_id": 152,
+      "name": "PRAIA FORT",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 153,
+      "new_id": 153,
+      "name": "COND. ROSENGARTEN",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 154,
+      "new_id": 154,
+      "name": "COND. SUPREMO VILA YARA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 155,
+      "new_id": 155,
+      "name": "FINERAX",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 156,
+      "new_id": 156,
+      "name": "COND. SOLAR SERRANO",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 157,
+      "new_id": 157,
+      "name": "COND. CINTIA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 158,
+      "new_id": 158,
+      "name": "BASE OPERACAO",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 159,
+      "new_id": 159,
+      "name": "COND. ANNUNCIATA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 161,
+      "new_id": 161,
+      "name": "COND. ART ECO VIDA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 162,
+      "new_id": 162,
+      "name": "COND. ATLANTA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 163,
+      "new_id": 163,
+      "name": "COND. VILA YARA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 164,
+      "new_id": 164,
+      "name": "COND. UPTOWN",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 165,
+      "new_id": 165,
+      "name": "COND. SHALON",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 166,
+      "new_id": 166,
+      "name": "COND. AUSTRIA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 167,
+      "new_id": 167,
+      "name": "COND. SCORPIUS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 168,
+      "new_id": 168,
+      "name": "COND. ROMA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 169,
+      "new_id": 169,
+      "name": "COND. PRISCILA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 170,
+      "new_id": 170,
+      "name": "COND. PORTAL SAO FRANCISCO",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 172,
+      "new_id": 172,
+      "name": "COND. ORQUIDEAS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 173,
+      "new_id": 173,
+      "name": "COND. MORADA DO SOL",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 174,
+      "new_id": 174,
+      "name": "COND. MATRIZ",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 175,
+      "new_id": 175,
+      "name": "COND. MARAPASSU",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 176,
+      "new_id": 176,
+      "name": "COND. IPANEMA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 177,
+      "new_id": 177,
+      "name": "COND. FLORENCA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 178,
+      "new_id": 178,
+      "name": "COND. ESPANHA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 179,
+      "new_id": 179,
+      "name": "COND. CAMILA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 180,
+      "new_id": 180,
+      "name": "COND. BORBA GATO",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 181,
+      "new_id": 181,
+      "name": "COND. BEIJA FLOR",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 182,
+      "new_id": 182,
+      "name": "COND. BANDEIRANTES",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 183,
+      "new_id": 183,
+      "name": "COND. ANIMA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 184,
+      "new_id": 184,
+      "name": "COND. 28 DE MAIO",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 186,
+      "new_id": 186,
+      "name": "COND. AMERICA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 187,
+      "new_id": 187,
+      "name": "COND. BONFIGLIOLI",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 188,
+      "new_id": 188,
+      "name": "COND. BOULEVARD",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 190,
+      "new_id": 190,
+      "name": "COND. CAMPO GRANDE",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 191,
+      "new_id": 191,
+      "name": "COND. CANTA GALO",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 192,
+      "new_id": 192,
+      "name": "COND. CASA FLORA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 193,
+      "new_id": 193,
+      "name": "COND. CASCAIS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 194,
+      "new_id": 194,
+      "name": "COND. COQUEIROS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 196,
+      "new_id": 196,
+      "name": "COND. DIVA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 197,
+      "new_id": 197,
+      "name": "COND. FLOR DE LIRIO",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 198,
+      "new_id": 198,
+      "name": "COND. GARDENS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 199,
+      "new_id": 199,
+      "name": "COND. GIUSEPPE",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 200,
+      "new_id": 200,
+      "name": "COND. GOLDEN GATE",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 201,
+      "new_id": 201,
+      "name": "COND. GRAND CANAL",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 202,
+      "new_id": 202,
+      "name": "COND. HORTENCIAS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 204,
+      "new_id": 204,
+      "name": "COND. LA VILLETE",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 205,
+      "new_id": 205,
+      "name": "COND. LIFE STYLE",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 206,
+      "new_id": 206,
+      "name": "COND. MAGGIORE",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 207,
+      "new_id": 207,
+      "name": "COND. MARIE",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 208,
+      "new_id": 208,
+      "name": "COND. MATIAZZO",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 209,
+      "new_id": 209,
+      "name": "COND. OPTION HOME",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 210,
+      "new_id": 210,
+      "name": "COND. PLANALTO BUTANTA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 211,
+      "new_id": 211,
+      "name": "COND. PLAZA MORUMBI",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 212,
+      "new_id": 212,
+      "name": "COND. PURUS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 213,
+      "new_id": 213,
+      "name": "COND. QUINTA DE SILVEIRAS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 214,
+      "new_id": 214,
+      "name": "COND. ROLDAO",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 215,
+      "new_id": 215,
+      "name": "COND. SANTA RITA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 216,
+      "new_id": 216,
+      "name": "COND. SANTANNA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 217,
+      "new_id": 217,
+      "name": "COND. SPAZIO",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 218,
+      "new_id": 218,
+      "name": "COND. TENERIFE",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 219,
+      "new_id": 219,
+      "name": "COND. TERRA BRASILIS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 220,
+      "new_id": 220,
+      "name": "COND. UPSIDE",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 222,
+      "new_id": 222,
+      "name": "COND. VILA ITU",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 223,
+      "new_id": 223,
+      "name": "COND. VILA MARIANA",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 224,
+      "new_id": 224,
+      "name": "COND. VILA VERDE",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 225,
+      "new_id": 225,
+      "name": "COND. VILLAGIO",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 226,
+      "new_id": 226,
+      "name": "HARAS",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 227,
+      "new_id": 227,
+      "name": "PAULO TEST",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 228,
+      "new_id": 228,
+      "name": "JACKPOT",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 229,
+      "new_id": 229,
+      "name": "Eduacandario",
+      "old_client_id": 93,
+      "new_client_id": 93,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 231,
+      "new_id": 231,
+      "name": "AUTOBAHN",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 232,
+      "new_id": 232,
+      "name": "CN LOG",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 233,
+      "new_id": 233,
+      "name": "1Project",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 234,
+      "new_id": 234,
+      "name": "MONUV",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 235,
+      "new_id": 235,
+      "name": "COND. LEAF",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 236,
+      "new_id": 236,
+      "name": "COND. COLLINE DE NICE",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 237,
+      "new_id": 237,
+      "name": "9000 - MARTEL SEGURANCA",
+      "old_client_id": 96,
+      "new_client_id": 96,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 238,
+      "new_id": 238,
+      "name": "2000 - casa das ferragens",
+      "old_client_id": 96,
+      "new_client_id": 96,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 239,
+      "new_id": 239,
+      "name": "8608 - GTTAM",
+      "old_client_id": 97,
+      "new_client_id": 97,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 240,
+      "new_id": 240,
+      "name": "1147 - UBS BOA VISTA",
+      "old_client_id": 4,
+      "new_client_id": 4,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 241,
+      "new_id": 241,
+      "name": "Stratum",
+      "old_client_id": 98,
+      "new_client_id": 98,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 242,
+      "new_id": 242,
+      "name": "CASA DO CONSTRUTOR",
+      "old_client_id": 4,
+      "new_client_id": 4,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 244,
+      "new_id": 244,
+      "name": "0076 - Proeng Hall",
+      "old_client_id": 97,
+      "new_client_id": 97,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 245,
+      "new_id": 245,
+      "name": "5050 - LOJA SOLUTION",
+      "old_client_id": 100,
+      "new_client_id": 100,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 246,
+      "new_id": 246,
+      "name": "0123 - AFFETTO PAPELARIA",
+      "old_client_id": 97,
+      "new_client_id": 97,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 247,
+      "new_id": 247,
+      "name": "0124 - VITORIA FUTEBOL CLUBE - GALERIA VITORIA",
+      "old_client_id": 97,
+      "new_client_id": 97,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 248,
+      "new_id": 248,
+      "name": "ESTOQUE VERTEX",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 249,
+      "new_id": 249,
+      "name": "ATCOM- SHOPPINGS",
+      "old_client_id": 101,
+      "new_client_id": 101,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 251,
+      "new_id": 251,
+      "name": "MARCELO",
+      "old_client_id": 90,
+      "new_client_id": 90,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 252,
+      "new_id": 252,
+      "name": "0085 - VITORIA FUTEBOL CLUBE",
+      "old_client_id": 97,
+      "new_client_id": 97,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 253,
+      "new_id": 253,
+      "name": "AGRALE GALPAO",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    },
+    {
+      "old_id": 254,
+      "new_id": 254,
+      "name": "SCARDUA",
+      "old_client_id": 6,
+      "new_client_id": 6,
+      "old_parent_id": 0,
+      "new_parent_id": 0
+    }
+  ],
+  "unmapped_old": [
+    {
+      "old_id": 83,
+      "name": "2000 - PRIME",
+      "old_client_id": 41,
+      "parent_id": 0,
+      "reason": "client_id missing from clients mapping"
+    }
+  ],
+  "unmapped_new": []
+}
