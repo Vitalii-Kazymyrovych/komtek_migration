@@ -1,0 +1,3 @@
+2025-12-31T01:00:26+02:00 Starting image rename.
+2025-12-31T01:00:27+02:00 Manifest: docs/face_list_items_images.json (items=1596, image_refs=1641); source=face_lists; target_root=face_lists_new; log=face_lists_new/img_rename.log
+2025-12-31T01:13:36+02:00 Built lookup for 1641 unique image filenames (0 duplicates ignored).
