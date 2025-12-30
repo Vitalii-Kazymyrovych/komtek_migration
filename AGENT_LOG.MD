@@ -32,3 +32,5 @@
 
 - 20:32 UTC — Added helper_scripts/face_list_items_assets.py to build manifest and directories for face list assets, generating docs/face_list_items_images.json and face_lists_new skeleton.
 - 20:32 UTC — Created img_rename.sh to rename and move face list images into face_lists_new using the generated manifest.
+- 21:56 UTC — Updated /helper_scripts/face_list_items_assets.py to parse comma-separated legacy IDs so all items are retained in the manifest.
+- 21:56 UTC — Regenerated docs/face_list_items_images.json and refreshed face_lists_new directories to include all 1,596 active face list items for image renaming.

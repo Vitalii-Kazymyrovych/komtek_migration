@@ -100,8 +100,11 @@ def parse_int(value: Optional[str]) -> Optional[int]:
     cleaned = value.strip()
     if cleaned in PLACEHOLDER_NULLS:
         return None
+
+    # Accept thousand separators that appear in the legacy exports (e.g., "1,234").
+    normalized = cleaned.replace(",", "").replace("_", "")
     try:
-        return int(cleaned)
+        return int(normalized)
     except Exception:
         return None
 
