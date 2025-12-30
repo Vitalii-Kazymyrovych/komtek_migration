@@ -61,6 +61,7 @@ The primary task of the AI agent is to **analyze legacy data**, **generate corre
 - Convert empty values, `-`, or textual `NULL` to SQL `NULL`
 - Preserve original casing unless instructed otherwise
 - Escape strings for SQL using single quotes and standard PostgreSQL escaping
+- For ALPR list items, `created_by` is NOT NULL in the target schema; when the legacy creator is unmapped or missing, default to the admin user id `1` so inserts remain valid (and reflect this fallback in generated datasets/mappings/SQL).
 
 ---
 

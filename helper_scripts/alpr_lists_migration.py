@@ -32,6 +32,7 @@ MAP_LISTS_PATH = Path("maps/alpr_lists.json")
 MAP_ITEMS_PATH = Path("maps/alpr_list_items.json")
 PRESERVE_LIST_IDS = {1}
 PRESERVE_ITEM_IDS: set[int] = set()
+DEFAULT_CREATED_BY_ID = 1
 
 
 SUBSTITUTIONS = str.maketrans(
@@ -455,7 +456,8 @@ def build_list_item_records(
             continue
 
         old_creator_id = parse_int(row.get("created_by"))
-        new_creator_id = user_map.get(old_creator_id) if old_creator_id is not None else None
+        mapped_creator_id = user_map.get(old_creator_id) if old_creator_id is not None else None
+        new_creator_id = mapped_creator_id if mapped_creator_id is not None else DEFAULT_CREATED_BY_ID
 
         normalized_number = normalize_text(strip_outer_quotes(row.get("number"))) or ""
         normalized_comment = normalize_text(strip_outer_quotes(row.get("comment")))
