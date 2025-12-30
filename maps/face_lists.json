@@ -1,0 +1,854 @@
+{
+  "match_keys": [
+    "name to name",
+    "client_id to client_id",
+    "status to status",
+    "streams/time_attendance streams to analytics_ids via analytics mapping",
+    "creator_id in list_permissions to users mapping"
+  ],
+  "mapped": [
+    {
+      "old_id": 6,
+      "new_id": 2,
+      "name": "SEMDEST",
+      "old_client_id": 1,
+      "new_client_id": 1,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [
+        21,
+        22,
+        23
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 8,
+      "new_id": 3,
+      "name": "",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 0
+    },
+    {
+      "old_id": 10,
+      "new_id": 4,
+      "name": "Procurados ES",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [
+        601
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 43,
+      "new_id": 5,
+      "name": "Trontec",
+      "old_client_id": 45,
+      "new_client_id": 45,
+      "analytics_ids": [
+        96
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 44,
+      "new_id": 6,
+      "name": "Trontec 1",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 85,
+      "new_id": 7,
+      "name": "Moradores",
+      "old_client_id": 46,
+      "new_client_id": 46,
+      "analytics_ids": [
+        196
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 90,
+      "new_id": 8,
+      "name": "BANCO SICOOB",
+      "old_client_id": 84,
+      "new_client_id": 84,
+      "analytics_ids": [
+        211,
+        216,
+        527
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 91,
+      "new_id": 9,
+      "name": "GRUPO SEI",
+      "old_client_id": 84,
+      "new_client_id": 84,
+      "analytics_ids": [
+        211,
+        216,
+        527
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 92,
+      "new_id": 10,
+      "name": "LIMPEZA",
+      "old_client_id": 84,
+      "new_client_id": 84,
+      "analytics_ids": [
+        211,
+        216
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 93,
+      "new_id": 11,
+      "name": "SEGURANCA SHOPPING",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [
+        143,
+        144,
+        145,
+        148,
+        151,
+        158,
+        186,
+        206,
+        228,
+        300
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 94,
+      "new_id": 12,
+      "name": "CAPIXABA SERVICOS INTEGRADOS",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [
+        260,
+        261
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 97,
+      "new_id": 13,
+      "name": "Portal Patropolis",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [
+        628
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 98,
+      "new_id": 14,
+      "name": "Prestadores de Servicos",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 99,
+      "new_id": 15,
+      "name": "Suspeitor",
+      "old_client_id": 86,
+      "new_client_id": 86,
+      "analytics_ids": [
+        283
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 100,
+      "new_id": 16,
+      "name": "FORAGIDOS",
+      "old_client_id": 86,
+      "new_client_id": 86,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 104,
+      "new_id": 17,
+      "name": "Vertex Colaboradores",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 105,
+      "new_id": 18,
+      "name": "SEGEAGLE FACES",
+      "old_client_id": 0,
+      "new_client_id": 0,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 106,
+      "new_id": 19,
+      "name": "Blacklist",
+      "old_client_id": 89,
+      "new_client_id": 89,
+      "analytics_ids": [
+        378,
+        508,
+        509
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 107,
+      "new_id": 20,
+      "name": "Entrada JUSBRASIL",
+      "old_client_id": 89,
+      "new_client_id": 89,
+      "analytics_ids": [
+        509
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 108,
+      "new_id": 21,
+      "name": "ALUNOS",
+      "old_client_id": 91,
+      "new_client_id": 91,
+      "analytics_ids": [
+        511
+      ],
+      "unmapped_stream_ids": [
+        843
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 109,
+      "new_id": 22,
+      "name": "Anima",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 110,
+      "new_id": 23,
+      "name": "Antonio Monteiro Machado",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        267,
+        343
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 111,
+      "new_id": 24,
+      "name": "Espanha",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        535
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 112,
+      "new_id": 25,
+      "name": "Gardens",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        548
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 114,
+      "new_id": 26,
+      "name": "Solar Serrano",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 115,
+      "new_id": 27,
+      "name": "Finerax",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        432,
+        434,
+        445
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 116,
+      "new_id": 28,
+      "name": "Grand Canal",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        562
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 117,
+      "new_id": 29,
+      "name": "Flor de Lirio",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [
+        876
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 118,
+      "new_id": 30,
+      "name": "Atlanta",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 119,
+      "new_id": 31,
+      "name": "Portal Sao Francisco",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        572
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 120,
+      "new_id": 32,
+      "name": "Casa Flora",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [
+        867
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 121,
+      "new_id": 33,
+      "name": ".",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        574
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 122,
+      "new_id": 34,
+      "name": "LEAF",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        606
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 123,
+      "new_id": 35,
+      "name": "teste",
+      "old_client_id": 96,
+      "new_client_id": 96,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [
+        898
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 125,
+      "new_id": 36,
+      "name": "Procurado",
+      "old_client_id": 98,
+      "new_client_id": 98,
+      "analytics_ids": [
+        631
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 126,
+      "new_id": 37,
+      "name": "Colaboradores",
+      "old_client_id": 99,
+      "new_client_id": 99,
+      "analytics_ids": [
+        643
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 129,
+      "new_id": 38,
+      "name": "POC Ibiracu",
+      "old_client_id": 98,
+      "new_client_id": 98,
+      "analytics_ids": [
+        663
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 130,
+      "new_id": 39,
+      "name": "COLABORADORES",
+      "old_client_id": 101,
+      "new_client_id": 101,
+      "analytics_ids": [
+        672,
+        673,
+        674,
+        675,
+        676,
+        679
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 131,
+      "new_id": 40,
+      "name": "VIGILANCIA",
+      "old_client_id": 101,
+      "new_client_id": 101,
+      "analytics_ids": [
+        672,
+        673,
+        674,
+        675,
+        676,
+        679
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 132,
+      "new_id": 41,
+      "name": "PERSONAS NAO GRATA",
+      "old_client_id": 101,
+      "new_client_id": 101,
+      "analytics_ids": [
+        672,
+        673,
+        674,
+        675,
+        676,
+        679
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 133,
+      "new_id": 42,
+      "name": "LOJISTAS",
+      "old_client_id": 101,
+      "new_client_id": 101,
+      "analytics_ids": [
+        672,
+        673,
+        674,
+        675,
+        676,
+        679
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 134,
+      "new_id": 43,
+      "name": "TERCEIROS",
+      "old_client_id": 101,
+      "new_client_id": 101,
+      "analytics_ids": [
+        672,
+        673,
+        674,
+        675,
+        676,
+        679
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 135,
+      "new_id": 44,
+      "name": "PROCURADOS",
+      "old_client_id": 101,
+      "new_client_id": 101,
+      "analytics_ids": [
+        672,
+        673,
+        674,
+        675,
+        676,
+        679
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 136,
+      "new_id": 45,
+      "name": "BOMBEIROS",
+      "old_client_id": 101,
+      "new_client_id": 101,
+      "analytics_ids": [
+        672,
+        673,
+        674,
+        675,
+        676,
+        679
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 137,
+      "new_id": 46,
+      "name": "MANUTENCAO",
+      "old_client_id": 101,
+      "new_client_id": 101,
+      "analytics_ids": [
+        672,
+        673,
+        674,
+        675,
+        676,
+        679
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 138,
+      "new_id": 47,
+      "name": "SUSPEITOS",
+      "old_client_id": 101,
+      "new_client_id": 101,
+      "analytics_ids": [
+        672,
+        673,
+        674,
+        675,
+        676,
+        679
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 139,
+      "new_id": 48,
+      "name": "TERCEIRIZADOS",
+      "old_client_id": 101,
+      "new_client_id": 101,
+      "analytics_ids": [
+        672,
+        673,
+        674,
+        675,
+        676,
+        679
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 140,
+      "new_id": 49,
+      "name": "Sant'Anna",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [
+        689
+      ],
+      "unmapped_stream_ids": [],
+      "status": 1
+    },
+    {
+      "old_id": 141,
+      "new_id": 50,
+      "name": "San Francisco Gardens",
+      "old_client_id": 8,
+      "new_client_id": 8,
+      "analytics_ids": [],
+      "unmapped_stream_ids": [],
+      "status": 1
+    }
+  ],
+  "unmapped_old": [
+    {
+      "old_id": 1,
+      "name": "Teste Musk",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 2,
+      "name": "FAMOSOS",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 3,
+      "name": "FAMOSOS DA WEB",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 4,
+      "name": "Artistas",
+      "old_client_id": 1,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 5,
+      "name": "Administracao",
+      "old_client_id": 1,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 7,
+      "name": "PROCURADOS ES",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 9,
+      "name": "COLABORADORES",
+      "old_client_id": 3,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 40,
+      "name": "PROCURADOS",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 41,
+      "name": "Grupo Rocha",
+      "old_client_id": 42,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 42,
+      "name": "ASSALTANTES VITORIA ES",
+      "old_client_id": 40,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 45,
+      "name": "EMPRESARIOS",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 46,
+      "name": "TESTE SHOPPING VITORIA",
+      "old_client_id": 40,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 47,
+      "name": "VIGILANTE SHOPPING VITORIA",
+      "old_client_id": 40,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 48,
+      "name": "KOMTEK TECNOLOGIA",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 80,
+      "name": "VANS AEROPORTO",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 81,
+      "name": "AEROPORTO FACES",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 82,
+      "name": "OI Telecom",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 83,
+      "name": "BULKE",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 84,
+      "name": "FORAGIDOS DA DEPEN",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 86,
+      "name": "REDES SOCIAIS",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 87,
+      "name": "DELLI SOLUCOES",
+      "old_client_id": 0,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 88,
+      "name": "SUPEITOS",
+      "old_client_id": 40,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 89,
+      "name": "COLABORADORES SICOOB",
+      "old_client_id": 84,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 95,
+      "name": "SEDE VERTEX",
+      "old_client_id": 8,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 96,
+      "name": "COLABORADORES ANTONIO M MACHADO",
+      "old_client_id": 8,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 101,
+      "name": "MORADORES ANTONIO M MACHADO",
+      "old_client_id": 8,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 102,
+      "name": "VISITANTES ANTONIO M MACHADO",
+      "old_client_id": 8,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 103,
+      "name": "Base GRUPO VTX",
+      "old_client_id": 8,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 113,
+      "name": "San Francisco Gardens",
+      "old_client_id": 8,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 124,
+      "name": "Funcionarios",
+      "old_client_id": 98,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 127,
+      "name": "COLABORADORES SERVIP",
+      "old_client_id": 6,
+      "reason": "status = -1 (excluded)"
+    },
+    {
+      "old_id": 128,
+      "name": "VISITANTES",
+      "old_client_id": 6,
+      "reason": "status = -1 (excluded)"
+    }
+  ],
+  "unmapped_new": [
+    {
+      "new_id": 1,
+      "name": "",
+      "reason": "pre-existing new_dataset row"
+    }
+  ]
+}
