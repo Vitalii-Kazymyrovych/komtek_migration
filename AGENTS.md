@@ -209,6 +209,32 @@ Use short, timestamped entries so they are easy to scan:
 - ❌ Never log passwords, tokens, private keys, or sensitive personal data.
 
 
+---
+
+## 🧰 Helper Scripts (during migration) — REQUIRED
+
+Sometimes small helper scripts are needed to parse, validate, diff, or transform datasets.
+
+### Storage location
+- ✅ All helper scripts must be saved in a dedicated folder: `/helper_scripts/` (create if missing).
+
+### Before writing any script
+- ✅ Check whether an equivalent script already exists in `/helper_scripts/`.
+  - Reuse or extend existing scripts instead of duplicating functionality.
+  - If you extend an existing script, keep backward compatibility unless explicitly instructed otherwise.
+
+### Logging requirement
+- ✅ Every time you add or modify a helper script, append a brief entry to `AGENTS_LOG.md` including:
+  - script filename/path
+  - what it does (1 line)
+  - why it was needed (1 line)
+
+Example log entry:
+```markdown
+- 14:10 UTC+00 — Added /helper_scripts/normalize_text.py (NFKD text normalization for datasets) to replace non-English chars; needed for clean inserts.
+```
+
+
 ## 🧪 Validation Checklist (Before Output)
 
 - [ ] No modifications to `old_dataset/`
