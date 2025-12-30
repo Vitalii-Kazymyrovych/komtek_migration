@@ -40,32 +40,6 @@ The primary task of the AI agent is to **analyze legacy data**, **generate corre
 
 ---
 
----
-
-## 🧾 Schema Reference (OLD_DDL.txt / NEW_DDL.txt) — REQUIRED
-
-Two schema reference files are stored in the repository root:
-
-- `OLD_DDL.txt` — `CREATE TABLE` statements for the old database schema
-- `NEW_DDL.txt` — `CREATE TABLE` statements for the new database schema
-
-### Before starting any migration task
-- ✅ **Read `OLD_DDL.txt` and `NEW_DDL.txt`** to understand:
-  - table/column differences
-  - data type changes
-  - renamed/removed/added columns
-  - constraint differences that affect inserts (NOT NULL, defaults, FK relations, etc.)
-- ✅ Use these files as the primary source of truth for column sets and data types when generating SQL and updating `new_dataset` tables.
-
-### While working
-- When generating `INSERT` statements, ensure each value is compatible with the target column type in `NEW_DDL.txt`.
-- If a column exists in old but not in new (or vice versa), document the decision:
-  - mapping/transform rule applied, or
-  - reason for omission, or
-  - need for clarification
-- If any type conversion is required (e.g., `int → bigint`, `text → jsonb`, `timestamp` changes), explicitly document the transformation in the output and log it in `AGENT_LOG.MD`.
-
-
 ## 📄 Dataset Format Rules
 
 - All datasets are `.txt` files containing pipe-separated tables (`|`)
@@ -78,6 +52,11 @@ Two schema reference files are stored in the repository root:
   ```
 
 ### Value Handling
+- If a **text** value contains non-English characters, replace them with English analogs (ASCII).
+  - Example: `ã→a`, `ç→c`, `í→i`, `ñ→n`, `ö→o`, `ß→ss`, `æ→ae`.
+  - Prefer deterministic normalization (Unicode NFKD + stripping diacritics) plus a small explicit substitution table for edge cases.
+  - **Do NOT** modify secrets or machine values (passwords, hashes, tokens, signatures, base64) unless explicitly requested.
+- If an object has `status = -1`, the object **must NOT** be inserted or kept in `new_dataset` (treat as excluded/disabled).
 - Trim whitespace
 - Convert empty values, `-`, or textual `NULL` to SQL `NULL`
 - Preserve original casing unless instructed otherwise
@@ -86,6 +65,8 @@ Two schema reference files are stored in the repository root:
 ---
 
 ## 📤 SQL Output Rules
+
+- Ensure normalized text values (non-English → English analogs) are reflected consistently in SQL and updated `new_dataset` files.
 
 - PostgreSQL-compatible SQL only
 - Always specify column names in `INSERT` statements
@@ -194,16 +175,18 @@ Each mapping file must follow this structure:
 
 ---
 
-## 📝 Agent Activity Log (AGENT_LOG.MD) — REQUIRED
+## 📝 Agent Activity Log (AGENTS_LOG.md) — REQUIRED
 
 To keep migration work auditable and consistent across sessions, the agent must maintain a lightweight activity log.
 
 ### Before starting any task
-- ✅ **Read `AGENT_LOG.MD`** (if present) to understand prior actions, assumptions, and any unresolved items.
+- ✅ **Read `AGENTS_LOG.md` immediately after reading `AGENTS.md`, before doing anything else.**
+- If the repository uses `AGENT_LOG.MD` (singular) instead, treat it as the same log and read it as well.
+- ✅ **Read `AGENTS_LOG.md`** (if present) to understand prior actions, assumptions, and any unresolved items.
 - If the file does not exist, create it when you make the first log entry.
 
 ### While working
-- ✅ Briefly log each meaningful action to `AGENT_LOG.MD` (append-only). Examples of actions:
+- ✅ Briefly log each meaningful action to `AGENTS_LOG.md` (append-only). Examples of actions:
   - “Parsed `old_dataset/clients.txt` and detected 2 duplicate client candidates by (email,name).”
   - “Generated `maps/users.json` using match keys: email, fullname, client_id, role_id→role_ids.”
   - “Produced SQL: `sql/clients_inserts.sql` (132 rows).”
