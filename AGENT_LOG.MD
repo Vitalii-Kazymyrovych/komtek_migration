@@ -12,5 +12,3 @@
 - 14:52 UTC — Migrated stream_groups (125 mapped rows) into new_dataset/stream_groups_202512301039.txt, generated sql/stream_groups_inserts.sql, and created maps/stream_groups.json; left old_id 83 unmapped due to missing client_id 41 in clients mapping.
 - 15:19 UTC — Added /helper_scripts/streams_migration.py to normalize streams, remap client/stream_group/user references, and emit dataset/SQL/mapping artifacts for streams.
 - 15:19 UTC — Migrated streams (414 mapped, 373 unmapped: 357 status=-1, 16 with missing client mappings) into new_dataset/streams_202512301039.txt, generated sql/streams_inserts.sql, and created maps/streams.json with creator_id remaps (unmapped creators stored as null).
- - 16:20 UTC — Updated helper_scripts/streams_migration.py to default empty string for missing addresses to satisfy NOT NULL address requirement.
- - 16:21 UTC — Regenerated streams artifacts (new_dataset/streams_202512301039.txt, sql/streams_inserts.sql, maps/streams.json) reflecting address defaults; mapped=414, unmapped=373.
