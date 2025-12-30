@@ -9,6 +9,8 @@ SOURCE_DIR="face_lists"
 TARGET_ROOT="face_lists_new"
 LOG_FILE="${LOG_FILE:-${TARGET_ROOT}/img_rename.log}"
 
+SCRIPT_START="$(date +%s)"
+
 if ! command -v jq >/dev/null 2>&1; then
   echo "jq is required to run this script." >&2
   exit 1
@@ -35,40 +37,50 @@ log() {
   printf '%s %s\n' "${timestamp}" "${message}" | tee -a "${LOG_FILE}"
 }
 
-tmpfile="$(mktemp)"
-trap 'rm -f "${tmpfile}"' EXIT
+log_duration() {
+  local message="$1"
+  local start_ts="$2"
+  local end_ts
+  end_ts="$(date +%s)"
+  local elapsed=$((end_ts - start_ts))
+  log "${message} (took ${elapsed}s)"
+}
+
+on_error() {
+  local exit_code=$?
+  log "ERROR exit ${exit_code} at line ${BASH_LINENO[0]} during: ${BASH_COMMAND}"
+  exit "${exit_code}"
+}
+trap on_error ERR
 
 manifest_items="$(jq '.items | length' "${MANIFEST}")"
 manifest_image_refs="$(jq '[.items[].images[]] | length' "${MANIFEST}")"
 log "Starting image rename."
 log "Manifest: ${MANIFEST} (items=${manifest_items}, image_refs=${manifest_image_refs}); source=${SOURCE_DIR}; target_root=${TARGET_ROOT}; log=${LOG_FILE}"
 
-# Build a lookup from image filename -> {name, dir}.
-jq -c '.items[] | {image: .images[], dir: .target_dir, name: .name_sanitized}' "${MANIFEST}" > "${tmpfile}"
-
 declare -A IMAGE_TO_NAME
 declare -A IMAGE_TO_DIR
 declare -A MANIFEST_IMAGE_SEEN
 duplicate_mappings=0
 
-while IFS= read -r line; do
-  image="$(printf '%s' "${line}" | jq -r '.image')"
-  dir="$(printf '%s' "${line}" | jq -r '.dir')"
-  name="$(printf '%s' "${line}" | jq -r '.name')"
+# Build a lookup from image filename -> {name, dir} in a single jq pass.
+log "Building manifest lookup..."
+build_lookup_start="$(date +%s)"
+while IFS=$'\t' read -r image dir name; do
+  [[ -z "${image}" ]] && continue
 
   MANIFEST_IMAGE_SEEN["${image}"]=1
 
   if [[ -n "${IMAGE_TO_NAME[${image}]:-}" ]]; then
-    ((duplicate_mappings++))
+    ((++duplicate_mappings))
     log "WARN duplicate mapping for ${image}; keeping first entry (${IMAGE_TO_DIR[${image}]}) and ignoring ${dir}"
     continue
   fi
 
   IMAGE_TO_NAME["${image}"]="${name}"
   IMAGE_TO_DIR["${image}"]="${dir}"
-done < "${tmpfile}"
-
-log "Built lookup for ${#IMAGE_TO_NAME[@]} unique image filenames (${duplicate_mappings} duplicates ignored)."
+done < <(jq -r '.items[] | .images[] as $img | "\($img)\t\(.target_dir)\t\(.name_sanitized)"' "${MANIFEST}")
+log_duration "Built lookup for ${#IMAGE_TO_NAME[@]} unique image filenames (${duplicate_mappings} duplicates ignored)" "${build_lookup_start}"
 
 shopt -s nullglob
 moved=0
@@ -76,9 +88,16 @@ unmapped=0
 seen=0
 declare -A USED_IMAGE
 
+source_count="$(find "${SOURCE_DIR}" -maxdepth 1 -type f | wc -l | tr -d ' ')"
+log "Scanning ${SOURCE_DIR}: ${source_count} files detected."
+
 for src in "${SOURCE_DIR}"/*; do
   [[ -f "${src}" ]] || continue
-  ((seen++))
+  ((++seen))
+
+  if (( seen % 200 == 0 )); then
+    log "Progress: scanned ${seen} files (moved=${moved}, unmapped=${unmapped})"
+  fi
 
   filename="$(basename "${src}")"
   name="${IMAGE_TO_NAME[${filename}]:-}"
@@ -86,7 +105,7 @@ for src in "${SOURCE_DIR}"/*; do
 
   if [[ -z "${name}" || -z "${dir}" ]]; then
     log "SKIP ${filename}: no mapping found in manifest"
-    ((unmapped++))
+    ((++unmapped))
     continue
   fi
 
@@ -99,7 +118,7 @@ for src in "${SOURCE_DIR}"/*; do
   if [[ -e "${dest}" ]]; then
     idx=1
     while [[ -e "${TARGET_ROOT}/${dir}/${name}_${idx}.${ext}" ]]; do
-      ((idx++))
+      ((idx+=1))
     done
     log "INFO collision for ${filename}: ${dest} exists; using ${TARGET_ROOT}/${dir}/${name}_${idx}.${ext}"
     dest="${TARGET_ROOT}/${dir}/${name}_${idx}.${ext}"
@@ -108,7 +127,7 @@ for src in "${SOURCE_DIR}"/*; do
   mv "${src}" "${dest}"
   USED_IMAGE["${filename}"]=1
   log "MOVE ${filename} -> ${dest} (dir=${dir}, name=${name}, ext=${ext})"
-  ((moved++))
+  ((++moved))
 done
 
 manifest_missing=()
@@ -127,3 +146,4 @@ if [[ ${#manifest_missing[@]} -gt 0 ]]; then
 fi
 
 log "Completed. Scanned ${seen} files; moved ${moved}; ${unmapped} files had no mapping; manifest-only images missing from source: ${#manifest_missing[@]}."
+log_duration "Total runtime" "${SCRIPT_START}"

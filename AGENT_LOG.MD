@@ -36,3 +36,5 @@
 - 21:56 UTC — Regenerated docs/face_list_items_images.json and refreshed face_lists_new directories to include all 1,596 active face list items for image renaming.
 - 22:30 UTC — Updated img_rename.sh to map face_lists files by filename against the manifest, warning on unmapped assets and avoiding duplicate moves.
 - 22:57 UTC — Enhanced img_rename.sh logging (per-file actions, manifest gaps, summary) to diagnose why most assets are not moving.
+- 23:23 UTC — Reworked img_rename.sh to load the manifest in a single jq pass, add error trapping, safe counters for set -e, and periodic progress logging.
+- 23:24 UTC — Ran img_rename.sh; moved 531 images into face_lists_new, skipped 494 unmapped source files, and logged 1,110 manifest entries missing from source with per-file details in face_lists_new/img_rename.log.
