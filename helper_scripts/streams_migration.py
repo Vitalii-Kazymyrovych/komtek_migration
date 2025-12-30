@@ -238,7 +238,7 @@ def build_records(
             lng=clean_value(row.get("lng")),
             type=normalize_text(row.get("type")),
             uuid=normalize_text(row.get("uuid")),
-            address=normalize_text(strip_outer_quotes(row.get("address"))),
+            address=normalize_text(strip_outer_quotes(row.get("address"))) or "",
             params=parse_json_field(row.get("params")),
             auth=parse_json_field(row.get("auth")),
             direction=to_int(row.get("direction")),
