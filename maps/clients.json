@@ -1,0 +1,310 @@
+{
+  "match_keys": [
+    "client_name (ASCII normalized) to client_name",
+    "country to country",
+    "city (ASCII normalized) to city",
+    "email to email",
+    "zip_code to zip_code"
+  ],
+  "mapped": [
+    {
+      "old_id": 0,
+      "new_id": 0,
+      "client_name": "default",
+      "country": "",
+      "city": "",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 1,
+      "new_id": 1,
+      "client_name": "CCONET",
+      "country": "BR",
+      "city": "VILA VELHA",
+      "zip_code": "",
+      "email": "cconet@cconet.com.br"
+    },
+    {
+      "old_id": 4,
+      "new_id": 4,
+      "client_name": "Megavig",
+      "country": "BR",
+      "city": "Sao Paulo",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 6,
+      "new_id": 6,
+      "client_name": "SERVIP TECNOLOGIA",
+      "country": "BR",
+      "city": "Serra",
+      "zip_code": "",
+      "email": "servip@serviptecnologia.com.br"
+    },
+    {
+      "old_id": 7,
+      "new_id": 7,
+      "client_name": "HMSJ",
+      "country": "BR",
+      "city": "Colatina",
+      "zip_code": "",
+      "email": "hmsj@hmsj.com.br"
+    },
+    {
+      "old_id": 8,
+      "new_id": 8,
+      "client_name": "Vertex",
+      "country": "BR",
+      "city": "Sao Paulo",
+      "zip_code": "",
+      "email": "vertex@vertex.com.br"
+    },
+    {
+      "old_id": 40,
+      "new_id": 40,
+      "client_name": "SHOW ROOM",
+      "country": "BR",
+      "city": "VITORIA ES",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 45,
+      "new_id": 45,
+      "client_name": "TIAGO",
+      "country": "BR",
+      "city": "",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 46,
+      "new_id": 46,
+      "client_name": "Trontec",
+      "country": "BR",
+      "city": "Porto Alegre",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 80,
+      "new_id": 80,
+      "client_name": "CAPIXABA",
+      "country": "BR",
+      "city": "Colatina",
+      "zip_code": "",
+      "email": "projetos@capixabaservicos.com.br"
+    },
+    {
+      "old_id": 81,
+      "new_id": 81,
+      "client_name": "Bulke",
+      "country": "BR",
+      "city": "Sao Paulo",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 82,
+      "new_id": 82,
+      "client_name": "Komtek Lab",
+      "country": "BR",
+      "city": "Vitoria",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 83,
+      "new_id": 83,
+      "client_name": "JF CONSULTORIA",
+      "country": "BR",
+      "city": "BAIXO GUANDU",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 84,
+      "new_id": 84,
+      "client_name": "GRUPO SEI",
+      "country": "BR",
+      "city": "SERRA ES",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 85,
+      "new_id": 85,
+      "client_name": "PREFEITURA DE COLATINA",
+      "country": "BR",
+      "city": "Colatina",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 86,
+      "new_id": 86,
+      "client_name": "NTECH",
+      "country": "BR",
+      "city": "",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 87,
+      "new_id": 87,
+      "client_name": "PMC COLATINA",
+      "country": "BR",
+      "city": "Colatina",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 88,
+      "new_id": 88,
+      "client_name": "vCloud.ai Lab",
+      "country": "BR",
+      "city": "Vitoria",
+      "zip_code": "",
+      "email": "paulo.rocha@vcloud.ai"
+    },
+    {
+      "old_id": 89,
+      "new_id": 89,
+      "client_name": "GRUPO VSG",
+      "country": "",
+      "city": "",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 90,
+      "new_id": 90,
+      "client_name": "ON DISTRIBUIDORA",
+      "country": "BR",
+      "city": "",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 91,
+      "new_id": 91,
+      "client_name": "GRUPO TRAJANO",
+      "country": "BR",
+      "city": "ITAPORAM",
+      "zip_code": "",
+      "email": "trajanoleonardo020@gmail.com"
+    },
+    {
+      "old_id": 92,
+      "new_id": 92,
+      "client_name": "Praia Forte",
+      "country": "",
+      "city": "",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 93,
+      "new_id": 93,
+      "client_name": "Praia Forte",
+      "country": "",
+      "city": "",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 94,
+      "new_id": 94,
+      "client_name": "TWG",
+      "country": "BR",
+      "city": "SAO PAULO",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 95,
+      "new_id": 95,
+      "client_name": "client",
+      "country": "UA",
+      "city": "Kyiv",
+      "zip_code": "01000",
+      "email": "client.mail@test.com"
+    },
+    {
+      "old_id": 96,
+      "new_id": 96,
+      "client_name": "MARTEL",
+      "country": "",
+      "city": "LINHARES",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 97,
+      "new_id": 97,
+      "client_name": "GTTAM",
+      "country": "",
+      "city": "",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 98,
+      "new_id": 98,
+      "client_name": "STRATUM",
+      "country": "BR",
+      "city": "Belo Horizonte",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 99,
+      "new_id": 99,
+      "client_name": "VEMCO",
+      "country": "BR",
+      "city": "SAO PAULO",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 100,
+      "new_id": 100,
+      "client_name": "SOLUTION",
+      "country": "BR",
+      "city": "NOVA ALMEIDA",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 101,
+      "new_id": 101,
+      "client_name": "ATCOM",
+      "country": "BR",
+      "city": "Vitoria",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 102,
+      "new_id": 102,
+      "client_name": "BENUVEM",
+      "country": "BR",
+      "city": "BELO HORIZONTE",
+      "zip_code": "",
+      "email": ""
+    },
+    {
+      "old_id": 103,
+      "new_id": 103,
+      "client_name": "MONITORY PLUS",
+      "country": "BR",
+      "city": "Pernambuco",
+      "zip_code": "",
+      "email": ""
+    }
+  ],
+  "unmapped_old": [],
+  "unmapped_new": []
+}
