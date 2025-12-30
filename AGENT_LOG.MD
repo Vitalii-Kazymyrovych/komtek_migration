@@ -8,3 +8,5 @@
 - 12:48 UTC — Migrated roles from old_dataset/_roles__old.txt into new_dataset/roles_202512301208.txt, generated batched SQL (sql/roles_and_users_inserts.sql), and created maps/roles.json.
 - 12:48 UTC — Migrated active users (status != -1) from old_dataset/_users__202512301159.txt into new_dataset/users_202512301208.txt with normalized names, updated batched SQL, and created maps/users.json.
 - 14:44 UTC — Regenerated maps/users.json to align legacy user ids with manually added new_dataset/users_202512301440.txt entries and updated users_inserts.sql data.
+- 14:52 UTC — Added /helper_scripts/stream_groups_migration.py to normalize stream group names, remap client_ids, and generate dataset/SQL/mapping outputs.
+- 14:52 UTC — Migrated stream_groups (125 mapped rows) into new_dataset/stream_groups_202512301039.txt, generated sql/stream_groups_inserts.sql, and created maps/stream_groups.json; left old_id 83 unmapped due to missing client_id 41 in clients mapping.
