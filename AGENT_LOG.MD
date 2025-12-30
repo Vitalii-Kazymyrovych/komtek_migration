@@ -29,3 +29,6 @@
 
 - 19:28 UTC — Added /helper_scripts/face_lists_migration.py to normalize legacy face lists, remap streams to face analytics, and emit dataset/SQL/mapping outputs.
 - 19:28 UTC — Migrated active face_lists (status != -1) regenerating new_dataset/face_lists_202512301039.txt, sql/face_lists_inserts.sql, and maps/face_lists.json with unmapped streams noted.
+
+- 20:32 UTC — Added helper_scripts/face_list_items_assets.py to build manifest and directories for face list assets, generating docs/face_list_items_images.json and face_lists_new skeleton.
+- 20:32 UTC — Created img_rename.sh to rename and move face list images into face_lists_new using the generated manifest.
