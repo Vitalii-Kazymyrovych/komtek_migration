@@ -1,0 +1,305 @@
+{
+  "match_keys": [
+    "role_name (ASCII normalized) to role_name",
+    "permissions to permissions",
+    "client_id to client_id"
+  ],
+  "mapped": [
+    {
+      "old_id": 1,
+      "new_id": 1,
+      "role_name": "root",
+      "permissions_sample": "[\"ManagePoseEstimationAnalytics\", \"ManageHardHatAnalytic\", \"ViewAlprSpeedRule\", ",
+      "client_id": 0
+    },
+    {
+      "old_id": 2,
+      "new_id": 2,
+      "role_name": "CCONET",
+      "permissions_sample": "[\"EditLprList\", \"ViewObjectInZoneAnalytics\", \"ViewFaceSearch\", \"AddLprListElemen",
+      "client_id": 0
+    },
+    {
+      "old_id": 5,
+      "new_id": 5,
+      "role_name": "Megavig",
+      "permissions_sample": "[\"ManageFaceAnalytic\", \"ViewTrafficEvents\", \"EditFaceList\", \"ViewObjectInZoneAna",
+      "client_id": 0
+    },
+    {
+      "old_id": 7,
+      "new_id": 7,
+      "role_name": "Servip",
+      "permissions_sample": "[\"EditLprList\", \"ViewObjectInZoneAnalytics\", \"ViewFaceSearch\", \"AddLprListElemen",
+      "client_id": 0
+    },
+    {
+      "old_id": 9,
+      "new_id": 9,
+      "role_name": "Operadores",
+      "permissions_sample": "[\"ViewObjectInZoneNotification\", \"ViewTrafficObjectCounter\", \"AcceptObjectInZone",
+      "client_id": 0
+    },
+    {
+      "old_id": 10,
+      "new_id": 10,
+      "role_name": "HMSJ HOSPITAL",
+      "permissions_sample": "[\"ViewLprAlertsStats\", \"ViewReidAnalytic\", \"AddFaceListElement\", \"EditLprList\", ",
+      "client_id": 0
+    },
+    {
+      "old_id": 11,
+      "new_id": 11,
+      "role_name": "Vertex",
+      "permissions_sample": "[\"ViewFaceStatistics\", \"ViewAlprSpeedReports\", \"ManageLprAnalytic\", \"ExportLprAl",
+      "client_id": 0
+    },
+    {
+      "old_id": 43,
+      "new_id": 43,
+      "role_name": "SHOW ROOM",
+      "permissions_sample": "[\"ViewFaceEvents\", \"ViewPoseEstimationNotification\", \"DeleteFaceListElement\", \"V",
+      "client_id": 0
+    },
+    {
+      "old_id": 48,
+      "new_id": 48,
+      "role_name": "TIAGO",
+      "permissions_sample": "[\"ViewObjectInZoneNotification\", \"AddFaceListElement\", \"ViewLprSearch\", \"ViewStr",
+      "client_id": 0
+    },
+    {
+      "old_id": 49,
+      "new_id": 49,
+      "role_name": "Trontec",
+      "permissions_sample": "[\"ManageEvents\", \"ManageFaceAnalytic\", \"ManageObjectInZoneAnalytics\", \"ViewFaceS",
+      "client_id": 0
+    },
+    {
+      "old_id": 50,
+      "new_id": 50,
+      "role_name": "Operador",
+      "permissions_sample": "[\"ViewObjectInZoneNotification\", \"ViewObjectInZoneAnalytics\"]",
+      "client_id": 0
+    },
+    {
+      "old_id": 51,
+      "new_id": 51,
+      "role_name": "Supervisor",
+      "permissions_sample": "[\"ManageObjectInZoneAnalytics\", \"AcceptObjectInZoneNotification\", \"ViewObjectInZ",
+      "client_id": 0
+    },
+    {
+      "old_id": 52,
+      "new_id": 52,
+      "role_name": "Operador de Monitoramento",
+      "permissions_sample": "[\"ViewObjectInZoneNotification\", \"ViewObjectInZoneAnalytics\"]",
+      "client_id": 0
+    },
+    {
+      "old_id": 53,
+      "new_id": 53,
+      "role_name": "Supervisor Martel",
+      "permissions_sample": "[\"ViewHeatmapStats\", \"AddLprList\", \"ViewLprEvents\", \"ViewFaceAnalytic\", \"ViewPos",
+      "client_id": 0
+    },
+    {
+      "old_id": 87,
+      "new_id": 87,
+      "role_name": "Capixaba Operador",
+      "permissions_sample": "[\"ViewFaceLists\", \"ViewTrafficStats\", \"ViewTrafficAnalytic\", \"AcceptObjectInZone",
+      "client_id": 0
+    },
+    {
+      "old_id": 91,
+      "new_id": 91,
+      "role_name": "GRUPO SEI",
+      "permissions_sample": "[\"ViewHeatmapStats\", \"AddLprList\", \"ViewLprEvents\", \"ViewFaceAnalytic\", \"ViewPos",
+      "client_id": 0
+    },
+    {
+      "old_id": 93,
+      "new_id": 93,
+      "role_name": "TESTE SOLUS",
+      "permissions_sample": "[\"ViewParkingSettings\", \"ManageParkingComments\", \"ViewStreams\", \"ViewParkingSear",
+      "client_id": 0
+    },
+    {
+      "old_id": 94,
+      "new_id": 94,
+      "role_name": "Operador Colatina",
+      "permissions_sample": "[\"ManageEvents\", \"ManageHeatmapAnalytics\", \"ExportLprSearch\", \"AcceptObjectInZon",
+      "client_id": 0
+    },
+    {
+      "old_id": 95,
+      "new_id": 95,
+      "role_name": "Sindico",
+      "permissions_sample": "[\"ViewFaceStatistics\", \"AddFaceListElement\", \"DeleteFaceListElement\", \"ManageFac",
+      "client_id": 0
+    },
+    {
+      "old_id": 96,
+      "new_id": 96,
+      "role_name": "SICOOB",
+      "permissions_sample": "[\"EditLprList\", \"ViewObjectInZoneAnalytics\", \"ViewFaceSearch\", \"AddLprListElemen",
+      "client_id": 0
+    },
+    {
+      "old_id": 98,
+      "new_id": 98,
+      "role_name": "GMC Colatina",
+      "permissions_sample": "[\"EditLprListElement\", \"ViewSmokeFireNotifications\", \"ViewFaceEvents\", \"AcceptOb",
+      "client_id": 0
+    },
+    {
+      "old_id": 99,
+      "new_id": 99,
+      "role_name": "Komtek Lab",
+      "permissions_sample": "[\"ManageEvents\", \"ManageHeatmapAnalytics\", \"ExportLprSearch\", \"AcceptObjectInZon",
+      "client_id": 0
+    },
+    {
+      "old_id": 100,
+      "new_id": 100,
+      "role_name": "VSG",
+      "permissions_sample": "[\"ViewHeatmapStats\", \"AddLprList\", \"ViewLprEvents\", \"ViewFaceAnalytic\", \"ViewPos",
+      "client_id": 0
+    },
+    {
+      "old_id": 101,
+      "new_id": 101,
+      "role_name": "ON DISTRIBUIDORA",
+      "permissions_sample": "[\"ManageHardHatAnalytic\", \"ViewAlprSpeedRule\", \"ViewGenderAgeAnalytics\", \"ViewLi",
+      "client_id": 0
+    },
+    {
+      "old_id": 102,
+      "new_id": 102,
+      "role_name": "OPERADOR TRAJANO",
+      "permissions_sample": "[\"ManageEvents\", \"ManageHeatmapAnalytics\", \"ExportLprSearch\", \"AcceptObjectInZon",
+      "client_id": 0
+    },
+    {
+      "old_id": 103,
+      "new_id": 103,
+      "role_name": "JUSBRASIL-USERS",
+      "permissions_sample": "[\"ViewFaceStatistics\", \"AddFaceListElement\", \"DeleteFaceListElement\", \"ManageFac",
+      "client_id": 0
+    },
+    {
+      "old_id": 104,
+      "new_id": 104,
+      "role_name": "Operador Praia Fort",
+      "permissions_sample": "[\"ViewGunDetectorNotifications\", \"ViewReidSearch\", \"ManageGunDetectorAnalytics\",",
+      "client_id": 0
+    },
+    {
+      "old_id": 105,
+      "new_id": 105,
+      "role_name": "OPERADOR",
+      "permissions_sample": "[\"DeleteFaceListElement\", \"DeleteLprListElement\", \"ViewObjectInZoneNotification\"",
+      "client_id": 0
+    },
+    {
+      "old_id": 106,
+      "new_id": 106,
+      "role_name": "DAVI",
+      "permissions_sample": "[\"ViewServers\", \"ViewRoles\", \"ViewFaceStatistics\", \"ViewLprStats\", \"ManageBrandi",
+      "client_id": 0
+    },
+    {
+      "old_id": 107,
+      "new_id": 107,
+      "role_name": "OPERADOR TWG",
+      "permissions_sample": "[\"ViewLprAnalytic\", \"ManageEvents\", \"ViewLprLists\", \"ManageLprAnalytic\", \"EditLp",
+      "client_id": 0
+    },
+    {
+      "old_id": 108,
+      "new_id": 108,
+      "role_name": "SUPERVIAO",
+      "permissions_sample": "[\"ViewHeatmapStats\", \"AddLprList\", \"ViewLprEvents\", \"ViewFaceAnalytic\", \"ViewPos",
+      "client_id": 0
+    },
+    {
+      "old_id": 109,
+      "new_id": 109,
+      "role_name": "MARTEL",
+      "permissions_sample": "[\"ViewHeatmapStats\", \"AddLprList\", \"ViewLprEvents\", \"ViewFaceAnalytic\", \"ViewPos",
+      "client_id": 0
+    },
+    {
+      "old_id": 110,
+      "new_id": 110,
+      "role_name": "OPERADOR GTTAM",
+      "permissions_sample": "[\"ViewLiveTrafficAnalytics\", \"ViewFaceEvents\", \"ViewLprEvents\", \"ViewTrafficObje",
+      "client_id": 0
+    },
+    {
+      "old_id": 111,
+      "new_id": 111,
+      "role_name": "STRATUM",
+      "permissions_sample": "[\"ManageSmokeFireAnalytics\", \"ViewLprStats\", \"ViewFaceSearch\", \"EditLprListEleme",
+      "client_id": 0
+    },
+    {
+      "old_id": 112,
+      "new_id": 112,
+      "role_name": "VEMCO",
+      "permissions_sample": "[\"DeleteFaceList\", \"ManageStreams\", \"DeleteFaceListElement\", \"ViewFaceEvents\", \"",
+      "client_id": 0
+    },
+    {
+      "old_id": 113,
+      "new_id": 113,
+      "role_name": "Cliente 01",
+      "permissions_sample": "[\"ViewFaceSearch\", \"ViewFaceStatistics\", \"ViewTrafficStats\", \"ViewFaceAnalytic\"]",
+      "client_id": 0
+    },
+    {
+      "old_id": 114,
+      "new_id": 114,
+      "role_name": "SOLUTION",
+      "permissions_sample": "[\"DeleteLprList\", \"ViewFaceSearch\", \"ViewFaceAnalytic\", \"ViewGenderAgeStats\", \"V",
+      "client_id": 0
+    },
+    {
+      "old_id": 115,
+      "new_id": 115,
+      "role_name": "SUPERVISOR ATCOM",
+      "permissions_sample": "[\"ViewHeatmapStats\", \"ViewObjectInZoneNotification\", \"ManageParkingComments\", \"M",
+      "client_id": 0
+    },
+    {
+      "old_id": 116,
+      "new_id": 116,
+      "role_name": "OPERADOR",
+      "permissions_sample": "[\"ViewLiveTrafficAnalytics\", \"ViewTrafficObjectCounter\", \"ViewTrafficStats\", \"Vi",
+      "client_id": 0
+    },
+    {
+      "old_id": 117,
+      "new_id": 117,
+      "role_name": "spc",
+      "permissions_sample": "[\"EditFaceList\", \"DeleteFaceListElement\", \"AddFaceList\", \"ViewFaceAnalytic\", \"Vi",
+      "client_id": 0
+    },
+    {
+      "old_id": 118,
+      "new_id": 118,
+      "role_name": "BENUVEM OPERADOR",
+      "permissions_sample": "[\"ViewFaceAnalytic\", \"DeleteFaceList\", \"EditFaceListElement\", \"ManageStreams\", \"",
+      "client_id": 0
+    },
+    {
+      "old_id": 119,
+      "new_id": 119,
+      "role_name": "OPERADOR MONITORY PLUS",
+      "permissions_sample": "[\"ManageEvents\", \"ManageHeatmapAnalytics\", \"ExportLprSearch\", \"AcceptObjectInZon",
+      "client_id": 0
+    }
+  ],
+  "unmapped_old": [],
+  "unmapped_new": []
+}

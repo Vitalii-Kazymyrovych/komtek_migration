@@ -70,7 +70,7 @@ The primary task of the AI agent is to **analyze legacy data**, **generate corre
 
 - PostgreSQL-compatible SQL only
 - Always specify column names in `INSERT` statements
-- One row per `INSERT` unless batching is explicitly requested
+- **Use a single `INSERT` statement per table with multiple `VALUES` rows (one batch per table) instead of one `INSERT` per object.**
 - Keep output deterministic and stable (same input → same SQL ordering)
 
 Example:
