@@ -1,0 +1,9 @@
+|Variable_name              |Value                                    |
+|---------------------------|-----------------------------------------|
+|alerts_history_archive_days|"60"                                     |
+|notifications_archive_days |"60"                                     |
+|parking_archive_days       |"30"                                     |
+|google_maps_api_key        |"AIzaSyCdpQdtnvNz8zO0OL-l0k2TkR1YvJTVH7c"|
+|alerts_history_days        |"30"                                     |
+|metadata_history_days      |"30"                                     |
+|image_history_days         |"30"                                     |

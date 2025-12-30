@@ -1,0 +1,2 @@
+|id |name|description|list_id|created_at|client_id|expiration_settings|created_by|
+|---|----|-----------|-------|----------|---------|-------------------|----------|

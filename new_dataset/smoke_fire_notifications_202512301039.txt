@@ -1,0 +1,2 @@
+|id |status|accepted_by|objects|va_id|frame_image|thumbnail_image|zone|created_at|client_id|latitude|longitude|
+|---|------|-----------|-------|-----|-----------|---------------|----|----------|---------|--------|---------|

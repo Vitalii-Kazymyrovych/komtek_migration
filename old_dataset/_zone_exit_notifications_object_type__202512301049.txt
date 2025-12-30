@@ -1,0 +1,2 @@
+|id |zone_exit_notifications_id|object_type|
+|---|--------------------------|-----------|

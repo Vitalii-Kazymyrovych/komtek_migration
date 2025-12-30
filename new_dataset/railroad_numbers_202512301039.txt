@@ -1,0 +1,2 @@
+|id |number|box|number_image|frame_image|created_at|direction|client_id|iso_code|analytics_id|zone|latitude|longitude|
+|---|------|---|------------|-----------|----------|---------|---------|--------|------------|----|--------|---------|

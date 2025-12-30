@@ -1,0 +1,2 @@
+|id |number|iso|box|number_image|frame_image|detection_id|recognized_at|
+|---|------|---|---|------------|-----------|------------|-------------|

@@ -1,0 +1,34 @@
+|id |client_name           |country|city          |address             |zip_code|email                           |phone        |comment                   |
+|---|----------------------|-------|--------------|--------------------|--------|--------------------------------|-------------|--------------------------|
+|1  |CCONET                |BR     |VILA VELHA    |                    |        |cconet@cconet.com.br            |             |"Demo"                    |
+|4  |Megavig               |BR     |São Paulo     |                    |        |                                |             |"Demo Project"            |
+|6  |SERVIP TECNOLOGIA     |BR     |Serra         |                    |        |servip@serviptecnologia.com.br  |             |"Customer"                |
+|7  |HMSJ                  |BR     |Colatina      |                    |        |hmsj@hmsj.com.br                |             |"Demo"                    |
+|8  |Vertex                |BR     |São Paulo     |                    |        |vertex@vertex.com.br            |             |""                        |
+|40 |SHOW ROOM             |BR     |VITORIA ES    |                    |        |                                |             |""                        |
+|45 |TIAGO                 |BR     |              |                    |        |                                |             |""                        |
+|46 |Trontec               |BR     |Porto Alegre  |                    |        |                                |             |""                        |
+|80 |CAPIXABA              |BR     |Colatina      |                    |        |projetos@capixabaservicos.com.br|             |""                        |
+|81 |Bulke                 |BR     |Sao Paulo     |                    |        |                                |             |""                        |
+|82 |Komtek Lab            |BR     |Vitória       |                    |        |                                |             |""                        |
+|83 |JF CONSULTORIA        |BR     |BAIXO GUANDU  |                    |        |                                |             |""                        |
+|84 |GRUPO SEI             |BR     |SERRA ES      |                    |        |                                |             |""                        |
+|85 |PREFEITURA DE COLATINA|BR     |Colatina      |                    |        |                                |             |""                        |
+|86 |NTECH                 |BR     |              |                    |        |                                |             |""                        |
+|87 |PMC COLATINA          |BR     |Colatina      |                    |        |                                |             |""                        |
+|88 |vCloud.ai Lab         |BR     |Vitória       |                    |        |paulo.rocha@vcloud.ai           |             |""                        |
+|89 |GRUPO VSG             |       |              |                    |        |                                |             |""                        |
+|90 |ON DISTRIBUIDORA      |BR     |              |                    |        |                                |             |""                        |
+|91 |GRUPO TRAJANO         |BR     |ITAPORAM      |                    |        |trajanoleonardo020@gmail.com    |             |""                        |
+|92 |Praia Forte           |       |              |                    |        |                                |             |""                        |
+|93 |Praia Forte           |       |              |                    |        |                                |             |""                        |
+|94 |TWG                   |BR     |SAO PAULO     |                    |        |                                |             |""                        |
+|95 |client                |UA     |Kyiv          |21. Khreshchatyk st.|01000   |client.mail@test.com            |+380123456789|"Short notes about client"|
+|96 |MARTEL                |       |LINHARES      |                    |        |                                |             |""                        |
+|97 |GTTAM                 |       |              |                    |        |                                |             |""                        |
+|98 |STRATUM               |BR     |Belo Horizonte|                    |        |                                |             |""                        |
+|99 |VEMCO                 |BR     |SAO PAULO     |                    |        |                                |             |""                        |
+|100|SOLUTION              |BR     |NOVA ALMEIDA  |                    |        |                                |             |""                        |
+|101|ATCOM                 |BR     |Vitória       |                    |        |                                |             |""                        |
+|102|BENUVEM               |BR     |BELO HORIZONTE|                    |        |                                |             |""                        |
+|103|MONITORY PLUS         |BR     |Pernambuco    |                    |        |                                |             |""                        |

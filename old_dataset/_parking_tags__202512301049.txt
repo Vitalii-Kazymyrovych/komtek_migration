@@ -1,0 +1,28 @@
+|id |name                        |client_id|
+|---|----------------------------|---------|
+|35 |"VISITANTE_DIÁRIO"          |0        |
+|36 |"VISITANTE_EVENTO"          |0        |
+|37 |"VISITANTE_EMPRESA"         |0        |
+|38 |"FUNCIONÁRIO_FIXO"          |0        |
+|39 |"FUNCIONÁRIO_TEMPORÁRIO"    |0        |
+|40 |"FUNCIONÁRIO_ADMINISTRATIVO"|0        |
+|41 |"FUNCIONÁRIO_OPERACIONAL"   |0        |
+|42 |"FUNCIONÁRIO_ESTACIONAMENTO"|0        |
+|43 |"LOJISTA_PERMANENTE"        |0        |
+|44 |"LOJISTA_TEMPORÁRIO"        |0        |
+|45 |"LOJISTA_FORNECEDOR"        |0        |
+|46 |"VIP_EXECUTIVO"             |0        |
+|48 |"VIP_CELEBRIDADE"           |0        |
+|49 |"VIP_CORPORATIVO"           |0        |
+|50 |"TERCEIRIZADO_SEGURANÇA"    |0        |
+|51 |"TERCEIRIZADO_LIMPEZA"      |0        |
+|52 |"TERCEIRIZADO_MANUTENÇÃO"   |0        |
+|53 |"TERCEIRIZADO_TECNOLOGIA"   |0        |
+|54 |"ENTREGA_RAPIDA"            |0        |
+|55 |"ENTREGA_LOGÍSTICA"         |0        |
+|56 |"ENTREGA_CORREIOS"          |0        |
+|57 |"MORADOR_RESIDENTE"         |0        |
+|58 |"MORADOR_VISITANTE"         |0        |
+|59 |"MORADOR_PRESTADOR"         |0        |
+|60 |"FROTA_EMPRESA"             |0        |
+|61 |"FROTA_TERCERIZADA"         |0        |

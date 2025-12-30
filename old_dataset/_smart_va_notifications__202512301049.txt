@@ -1,0 +1,2 @@
+|id |status|notification_status|accepted_by|va_id|stream_id|frame_image|thumbnail_image|trigger|trigger_settings|notification_type|resolution|created_at|rule_type|rule|client_id|
+|---|------|-------------------|-----------|-----|---------|-----------|---------------|-------|----------------|-----------------|----------|----------|---------|----|---------|

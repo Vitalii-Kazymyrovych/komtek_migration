@@ -1,0 +1,11 @@
+|id |server_metrics_id|gpu_id|gpu_name        |load                                            |client_id|
+|---|-----------------|------|----------------|------------------------------------------------|---------|
+|16 |7                |0     |NVIDIA RTX A6000|{"sum":0.0,"max":0.0,"measurements_count":63761}|0        |
+|17 |7                |1     |NVIDIA RTX A6000|{"sum":0.0,"max":0.0,"measurements_count":63761}|0        |
+|18 |7                |2     |NVIDIA RTX A6000|{"sum":0.0,"max":0.0,"measurements_count":63761}|0        |
+|19 |8                |0     |NVIDIA RTX A6000|{"sum":0.0,"max":0.0,"measurements_count":63767}|0        |
+|20 |8                |1     |NVIDIA RTX A6000|{"sum":0.0,"max":0.0,"measurements_count":63767}|0        |
+|21 |8                |2     |NVIDIA RTX A6000|{"sum":0.0,"max":0.0,"measurements_count":63767}|0        |
+|13 |5                |0     |NVIDIA RTX A6000|{"sum":0.0,"max":0.0,"measurements_count":2314} |0        |
+|14 |5                |1     |NVIDIA RTX A6000|{"sum":0.0,"max":0.0,"measurements_count":2314} |0        |
+|15 |5                |2     |NVIDIA RTX A6000|{"sum":0.0,"max":0.0,"measurements_count":2314} |0        |

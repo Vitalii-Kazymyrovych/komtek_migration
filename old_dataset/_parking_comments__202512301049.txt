@@ -1,0 +1,2 @@
+|id |vehicle_id|author_id|author|message|created_at|updated_at|
+|---|----------|---------|------|-------|----------|----------|

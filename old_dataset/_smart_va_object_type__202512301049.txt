@@ -1,0 +1,2 @@
+|id |notification_id|object_type|confidence|x1 |y1 |x2 |y2 |
+|---|---------------|-----------|----------|---|---|---|---|

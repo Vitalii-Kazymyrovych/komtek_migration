@@ -1,0 +1,2 @@
+|id |rule_id|plate_number|make_model_id|color_id|direction|country|country_pattern|stream1_frame|stream2_frame|stream1_timestamp|stream2_timestamp|speed_limit|speed_unit|client_id|
+|---|-------|------------|-------------|--------|---------|-------|---------------|-------------|-------------|-----------------|-----------------|-----------|----------|---------|

@@ -1,0 +1,2 @@
+|embeddings_id|frame_id|person_image|box|stream_id|hat|hair|up |up_length|bag|down|down_length|down_clothes|age|gender|created_at|client_id|
+|-------------|--------|------------|---|---------|---|----|---|---------|---|----|-----------|------------|---|------|----------|---------|

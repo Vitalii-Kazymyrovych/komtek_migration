@@ -1,0 +1,2 @@
+|id |name|comment|status|created_at|created_by|closed_at|list_id|expiration_settings|client_id|expiration_settings_enabled|expiration_settings_action|expiration_settings_list_id|expiration_settings_date|expiration_settings_events_holder|
+|---|----|-------|------|----------|----------|---------|-------|-------------------|---------|---------------------------|--------------------------|---------------------------|------------------------|---------------------------------|

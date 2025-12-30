@@ -1,0 +1,2 @@
+|id |rule_id|speed_value|speed_unit|detection1_id|detection2_id|
+|---|-------|-----------|----------|-------------|-------------|

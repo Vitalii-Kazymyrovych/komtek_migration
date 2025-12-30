@@ -1,0 +1,6 @@
+|id |variable_name        |value                                  |
+|---|---------------------|---------------------------------------|
+|1  |google_maps_api_key  |AIzaSyCdpQdtnvNz8zO0OL-l0k2TkR1YvJTVH7c|
+|2  |alerts_history_days  |30                                     |
+|3  |metadata_history_days|30                                     |
+|4  |image_history_days   |30                                     |

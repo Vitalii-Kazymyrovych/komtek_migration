@@ -1,0 +1,2 @@
+|id |host|share_name|username|password|domain|
+|---|----|----------|--------|--------|------|

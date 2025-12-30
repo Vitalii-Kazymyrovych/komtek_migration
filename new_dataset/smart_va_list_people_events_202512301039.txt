@@ -1,0 +1,2 @@
+|id |list_item_id|stream_id|va_id|created_at|frame_image|x1 |y1 |x2 |y2 |client_id|confidence|accepted|
+|---|------------|---------|-----|----------|-----------|---|---|---|---|---------|----------|--------|

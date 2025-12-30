@@ -1,0 +1,2 @@
+|id |analytics_id|object_id|zone_id|seconds_in_zone|object_type|notification_type|created_at|client_id|
+|---|------------|---------|-------|---------------|-----------|-----------------|----------|---------|

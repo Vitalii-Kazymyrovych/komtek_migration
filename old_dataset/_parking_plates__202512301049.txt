@@ -1,0 +1,2 @@
+|id |plate_number|make_model_id|color_id|confidence|box|plate_image|frame_image|stream_id|va_id|site_id|vehicle_id|country|country_pattern_id|modified|direction|site_direction|created_at|client_id|
+|---|------------|-------------|--------|----------|---|-----------|-----------|---------|-----|-------|----------|-------|------------------|--------|---------|--------------|----------|---------|

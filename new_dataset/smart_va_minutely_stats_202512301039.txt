@@ -1,0 +1,2 @@
+|id |va_id|line|type|count|present|direction|created_at|client_id|
+|---|-----|----|----|-----|-------|---------|----------|---------|

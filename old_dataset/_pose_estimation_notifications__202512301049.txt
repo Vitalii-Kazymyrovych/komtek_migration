@@ -1,0 +1,2 @@
+|id |status|accepted_by|objects|box|stream_id|va_id|frame_image|thumbnail_image|zone|rule_type|created_at|client_id|
+|---|------|-----------|-------|---|---------|-----|-----------|---------------|----|---------|----------|---------|

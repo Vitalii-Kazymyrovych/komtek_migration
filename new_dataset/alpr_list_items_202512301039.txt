@@ -1,0 +1,2 @@
+|id |number|comment|status|created_at|created_by|closed_at|list_id|client_id|
+|---|------|-------|------|----------|----------|---------|-------|---------|

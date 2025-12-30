@@ -1,0 +1,4 @@
+|id |name     |user_id|api_key                         |api_key_hash                                                |issued_at              |expires_at             |
+|---|---------|-------|--------------------------------|------------------------------------------------------------|-----------------------|-----------------------|
+|2  |engeinfo |1      |gw4gCPycnTM0ECLG1ufOPpllpg6F4pfQ|$2a$10$Y3TKUOj0OV4qAZiU5cPC8OVyaz8K7Zykk9Bf71UeQmaZa5J159IaG|2025-12-18 03:04:40.097|2026-01-18 03:04:32.854|
+|3  |migration|1      |HvNerokuEav0LTOqPVA34FArIFO2dIuw|$2a$10$QvRW3idH2BkW8tSJqup4ZOEf4jdJEWJ.vhrD8Eo.Zi.S4BD59EzMS|2025-12-26 17:20:27.088|2026-01-26 17:20:17.005|

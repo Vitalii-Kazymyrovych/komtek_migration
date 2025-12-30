@@ -1,0 +1,2 @@
+|id |file_name|description|core_version|type|created_at|size|client_id|is_vms_integration_enabled|
+|---|---------|-----------|------------|----|----------|----|---------|--------------------------|

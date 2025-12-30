@@ -1,0 +1,2 @@
+|id |uuid|stream_id|va_id|frame_image|thumbnail_image|confidence|type|color_id|timestamp|client_id|frame_id|x1 |y1 |x2 |y2 |
+|---|----|---------|-----|-----------|---------------|----------|----|--------|---------|---------|--------|---|---|---|---|

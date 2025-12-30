@@ -1,0 +1,3 @@
+|id |locked|lockgranted|lockedby|
+|---|------|-----------|--------|
+|1  |false |[NULL]     |[NULL]  |

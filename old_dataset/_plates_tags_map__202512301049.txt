@@ -1,0 +1,3 @@
+|id |plate  |tag_id|validity_period_start|validity_period_end|
+|---|-------|------|---------------------|-------------------|
+|38 |ERP1A23|57    |[NULL]               |[NULL]             |

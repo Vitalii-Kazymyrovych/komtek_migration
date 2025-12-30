@@ -1,0 +1,1639 @@
+-- VIDEOANALYTICS."alpr_list_items" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."alpr_list_items";
+
+CREATE TABLE VIDEOANALYTICS."alpr_list_items" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"number" CHARACTER VARYING(20) DEFAULT '' NOT NULL,
+	"comment" CHARACTER LARGE OBJECT,
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	"created_by" INTEGER DEFAULT 0 NOT NULL,
+	"closed_at" TIMESTAMP,
+	"list_id" INTEGER,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_ALPR_LIST_ITEMS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_86 ON VIDEOANALYTICS."alpr_list_items" ("id");
+
+
+-- VIDEOANALYTICS."alpr_lists" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."alpr_lists";
+
+CREATE TABLE VIDEOANALYTICS."alpr_lists" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER VARYING(45) NOT NULL,
+	"comment" CHARACTER VARYING(255),
+	"streams" CHARACTER LARGE OBJECT,
+	"send_internal_notifications" BOOLEAN DEFAULT FALSE NOT NULL,
+	"events_holder" CHARACTER LARGE OBJECT,
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	"list_permissions" CHARACTER LARGE OBJECT,
+	"enabled" BOOLEAN DEFAULT FALSE,
+	"color" CHARACTER(7) DEFAULT '#FFFFFF' NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_ALPR_LISTS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_C5 ON VIDEOANALYTICS."alpr_lists" ("id");
+
+
+-- VIDEOANALYTICS."alpr_notifications" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."alpr_notifications";
+
+CREATE TABLE VIDEOANALYTICS."alpr_notifications" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"plate_id" BIGINT NOT NULL,
+	"list_id" INTEGER,
+	"list_item_id" INTEGER,
+	"list_item_name" CHARACTER VARYING(15),
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"accepted_by" INTEGER DEFAULT 0 NOT NULL,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	CONSTRAINT PK_ALPR_NOTIFICATIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_53 ON VIDEOANALYTICS."alpr_notifications" ("id");
+CREATE INDEX "alpr_notifications_list_item_id" ON VIDEOANALYTICS."alpr_notifications" ("plate_id","list_item_id");
+CREATE INDEX "alpr_notifications_plate_id" ON VIDEOANALYTICS."alpr_notifications" ("plate_id");
+CREATE INDEX "alpr_notifications_plate_id_status_list_item_name_created_at" ON VIDEOANALYTICS."alpr_notifications" ("plate_id","status","list_item_name","created_at");
+
+
+-- VIDEOANALYTICS."alpr_plates" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."alpr_plates";
+
+CREATE TABLE VIDEOANALYTICS."alpr_plates" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"list_items" CHARACTER LARGE OBJECT,
+	"plate_number" CHARACTER VARYING(15) DEFAULT '' NOT NULL,
+	"arabic_number" CHARACTER VARYING(64) DEFAULT '' NOT NULL,
+	"adr" CHARACTER VARYING(10) DEFAULT '' NOT NULL,
+	"box" CHARACTER LARGE OBJECT,
+	"plate_image" CHARACTER LARGE OBJECT,
+	"frame_image" CHARACTER LARGE OBJECT,
+	"stream_id" INTEGER NOT NULL,
+	"va_id" INTEGER NOT NULL,
+	"make_model_id" INTEGER DEFAULT -1 NOT NULL,
+	"vehicle_type" INTEGER DEFAULT 1 NOT NULL,
+	"created_at" TIMESTAMP NOT NULL,
+	"color_id" INTEGER,
+	"direction" INTEGER,
+	"country" CHARACTER VARYING(5),
+	"pattern" CHARACTER VARYING(100),
+	"client_id" INTEGER DEFAULT 0 NOT NULL,
+	CONSTRAINT PK_ALPR_PLATES PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_88 ON VIDEOANALYTICS."alpr_plates" ("id");
+CREATE INDEX "alpr_plates_created_at" ON VIDEOANALYTICS."alpr_plates" ("created_at" DESC);
+CREATE INDEX "alpr_plates_created_at_color_and_make_model" ON VIDEOANALYTICS."alpr_plates" ("created_at" DESC,"make_model_id","color_id");
+CREATE INDEX "alpr_plates_created_at_make_model" ON VIDEOANALYTICS."alpr_plates" ("created_at" DESC,"make_model_id");
+CREATE INDEX "alpr_plates_created_at_plate_number" ON VIDEOANALYTICS."alpr_plates" ("created_at" DESC,"plate_number");
+CREATE INDEX "alpr_plates_created_at_stream" ON VIDEOANALYTICS."alpr_plates" ("created_at" DESC,"stream_id");
+CREATE INDEX "alpr_plates_created_at_stream_make_model" ON VIDEOANALYTICS."alpr_plates" ("created_at" DESC,"make_model_id","stream_id");
+CREATE INDEX "alpr_plates_plate_number" ON VIDEOANALYTICS."alpr_plates" ("plate_number");
+CREATE INDEX "alpr_plates_plate_number_stream_id" ON VIDEOANALYTICS."alpr_plates" ("plate_number","stream_id");
+CREATE INDEX "alpr_plates_stream_id" ON VIDEOANALYTICS."alpr_plates" ("stream_id");
+
+
+-- VIDEOANALYTICS."alpr_speed_rule_events" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."alpr_speed_rule_events";
+
+CREATE TABLE VIDEOANALYTICS."alpr_speed_rule_events" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"rule_id" INTEGER,
+	"plate_number" CHARACTER VARYING(10) DEFAULT '' NOT NULL,
+	"make_model_id" INTEGER DEFAULT -1,
+	"color_id" INTEGER,
+	"direction" INTEGER,
+	"country" CHARACTER VARYING(25),
+	"country_pattern" CHARACTER VARYING(30),
+	"stream1_frame" CHARACTER LARGE OBJECT,
+	"stream2_frame" CHARACTER LARGE OBJECT,
+	"stream1_timestamp" TIMESTAMP,
+	"stream2_timestamp" TIMESTAMP,
+	"speed_limit" INTEGER DEFAULT 0,
+	"speed_unit" INTEGER DEFAULT 0,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_ALPR_SPEED_RULE_EVENTS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_7A ON VIDEOANALYTICS."alpr_speed_rule_events" ("id");
+CREATE INDEX "alpr_speed_rule_events_client_id" ON VIDEOANALYTICS."alpr_speed_rule_events" ("client_id");
+CREATE INDEX "alpr_speed_rule_events_rule_id" ON VIDEOANALYTICS."alpr_speed_rule_events" ("rule_id");
+CREATE INDEX "alpr_speed_rule_events_rule_id_timestamp" ON VIDEOANALYTICS."alpr_speed_rule_events" ("stream2_timestamp" DESC,"rule_id");
+
+
+-- VIDEOANALYTICS."alpr_speed_rules" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."alpr_speed_rules";
+
+CREATE TABLE VIDEOANALYTICS."alpr_speed_rules" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER VARYING(45) DEFAULT '' NOT NULL,
+	"stream_id1" INTEGER NOT NULL,
+	"stream_id2" INTEGER NOT NULL,
+	"speed_limit" INTEGER DEFAULT 0,
+	"speed_unit" INTEGER DEFAULT 0,
+	"distance" DOUBLE PRECISION DEFAULT 0,
+	"distance_unit" INTEGER DEFAULT 0,
+	"min_speed" INTEGER DEFAULT 0,
+	"min_speed_unit" INTEGER DEFAULT 0,
+	"max_duration" INTEGER DEFAULT 0,
+	"events_holder" CHARACTER LARGE OBJECT,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_ALPR_SPEED_RULES PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_D3 ON VIDEOANALYTICS."alpr_speed_rules" ("id");
+
+
+-- VIDEOANALYTICS."alpr_stats_hourly" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."alpr_stats_hourly";
+
+CREATE TABLE VIDEOANALYTICS."alpr_stats_hourly" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"stream_id" INTEGER NOT NULL,
+	"total" INTEGER NOT NULL,
+	"numbers" INTEGER NOT NULL,
+	"make_models" INTEGER NOT NULL,
+	"created_at" TIMESTAMP NOT NULL,
+	"client_id" INTEGER,
+	CONSTRAINT PK_ALPR_STATS_HOURLY PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_CF ON VIDEOANALYTICS."alpr_stats_hourly" ("id");
+CREATE INDEX "alpr_stats_hourly_created_at" ON VIDEOANALYTICS."alpr_stats_hourly" ("created_at","client_id");
+CREATE INDEX "alpr_stats_hourly_created_at_stream" ON VIDEOANALYTICS."alpr_stats_hourly" ("created_at","stream_id","client_id");
+
+
+-- VIDEOANALYTICS."analytics" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."analytics";
+
+CREATE TABLE VIDEOANALYTICS."analytics" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"topic" CHARACTER LARGE OBJECT DEFAULT '',
+	"type" CHARACTER LARGE OBJECT,
+	"plugin_name" CHARACTER LARGE OBJECT,
+	"name" CHARACTER LARGE OBJECT,
+	"created_at" TIMESTAMP NOT NULL,
+	"status" CHARACTER LARGE OBJECT NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	"stream" CHARACTER LARGE OBJECT,
+	"module" CHARACTER LARGE OBJECT,
+	"last_gpu_id" INTEGER,
+	"desired_server_id" CHARACTER VARYING(100),
+	"disable_balancing" BOOLEAN,
+	"start_signature" CHARACTER VARYING(50),
+	"allowed_server_ids" CHARACTER LARGE OBJECT,
+	"restrictions" CHARACTER LARGE OBJECT,
+	"stream_id" INTEGER,
+	"events_holder" CHARACTER LARGE OBJECT,
+	"start_at" TIMESTAMP,
+	CONSTRAINT PK_ANALYTICS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_9 ON VIDEOANALYTICS."analytics" ("id");
+
+
+-- VIDEOANALYTICS."audit_trail" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."audit_trail";
+
+CREATE TABLE VIDEOANALYTICS."audit_trail" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"created_at" TIMESTAMP NOT NULL,
+	"session_id" CHARACTER VARYING(255) NOT NULL,
+	"user_id" INTEGER NOT NULL,
+	"user_ip" CHARACTER VARYING(45) NOT NULL,
+	"source_id" CHARACTER VARYING(255) NOT NULL,
+	"event_category" INTEGER NOT NULL,
+	"event_action" INTEGER NOT NULL,
+	"stream_id" INTEGER,
+	"analytics_id" INTEGER,
+	"message" CHARACTER LARGE OBJECT NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_AUDIT_TRAIL PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_37 ON VIDEOANALYTICS."audit_trail" ("id");
+
+
+-- VIDEOANALYTICS."clients" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."clients";
+
+CREATE TABLE VIDEOANALYTICS."clients" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"client_name" CHARACTER VARYING(250) NOT NULL,
+	"country" CHARACTER VARYING(250) DEFAULT '' NOT NULL,
+	"city" CHARACTER VARYING(250) DEFAULT '' NOT NULL,
+	"address" CHARACTER VARYING(250) DEFAULT '' NOT NULL,
+	"zip_code" CHARACTER VARYING(15) DEFAULT '' NOT NULL,
+	"email" CHARACTER VARYING(250) DEFAULT '' NOT NULL,
+	"phone" CHARACTER VARYING(20) DEFAULT '' NOT NULL,
+	"comment" CHARACTER LARGE OBJECT DEFAULT '' NOT NULL,
+	CONSTRAINT PK_CLIENTS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_3 ON VIDEOANALYTICS."clients" ("id");
+
+
+-- VIDEOANALYTICS.DATABASECHANGELOG definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS.DATABASECHANGELOG;
+
+CREATE TABLE VIDEOANALYTICS.DATABASECHANGELOG (
+	ID CHARACTER VARYING(255) NOT NULL,
+	AUTHOR CHARACTER VARYING(255) NOT NULL,
+	FILENAME CHARACTER VARYING(255) NOT NULL,
+	DATEEXECUTED TIMESTAMP NOT NULL,
+	ORDEREXECUTED INTEGER NOT NULL,
+	EXECTYPE CHARACTER VARYING(10) NOT NULL,
+	MD5SUM CHARACTER VARYING(35),
+	DESCRIPTION CHARACTER VARYING(255),
+	COMMENTS CHARACTER VARYING(255),
+	TAG CHARACTER VARYING(255),
+	LIQUIBASE CHARACTER VARYING(20),
+	CONTEXTS CHARACTER VARYING(255),
+	LABELS CHARACTER VARYING(255),
+	DEPLOYMENT_ID CHARACTER VARYING(10)
+);
+
+
+-- VIDEOANALYTICS.DATABASECHANGELOGLOCK definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS.DATABASECHANGELOGLOCK;
+
+CREATE TABLE VIDEOANALYTICS.DATABASECHANGELOGLOCK (
+	ID INTEGER NOT NULL,
+	LOCKED BOOLEAN NOT NULL,
+	LOCKGRANTED TIMESTAMP,
+	LOCKEDBY CHARACTER VARYING(255),
+	CONSTRAINT PK_DATABASECHANGELOGLOCK PRIMARY KEY (ID)
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_D ON VIDEOANALYTICS.DATABASECHANGELOGLOCK (ID);
+
+
+-- VIDEOANALYTICS."event_manager" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."event_manager";
+
+CREATE TABLE VIDEOANALYTICS."event_manager" (
+	"id" CHARACTER VARYING(255) NOT NULL,
+	"title" CHARACTER LARGE OBJECT DEFAULT '',
+	"description" CHARACTER LARGE OBJECT DEFAULT '',
+	"created_at" TIMESTAMP,
+	"nodes" CHARACTER LARGE OBJECT DEFAULT '',
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_EVENT_MANAGER PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_4 ON VIDEOANALYTICS."event_manager" ("id");
+
+
+-- VIDEOANALYTICS."face_detections" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."face_detections";
+
+CREATE TABLE VIDEOANALYTICS."face_detections" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"list_id" INTEGER,
+	"list_item_id" INTEGER,
+	"confidence" INTEGER,
+	"box" BINARY LARGE OBJECT,
+	"face_image" CHARACTER LARGE OBJECT,
+	"frame_image" CHARACTER LARGE OBJECT,
+	"stream_id" INTEGER NOT NULL,
+	"va_id" INTEGER NOT NULL,
+	"age" CHARACTER VARYING(10),
+	"gender" INTEGER,
+	"race" CHARACTER VARYING(20),
+	"spoofed" BOOLEAN,
+	"mask" BOOLEAN,
+	"created_at" TIMESTAMP NOT NULL,
+	"client_id" INTEGER,
+	CONSTRAINT PK_FACE_DETECTIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_75 ON VIDEOANALYTICS."face_detections" ("id");
+CREATE INDEX "face_detections_confidence" ON VIDEOANALYTICS."face_detections" ("confidence");
+CREATE INDEX "face_detections_created_at" ON VIDEOANALYTICS."face_detections" ("created_at" DESC);
+CREATE INDEX "face_detections_created_at_stream" ON VIDEOANALYTICS."face_detections" ("created_at" DESC,"stream_id");
+CREATE INDEX "face_detections_list_id" ON VIDEOANALYTICS."face_detections" ("list_id");
+CREATE INDEX "face_detections_list_item_id" ON VIDEOANALYTICS."face_detections" ("list_item_id");
+
+
+-- VIDEOANALYTICS."face_encodings" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."face_encodings";
+
+CREATE TABLE VIDEOANALYTICS."face_encodings" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"face_id" BIGINT,
+	"encoding" BINARY LARGE OBJECT,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	CONSTRAINT PK_FACE_ENCODINGS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_17 ON VIDEOANALYTICS."face_encodings" ("id");
+CREATE INDEX "face_encodings_created_at" ON VIDEOANALYTICS."face_encodings" ("created_at" DESC);
+CREATE INDEX "face_encodings_face_id" ON VIDEOANALYTICS."face_encodings" ("face_id");
+
+
+-- VIDEOANALYTICS."face_list_items" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."face_list_items";
+
+CREATE TABLE VIDEOANALYTICS."face_list_items" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER VARYING(255) DEFAULT '' NOT NULL,
+	"comment" CHARACTER LARGE OBJECT DEFAULT '',
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	"created_by" INTEGER DEFAULT 0 NOT NULL,
+	"closed_at" TIMESTAMP,
+	"list_id" INTEGER,
+	"expiration_settings" CHARACTER LARGE OBJECT,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_FACE_LIST_ITEMS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_12 ON VIDEOANALYTICS."face_list_items" ("id");
+
+
+-- VIDEOANALYTICS."face_list_items_images" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."face_list_items_images";
+
+CREATE TABLE VIDEOANALYTICS."face_list_items_images" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"list_item_id" INTEGER NOT NULL,
+	"path" CHARACTER LARGE OBJECT NOT NULL,
+	"encoding" BINARY LARGE OBJECT,
+	"points" CHARACTER LARGE OBJECT,
+	CONSTRAINT PK_FACE_LIST_ITEMS_IMAGES PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_8D ON VIDEOANALYTICS."face_list_items_images" ("id");
+CREATE INDEX "list_item_id" ON VIDEOANALYTICS."face_list_items_images" ("list_item_id");
+
+
+-- VIDEOANALYTICS."face_lists" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."face_lists";
+
+CREATE TABLE VIDEOANALYTICS."face_lists" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER VARYING(45) NOT NULL,
+	"comment" CHARACTER VARYING(255),
+	"min_confidence" INTEGER DEFAULT 80 NOT NULL,
+	"streams" CHARACTER LARGE OBJECT,
+	"send_internal_notifications" BOOLEAN DEFAULT FALSE NOT NULL,
+	"events_holder" CHARACTER LARGE OBJECT,
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	"color" CHARACTER(7) DEFAULT '#FFFFFF' NOT NULL,
+	"time_attendance" CHARACTER LARGE OBJECT,
+	"enabled" BOOLEAN DEFAULT FALSE,
+	"list_permissions" CHARACTER LARGE OBJECT,
+	CONSTRAINT PK_FACE_LISTS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_36 ON VIDEOANALYTICS."face_lists" ("id");
+
+
+-- VIDEOANALYTICS."face_notifications" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."face_notifications";
+
+CREATE TABLE VIDEOANALYTICS."face_notifications" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"face_id" BIGINT NOT NULL,
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"accepted_by" INTEGER DEFAULT 0 NOT NULL,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	CONSTRAINT PK_FACE_NOTIFICATIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_AE ON VIDEOANALYTICS."face_notifications" ("id");
+CREATE INDEX "face_notifications_face_id" ON VIDEOANALYTICS."face_notifications" ("face_id");
+CREATE INDEX "face_notifications_row_id_status_alert_name_created_at" ON VIDEOANALYTICS."face_notifications" ("face_id","status","created_at");
+
+
+-- VIDEOANALYTICS."face_unique_person_mapping" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."face_unique_person_mapping";
+
+CREATE TABLE VIDEOANALYTICS."face_unique_person_mapping" (
+	"id" UUID NOT NULL,
+	"face_id" BIGINT NOT NULL,
+	"list_id" INTEGER,
+	"created_at" TIMESTAMP NOT NULL
+);
+CREATE INDEX "face_unique_person_mapping_face_id" ON VIDEOANALYTICS."face_unique_person_mapping" ("face_id");
+CREATE INDEX "face_unique_person_mapping_face_uuid" ON VIDEOANALYTICS."face_unique_person_mapping" ("id");
+
+
+-- VIDEOANALYTICS."gender_age_stat" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."gender_age_stat";
+
+CREATE TABLE VIDEOANALYTICS."gender_age_stat" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"va_id" INTEGER NOT NULL,
+	"stream_id" INTEGER NOT NULL,
+	"gender" INTEGER NOT NULL,
+	"age" INTEGER NOT NULL,
+	"count" INTEGER NOT NULL,
+	"date" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_GENDER_AGE_STAT PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_A4 ON VIDEOANALYTICS."gender_age_stat" ("id");
+CREATE INDEX "date_gender_age" ON VIDEOANALYTICS."gender_age_stat" ("date");
+CREATE INDEX "date_va_id_gender_age" ON VIDEOANALYTICS."gender_age_stat" ("date","va_id");
+
+
+-- VIDEOANALYTICS."gun_notifications" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."gun_notifications";
+
+CREATE TABLE VIDEOANALYTICS."gun_notifications" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"stream_id" INTEGER NOT NULL,
+	"va_id" INTEGER NOT NULL,
+	"frame_image" CHARACTER LARGE OBJECT NOT NULL,
+	"thumbnail_image" CHARACTER LARGE OBJECT,
+	"objects" CHARACTER LARGE OBJECT NOT NULL,
+	"zone" CHARACTER LARGE OBJECT NOT NULL,
+	"created_at" TIMESTAMP NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"accepted_by" INTEGER DEFAULT 0 NOT NULL,
+	CONSTRAINT PK_GUN_NOTIFICATIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_45 ON VIDEOANALYTICS."gun_notifications" ("id");
+CREATE INDEX "gun_detection_id_status_created_at" ON VIDEOANALYTICS."gun_notifications" ("id","created_at");
+
+
+-- VIDEOANALYTICS."gun_type_mapping" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."gun_type_mapping";
+
+CREATE TABLE VIDEOANALYTICS."gun_type_mapping" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"notification_id" BIGINT NOT NULL,
+	"type" INTEGER NOT NULL,
+	CONSTRAINT PK_GUN_TYPE_MAPPING PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_5D ON VIDEOANALYTICS."gun_type_mapping" ("id");
+
+
+-- VIDEOANALYTICS."hardhats_notifications" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."hardhats_notifications";
+
+CREATE TABLE VIDEOANALYTICS."hardhats_notifications" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"accepted_by" INTEGER DEFAULT 0 NOT NULL,
+	"objects" CHARACTER LARGE OBJECT,
+	"stream_id" INTEGER NOT NULL,
+	"va_id" INTEGER NOT NULL,
+	"frame_image" CHARACTER LARGE OBJECT NOT NULL,
+	"thumbnail_image" CHARACTER LARGE OBJECT,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	"zone" CHARACTER LARGE OBJECT,
+	"client_id" INTEGER,
+	CONSTRAINT PK_HARDHATS_NOTIFICATIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_55 ON VIDEOANALYTICS."hardhats_notifications" ("id");
+CREATE INDEX "hardhats_id_status_created_at" ON VIDEOANALYTICS."hardhats_notifications" ("id","status","created_at");
+
+
+-- VIDEOANALYTICS."heatmap_plans" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."heatmap_plans";
+
+CREATE TABLE VIDEOANALYTICS."heatmap_plans" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER LARGE OBJECT NOT NULL,
+	"image_path" CHARACTER LARGE OBJECT NOT NULL,
+	"width" INTEGER NOT NULL,
+	"height" INTEGER NOT NULL,
+	"opacity" INTEGER NOT NULL,
+	"analytics" CHARACTER LARGE OBJECT NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_HEATMAP_PLANS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_54 ON VIDEOANALYTICS."heatmap_plans" ("id");
+
+
+-- VIDEOANALYTICS."heatmap_plans_old" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."heatmap_plans_old";
+
+CREATE TABLE VIDEOANALYTICS."heatmap_plans_old" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER LARGE OBJECT,
+	"image_path" CHARACTER LARGE OBJECT,
+	"width" INTEGER,
+	"height" INTEGER,
+	"opacity" INTEGER,
+	"analytics" CHARACTER LARGE OBJECT,
+	"client_id" INTEGER,
+	CONSTRAINT PK_HEATMAP_PLANS_OLD PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_E ON VIDEOANALYTICS."heatmap_plans_old" ("id");
+
+
+-- VIDEOANALYTICS."koatuu_level1" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."koatuu_level1";
+
+CREATE TABLE VIDEOANALYTICS."koatuu_level1" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER VARYING(255) NOT NULL,
+	CONSTRAINT PK_KOATUU_LEVEL1 PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_BF6 ON VIDEOANALYTICS."koatuu_level1" ("id");
+
+
+-- VIDEOANALYTICS."koatuu_level2" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."koatuu_level2";
+
+CREATE TABLE VIDEOANALYTICS."koatuu_level2" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"level1_id" CHARACTER VARYING(2) NOT NULL,
+	"name" CHARACTER VARYING(255) NOT NULL,
+	CONSTRAINT PK_KOATUU_LEVEL2 PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_BF6B ON VIDEOANALYTICS."koatuu_level2" ("id");
+CREATE INDEX "level1_id" ON VIDEOANALYTICS."koatuu_level2" ("level1_id");
+
+
+-- VIDEOANALYTICS."koatuu_level3" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."koatuu_level3";
+
+CREATE TABLE VIDEOANALYTICS."koatuu_level3" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"level1_id" CHARACTER VARYING(2) NOT NULL,
+	"level2_id" CHARACTER VARYING(4) NOT NULL,
+	"name" CHARACTER VARYING(255) NOT NULL,
+	CONSTRAINT PK_KOATUU_LEVEL3 PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_BF6B7 ON VIDEOANALYTICS."koatuu_level3" ("id");
+CREATE INDEX "koatuu_level3_level1_id" ON VIDEOANALYTICS."koatuu_level3" ("level1_id");
+CREATE INDEX "level2_id" ON VIDEOANALYTICS."koatuu_level3" ("level2_id");
+CREATE INDEX "level2_id_2" ON VIDEOANALYTICS."koatuu_level3" ("level1_id","level2_id");
+
+
+-- VIDEOANALYTICS."motion_notifications" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."motion_notifications";
+
+CREATE TABLE VIDEOANALYTICS."motion_notifications" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"accepted_by" INTEGER DEFAULT 0 NOT NULL,
+	"box" BINARY LARGE OBJECT,
+	"stream_id" INTEGER NOT NULL,
+	"va_id" INTEGER NOT NULL,
+	"frame_image" CHARACTER LARGE OBJECT NOT NULL,
+	"thumbnail_image" CHARACTER LARGE OBJECT NOT NULL,
+	"rule_id" CHARACTER LARGE OBJECT,
+	"rule_points" CHARACTER LARGE OBJECT,
+	"rule_type" INTEGER NOT NULL,
+	"in_time" INTEGER,
+	"zone" CHARACTER LARGE OBJECT,
+	"created_at" TIMESTAMP NOT NULL,
+	"client_id" INTEGER,
+	CONSTRAINT PK_MOTION_NOTIFICATIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_7C ON VIDEOANALYTICS."motion_notifications" ("id");
+CREATE INDEX "motion_id_status_created_at" ON VIDEOANALYTICS."motion_notifications" ("id","status","created_at");
+
+
+-- VIDEOANALYTICS."object_in_zone_notifications" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."object_in_zone_notifications";
+
+CREATE TABLE VIDEOANALYTICS."object_in_zone_notifications" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"va_id" INTEGER,
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"accepted_by" INTEGER DEFAULT 0 NOT NULL,
+	"stream_id" INTEGER NOT NULL,
+	"frame_image" CHARACTER LARGE OBJECT NOT NULL,
+	"thumbnail_image" CHARACTER LARGE OBJECT NOT NULL,
+	"zone" CHARACTER LARGE OBJECT,
+	"dwell_time" INTEGER NOT NULL,
+	"trigger" INTEGER NOT NULL,
+	"notification_type" CHARACTER VARYING(10) DEFAULT 'alert' NOT NULL,
+	"action_type" CHARACTER VARYING(20),
+	"resolution" CHARACTER LARGE OBJECT,
+	"created_at" TIMESTAMP NOT NULL,
+	"client_id" INTEGER,
+	CONSTRAINT PK_OBJECT_IN_ZONE_NOTIFICATIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_6E ON VIDEOANALYTICS."object_in_zone_notifications" ("id");
+CREATE INDEX "id_status_created_at" ON VIDEOANALYTICS."object_in_zone_notifications" ("id","status","created_at");
+
+
+-- VIDEOANALYTICS."opendata_body_set" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."opendata_body_set";
+
+CREATE TABLE VIDEOANALYTICS."opendata_body_set" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER VARYING(255) NOT NULL,
+	CONSTRAINT PK_OPENDATA_BODY_SET PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_B ON VIDEOANALYTICS."opendata_body_set" ("id");
+CREATE UNIQUE INDEX "name" ON VIDEOANALYTICS."opendata_body_set" ("name");
+
+
+-- VIDEOANALYTICS."opendata_color_set" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."opendata_color_set";
+
+CREATE TABLE VIDEOANALYTICS."opendata_color_set" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER VARYING(20) NOT NULL,
+	CONSTRAINT PK_OPENDATA_COLOR_SET PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_BF ON VIDEOANALYTICS."opendata_color_set" ("id");
+
+
+-- VIDEOANALYTICS."opendata_dep_set" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."opendata_dep_set";
+
+CREATE TABLE VIDEOANALYTICS."opendata_dep_set" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"code" INTEGER NOT NULL,
+	"name" CHARACTER VARYING(255) NOT NULL,
+	CONSTRAINT PK_OPENDATA_DEP_SET PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_EB ON VIDEOANALYTICS."opendata_dep_set" ("id");
+CREATE UNIQUE INDEX "code" ON VIDEOANALYTICS."opendata_dep_set" ("code");
+
+
+-- VIDEOANALYTICS."opendata_fuel_set" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."opendata_fuel_set";
+
+CREATE TABLE VIDEOANALYTICS."opendata_fuel_set" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER VARYING(40) NOT NULL,
+	CONSTRAINT PK_OPENDATA_FUEL_SET PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_90 ON VIDEOANALYTICS."opendata_fuel_set" ("id");
+
+
+-- VIDEOANALYTICS."opendata_kind_set" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."opendata_kind_set";
+
+CREATE TABLE VIDEOANALYTICS."opendata_kind_set" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER VARYING(20) NOT NULL,
+	CONSTRAINT PK_OPENDATA_KIND_SET PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_2 ON VIDEOANALYTICS."opendata_kind_set" ("id");
+
+
+-- VIDEOANALYTICS."opendata_make_models" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."opendata_make_models";
+
+CREATE TABLE VIDEOANALYTICS."opendata_make_models" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"make" CHARACTER VARYING(50) NOT NULL,
+	"model" CHARACTER VARYING(50) NOT NULL,
+	"name" CHARACTER VARYING(100) NOT NULL,
+	CONSTRAINT PK_OPENDATA_MAKE_MODELS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_A7 ON VIDEOANALYTICS."opendata_make_models" ("id");
+
+
+-- VIDEOANALYTICS."opendata_oper_set" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."opendata_oper_set";
+
+CREATE TABLE VIDEOANALYTICS."opendata_oper_set" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"code" INTEGER NOT NULL,
+	"name" CHARACTER VARYING(255) NOT NULL,
+	CONSTRAINT PK_OPENDATA_OPER_SET PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_2E ON VIDEOANALYTICS."opendata_oper_set" ("id");
+CREATE UNIQUE INDEX "opendata_oper_set_code" ON VIDEOANALYTICS."opendata_oper_set" ("code");
+
+
+-- VIDEOANALYTICS."opendata_purpose_set" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."opendata_purpose_set";
+
+CREATE TABLE VIDEOANALYTICS."opendata_purpose_set" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER VARYING(20) NOT NULL,
+	CONSTRAINT PK_OPENDATA_PURPOSE_SET PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_58 ON VIDEOANALYTICS."opendata_purpose_set" ("id");
+
+
+-- VIDEOANALYTICS."opendata_tz" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."opendata_tz";
+
+CREATE TABLE VIDEOANALYTICS."opendata_tz" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"person" CHARACTER VARYING(1) NOT NULL,
+	"reg_addr_koatuu" CHARACTER VARYING(10) NOT NULL,
+	"oper_code" SMALLINT NOT NULL,
+	"d_reg" DATE NOT NULL,
+	"dep_code" INTEGER NOT NULL,
+	"brand" CHARACTER VARYING(100) NOT NULL,
+	"model" CHARACTER VARYING(50) NOT NULL,
+	"make_year" SMALLINT NOT NULL,
+	"color" TINYINT NOT NULL,
+	"kind" TINYINT NOT NULL,
+	"body" SMALLINT NOT NULL,
+	"purpose" TINYINT NOT NULL,
+	"fuel" TINYINT NOT NULL,
+	"capacity" INTEGER NOT NULL,
+	"own_weight" INTEGER NOT NULL,
+	"total_weight" INTEGER NOT NULL,
+	"n_reg_new" CHARACTER VARYING(10) NOT NULL,
+	CONSTRAINT PK_OPENDATA_TZ PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_E7 ON VIDEOANALYTICS."opendata_tz" ("id");
+CREATE INDEX "n_reg_new" ON VIDEOANALYTICS."opendata_tz" ("n_reg_new");
+
+
+-- VIDEOANALYTICS."parking_comments" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."parking_comments";
+
+CREATE TABLE VIDEOANALYTICS."parking_comments" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"vehicle_id" INTEGER NOT NULL,
+	"author_id" INTEGER NOT NULL,
+	"author" CHARACTER VARYING(255) NOT NULL,
+	"message" CHARACTER LARGE OBJECT,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	"updated_at" TIMESTAMP,
+	CONSTRAINT PK_PARKING_COMMENTS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_4EA ON VIDEOANALYTICS."parking_comments" ("id");
+
+
+-- VIDEOANALYTICS."parking_custom_fields" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."parking_custom_fields";
+
+CREATE TABLE VIDEOANALYTICS."parking_custom_fields" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"custom_field_1" CHARACTER VARYING(255) DEFAULT 'Custom field 1',
+	"custom_field_2" CHARACTER VARYING(255) DEFAULT 'Custom field 2',
+	"custom_field_3" CHARACTER VARYING(255) DEFAULT 'Custom field 3',
+	"custom_field_4" CHARACTER VARYING(255) DEFAULT 'Custom field 4',
+	"custom_field_5" CHARACTER VARYING(255) DEFAULT 'Custom field 5',
+	"custom_field_6" CHARACTER VARYING(255) DEFAULT 'Custom field 6',
+	CONSTRAINT PK_PARKING_CUSTOM_FIELDS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_2F ON VIDEOANALYTICS."parking_custom_fields" ("id");
+
+
+-- VIDEOANALYTICS."parking_notifications" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."parking_notifications";
+
+CREATE TABLE VIDEOANALYTICS."parking_notifications" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"row_id" BIGINT NOT NULL,
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"accepted_by" INTEGER,
+	"rule_id" INTEGER,
+	CONSTRAINT PK_PARKING_NOTIFICATIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_4C ON VIDEOANALYTICS."parking_notifications" ("id");
+
+
+-- VIDEOANALYTICS."parking_passes" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."parking_passes";
+
+CREATE TABLE VIDEOANALYTICS."parking_passes" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"plate" CHARACTER VARYING(50) NOT NULL,
+	"validity_period_start" TIMESTAMP,
+	"validity_period_end" TIMESTAMP,
+	CONSTRAINT PK_PARKING_PASSES PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_F2 ON VIDEOANALYTICS."parking_passes" ("id");
+
+
+-- VIDEOANALYTICS."parking_plates" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."parking_plates";
+
+CREATE TABLE VIDEOANALYTICS."parking_plates" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"plate_number" CHARACTER VARYING(15),
+	"make_model_id" INTEGER DEFAULT -1 NOT NULL,
+	"color_id" INTEGER DEFAULT 4,
+	"confidence" INTEGER,
+	"box" CHARACTER LARGE OBJECT,
+	"plate_image" CHARACTER LARGE OBJECT,
+	"frame_image" CHARACTER LARGE OBJECT,
+	"stream_id" INTEGER NOT NULL,
+	"va_id" INTEGER NOT NULL,
+	"site_id" INTEGER,
+	"vehicle_id" INTEGER,
+	"country" CHARACTER VARYING(25),
+	"country_pattern_id" CHARACTER VARYING(30),
+	"modified" TINYINT DEFAULT 0 NOT NULL,
+	"direction" INTEGER DEFAULT 0 NOT NULL,
+	"site_direction" CHARACTER VARYING(10),
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	"client_id" INTEGER,
+	CONSTRAINT PK_PARKING_PLATES PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_F3 ON VIDEOANALYTICS."parking_plates" ("id");
+
+
+-- VIDEOANALYTICS."parking_rules" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."parking_rules";
+
+CREATE TABLE VIDEOANALYTICS."parking_rules" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER LARGE OBJECT NOT NULL,
+	"events_holder" CHARACTER LARGE OBJECT NOT NULL,
+	"comment" CHARACTER LARGE OBJECT,
+	"selected_sites" CHARACTER LARGE OBJECT NOT NULL,
+	"selected_tags" CHARACTER LARGE OBJECT NOT NULL,
+	"schedule" CHARACTER LARGE OBJECT NOT NULL,
+	"enable_system_notifications" BOOLEAN,
+	"triggered_by_parking_pass" BOOLEAN,
+	"selected_streams" CHARACTER LARGE OBJECT,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_PARKING_RULES PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_103 ON VIDEOANALYTICS."parking_rules" ("id");
+
+
+-- VIDEOANALYTICS."parking_sites" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."parking_sites";
+
+CREATE TABLE VIDEOANALYTICS."parking_sites" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER LARGE OBJECT,
+	"streams" CHARACTER LARGE OBJECT,
+	"timeout" INTEGER,
+	"client_id" INTEGER,
+	CONSTRAINT PK_PARKING_SITES PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_10 ON VIDEOANALYTICS."parking_sites" ("id");
+
+
+-- VIDEOANALYTICS."parking_tags" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."parking_tags";
+
+CREATE TABLE VIDEOANALYTICS."parking_tags" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER LARGE OBJECT,
+	"client_id" INTEGER,
+	CONSTRAINT PK_PARKING_TAGS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_95 ON VIDEOANALYTICS."parking_tags" ("id");
+
+
+-- VIDEOANALYTICS."parking_vehicles" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."parking_vehicles";
+
+CREATE TABLE VIDEOANALYTICS."parking_vehicles" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"plate" CHARACTER LARGE OBJECT,
+	"type" INTEGER,
+	"make_model_id" INTEGER,
+	"color" INTEGER,
+	"client_id" INTEGER,
+	"custom_field_1" CHARACTER LARGE OBJECT,
+	"custom_field_2" CHARACTER LARGE OBJECT,
+	"custom_field_3" CHARACTER LARGE OBJECT,
+	"custom_field_4" CHARACTER LARGE OBJECT,
+	"custom_field_5" CHARACTER LARGE OBJECT,
+	"custom_field_6" CHARACTER LARGE OBJECT,
+	CONSTRAINT PK_PARKING_VEHICLES PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_EA ON VIDEOANALYTICS."parking_vehicles" ("id");
+
+
+-- VIDEOANALYTICS."pose_estimation_notifications" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."pose_estimation_notifications";
+
+CREATE TABLE VIDEOANALYTICS."pose_estimation_notifications" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"accepted_by" INTEGER DEFAULT 0 NOT NULL,
+	"objects" CHARACTER LARGE OBJECT,
+	"box" BINARY LARGE OBJECT,
+	"stream_id" INTEGER NOT NULL,
+	"va_id" INTEGER NOT NULL,
+	"frame_image" CHARACTER LARGE OBJECT NOT NULL,
+	"thumbnail_image" CHARACTER LARGE OBJECT NOT NULL,
+	"zone" CHARACTER LARGE OBJECT,
+	"rule_type" CHARACTER VARYING(25) NOT NULL,
+	"created_at" TIMESTAMP NOT NULL,
+	"client_id" INTEGER,
+	CONSTRAINT PK_POSE_ESTIMATION_NOTIFICATIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_6EA ON VIDEOANALYTICS."pose_estimation_notifications" ("id");
+CREATE INDEX "pose_estimation_id_status_created_at" ON VIDEOANALYTICS."pose_estimation_notifications" ("id","status","created_at");
+
+
+-- VIDEOANALYTICS."railroad_numbers" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."railroad_numbers";
+
+CREATE TABLE VIDEOANALYTICS."railroad_numbers" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"number" CHARACTER VARYING(32) DEFAULT '' NOT NULL,
+	"box" CHARACTER LARGE OBJECT,
+	"number_image" CHARACTER LARGE OBJECT,
+	"frame_image" CHARACTER LARGE OBJECT,
+	"stream_id" INTEGER NOT NULL,
+	"created_at" TIMESTAMP NOT NULL,
+	"direction" SMALLINT,
+	"client_id" INTEGER,
+	"iso_code" CHARACTER VARYING(16),
+	CONSTRAINT PK_RAILROAD_NUMBERS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_DB2 ON VIDEOANALYTICS."railroad_numbers" ("id");
+CREATE INDEX "railroad_numbers_created_at" ON VIDEOANALYTICS."railroad_numbers" ("created_at" DESC);
+CREATE INDEX "railroad_numbers_created_at_number" ON VIDEOANALYTICS."railroad_numbers" ("created_at" DESC,"number");
+CREATE INDEX "railroad_numbers_created_at_stream" ON VIDEOANALYTICS."railroad_numbers" ("created_at" DESC,"stream_id");
+
+
+-- VIDEOANALYTICS."roles" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."roles";
+
+CREATE TABLE VIDEOANALYTICS."roles" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"role_name" CHARACTER VARYING(60) NOT NULL,
+	"permissions" CHARACTER LARGE OBJECT NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_ROLES PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_67 ON VIDEOANALYTICS."roles" ("id");
+
+
+-- VIDEOANALYTICS."servers" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."servers";
+
+CREATE TABLE VIDEOANALYTICS."servers" (
+	"id" CHARACTER VARYING(36) NOT NULL,
+	"name" CHARACTER VARYING(255) NOT NULL,
+	CONSTRAINT PK_SERVERS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_7 ON VIDEOANALYTICS."servers" ("id");
+
+
+-- VIDEOANALYTICS."settings" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."settings";
+
+CREATE TABLE VIDEOANALYTICS."settings" (
+	"Variable_name" CHARACTER VARYING(45) NOT NULL,
+	"Value" CHARACTER LARGE OBJECT,
+	CONSTRAINT PK_SETTINGS PRIMARY KEY ("Variable_name")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_5 ON VIDEOANALYTICS."settings" ("Variable_name");
+
+
+-- VIDEOANALYTICS."smart_tracking_frame_reid" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."smart_tracking_frame_reid";
+
+CREATE TABLE VIDEOANALYTICS."smart_tracking_frame_reid" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"frame_image" CHARACTER LARGE OBJECT NOT NULL,
+	"stream_id" INTEGER NOT NULL,
+	"created_at" TIMESTAMP NOT NULL,
+	CONSTRAINT PK_SMART_TRACKING_FRAME_REID PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_DB ON VIDEOANALYTICS."smart_tracking_frame_reid" ("id");
+
+
+-- VIDEOANALYTICS."smart_tracking_person_reid" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."smart_tracking_person_reid";
+
+CREATE TABLE VIDEOANALYTICS."smart_tracking_person_reid" (
+	"embeddings_id" BIGINT NOT NULL AUTO_INCREMENT,
+	"frame_id" BIGINT NOT NULL,
+	"person_image" CHARACTER LARGE OBJECT NOT NULL,
+	"box" CHARACTER LARGE OBJECT,
+	"stream_id" INTEGER NOT NULL,
+	"hat" INTEGER NOT NULL,
+	"hair" INTEGER NOT NULL,
+	"up" INTEGER NOT NULL,
+	"up_length" INTEGER NOT NULL,
+	"bag" INTEGER NOT NULL,
+	"down" INTEGER NOT NULL,
+	"down_length" INTEGER NOT NULL,
+	"down_clothes" INTEGER NOT NULL,
+	"age" INTEGER NOT NULL,
+	"gender" INTEGER NOT NULL,
+	"created_at" TIMESTAMP NOT NULL,
+	"client_id" INTEGER DEFAULT 0 NOT NULL,
+	CONSTRAINT PK_SMART_TRACKING_PERSON_REID PRIMARY KEY ("embeddings_id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_65 ON VIDEOANALYTICS."smart_tracking_person_reid" ("embeddings_id");
+CREATE INDEX "smart_tracking_age" ON VIDEOANALYTICS."smart_tracking_person_reid" ("age");
+CREATE INDEX "smart_tracking_bag" ON VIDEOANALYTICS."smart_tracking_person_reid" ("bag");
+CREATE INDEX "smart_tracking_created_at" ON VIDEOANALYTICS."smart_tracking_person_reid" ("created_at" DESC);
+CREATE INDEX "smart_tracking_down" ON VIDEOANALYTICS."smart_tracking_person_reid" ("down");
+CREATE INDEX "smart_tracking_down_clothes" ON VIDEOANALYTICS."smart_tracking_person_reid" ("down_clothes");
+CREATE INDEX "smart_tracking_down_length" ON VIDEOANALYTICS."smart_tracking_person_reid" ("down_length");
+CREATE INDEX "smart_tracking_frame_id" ON VIDEOANALYTICS."smart_tracking_person_reid" ("frame_id");
+CREATE INDEX "smart_tracking_gender" ON VIDEOANALYTICS."smart_tracking_person_reid" ("gender");
+CREATE INDEX "smart_tracking_hair" ON VIDEOANALYTICS."smart_tracking_person_reid" ("hair");
+CREATE INDEX "smart_tracking_hat" ON VIDEOANALYTICS."smart_tracking_person_reid" ("hat");
+CREATE INDEX "smart_tracking_stream_id" ON VIDEOANALYTICS."smart_tracking_person_reid" ("stream_id");
+CREATE INDEX "smart_tracking_up" ON VIDEOANALYTICS."smart_tracking_person_reid" ("up");
+CREATE INDEX "up_length" ON VIDEOANALYTICS."smart_tracking_person_reid" ("up_length");
+
+
+-- VIDEOANALYTICS."smart_va_alpr_filter_presets" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."smart_va_alpr_filter_presets";
+
+CREATE TABLE VIDEOANALYTICS."smart_va_alpr_filter_presets" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER LARGE OBJECT NOT NULL,
+	"filters" CHARACTER LARGE OBJECT NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_SMART_VA_ALPR_FILTER_PRESETS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_F ON VIDEOANALYTICS."smart_va_alpr_filter_presets" ("id");
+
+
+-- VIDEOANALYTICS."smart_va_notifications" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."smart_va_notifications";
+
+CREATE TABLE VIDEOANALYTICS."smart_va_notifications" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"notification_status" INTEGER DEFAULT '1' NOT NULL,
+	"accepted_by" INTEGER DEFAULT 0 NOT NULL,
+	"va_id" INTEGER NOT NULL,
+	"stream_id" INTEGER NOT NULL,
+	"frame_image" CHARACTER LARGE OBJECT NOT NULL,
+	"thumbnail_image" CHARACTER LARGE OBJECT NOT NULL,
+	"trigger" INTEGER,
+	"trigger_settings" CHARACTER LARGE OBJECT,
+	"notification_type" CHARACTER VARYING(10) DEFAULT 'alert' NOT NULL,
+	"resolution" CHARACTER LARGE OBJECT NOT NULL,
+	"created_at" TIMESTAMP NOT NULL,
+	"rule_type" INTEGER NOT NULL,
+	"rule" CHARACTER LARGE OBJECT NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_SMART_VA_NOTIFICATIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_C0 ON VIDEOANALYTICS."smart_va_notifications" ("id");
+CREATE INDEX "smart_va_id_created_at" ON VIDEOANALYTICS."smart_va_notifications" ("id","created_at");
+
+
+-- VIDEOANALYTICS."smart_va_people_detections" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."smart_va_people_detections";
+
+CREATE TABLE VIDEOANALYTICS."smart_va_people_detections" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"uuid" UUID NOT NULL,
+	"stream_id" INTEGER NOT NULL,
+	"va_id" INTEGER,
+	"frame_image" CHARACTER LARGE OBJECT NOT NULL,
+	"thumbnail_image" CHARACTER LARGE OBJECT NOT NULL,
+	"confidence" DOUBLE PRECISION,
+	"age" INTEGER,
+	"bag" INTEGER,
+	"up_color" INTEGER,
+	"down_color" INTEGER,
+	"hat" BOOLEAN,
+	"gender" INTEGER,
+	"timestamp" TIMESTAMP NOT NULL,
+	"client_id" INTEGER,
+	"frame_id" UUID NOT NULL,
+	"x1" DOUBLE PRECISION,
+	"y1" DOUBLE PRECISION,
+	"x2" DOUBLE PRECISION,
+	"y2" DOUBLE PRECISION,
+	CONSTRAINT PK_SMART_VA_PEOPLE_DETECTIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_CEC ON VIDEOANALYTICS."smart_va_people_detections" ("id");
+CREATE INDEX "people_detections_frame_id_idx" ON VIDEOANALYTICS."smart_va_people_detections" ("frame_id");
+CREATE INDEX "people_detections_timestamp" ON VIDEOANALYTICS."smart_va_people_detections" ("timestamp" DESC);
+CREATE INDEX "smart_va_age_idx" ON VIDEOANALYTICS."smart_va_people_detections" ("age");
+CREATE INDEX "smart_va_bag_idx" ON VIDEOANALYTICS."smart_va_people_detections" ("bag");
+CREATE INDEX "smart_va_down_color_idx" ON VIDEOANALYTICS."smart_va_people_detections" ("down_color");
+CREATE INDEX "smart_va_gender_idx" ON VIDEOANALYTICS."smart_va_people_detections" ("gender");
+CREATE INDEX "smart_va_hat_idx" ON VIDEOANALYTICS."smart_va_people_detections" ("hat");
+CREATE INDEX "smart_va_up_color_idx" ON VIDEOANALYTICS."smart_va_people_detections" ("up_color");
+
+
+-- VIDEOANALYTICS."smart_va_person_filter_presets" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."smart_va_person_filter_presets";
+
+CREATE TABLE VIDEOANALYTICS."smart_va_person_filter_presets" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER LARGE OBJECT NOT NULL,
+	"filters" CHARACTER LARGE OBJECT NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_SMART_VA_PERSON_FILTER_PRESETS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_311 ON VIDEOANALYTICS."smart_va_person_filter_presets" ("id");
+
+
+-- VIDEOANALYTICS."smart_va_tracking" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."smart_va_tracking";
+
+CREATE TABLE VIDEOANALYTICS."smart_va_tracking" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"object_id" UUID NOT NULL,
+	"timestamp" TIMESTAMP NOT NULL,
+	"va_id" INTEGER NOT NULL,
+	"x1" DOUBLE PRECISION,
+	"y1" DOUBLE PRECISION,
+	"x2" DOUBLE PRECISION,
+	"y2" DOUBLE PRECISION,
+	"position_changed" BOOLEAN DEFAULT TRUE,
+	CONSTRAINT PK_SMART_VA_TRACKING PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_978 ON VIDEOANALYTICS."smart_va_tracking" ("id");
+CREATE INDEX "smart_va_tracking_object_id_idx" ON VIDEOANALYTICS."smart_va_tracking" ("object_id");
+CREATE INDEX "smart_va_tracking_timestamp_idx" ON VIDEOANALYTICS."smart_va_tracking" ("timestamp");
+
+
+-- VIDEOANALYTICS."smart_va_vehicle_detections" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."smart_va_vehicle_detections";
+
+CREATE TABLE VIDEOANALYTICS."smart_va_vehicle_detections" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"uuid" UUID NOT NULL,
+	"stream_id" INTEGER NOT NULL,
+	"va_id" INTEGER,
+	"frame_image" CHARACTER LARGE OBJECT NOT NULL,
+	"thumbnail_image" CHARACTER LARGE OBJECT NOT NULL,
+	"confidence" DOUBLE PRECISION,
+	"type" INTEGER,
+	"color_id" INTEGER,
+	"timestamp" TIMESTAMP NOT NULL,
+	"client_id" INTEGER,
+	"frame_id" UUID NOT NULL,
+	"x1" DOUBLE PRECISION,
+	"y1" DOUBLE PRECISION,
+	"x2" DOUBLE PRECISION,
+	"y2" DOUBLE PRECISION,
+	CONSTRAINT PK_SMART_VA_VEHICLE_DETECTIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_C32 ON VIDEOANALYTICS."smart_va_vehicle_detections" ("id");
+CREATE INDEX "vehicle_detections_frame_id_idx" ON VIDEOANALYTICS."smart_va_vehicle_detections" ("frame_id");
+CREATE INDEX "vehicle_detections_timestamp" ON VIDEOANALYTICS."smart_va_vehicle_detections" ("timestamp" DESC);
+
+
+-- VIDEOANALYTICS."smoke_fire_notifications" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."smoke_fire_notifications";
+
+CREATE TABLE VIDEOANALYTICS."smoke_fire_notifications" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"accepted_by" INTEGER DEFAULT 0 NOT NULL,
+	"objects" CHARACTER LARGE OBJECT,
+	"stream_id" INTEGER NOT NULL,
+	"va_id" INTEGER NOT NULL,
+	"frame_image" CHARACTER LARGE OBJECT NOT NULL,
+	"thumbnail_image" CHARACTER LARGE OBJECT,
+	"zone" CHARACTER LARGE OBJECT NOT NULL,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	"client_id" INTEGER,
+	CONSTRAINT PK_SMOKE_FIRE_NOTIFICATIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_84 ON VIDEOANALYTICS."smoke_fire_notifications" ("id");
+CREATE INDEX "smoke_fire_id_status_created_at" ON VIDEOANALYTICS."smoke_fire_notifications" ("id","status","created_at");
+
+
+-- VIDEOANALYTICS."smoke_fire_type_mapping" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."smoke_fire_type_mapping";
+
+CREATE TABLE VIDEOANALYTICS."smoke_fire_type_mapping" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"notification_id" BIGINT NOT NULL,
+	"type" INTEGER NOT NULL,
+	CONSTRAINT PK_SMOKE_FIRE_TYPE_MAPPING PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_3E ON VIDEOANALYTICS."smoke_fire_type_mapping" ("id");
+
+
+-- VIDEOANALYTICS."stats_traffic_minutely" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."stats_traffic_minutely";
+
+CREATE TABLE VIDEOANALYTICS."stats_traffic_minutely" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"va_id" INTEGER NOT NULL,
+	"line" INTEGER NOT NULL,
+	"type" INTEGER NOT NULL,
+	"count" INTEGER NOT NULL,
+	"direction" INTEGER DEFAULT 0 NOT NULL,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	"present" INTEGER DEFAULT 0 NOT NULL,
+	CONSTRAINT PK_STATS_TRAFFIC_HOURLY PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_6B ON VIDEOANALYTICS."stats_traffic_minutely" ("id");
+CREATE INDEX "stats_traffic_hourly_created_at_client" ON VIDEOANALYTICS."stats_traffic_minutely" ("created_at","client_id");
+CREATE INDEX "stats_traffic_hourly_created_at_va_id" ON VIDEOANALYTICS."stats_traffic_minutely" ("created_at","va_id","client_id");
+CREATE INDEX "stats_traffic_minutely_created_at_client" ON VIDEOANALYTICS."stats_traffic_minutely" ("created_at","client_id");
+CREATE INDEX "stats_traffic_minutely_created_at_va_id" ON VIDEOANALYTICS."stats_traffic_minutely" ("created_at","va_id","client_id");
+
+
+-- VIDEOANALYTICS."stream_groups" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."stream_groups";
+
+CREATE TABLE VIDEOANALYTICS."stream_groups" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"parent_id" INTEGER NOT NULL,
+	"name" CHARACTER VARYING(255) NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	CONSTRAINT PK_STREAM_GROUPS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_1 ON VIDEOANALYTICS."stream_groups" ("id");
+
+
+-- VIDEOANALYTICS."streams" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."streams";
+
+CREATE TABLE VIDEOANALYTICS."streams" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"name" CHARACTER VARYING(255) NOT NULL,
+	"path" CHARACTER LARGE OBJECT,
+	"width" INTEGER NOT NULL,
+	"height" INTEGER NOT NULL,
+	"file_name" CHARACTER VARYING(255) NOT NULL,
+	"status" TINYINT NOT NULL,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	"lat" DOUBLE PRECISION DEFAULT 0 NOT NULL,
+	"lng" DOUBLE PRECISION DEFAULT 0 NOT NULL,
+	"type" CHARACTER VARYING(45) DEFAULT 'rtsp' NOT NULL,
+	"uuid" CHARACTER VARYING(55) NOT NULL,
+	"address" CHARACTER VARYING(255) DEFAULT '' NOT NULL,
+	"params" CHARACTER LARGE OBJECT,
+	"auth" CHARACTER LARGE OBJECT,
+	"direction" INTEGER DEFAULT 0 NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	"codec" CHARACTER VARYING(10),
+	"timezone" CHARACTER VARYING(100),
+	"duration" BIGINT,
+	"restrictions" CHARACTER LARGE OBJECT,
+	"parent_id" INTEGER DEFAULT '0' NOT NULL,
+	CONSTRAINT PK_STREAMS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_C ON VIDEOANALYTICS."streams" ("id");
+
+
+-- VIDEOANALYTICS."traffic_stat" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."traffic_stat";
+
+CREATE TABLE VIDEOANALYTICS."traffic_stat" (
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	"stream_id" INTEGER NOT NULL,
+	"va_id" INTEGER NOT NULL,
+	"line" INTEGER NOT NULL,
+	"type" INTEGER NOT NULL,
+	"count" INTEGER NOT NULL,
+	"direction" INTEGER DEFAULT 0 NOT NULL,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	"client_id" INTEGER NOT NULL,
+	"frame_image" CHARACTER LARGE OBJECT,
+	"object_image" CHARACTER LARGE OBJECT,
+	"notification_status" INTEGER DEFAULT 0 NOT NULL,
+	"accepted_by" INTEGER DEFAULT 0 NOT NULL,
+	CONSTRAINT PK_TRAFFIC_STAT PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_31 ON VIDEOANALYTICS."traffic_stat" ("id");
+CREATE INDEX "line" ON VIDEOANALYTICS."traffic_stat" ("line");
+CREATE INDEX "traffic_stat_notification_status_index" ON VIDEOANALYTICS."traffic_stat" ("notification_status");
+CREATE INDEX "traffic_stat_type" ON VIDEOANALYTICS."traffic_stat" ("type");
+CREATE INDEX "va_id" ON VIDEOANALYTICS."traffic_stat" ("va_id");
+
+
+-- VIDEOANALYTICS."users" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."users";
+
+CREATE TABLE VIDEOANALYTICS."users" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"email" CHARACTER VARYING(250) DEFAULT '' NOT NULL,
+	"fullname" CHARACTER VARYING(250) DEFAULT '' NOT NULL,
+	"password" CHARACTER VARYING(64) DEFAULT '' NOT NULL,
+	"last_ip" CHARACTER VARYING(64),
+	"last_login" TIMESTAMP NOT NULL,
+	"ip_params" CHARACTER LARGE OBJECT NOT NULL,
+	"role_id" INTEGER DEFAULT 0 NOT NULL,
+	"status" INTEGER DEFAULT 1 NOT NULL,
+	"created_at" TIMESTAMP DEFAULT LOCALTIMESTAMP NOT NULL,
+	"settings" CHARACTER LARGE OBJECT,
+	"client_id" INTEGER NOT NULL,
+	"client_info" CHARACTER LARGE OBJECT,
+	"type" CHARACTER VARYING(45) DEFAULT 'basic' NOT NULL,
+	"timezone" CHARACTER VARYING(100),
+	CONSTRAINT PK_USERS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_6 ON VIDEOANALYTICS."users" ("id");
+
+
+-- VIDEOANALYTICS."windows_share_folder_configs" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."windows_share_folder_configs";
+
+CREATE TABLE VIDEOANALYTICS."windows_share_folder_configs" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"host" CHARACTER LARGE OBJECT NOT NULL,
+	"share_name" CHARACTER LARGE OBJECT NOT NULL,
+	"username" CHARACTER LARGE OBJECT,
+	"password" CHARACTER LARGE OBJECT,
+	"domain" CHARACTER LARGE OBJECT,
+	CONSTRAINT PK_WINDOWS_SHARE_FOLDER_CONFIGS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_15 ON VIDEOANALYTICS."windows_share_folder_configs" ("id");
+
+
+-- VIDEOANALYTICS."zone_exit_notifications" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."zone_exit_notifications";
+
+CREATE TABLE VIDEOANALYTICS."zone_exit_notifications" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"va_id" INTEGER NOT NULL,
+	"stream_id" INTEGER NOT NULL,
+	"object_id" CHARACTER LARGE OBJECT NOT NULL,
+	"zone_id" CHARACTER LARGE OBJECT,
+	"seconds_in_zone" INTEGER NOT NULL,
+	"object_type" SMALLINT,
+	"notification_type" CHARACTER VARYING(10) DEFAULT 'exit' NOT NULL,
+	"created_at" TIMESTAMP NOT NULL,
+	"client_id" INTEGER,
+	CONSTRAINT PK_ZONE_EXIT_NOTIFICATIONS PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_8 ON VIDEOANALYTICS."zone_exit_notifications" ("id");
+
+
+-- VIDEOANALYTICS."zone_exit_notifications_object_type" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."zone_exit_notifications_object_type";
+
+CREATE TABLE VIDEOANALYTICS."zone_exit_notifications_object_type" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"zone_exit_notifications_id" INTEGER DEFAULT 1 NOT NULL,
+	"object_type" INTEGER,
+	CONSTRAINT PK_ZONE_EXIT_NOTIFICATIONS_OBJECT_TYPE PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_D4 ON VIDEOANALYTICS."zone_exit_notifications_object_type" ("id");
+
+
+-- VIDEOANALYTICS."notifications_presence_action_types" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."notifications_presence_action_types";
+
+CREATE TABLE VIDEOANALYTICS."notifications_presence_action_types" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"notification_id" INTEGER NOT NULL,
+	"action_type" CHARACTER LARGE OBJECT,
+	CONSTRAINT PK_NOTIFICATIONS_PRESENCE_ACTION_TYPES PRIMARY KEY ("id"),
+	CONSTRAINT "FK__notifications_presence_action_types" FOREIGN KEY ("notification_id") REFERENCES VIDEOANALYTICS."smart_va_notifications"("id") ON DELETE CASCADE ON UPDATE RESTRICT
+);
+CREATE INDEX "FK__notifications_presence_action_types_INDEX_A" ON VIDEOANALYTICS."notifications_presence_action_types" ("notification_id");
+CREATE UNIQUE INDEX PRIMARY_KEY_A44 ON VIDEOANALYTICS."notifications_presence_action_types" ("id");
+
+
+-- VIDEOANALYTICS."object_in_zone_object_type" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."object_in_zone_object_type";
+
+CREATE TABLE VIDEOANALYTICS."object_in_zone_object_type" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"object_in_zone_id" INTEGER DEFAULT 1 NOT NULL,
+	"object_type" INTEGER,
+	"confidence" DOUBLE PRECISION,
+	"box" BINARY LARGE OBJECT,
+	CONSTRAINT PK_OBJECT_IN_ZONE_OBJECT_TYPE PRIMARY KEY ("id"),
+	CONSTRAINT "FK__object_in_zone_object_type_object_in_zone_id" FOREIGN KEY ("object_in_zone_id") REFERENCES VIDEOANALYTICS."object_in_zone_notifications"("id") ON DELETE CASCADE ON UPDATE RESTRICT
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_FF ON VIDEOANALYTICS."object_in_zone_object_type" ("id");
+CREATE INDEX "object_in_zone_object_type_object_in_zone_id_index" ON VIDEOANALYTICS."object_in_zone_object_type" ("object_in_zone_id");
+
+
+-- VIDEOANALYTICS."plates_tags_map" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."plates_tags_map";
+
+CREATE TABLE VIDEOANALYTICS."plates_tags_map" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"plate" CHARACTER VARYING(50) NOT NULL,
+	"tag_id" INTEGER NOT NULL,
+	"validity_period_start" TIMESTAMP,
+	"validity_period_end" TIMESTAMP,
+	CONSTRAINT PK_PLATES_TAGS_MAP PRIMARY KEY ("id"),
+	CONSTRAINT "fk_tag_id" FOREIGN KEY ("tag_id") REFERENCES VIDEOANALYTICS."parking_tags"("id") ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+CREATE UNIQUE INDEX PRIMARY_KEY_C9 ON VIDEOANALYTICS."plates_tags_map" ("id");
+CREATE INDEX "fk_tag_id_INDEX_C" ON VIDEOANALYTICS."plates_tags_map" ("tag_id");
+CREATE INDEX "plates_tags_map_plate_index" ON VIDEOANALYTICS."plates_tags_map" ("plate");
+CREATE INDEX "plates_tags_map_tag_id_index" ON VIDEOANALYTICS."plates_tags_map" ("tag_id");
+
+
+-- VIDEOANALYTICS."smart_va_object_type" definition
+
+-- Drop table
+
+-- DROP TABLE VIDEOANALYTICS."smart_va_object_type";
+
+CREATE TABLE VIDEOANALYTICS."smart_va_object_type" (
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	"notification_id" INTEGER DEFAULT 1 NOT NULL,
+	"object_type" INTEGER,
+	"confidence" INTEGER DEFAULT 0,
+	"x1" DOUBLE PRECISION,
+	"y1" DOUBLE PRECISION,
+	"x2" DOUBLE PRECISION,
+	"y2" DOUBLE PRECISION,
+	CONSTRAINT PK_SMART_VA_OBJECT_TYPE PRIMARY KEY ("id"),
+	CONSTRAINT "FK__smart_va_notifications__smart_va_object_type" FOREIGN KEY ("notification_id") REFERENCES VIDEOANALYTICS."smart_va_notifications"("id") ON DELETE CASCADE ON UPDATE RESTRICT
+);
+CREATE INDEX "FK__smart_va_notifications__smart_va_object_type_INDEX_3" ON VIDEOANALYTICS."smart_va_object_type" ("notification_id");
+CREATE UNIQUE INDEX PRIMARY_KEY_313 ON VIDEOANALYTICS."smart_va_object_type" ("id");

@@ -1,0 +1,2 @@
+|id |object_id|timestamp|va_id|x1 |y1 |x2 |y2 |position_changed|
+|---|---------|---------|-----|---|---|---|---|----------------|

@@ -1,0 +1,2 @@
+|id |name|entry_lpr_analytics_id|exit_lpr_analytics_id|container_analytics_ids|created_at|start_at|status|client_id|buffer_time|overview_stream_configs|entry_lpr_analytics_angle_degrees|exit_lpr_analytics_angle_degrees|is_reverse_enabled|group_id|
+|---|----|----------------------|---------------------|-----------------------|----------|--------|------|---------|-----------|-----------------------|---------------------------------|--------------------------------|------------------|--------|

@@ -1,0 +1,2 @@
+|id |name|analytics_id1|analytics_id2|speed_limit|speed_unit|distance|distance_unit|min_speed|min_speed_unit|max_duration|events_holder|client_id|
+|---|----|-------------|-------------|-----------|----------|--------|-------------|---------|--------------|------------|-------------|---------|

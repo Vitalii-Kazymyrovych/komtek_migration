@@ -1,0 +1,2 @@
+|id |name|image_path|width|height|opacity|analytics|client_id|
+|---|----|----------|-----|------|-------|---------|---------|
