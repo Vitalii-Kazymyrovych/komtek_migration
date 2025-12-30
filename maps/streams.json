@@ -1,6 +1,7 @@
 {
   "match_keys": [
-    "id preserved 1:1 to id",
+    "existing new_dataset rows preserved with ids",
+    "legacy ids remapped sequentially (no collision) to id",
     "name (ASCII normalized) to name",
     "client_id remapped via clients.json to client_id",
     "parent_id remapped via stream_groups.json to parent_id",
@@ -9,7 +10,7 @@
   "mapped": [
     {
       "old_id": 1,
-      "new_id": 1,
+      "new_id": 5,
       "name": "VV2",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -21,7 +22,7 @@
     },
     {
       "old_id": 3,
-      "new_id": 3,
+      "new_id": 6,
       "name": "LPR - 1",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -33,7 +34,7 @@
     },
     {
       "old_id": 4,
-      "new_id": 4,
+      "new_id": 7,
       "name": "VV3",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -45,7 +46,7 @@
     },
     {
       "old_id": 11,
-      "new_id": 11,
+      "new_id": 8,
       "name": "LPR - 2",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -57,7 +58,7 @@
     },
     {
       "old_id": 25,
-      "new_id": 25,
+      "new_id": 9,
       "name": "ASSALTO 1",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -69,7 +70,7 @@
     },
     {
       "old_id": 28,
-      "new_id": 28,
+      "new_id": 10,
       "name": "Padaria Assalto",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -81,7 +82,7 @@
     },
     {
       "old_id": 43,
-      "new_id": 43,
+      "new_id": 11,
       "name": "Pesquisa Instagram",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -93,7 +94,7 @@
     },
     {
       "old_id": 44,
-      "new_id": 44,
+      "new_id": 12,
       "name": "Teste01",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -105,7 +106,7 @@
     },
     {
       "old_id": 50,
-      "new_id": 50,
+      "new_id": 13,
       "name": "ASSALTO LOJA",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -117,7 +118,7 @@
     },
     {
       "old_id": 51,
-      "new_id": 51,
+      "new_id": 14,
       "name": "Assalto de Moto",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -129,7 +130,7 @@
     },
     {
       "old_id": 52,
-      "new_id": 52,
+      "new_id": 15,
       "name": "SPEED DOME INDUSTRIA",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -141,7 +142,7 @@
     },
     {
       "old_id": 57,
-      "new_id": 57,
+      "new_id": 16,
       "name": "BRIGA POSTO",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -153,7 +154,7 @@
     },
     {
       "old_id": 59,
-      "new_id": 59,
+      "new_id": 17,
       "name": "INVASAO GARAGEM CONDOMINIO",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -165,7 +166,7 @@
     },
     {
       "old_id": 60,
-      "new_id": 60,
+      "new_id": 18,
       "name": "FURTO DE BICICLETA",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -177,7 +178,7 @@
     },
     {
       "old_id": 82,
-      "new_id": 82,
+      "new_id": 19,
       "name": "FOGO E FUMACA",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -189,7 +190,7 @@
     },
     {
       "old_id": 84,
-      "new_id": 84,
+      "new_id": 20,
       "name": "DETECCAO INTRUSAO",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -201,7 +202,7 @@
     },
     {
       "old_id": 85,
-      "new_id": 85,
+      "new_id": 21,
       "name": "CONTROLE DE VAGA",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -213,7 +214,7 @@
     },
     {
       "old_id": 97,
-      "new_id": 97,
+      "new_id": 22,
       "name": "1329 -  Ultrafarma Santo Amaro - CAM04",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -225,7 +226,7 @@
     },
     {
       "old_id": 98,
-      "new_id": 98,
+      "new_id": 23,
       "name": "1329 - Ultrafarma Santo Amaro   - CAM02",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -237,7 +238,7 @@
     },
     {
       "old_id": 99,
-      "new_id": 99,
+      "new_id": 24,
       "name": "1329 -  Ultrafarma Santo Amaro - DVR 02 CAM04",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -249,7 +250,7 @@
     },
     {
       "old_id": 100,
-      "new_id": 100,
+      "new_id": 25,
       "name": "0036 - GM INDUSTRIAL CAM 11",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -261,7 +262,7 @@
     },
     {
       "old_id": 101,
-      "new_id": 101,
+      "new_id": 26,
       "name": "0036 - GM INDUSTRIAL CAM 8",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -273,7 +274,7 @@
     },
     {
       "old_id": 102,
-      "new_id": 102,
+      "new_id": 27,
       "name": "0036 - GM INDUSTRIAL CAM 7",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -285,7 +286,7 @@
     },
     {
       "old_id": 103,
-      "new_id": 103,
+      "new_id": 28,
       "name": "0020 - ESPIRAL -DVR03 - CAM11",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -297,7 +298,7 @@
     },
     {
       "old_id": 105,
-      "new_id": 105,
+      "new_id": 29,
       "name": "0038 - LUVEP DVR01 CAM06",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -309,7 +310,7 @@
     },
     {
       "old_id": 106,
-      "new_id": 106,
+      "new_id": 30,
       "name": "0038 - LUVEP DVR01 CAM13",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -321,7 +322,7 @@
     },
     {
       "old_id": 107,
-      "new_id": 107,
+      "new_id": 31,
       "name": "1329 - Ultrafarma Santo Amaro - DVR02 CAM05",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -333,7 +334,7 @@
     },
     {
       "old_id": 108,
-      "new_id": 108,
+      "new_id": 32,
       "name": "1329 - Ultrafarma Santo Amaro - DVR02 CAM01",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -345,7 +346,7 @@
     },
     {
       "old_id": 109,
-      "new_id": 109,
+      "new_id": 33,
       "name": "1329 - Ultrafarma Santo Amaro - DVR01 CAM05",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -357,7 +358,7 @@
     },
     {
       "old_id": 111,
-      "new_id": 111,
+      "new_id": 34,
       "name": "0038 - LUVEP DVR02 CAM06",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -369,7 +370,7 @@
     },
     {
       "old_id": 112,
-      "new_id": 112,
+      "new_id": 35,
       "name": "0038 - LUVEP DVR02 CAM03",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -381,7 +382,7 @@
     },
     {
       "old_id": 113,
-      "new_id": 113,
+      "new_id": 36,
       "name": "0038 - LUVEP DVR02 CAM01",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -393,7 +394,7 @@
     },
     {
       "old_id": 115,
-      "new_id": 115,
+      "new_id": 37,
       "name": "0030 - IPMED - ESTACIONAMENTO CAM11",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -405,7 +406,7 @@
     },
     {
       "old_id": 116,
-      "new_id": 116,
+      "new_id": 38,
       "name": "ESCADA SAMP",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -417,7 +418,7 @@
     },
     {
       "old_id": 117,
-      "new_id": 117,
+      "new_id": 39,
       "name": "ESCADA DOCA",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -429,7 +430,7 @@
     },
     {
       "old_id": 118,
-      "new_id": 118,
+      "new_id": 40,
       "name": "deteccao de armas white",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -441,7 +442,7 @@
     },
     {
       "old_id": 119,
-      "new_id": 119,
+      "new_id": 41,
       "name": "0030 - IPMED FRENTE CAM12",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -453,7 +454,7 @@
     },
     {
       "old_id": 156,
-      "new_id": 156,
+      "new_id": 42,
       "name": "DIRECAO PROIBIDA",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -465,7 +466,7 @@
     },
     {
       "old_id": 157,
-      "new_id": 157,
+      "new_id": 43,
       "name": "ALERTA DE CONTRA MAO",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -477,7 +478,7 @@
     },
     {
       "old_id": 160,
-      "new_id": 160,
+      "new_id": 44,
       "name": "ARMA ESCOLA",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -489,7 +490,7 @@
     },
     {
       "old_id": 161,
-      "new_id": 161,
+      "new_id": 45,
       "name": "ASSALTO JOALHERIA",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -501,7 +502,7 @@
     },
     {
       "old_id": 199,
-      "new_id": 199,
+      "new_id": 46,
       "name": "DETECCAO DE FOGO EM CELULAR",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -513,7 +514,7 @@
     },
     {
       "old_id": 203,
-      "new_id": 203,
+      "new_id": 47,
       "name": "PROCURADOES 06072024",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -525,7 +526,7 @@
     },
     {
       "old_id": 205,
-      "new_id": 205,
+      "new_id": 48,
       "name": "PROCURADOS SANTA CATARINA",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -537,7 +538,7 @@
     },
     {
       "old_id": 206,
-      "new_id": 206,
+      "new_id": 49,
       "name": "TRONTRON CAM03",
       "old_client_id": 45,
       "new_client_id": 45,
@@ -549,7 +550,7 @@
     },
     {
       "old_id": 207,
-      "new_id": 207,
+      "new_id": 50,
       "name": "TRONTRON CAM04",
       "old_client_id": 45,
       "new_client_id": 45,
@@ -561,7 +562,7 @@
     },
     {
       "old_id": 211,
-      "new_id": 211,
+      "new_id": 51,
       "name": "TRONTORN CAM3 TESTE",
       "old_client_id": 45,
       "new_client_id": 45,
@@ -573,7 +574,7 @@
     },
     {
       "old_id": 214,
-      "new_id": 214,
+      "new_id": 52,
       "name": "Comercial 1",
       "old_client_id": 45,
       "new_client_id": 45,
@@ -585,7 +586,7 @@
     },
     {
       "old_id": 215,
-      "new_id": 215,
+      "new_id": 53,
       "name": "Comercial 2",
       "old_client_id": 45,
       "new_client_id": 45,
@@ -597,7 +598,7 @@
     },
     {
       "old_id": 216,
-      "new_id": 216,
+      "new_id": 54,
       "name": "0563 - Hyde Menino Deus 1",
       "old_client_id": 46,
       "new_client_id": 46,
@@ -609,7 +610,7 @@
     },
     {
       "old_id": 217,
-      "new_id": 217,
+      "new_id": 55,
       "name": "PESQUISA WILTON",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -621,7 +622,7 @@
     },
     {
       "old_id": 218,
-      "new_id": 218,
+      "new_id": 56,
       "name": "TESTE WILTON",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -633,7 +634,7 @@
     },
     {
       "old_id": 219,
-      "new_id": 219,
+      "new_id": 57,
       "name": "TRANSITO",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -645,7 +646,7 @@
     },
     {
       "old_id": 220,
-      "new_id": 220,
+      "new_id": 58,
       "name": "0563 - Hyde Menino Deus 2",
       "old_client_id": 46,
       "new_client_id": 46,
@@ -657,7 +658,7 @@
     },
     {
       "old_id": 222,
-      "new_id": 222,
+      "new_id": 59,
       "name": "GDL_1",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -669,7 +670,7 @@
     },
     {
       "old_id": 223,
-      "new_id": 223,
+      "new_id": 60,
       "name": "GDL_2",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -681,7 +682,7 @@
     },
     {
       "old_id": 224,
-      "new_id": 224,
+      "new_id": 61,
       "name": "SETOR 4 - STAND MACDONALDS",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -693,7 +694,7 @@
     },
     {
       "old_id": 225,
-      "new_id": 225,
+      "new_id": 62,
       "name": "SETOR 5",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -705,7 +706,7 @@
     },
     {
       "old_id": 226,
-      "new_id": 226,
+      "new_id": 63,
       "name": "ELEVADOR",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -717,7 +718,7 @@
     },
     {
       "old_id": 227,
-      "new_id": 227,
+      "new_id": 64,
       "name": "ELEVADOR 2",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -729,7 +730,7 @@
     },
     {
       "old_id": 228,
-      "new_id": 228,
+      "new_id": 65,
       "name": "ACESSO A",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -741,7 +742,7 @@
     },
     {
       "old_id": 230,
-      "new_id": 230,
+      "new_id": 66,
       "name": "parc monceau 01",
       "old_client_id": 46,
       "new_client_id": 46,
@@ -753,7 +754,7 @@
     },
     {
       "old_id": 231,
-      "new_id": 231,
+      "new_id": 67,
       "name": "acesso e",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -765,7 +766,7 @@
     },
     {
       "old_id": 232,
-      "new_id": 232,
+      "new_id": 68,
       "name": "speed",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -777,7 +778,7 @@
     },
     {
       "old_id": 233,
-      "new_id": 233,
+      "new_id": 69,
       "name": "st7",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -789,7 +790,7 @@
     },
     {
       "old_id": 234,
-      "new_id": 234,
+      "new_id": 70,
       "name": "800",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -801,7 +802,7 @@
     },
     {
       "old_id": 235,
-      "new_id": 235,
+      "new_id": 71,
       "name": "GDL",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -813,7 +814,7 @@
     },
     {
       "old_id": 236,
-      "new_id": 236,
+      "new_id": 72,
       "name": "GDL 2",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -825,7 +826,7 @@
     },
     {
       "old_id": 237,
-      "new_id": 237,
+      "new_id": 73,
       "name": "GDL 3",
       "old_client_id": 40,
       "new_client_id": 40,
@@ -837,7 +838,7 @@
     },
     {
       "old_id": 243,
-      "new_id": 243,
+      "new_id": 74,
       "name": "0992 - COPAG COLATINA CAM02",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -849,7 +850,7 @@
     },
     {
       "old_id": 244,
-      "new_id": 244,
+      "new_id": 75,
       "name": "0992 - COPAG COLATINA CAM04",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -861,7 +862,7 @@
     },
     {
       "old_id": 257,
-      "new_id": 257,
+      "new_id": 76,
       "name": "LOCAL",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -873,7 +874,7 @@
     },
     {
       "old_id": 258,
-      "new_id": 258,
+      "new_id": 77,
       "name": "EXTERNO",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -885,7 +886,7 @@
     },
     {
       "old_id": 284,
-      "new_id": 284,
+      "new_id": 78,
       "name": "0992 - COPAG COLATINA CAM04",
       "old_client_id": 80,
       "new_client_id": 80,
@@ -897,7 +898,7 @@
     },
     {
       "old_id": 286,
-      "new_id": 286,
+      "new_id": 79,
       "name": "0620 - Portal Patropolis = Hall",
       "old_client_id": 46,
       "new_client_id": 46,
@@ -909,7 +910,7 @@
     },
     {
       "old_id": 294,
-      "new_id": 294,
+      "new_id": 80,
       "name": "CCONET",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -921,7 +922,7 @@
     },
     {
       "old_id": 295,
-      "new_id": 295,
+      "new_id": 81,
       "name": "cconet 2",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -933,7 +934,7 @@
     },
     {
       "old_id": 327,
-      "new_id": 327,
+      "new_id": 82,
       "name": "Demo 4-67a90ca0-5588-4c72-86d6-795a63be97db",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -945,7 +946,7 @@
     },
     {
       "old_id": 328,
-      "new_id": 328,
+      "new_id": 83,
       "name": "Patio Frente",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -957,7 +958,7 @@
     },
     {
       "old_id": 329,
-      "new_id": 329,
+      "new_id": 84,
       "name": "Patio Lateral",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -969,7 +970,7 @@
     },
     {
       "old_id": 335,
-      "new_id": 335,
+      "new_id": 85,
       "name": "Video 01",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -981,7 +982,7 @@
     },
     {
       "old_id": 336,
-      "new_id": 336,
+      "new_id": 86,
       "name": "Video 02",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -993,7 +994,7 @@
     },
     {
       "old_id": 337,
-      "new_id": 337,
+      "new_id": 87,
       "name": "Video 03",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1005,7 +1006,7 @@
     },
     {
       "old_id": 338,
-      "new_id": 338,
+      "new_id": 88,
       "name": "Video 04",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1017,7 +1018,7 @@
     },
     {
       "old_id": 339,
-      "new_id": 339,
+      "new_id": 89,
       "name": "Video 05",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1029,7 +1030,7 @@
     },
     {
       "old_id": 340,
-      "new_id": 340,
+      "new_id": 90,
       "name": "Video 06",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1041,7 +1042,7 @@
     },
     {
       "old_id": 341,
-      "new_id": 341,
+      "new_id": 91,
       "name": "Video 07",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1053,7 +1054,7 @@
     },
     {
       "old_id": 342,
-      "new_id": 342,
+      "new_id": 92,
       "name": "Video 08",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1065,7 +1066,7 @@
     },
     {
       "old_id": 343,
-      "new_id": 343,
+      "new_id": 93,
       "name": "Video 09",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1077,7 +1078,7 @@
     },
     {
       "old_id": 344,
-      "new_id": 344,
+      "new_id": 94,
       "name": "Video 10",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1089,7 +1090,7 @@
     },
     {
       "old_id": 345,
-      "new_id": 345,
+      "new_id": 95,
       "name": "Video 11",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1101,7 +1102,7 @@
     },
     {
       "old_id": 348,
-      "new_id": 348,
+      "new_id": 96,
       "name": "0620 - Portal Patropolis - Facial",
       "old_client_id": 46,
       "new_client_id": 46,
@@ -1113,7 +1114,7 @@
     },
     {
       "old_id": 353,
-      "new_id": 353,
+      "new_id": 97,
       "name": "PESQUISA RODRIO",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1125,7 +1126,7 @@
     },
     {
       "old_id": 357,
-      "new_id": 357,
+      "new_id": 98,
       "name": "truck_vms_1",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1137,7 +1138,7 @@
     },
     {
       "old_id": 358,
-      "new_id": 358,
+      "new_id": 99,
       "name": "truck_vms_2",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1149,7 +1150,7 @@
     },
     {
       "old_id": 359,
-      "new_id": 359,
+      "new_id": 100,
       "name": "0068 - ESCOLA SANTA TEREZINHA - CAM02",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -1161,7 +1162,7 @@
     },
     {
       "old_id": 367,
-      "new_id": 367,
+      "new_id": 101,
       "name": "BANCO SICCOB - CAM02",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1173,7 +1174,7 @@
     },
     {
       "old_id": 368,
-      "new_id": 368,
+      "new_id": 102,
       "name": "BANCO SICOOB - CAM18",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1185,7 +1186,7 @@
     },
     {
       "old_id": 371,
-      "new_id": 371,
+      "new_id": 103,
       "name": "BANCO SICOOB - CAM17",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1197,7 +1198,7 @@
     },
     {
       "old_id": 372,
-      "new_id": 372,
+      "new_id": 104,
       "name": "DETECCAO DE AUSENCIA DE CAPACETE",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1209,7 +1210,7 @@
     },
     {
       "old_id": 374,
-      "new_id": 374,
+      "new_id": 105,
       "name": "COPAG MG",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1221,7 +1222,7 @@
     },
     {
       "old_id": 375,
-      "new_id": 375,
+      "new_id": 106,
       "name": "3107 - COPAG VARGINHA CAM18",
       "old_client_id": 80,
       "new_client_id": 80,
@@ -1233,7 +1234,7 @@
     },
     {
       "old_id": 380,
-      "new_id": 380,
+      "new_id": 107,
       "name": "Rear LPR-752bbf7e-cb46-4f12-b2c5-264819b69e03",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1245,7 +1246,7 @@
     },
     {
       "old_id": 383,
-      "new_id": 383,
+      "new_id": 108,
       "name": "Loja 1",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1257,7 +1258,7 @@
     },
     {
       "old_id": 390,
-      "new_id": 390,
+      "new_id": 109,
       "name": "LPR_PACAEMBU",
       "old_client_id": 85,
       "new_client_id": 85,
@@ -1269,7 +1270,7 @@
     },
     {
       "old_id": 391,
-      "new_id": 391,
+      "new_id": 110,
       "name": "Radar_SP",
       "old_client_id": 85,
       "new_client_id": 85,
@@ -1281,7 +1282,7 @@
     },
     {
       "old_id": 402,
-      "new_id": 402,
+      "new_id": 111,
       "name": "CAM01",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -1293,7 +1294,7 @@
     },
     {
       "old_id": 403,
-      "new_id": 403,
+      "new_id": 112,
       "name": "CAM02",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -1305,7 +1306,7 @@
     },
     {
       "old_id": 404,
-      "new_id": 404,
+      "new_id": 113,
       "name": "CAM03",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -1317,7 +1318,7 @@
     },
     {
       "old_id": 411,
-      "new_id": 411,
+      "new_id": 114,
       "name": "618 - Altos do Ipe - Garagem",
       "old_client_id": 46,
       "new_client_id": 46,
@@ -1329,7 +1330,7 @@
     },
     {
       "old_id": 448,
-      "new_id": 448,
+      "new_id": 115,
       "name": "FACIAL TESTE",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1341,7 +1342,7 @@
     },
     {
       "old_id": 455,
-      "new_id": 455,
+      "new_id": 116,
       "name": "SICOOB CENTRAL - CAM06",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1353,7 +1354,7 @@
     },
     {
       "old_id": 456,
-      "new_id": 456,
+      "new_id": 117,
       "name": "BANCO CENTRAL -  CAM23",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1365,7 +1366,7 @@
     },
     {
       "old_id": 457,
-      "new_id": 457,
+      "new_id": 118,
       "name": "SICOOB CAVALEIROS -  CAM05",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1377,7 +1378,7 @@
     },
     {
       "old_id": 458,
-      "new_id": 458,
+      "new_id": 119,
       "name": "SICOOB CAVALEIROS -  CAM12",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1389,7 +1390,7 @@
     },
     {
       "old_id": 459,
-      "new_id": 459,
+      "new_id": 120,
       "name": "SICOOB VALENCA - CAM01",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1401,7 +1402,7 @@
     },
     {
       "old_id": 460,
-      "new_id": 460,
+      "new_id": 121,
       "name": "SICOOB VALENCA -CAM02",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1413,7 +1414,7 @@
     },
     {
       "old_id": 461,
-      "new_id": 461,
+      "new_id": 122,
       "name": "SICOOB VILA INDUSTRIAL - CAM01",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1425,7 +1426,7 @@
     },
     {
       "old_id": 462,
-      "new_id": 462,
+      "new_id": 123,
       "name": "SICOOB VILA INDUSTRIAL - CAM02",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1437,7 +1438,7 @@
     },
     {
       "old_id": 463,
-      "new_id": 463,
+      "new_id": 124,
       "name": "SICOOB MACAE -CAM03",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1449,7 +1450,7 @@
     },
     {
       "old_id": 464,
-      "new_id": 464,
+      "new_id": 125,
       "name": "SICOOB MACAE - CAM10",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1461,7 +1462,7 @@
     },
     {
       "old_id": 465,
-      "new_id": 465,
+      "new_id": 126,
       "name": "SICOOB JARDIM BOTANICO - CAM04",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1473,7 +1474,7 @@
     },
     {
       "old_id": 466,
-      "new_id": 466,
+      "new_id": 127,
       "name": "SICOOB JARDIM BOTANICO - CAM05",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1485,7 +1486,7 @@
     },
     {
       "old_id": 467,
-      "new_id": 467,
+      "new_id": 128,
       "name": "SICOOB CASIMIRO DE ABRU - CAM01",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1497,7 +1498,7 @@
     },
     {
       "old_id": 468,
-      "new_id": 468,
+      "new_id": 129,
       "name": "SICOOB CASIMIRO DE ABRU - CAM07",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1509,7 +1510,7 @@
     },
     {
       "old_id": 469,
-      "new_id": 469,
+      "new_id": 130,
       "name": "SICOOB PITUBA - CAM02",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1521,7 +1522,7 @@
     },
     {
       "old_id": 470,
-      "new_id": 470,
+      "new_id": 131,
       "name": "SICOOB PITUBA - CAM03",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1533,7 +1534,7 @@
     },
     {
       "old_id": 471,
-      "new_id": 471,
+      "new_id": 132,
       "name": "SICOOB MIMOSO DO SUL -  CAM01",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1545,7 +1546,7 @@
     },
     {
       "old_id": 472,
-      "new_id": 472,
+      "new_id": 133,
       "name": "SICOOB MIMOSO DO SUL -  CAM03",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1557,7 +1558,7 @@
     },
     {
       "old_id": 473,
-      "new_id": 473,
+      "new_id": 134,
       "name": "SICOOB SAO MATHEUS - CAM02",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1569,7 +1570,7 @@
     },
     {
       "old_id": 474,
-      "new_id": 474,
+      "new_id": 135,
       "name": "SICOOB SAQUAREMA - CAM03",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1581,7 +1582,7 @@
     },
     {
       "old_id": 475,
-      "new_id": 475,
+      "new_id": 136,
       "name": "SICOOB SAQUAREMA - CAM09",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1593,7 +1594,7 @@
     },
     {
       "old_id": 476,
-      "new_id": 476,
+      "new_id": 137,
       "name": "SICOOB LARANJEIRAS - CAM02",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1605,7 +1606,7 @@
     },
     {
       "old_id": 477,
-      "new_id": 477,
+      "new_id": 138,
       "name": "SICOOB LARANJEIRAS - CAM03",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1617,7 +1618,7 @@
     },
     {
       "old_id": 478,
-      "new_id": 478,
+      "new_id": 139,
       "name": "SICOOB RIO BONITO - CAM03",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1629,7 +1630,7 @@
     },
     {
       "old_id": 479,
-      "new_id": 479,
+      "new_id": 140,
       "name": "SICOOB RIO BONITO - CAM02",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1641,7 +1642,7 @@
     },
     {
       "old_id": 480,
-      "new_id": 480,
+      "new_id": 141,
       "name": "SICOOB ILHEUS - CAM06",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1653,7 +1654,7 @@
     },
     {
       "old_id": 481,
-      "new_id": 481,
+      "new_id": 142,
       "name": "SICOOB ILHEUS - CAM11",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1665,7 +1666,7 @@
     },
     {
       "old_id": 482,
-      "new_id": 482,
+      "new_id": 143,
       "name": "SICOOB BROTAS - CAM03",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1677,7 +1678,7 @@
     },
     {
       "old_id": 483,
-      "new_id": 483,
+      "new_id": 144,
       "name": "SICOOB BROTAS - CAM06",
       "old_client_id": 84,
       "new_client_id": 84,
@@ -1689,7 +1690,7 @@
     },
     {
       "old_id": 488,
-      "new_id": 488,
+      "new_id": 145,
       "name": "EPI",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1701,7 +1702,7 @@
     },
     {
       "old_id": 489,
-      "new_id": 489,
+      "new_id": 146,
       "name": "QUEDA",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1713,7 +1714,7 @@
     },
     {
       "old_id": 490,
-      "new_id": 490,
+      "new_id": 147,
       "name": "QUEDA_CHOQUE",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1725,7 +1726,7 @@
     },
     {
       "old_id": 491,
-      "new_id": 491,
+      "new_id": 148,
       "name": "PVV_CAM01",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -1737,7 +1738,7 @@
     },
     {
       "old_id": 492,
-      "new_id": 492,
+      "new_id": 149,
       "name": "PVV_CAM05",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -1749,7 +1750,7 @@
     },
     {
       "old_id": 493,
-      "new_id": 493,
+      "new_id": 150,
       "name": "PVV_CAM02",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -1761,7 +1762,7 @@
     },
     {
       "old_id": 498,
-      "new_id": 498,
+      "new_id": 151,
       "name": "FACIAL CAPIXABA",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1773,7 +1774,7 @@
     },
     {
       "old_id": 501,
-      "new_id": 501,
+      "new_id": 152,
       "name": "ANTONIO MACHADO CAM1 ENTRADA PEDESTRE",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -1785,7 +1786,7 @@
     },
     {
       "old_id": 502,
-      "new_id": 502,
+      "new_id": 153,
       "name": "ANTONIO MACHADO CAM2 ENTRADA VEICULO",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -1797,7 +1798,7 @@
     },
     {
       "old_id": 504,
-      "new_id": 504,
+      "new_id": 154,
       "name": "PVV_CAM06",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -1809,7 +1810,7 @@
     },
     {
       "old_id": 505,
-      "new_id": 505,
+      "new_id": 155,
       "name": "PVV_CAM13",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -1821,7 +1822,7 @@
     },
     {
       "old_id": 507,
-      "new_id": 507,
+      "new_id": 156,
       "name": "ANTONIO MACHADO PORTAO VEICULO",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -1833,7 +1834,7 @@
     },
     {
       "old_id": 533,
-      "new_id": 533,
+      "new_id": 157,
       "name": "ESCRITORIO",
       "old_client_id": 86,
       "new_client_id": 86,
@@ -1845,7 +1846,7 @@
     },
     {
       "old_id": 534,
-      "new_id": 534,
+      "new_id": 158,
       "name": "TESTE LPR",
       "old_client_id": 86,
       "new_client_id": 86,
@@ -1857,7 +1858,7 @@
     },
     {
       "old_id": 539,
-      "new_id": 539,
+      "new_id": 159,
       "name": "3025 - PINHOS I - LPR-ee27f814-f0f3-4587-9277-c96e49f12fb3",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1869,7 +1870,7 @@
     },
     {
       "old_id": 548,
-      "new_id": 548,
+      "new_id": 160,
       "name": "PONTE  FLORENTINO AVIDOS - SAO SILVANO SENTIDO CENTRO >>",
       "old_client_id": 87,
       "new_client_id": 87,
@@ -1881,7 +1882,7 @@
     },
     {
       "old_id": 551,
-      "new_id": 551,
+      "new_id": 161,
       "name": "0617 - Vila Nova de Gaia - 14",
       "old_client_id": 46,
       "new_client_id": 46,
@@ -1893,7 +1894,7 @@
     },
     {
       "old_id": 552,
-      "new_id": 552,
+      "new_id": 162,
       "name": "0617 - Vila Nova de Gaia - 13",
       "old_client_id": 46,
       "new_client_id": 46,
@@ -1905,7 +1906,7 @@
     },
     {
       "old_id": 554,
-      "new_id": 554,
+      "new_id": 163,
       "name": "SEGEAGLE LPR",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1917,7 +1918,7 @@
     },
     {
       "old_id": 555,
-      "new_id": 555,
+      "new_id": 164,
       "name": "PONTE LOURENCO BOSI - CAM01",
       "old_client_id": 87,
       "new_client_id": 87,
@@ -1929,7 +1930,7 @@
     },
     {
       "old_id": 556,
-      "new_id": 556,
+      "new_id": 165,
       "name": "PONTE AGOSTINHO GALDINO BREDA - CAM02",
       "old_client_id": 87,
       "new_client_id": 87,
@@ -1941,7 +1942,7 @@
     },
     {
       "old_id": 589,
-      "new_id": 589,
+      "new_id": 166,
       "name": "FACE - INGRAM SERRA - NVR3 CAM 25-645ff06f-0d16-475e-b30e-9f58139c023a",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1953,7 +1954,7 @@
     },
     {
       "old_id": 592,
-      "new_id": 592,
+      "new_id": 167,
       "name": "GTTAN FACIAL",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1965,7 +1966,7 @@
     },
     {
       "old_id": 594,
-      "new_id": 594,
+      "new_id": 168,
       "name": "Camera GTTAN-cdfcb0ec-6f74-44a0-8316-8960e7d1a3d0",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -1977,7 +1978,7 @@
     },
     {
       "old_id": 595,
-      "new_id": 595,
+      "new_id": 169,
       "name": "DECK FRENTE - CAM06",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -1989,7 +1990,7 @@
     },
     {
       "old_id": 596,
-      "new_id": 596,
+      "new_id": 170,
       "name": "AREA PISCINA EXTERNO - CAM09",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -2001,7 +2002,7 @@
     },
     {
       "old_id": 597,
-      "new_id": 597,
+      "new_id": 171,
       "name": "AREA DECK - CAM09",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -2013,7 +2014,7 @@
     },
     {
       "old_id": 627,
-      "new_id": 627,
+      "new_id": 172,
       "name": "0552 - Quinta de Evora  02-18ac441f-4ce2-49fa-a064-dd3a8bb9d9d2",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2025,7 +2026,7 @@
     },
     {
       "old_id": 631,
-      "new_id": 631,
+      "new_id": 173,
       "name": "0620 - Portal Patropolis - Hall-27aca0e8-6a00-4a2e-9580-b24a2dacc9ec",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2037,7 +2038,7 @@
     },
     {
       "old_id": 635,
-      "new_id": 635,
+      "new_id": 174,
       "name": "EUROVIDROS CAM7",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -2049,7 +2050,7 @@
     },
     {
       "old_id": 636,
-      "new_id": 636,
+      "new_id": 175,
       "name": "EUROVIDROS CAM8",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -2061,7 +2062,7 @@
     },
     {
       "old_id": 639,
-      "new_id": 639,
+      "new_id": 176,
       "name": "UAA RUI BARBOSA SJP 1-b774020f-30f1-4712-96d8-867fcba6404d",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2073,7 +2074,7 @@
     },
     {
       "old_id": 647,
-      "new_id": 647,
+      "new_id": 177,
       "name": "ANTONIO MACHADO CAM1 ENTRADA PEDESTRE-ed2fc6c0-9068-4e5d-9126-69fd6d7b43a5",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2085,7 +2086,7 @@
     },
     {
       "old_id": 671,
-      "new_id": 671,
+      "new_id": 178,
       "name": "cconet sala dev",
       "old_client_id": 1,
       "new_client_id": 1,
@@ -2097,7 +2098,7 @@
     },
     {
       "old_id": 675,
-      "new_id": 675,
+      "new_id": 179,
       "name": "AC193/310 -dd3fe7fa-5637-4e39-8b24-16796a0cc7c9",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2109,7 +2110,7 @@
     },
     {
       "old_id": 679,
-      "new_id": 679,
+      "new_id": 180,
       "name": "VIC.N.Marotti-2909af68-0635-4d8b-bece-6e41f727bbe5",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2121,7 +2122,7 @@
     },
     {
       "old_id": 680,
-      "new_id": 680,
+      "new_id": 181,
       "name": "Boat 1",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2133,7 +2134,7 @@
     },
     {
       "old_id": 685,
-      "new_id": 685,
+      "new_id": 182,
       "name": "CAM TESTE",
       "old_client_id": 89,
       "new_client_id": 89,
@@ -2145,7 +2146,7 @@
     },
     {
       "old_id": 686,
-      "new_id": 686,
+      "new_id": 183,
       "name": "Camera FRONT",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2157,7 +2158,7 @@
     },
     {
       "old_id": 687,
-      "new_id": 687,
+      "new_id": 184,
       "name": "Camera REAR",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2169,7 +2170,7 @@
     },
     {
       "old_id": 688,
-      "new_id": 688,
+      "new_id": 185,
       "name": "Camera UIC",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2181,7 +2182,7 @@
     },
     {
       "old_id": 693,
-      "new_id": 693,
+      "new_id": 186,
       "name": "EPI SOLUS",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2193,7 +2194,7 @@
     },
     {
       "old_id": 694,
-      "new_id": 694,
+      "new_id": 187,
       "name": "1 PROJECT",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2205,7 +2206,7 @@
     },
     {
       "old_id": 695,
-      "new_id": 695,
+      "new_id": 188,
       "name": "TEST EPI",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2217,7 +2218,7 @@
     },
     {
       "old_id": 727,
-      "new_id": 727,
+      "new_id": 189,
       "name": "FURTO PRAIA",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -2229,7 +2230,7 @@
     },
     {
       "old_id": 728,
-      "new_id": 728,
+      "new_id": 190,
       "name": "HARAS CAM DIREITA RUA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2241,7 +2242,7 @@
     },
     {
       "old_id": 729,
-      "new_id": 729,
+      "new_id": 191,
       "name": "ROSENGARTEN CAM08",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2253,7 +2254,7 @@
     },
     {
       "old_id": 730,
-      "new_id": 730,
+      "new_id": 192,
       "name": "SUPREMO CAM 28",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2265,7 +2266,7 @@
     },
     {
       "old_id": 731,
-      "new_id": 731,
+      "new_id": 193,
       "name": "TORRE 1 CAM DIREITA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2277,7 +2278,7 @@
     },
     {
       "old_id": 732,
-      "new_id": 732,
+      "new_id": 194,
       "name": "TORRE 1 CAM ESQUERDA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2289,7 +2290,7 @@
     },
     {
       "old_id": 733,
-      "new_id": 733,
+      "new_id": 195,
       "name": "TORRE 2 CAM DIREITA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2301,7 +2302,7 @@
     },
     {
       "old_id": 734,
-      "new_id": 734,
+      "new_id": 196,
       "name": "TORRE 2 CAM ESQUERDA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2313,7 +2314,7 @@
     },
     {
       "old_id": 735,
-      "new_id": 735,
+      "new_id": 197,
       "name": "TORRE 3 CAM DIREITA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2325,7 +2326,7 @@
     },
     {
       "old_id": 736,
-      "new_id": 736,
+      "new_id": 198,
       "name": "TORRE 3 CAM ESQUERDA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2337,7 +2338,7 @@
     },
     {
       "old_id": 737,
-      "new_id": 737,
+      "new_id": 199,
       "name": "SOLAR SERRANO CAMERA5",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2349,7 +2350,7 @@
     },
     {
       "old_id": 738,
-      "new_id": 738,
+      "new_id": 200,
       "name": "SOLAR SERRANO CAMERA7",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2361,7 +2362,7 @@
     },
     {
       "old_id": 739,
-      "new_id": 739,
+      "new_id": 201,
       "name": "CINTIA CAMERA 17",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2373,7 +2374,7 @@
     },
     {
       "old_id": 740,
-      "new_id": 740,
+      "new_id": 202,
       "name": "CINTIA CAMERA 18",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2385,7 +2386,7 @@
     },
     {
       "old_id": 741,
-      "new_id": 741,
+      "new_id": 203,
       "name": "ENTRADA RECEPCAO",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2397,7 +2398,7 @@
     },
     {
       "old_id": 742,
-      "new_id": 742,
+      "new_id": 204,
       "name": "ANNUNCIATA CAM 16 PORTAO VEICULO",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2409,7 +2410,7 @@
     },
     {
       "old_id": 745,
-      "new_id": 745,
+      "new_id": 205,
       "name": "ART ECO CAM 3 PORTAO VEICULO",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2421,7 +2422,7 @@
     },
     {
       "old_id": 746,
-      "new_id": 746,
+      "new_id": 206,
       "name": "ATLANTA INTRUSAO PORTAO VEICULO",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2433,7 +2434,7 @@
     },
     {
       "old_id": 747,
-      "new_id": 747,
+      "new_id": 207,
       "name": "VILA YARA PORTAO VEICULOS P1 CAM 10",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2445,7 +2446,7 @@
     },
     {
       "old_id": 748,
-      "new_id": 748,
+      "new_id": 208,
       "name": "VILA YARA PORTAO VEICULOS P2 CAM 14",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2457,7 +2458,7 @@
     },
     {
       "old_id": 749,
-      "new_id": 749,
+      "new_id": 209,
       "name": "UPTOWN PORTAO VEICULOS TERREO 1 CAM 18",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2469,7 +2470,7 @@
     },
     {
       "old_id": 750,
-      "new_id": 750,
+      "new_id": 210,
       "name": "UPTOWN PORTAO VEICULOS TERREO 2 CAM 17",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2481,7 +2482,7 @@
     },
     {
       "old_id": 751,
-      "new_id": 751,
+      "new_id": 211,
       "name": "SHALON PORTAO DE VEICULOS CAM 11",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2493,7 +2494,7 @@
     },
     {
       "old_id": 752,
-      "new_id": 752,
+      "new_id": 212,
       "name": "AUSTRIA INTRUSAO PORTAO VEICULO SUBSOLO 1",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2505,7 +2506,7 @@
     },
     {
       "old_id": 753,
-      "new_id": 753,
+      "new_id": 213,
       "name": "AUSTRIA INTUSAO PORTAO VEICULO SUBSOLO 2",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2517,7 +2518,7 @@
     },
     {
       "old_id": 754,
-      "new_id": 754,
+      "new_id": 214,
       "name": "SCORPIUS PORTAO DE VEICULOS CAM 4",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2529,7 +2530,7 @@
     },
     {
       "old_id": 755,
-      "new_id": 755,
+      "new_id": 215,
       "name": "ROMA PORTAO VEICULOS SUB SOLO CAM 6",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2541,7 +2542,7 @@
     },
     {
       "old_id": 756,
-      "new_id": 756,
+      "new_id": 216,
       "name": "ROMA PORTAO VEICULOS TERREO CAM 10",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2553,7 +2554,7 @@
     },
     {
       "old_id": 757,
-      "new_id": 757,
+      "new_id": 217,
       "name": "PRISCILA PORTAO VEICULOS CAM 6",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2565,7 +2566,7 @@
     },
     {
       "old_id": 760,
-      "new_id": 760,
+      "new_id": 218,
       "name": "ORQUIDEAS PORTAO VEICULOS CAM 17",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2577,7 +2578,7 @@
     },
     {
       "old_id": 761,
-      "new_id": 761,
+      "new_id": 219,
       "name": "MORADA DO SOL PORTAO VEICULOS FRENTE CAM 16",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2589,7 +2590,7 @@
     },
     {
       "old_id": 762,
-      "new_id": 762,
+      "new_id": 220,
       "name": "MORADA DO SOL PORTAO VEICULOS FUNDOS CAM 8",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2601,7 +2602,7 @@
     },
     {
       "old_id": 763,
-      "new_id": 763,
+      "new_id": 221,
       "name": "MATRIZ PORTAO VEICULOS CAM 6",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2613,7 +2614,7 @@
     },
     {
       "old_id": 764,
-      "new_id": 764,
+      "new_id": 222,
       "name": "MARAPASSU PORTAO VEICULOS CAM 5",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2625,7 +2626,7 @@
     },
     {
       "old_id": 765,
-      "new_id": 765,
+      "new_id": 223,
       "name": "IPANEMA PORTAO VEICULOS G1 CAM 3",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2637,7 +2638,7 @@
     },
     {
       "old_id": 766,
-      "new_id": 766,
+      "new_id": 224,
       "name": "IPANEMA PORTAO VEICULOS TERREO CAM 7",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2649,7 +2650,7 @@
     },
     {
       "old_id": 767,
-      "new_id": 767,
+      "new_id": 225,
       "name": "FLORENCA PORTAO VEICULOS SUBSOLO CAM 3",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2661,7 +2662,7 @@
     },
     {
       "old_id": 768,
-      "new_id": 768,
+      "new_id": 226,
       "name": "FLORENCA PORTAO VEICULOS TERREO CAM 3",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2673,7 +2674,7 @@
     },
     {
       "old_id": 770,
-      "new_id": 770,
+      "new_id": 227,
       "name": "CAMILA PORTAO VEICULO CAM 6",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2685,7 +2686,7 @@
     },
     {
       "old_id": 771,
-      "new_id": 771,
+      "new_id": 228,
       "name": "BORBA GATO PORTAO VEICULOS CAM 4",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2697,7 +2698,7 @@
     },
     {
       "old_id": 772,
-      "new_id": 772,
+      "new_id": 229,
       "name": "BEIJA FLOR PORTAO VEICULOS CAM 8",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2709,7 +2710,7 @@
     },
     {
       "old_id": 773,
-      "new_id": 773,
+      "new_id": 230,
       "name": "BANDEIRANTES PORTAO VEICULO SUBSOLO CAM 7",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2721,7 +2722,7 @@
     },
     {
       "old_id": 774,
-      "new_id": 774,
+      "new_id": 231,
       "name": "BANDEIRANTES PORTAO VEICULO TERREO CAM 4",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2733,7 +2734,7 @@
     },
     {
       "old_id": 776,
-      "new_id": 776,
+      "new_id": 232,
       "name": "ANIMA PORTAO VEICULO PORTAO VEICULOS TERREO CAM 8",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2745,7 +2746,7 @@
     },
     {
       "old_id": 777,
-      "new_id": 777,
+      "new_id": 233,
       "name": "28 DE MAIO PORTAO DE VEICULOS CAM 8",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2757,7 +2758,7 @@
     },
     {
       "old_id": 779,
-      "new_id": 779,
+      "new_id": 234,
       "name": "AMERICA PORTAO VEICULOS 2SS CAM 2",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2769,7 +2770,7 @@
     },
     {
       "old_id": 780,
-      "new_id": 780,
+      "new_id": 235,
       "name": "AMERICA PORTAO VEICULOS 3SS CAM 1",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2781,7 +2782,7 @@
     },
     {
       "old_id": 781,
-      "new_id": 781,
+      "new_id": 236,
       "name": "BONFIGLIOLI PORTAO VEICULOS CAM 9",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2793,7 +2794,7 @@
     },
     {
       "old_id": 784,
-      "new_id": 784,
+      "new_id": 237,
       "name": "CAMPO GRANDE PORTAO VEICULOS DIREITA CAM 4",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2805,7 +2806,7 @@
     },
     {
       "old_id": 785,
-      "new_id": 785,
+      "new_id": 238,
       "name": "CAMPO GRANDE PORTAO VEICULOS ESQUERDA CAM 1",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2817,7 +2818,7 @@
     },
     {
       "old_id": 786,
-      "new_id": 786,
+      "new_id": 239,
       "name": "CANTA GALO PORTAO VEICULOS ENTRADA CAM 4",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2829,7 +2830,7 @@
     },
     {
       "old_id": 787,
-      "new_id": 787,
+      "new_id": 240,
       "name": "CANTA GALO PORTAO VEICULOS SAIDA CAM 8",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2841,7 +2842,7 @@
     },
     {
       "old_id": 788,
-      "new_id": 788,
+      "new_id": 241,
       "name": "CASA FLORA PORTAO VEICULO SUBSOLO CAM 11",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2853,7 +2854,7 @@
     },
     {
       "old_id": 789,
-      "new_id": 789,
+      "new_id": 242,
       "name": "CASA FLORA PORTAO VEICULO TERREO CAM 12",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2865,7 +2866,7 @@
     },
     {
       "old_id": 790,
-      "new_id": 790,
+      "new_id": 243,
       "name": "CASCAIS PORTAO VEICULO SUBSOLO CAM 12",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2877,7 +2878,7 @@
     },
     {
       "old_id": 791,
-      "new_id": 791,
+      "new_id": 244,
       "name": "CASCAIS PORTAO VEICULO TERREO CAM 8",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2889,7 +2890,7 @@
     },
     {
       "old_id": 792,
-      "new_id": 792,
+      "new_id": 245,
       "name": "COQUEIROS PORTAO VEICULO CAM 6",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2901,7 +2902,7 @@
     },
     {
       "old_id": 793,
-      "new_id": 793,
+      "new_id": 246,
       "name": "DIVA PORTAO VEICULO SUBSOLO CAM 10",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2913,7 +2914,7 @@
     },
     {
       "old_id": 794,
-      "new_id": 794,
+      "new_id": 247,
       "name": "DIVA PORTAO VEICULO TERREO CAM 12",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2925,7 +2926,7 @@
     },
     {
       "old_id": 795,
-      "new_id": 795,
+      "new_id": 248,
       "name": "FLOR DE LIRIO PORTAO VEICULO SS1 CAM 3",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2937,7 +2938,7 @@
     },
     {
       "old_id": 796,
-      "new_id": 796,
+      "new_id": 249,
       "name": "FLOR DE LIRIO PORTAO VEICULO SS2 CAM 4",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2949,7 +2950,7 @@
     },
     {
       "old_id": 797,
-      "new_id": 797,
+      "new_id": 250,
       "name": "FLOR DE LIRIO PORTAO VEICULO SS3 CAM 5",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2961,7 +2962,7 @@
     },
     {
       "old_id": 798,
-      "new_id": 798,
+      "new_id": 251,
       "name": "GARDENS PORTAO DE VEICULOS CAM 12",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2973,7 +2974,7 @@
     },
     {
       "old_id": 799,
-      "new_id": 799,
+      "new_id": 252,
       "name": "GIUSEPPE PORTAO VEICULO CAM 15",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2985,7 +2986,7 @@
     },
     {
       "old_id": 800,
-      "new_id": 800,
+      "new_id": 253,
       "name": "GOLDEN GATE PORTAO VEICULO CAM 7",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -2997,7 +2998,7 @@
     },
     {
       "old_id": 801,
-      "new_id": 801,
+      "new_id": 254,
       "name": "GRAND CANAL PORTAO VEICULO CAM 13",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3009,7 +3010,7 @@
     },
     {
       "old_id": 802,
-      "new_id": 802,
+      "new_id": 255,
       "name": "HORTENCIAS PORTAO VEICULO CAM 12",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3021,7 +3022,7 @@
     },
     {
       "old_id": 804,
-      "new_id": 804,
+      "new_id": 256,
       "name": "LA VILLETE PORTAO VEICULOS CAM 12",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3033,7 +3034,7 @@
     },
     {
       "old_id": 805,
-      "new_id": 805,
+      "new_id": 257,
       "name": "LIFE STYLE PORTAO VEICULOS CAM 5",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3045,7 +3046,7 @@
     },
     {
       "old_id": 806,
-      "new_id": 806,
+      "new_id": 258,
       "name": "MAGGIORE PORTAO VEICULO S1 CAM 13",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3057,7 +3058,7 @@
     },
     {
       "old_id": 807,
-      "new_id": 807,
+      "new_id": 259,
       "name": "MAGGIORE PORTAO VEICULO S2 CAM 4",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3069,7 +3070,7 @@
     },
     {
       "old_id": 808,
-      "new_id": 808,
+      "new_id": 260,
       "name": "MAGGIORE PORTAO VEICULO S3 CAM 6",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3081,7 +3082,7 @@
     },
     {
       "old_id": 809,
-      "new_id": 809,
+      "new_id": 261,
       "name": "MARIE PORTAO VEICULO CAM 6",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3093,7 +3094,7 @@
     },
     {
       "old_id": 810,
-      "new_id": 810,
+      "new_id": 262,
       "name": "MATIAZZO PORTAO VEICULO CAM 12",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3105,7 +3106,7 @@
     },
     {
       "old_id": 811,
-      "new_id": 811,
+      "new_id": 263,
       "name": "OPTION HOME PORTAO VEICULO CAM 16",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3117,7 +3118,7 @@
     },
     {
       "old_id": 812,
-      "new_id": 812,
+      "new_id": 264,
       "name": "PLAZA MORUMBI PORTAO VEICULO 1 CAM 1",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3129,7 +3130,7 @@
     },
     {
       "old_id": 813,
-      "new_id": 813,
+      "new_id": 265,
       "name": "PLAZA MORUMBI PORTAO VEICULO 2 CAM 2",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3141,7 +3142,7 @@
     },
     {
       "old_id": 814,
-      "new_id": 814,
+      "new_id": 266,
       "name": "PURUS PORTAO VEICULO CAM 8",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3153,7 +3154,7 @@
     },
     {
       "old_id": 815,
-      "new_id": 815,
+      "new_id": 267,
       "name": "QUINTA DE SILVEIRAS PORTAO VEICULO CAM 3",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3165,7 +3166,7 @@
     },
     {
       "old_id": 816,
-      "new_id": 816,
+      "new_id": 268,
       "name": "ROLDAO PORTAO TERREO CAM 12",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3177,7 +3178,7 @@
     },
     {
       "old_id": 817,
-      "new_id": 817,
+      "new_id": 269,
       "name": "ROLDAO PORTAO VEICULO SUBSOLO CAM 6",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3189,7 +3190,7 @@
     },
     {
       "old_id": 818,
-      "new_id": 818,
+      "new_id": 270,
       "name": "SANTA RITA PORTAO DE VEICULO 1SS CAM 12",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3201,7 +3202,7 @@
     },
     {
       "old_id": 819,
-      "new_id": 819,
+      "new_id": 271,
       "name": "SANTA RITA PORTAO DE VEICULO 2SS CAM 12",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3213,7 +3214,7 @@
     },
     {
       "old_id": 820,
-      "new_id": 820,
+      "new_id": 272,
       "name": "SANTANNA PORTAO VEICULO CAM 6",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3225,7 +3226,7 @@
     },
     {
       "old_id": 821,
-      "new_id": 821,
+      "new_id": 273,
       "name": "SPAZIO PORTAO VEICULO",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3237,7 +3238,7 @@
     },
     {
       "old_id": 822,
-      "new_id": 822,
+      "new_id": 274,
       "name": "TENERIFE PORTAO VEICULO CAM 1",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3249,7 +3250,7 @@
     },
     {
       "old_id": 823,
-      "new_id": 823,
+      "new_id": 275,
       "name": "TERRA BRASILIS PORTAO VEICULO JACARANDA CAM 7",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3261,7 +3262,7 @@
     },
     {
       "old_id": 824,
-      "new_id": 824,
+      "new_id": 276,
       "name": "TERRA BRASILIS PORTAO VEICULO PAU BRASIL CAM 2",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3273,7 +3274,7 @@
     },
     {
       "old_id": 825,
-      "new_id": 825,
+      "new_id": 277,
       "name": "TERRA BRASILIS PORTAO VEICULO PAU BRASIL/JACARANDA CAM 16",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3285,7 +3286,7 @@
     },
     {
       "old_id": 826,
-      "new_id": 826,
+      "new_id": 278,
       "name": "UPSIDE PORTAO VEICULO SS1 CAM 5",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3297,7 +3298,7 @@
     },
     {
       "old_id": 827,
-      "new_id": 827,
+      "new_id": 279,
       "name": "UPSIDE PORTAO VEICULO SS2 CAM 6",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3309,7 +3310,7 @@
     },
     {
       "old_id": 828,
-      "new_id": 828,
+      "new_id": 280,
       "name": "UPSIDE PORTAO VEICULO TERREO CAM 4",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3321,7 +3322,7 @@
     },
     {
       "old_id": 830,
-      "new_id": 830,
+      "new_id": 281,
       "name": "VILA ITU PORTAO VEICULOS CENTRAL CAM 5",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3333,7 +3334,7 @@
     },
     {
       "old_id": 831,
-      "new_id": 831,
+      "new_id": 282,
       "name": "VILA ITU PORTAO VEICULOS SERIVICO CAM 10",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3345,7 +3346,7 @@
     },
     {
       "old_id": 832,
-      "new_id": 832,
+      "new_id": 283,
       "name": "VILA ITU PORTAO VEICULOS SS2 CAM 14",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3357,7 +3358,7 @@
     },
     {
       "old_id": 833,
-      "new_id": 833,
+      "new_id": 284,
       "name": "VILA MARIANA PORTAO VEICULOS CAM 2",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3369,7 +3370,7 @@
     },
     {
       "old_id": 834,
-      "new_id": 834,
+      "new_id": 285,
       "name": "VILLAGIO PORTAO VEICULOS SUBSOLO CAM 6",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3381,7 +3382,7 @@
     },
     {
       "old_id": 835,
-      "new_id": 835,
+      "new_id": 286,
       "name": "VILLAGIO PORTAO VEICULOS TERREO CAM 5",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3393,7 +3394,7 @@
     },
     {
       "old_id": 836,
-      "new_id": 836,
+      "new_id": 287,
       "name": "HARAS CAM PORTAO VEICULO",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3405,7 +3406,7 @@
     },
     {
       "old_id": 837,
-      "new_id": 837,
+      "new_id": 288,
       "name": "JACKPOT CAM LATERAL RUA RESTAURANTE",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3417,7 +3418,7 @@
     },
     {
       "old_id": 838,
-      "new_id": 838,
+      "new_id": 289,
       "name": "JACKPOT CAM PORTA ENTRADA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3429,7 +3430,7 @@
     },
     {
       "old_id": 839,
-      "new_id": 839,
+      "new_id": 290,
       "name": "3040 - JUSBRASIL SP ENTRADA",
       "old_client_id": 89,
       "new_client_id": 89,
@@ -3441,7 +3442,7 @@
     },
     {
       "old_id": 840,
-      "new_id": 840,
+      "new_id": 291,
       "name": "CAMERA TESTE",
       "old_client_id": 91,
       "new_client_id": 91,
@@ -3453,7 +3454,7 @@
     },
     {
       "old_id": 842,
-      "new_id": 842,
+      "new_id": 292,
       "name": "RECONHECIMENTO FACIAL TRAJANO",
       "old_client_id": 91,
       "new_client_id": 91,
@@ -3465,7 +3466,7 @@
     },
     {
       "old_id": 844,
-      "new_id": 844,
+      "new_id": 293,
       "name": "ANIMA ROBO VIGILANTE CAM P. VEICULOS",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3477,7 +3478,7 @@
     },
     {
       "old_id": 845,
-      "new_id": 845,
+      "new_id": 294,
       "name": "ANIMA ROBO VIGILANTE CAM ENTRADA PEDESTRE",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3489,7 +3490,7 @@
     },
     {
       "old_id": 846,
-      "new_id": 846,
+      "new_id": 295,
       "name": "0004 - EDUCANDARIO CAM01",
       "old_client_id": 93,
       "new_client_id": 93,
@@ -3501,7 +3502,7 @@
     },
     {
       "old_id": 847,
-      "new_id": 847,
+      "new_id": 296,
       "name": "0004 - EDUCANDARIO CAM02",
       "old_client_id": 93,
       "new_client_id": 93,
@@ -3513,7 +3514,7 @@
     },
     {
       "old_id": 848,
-      "new_id": 848,
+      "new_id": 297,
       "name": "0004 - EDUACANDARIO CAM 03",
       "old_client_id": 93,
       "new_client_id": 93,
@@ -3525,7 +3526,7 @@
     },
     {
       "old_id": 852,
-      "new_id": 852,
+      "new_id": 298,
       "name": "ESPANHA CAM LATERAL RUA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3537,7 +3538,7 @@
     },
     {
       "old_id": 853,
-      "new_id": 853,
+      "new_id": 299,
       "name": "ESPANHA CAM FRENTE/PORTAO VEICULO",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3549,7 +3550,7 @@
     },
     {
       "old_id": 854,
-      "new_id": 854,
+      "new_id": 300,
       "name": "Demo 7-f4dd2f33-fd2f-42cd-bac9-4301dad2cce0",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -3561,7 +3562,7 @@
     },
     {
       "old_id": 855,
-      "new_id": 855,
+      "new_id": 301,
       "name": "3107 - COPAG VARGINHA CAM03",
       "old_client_id": 80,
       "new_client_id": 80,
@@ -3573,7 +3574,7 @@
     },
     {
       "old_id": 856,
-      "new_id": 856,
+      "new_id": 302,
       "name": "0073 - AUTOBAHN - PATIO ESTACIONAMENTO FRENTE - CAM 01",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -3585,7 +3586,7 @@
     },
     {
       "old_id": 857,
-      "new_id": 857,
+      "new_id": 303,
       "name": "0073 - AUTOBAHN - PATIO ESTACIONAMENTO FRENTE 2  - CAM 02",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -3597,7 +3598,7 @@
     },
     {
       "old_id": 858,
-      "new_id": 858,
+      "new_id": 304,
       "name": "0073 - AUTOBAHN - PATIO ESTACIONAMENTO FRENTE 3  - CAM 03",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -3609,7 +3610,7 @@
     },
     {
       "old_id": 859,
-      "new_id": 859,
+      "new_id": 305,
       "name": "0073 - AUTOBAHN - PATIO ESTACIONAMENTO 06  - CAM 06",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -3621,7 +3622,7 @@
     },
     {
       "old_id": 860,
-      "new_id": 860,
+      "new_id": 306,
       "name": "0073 - AUTOBAHN - OFICINA FRENTE 01 - CAM 09",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -3633,7 +3634,7 @@
     },
     {
       "old_id": 861,
-      "new_id": 861,
+      "new_id": 307,
       "name": "0073 - AUTOBAHN - OFICINA FRENTE 02 - CAM 10",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -3645,7 +3646,7 @@
     },
     {
       "old_id": 862,
-      "new_id": 862,
+      "new_id": 308,
       "name": "ROBO VIGILANTE LADO ESQUERO P. VEICULOS",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3657,7 +3658,7 @@
     },
     {
       "old_id": 863,
-      "new_id": 863,
+      "new_id": 309,
       "name": "ROBO VIGILANTE LADO DIREITO ENTRADA PEDESTRE",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3669,7 +3670,7 @@
     },
     {
       "old_id": 864,
-      "new_id": 864,
+      "new_id": 310,
       "name": "SOLAR SERRANO ENTRADA HALL",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3681,7 +3682,7 @@
     },
     {
       "old_id": 868,
-      "new_id": 868,
+      "new_id": 311,
       "name": "ATLANTA ENTRADA HALL",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3693,7 +3694,7 @@
     },
     {
       "old_id": 870,
-      "new_id": 870,
+      "new_id": 312,
       "name": "ESPANHA PORTAO VEICULOS",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3705,7 +3706,7 @@
     },
     {
       "old_id": 871,
-      "new_id": 871,
+      "new_id": 313,
       "name": "0048 - CN LOG - ZONA 31 - CAM 01",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -3717,7 +3718,7 @@
     },
     {
       "old_id": 872,
-      "new_id": 872,
+      "new_id": 314,
       "name": "0048 - CN LOG - ZONA 32 - CAM 02",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -3729,7 +3730,7 @@
     },
     {
       "old_id": 873,
-      "new_id": 873,
+      "new_id": 315,
       "name": "0048 - CN LOG - ZONA 33 - CAM 03",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -3741,7 +3742,7 @@
     },
     {
       "old_id": 874,
-      "new_id": 874,
+      "new_id": 316,
       "name": "Queda_embarcacao",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -3753,7 +3754,7 @@
     },
     {
       "old_id": 875,
-      "new_id": 875,
+      "new_id": 317,
       "name": "HALL PRINCIPAL RECONHECIMENTO FACIAL",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3765,7 +3766,7 @@
     },
     {
       "old_id": 877,
-      "new_id": 877,
+      "new_id": 318,
       "name": "FACIAL HI KENTRADA 2 REC FACIAL",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3777,7 +3778,7 @@
     },
     {
       "old_id": 878,
-      "new_id": 878,
+      "new_id": 319,
       "name": "ENTRADA 2 REC. FACIAL",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3789,7 +3790,7 @@
     },
     {
       "old_id": 881,
-      "new_id": 881,
+      "new_id": 320,
       "name": "Homologacao - Camera01",
       "old_client_id": 82,
       "new_client_id": 82,
@@ -3801,7 +3802,7 @@
     },
     {
       "old_id": 883,
-      "new_id": 883,
+      "new_id": 321,
       "name": "LEAF PORTAO VEICULO TERREO",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3813,7 +3814,7 @@
     },
     {
       "old_id": 884,
-      "new_id": 884,
+      "new_id": 322,
       "name": "LEAF PORTAO VEICULO SUBSOLO2",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3825,7 +3826,7 @@
     },
     {
       "old_id": 885,
-      "new_id": 885,
+      "new_id": 323,
       "name": "LEAF PORTAO VEICULOS SUBSOLO 1",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3837,7 +3838,7 @@
     },
     {
       "old_id": 886,
-      "new_id": 886,
+      "new_id": 324,
       "name": "CAM 02 - Loja Santo Amaro - POC",
       "old_client_id": 82,
       "new_client_id": 82,
@@ -3849,7 +3850,7 @@
     },
     {
       "old_id": 887,
-      "new_id": 887,
+      "new_id": 325,
       "name": "CAM 05 - Loja Santo Amaro - POC",
       "old_client_id": 82,
       "new_client_id": 82,
@@ -3861,7 +3862,7 @@
     },
     {
       "old_id": 888,
-      "new_id": 888,
+      "new_id": 326,
       "name": "CAM 06 - Loja Santo Amaro - POC",
       "old_client_id": 82,
       "new_client_id": 82,
@@ -3873,7 +3874,7 @@
     },
     {
       "old_id": 889,
-      "new_id": 889,
+      "new_id": 327,
       "name": "SALA DE MONITORAMENTO",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -3885,7 +3886,7 @@
     },
     {
       "old_id": 890,
-      "new_id": 890,
+      "new_id": 328,
       "name": "CAMERA EXTERNA - 01 LPR",
       "old_client_id": 93,
       "new_client_id": 93,
@@ -3897,7 +3898,7 @@
     },
     {
       "old_id": 891,
-      "new_id": 891,
+      "new_id": 329,
       "name": "LPR SHOPPING",
       "old_client_id": 93,
       "new_client_id": 93,
@@ -3909,7 +3910,7 @@
     },
     {
       "old_id": 892,
-      "new_id": 892,
+      "new_id": 330,
       "name": "FACIAL SHOPPING",
       "old_client_id": 93,
       "new_client_id": 93,
@@ -3921,7 +3922,7 @@
     },
     {
       "old_id": 894,
-      "new_id": 894,
+      "new_id": 331,
       "name": "COLLINE DE NICE PORTAO VEICULO S1",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3933,7 +3934,7 @@
     },
     {
       "old_id": 895,
-      "new_id": 895,
+      "new_id": 332,
       "name": "LEAF CAM TORRE FIXA ESQUERDA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3945,7 +3946,7 @@
     },
     {
       "old_id": 896,
-      "new_id": 896,
+      "new_id": 333,
       "name": "LEAF CAM TORRE FIXA DIREITA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3957,7 +3958,7 @@
     },
     {
       "old_id": 898,
-      "new_id": 898,
+      "new_id": 334,
       "name": "9000 - MARTEL -DVR01 - ZONA 1",
       "old_client_id": 96,
       "new_client_id": 96,
@@ -3969,7 +3970,7 @@
     },
     {
       "old_id": 899,
-      "new_id": 899,
+      "new_id": 335,
       "name": "ESTACIONAMENTO  COMPOSE  - ZONA 20",
       "old_client_id": 97,
       "new_client_id": 97,
@@ -3981,7 +3982,7 @@
     },
     {
       "old_id": 900,
-      "new_id": 900,
+      "new_id": 336,
       "name": "CAM FIXA LADO ESQUERDA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -3993,7 +3994,7 @@
     },
     {
       "old_id": 901,
-      "new_id": 901,
+      "new_id": 337,
       "name": "CAM FIXA LADO DIREITO",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4005,7 +4006,7 @@
     },
     {
       "old_id": 902,
-      "new_id": 902,
+      "new_id": 338,
       "name": "1147 - UBS Boa Vista  Zona 52 (Cam 02)",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -4017,7 +4018,7 @@
     },
     {
       "old_id": 903,
-      "new_id": 903,
+      "new_id": 339,
       "name": "1147 - UBS Boa Vista - Zona 53 (Cam 03)",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -4029,7 +4030,7 @@
     },
     {
       "old_id": 904,
-      "new_id": 904,
+      "new_id": 340,
       "name": "1147 - UBS Boa Vista - Zona 54 (Cam 04)",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -4041,7 +4042,7 @@
     },
     {
       "old_id": 905,
-      "new_id": 905,
+      "new_id": 341,
       "name": "1147 - UBS Boa Vista  Zona 55 (Cam 08)",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -4053,7 +4054,7 @@
     },
     {
       "old_id": 906,
-      "new_id": 906,
+      "new_id": 342,
       "name": "1147 - UBS Boa Vista - Zona 56 (Cam 09)",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -4065,7 +4066,7 @@
     },
     {
       "old_id": 907,
-      "new_id": 907,
+      "new_id": 343,
       "name": "1147 - UBS Boa Vista - Zona 57 (Cam 10)",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -4077,7 +4078,7 @@
     },
     {
       "old_id": 908,
-      "new_id": 908,
+      "new_id": 344,
       "name": "1147 - UBS Boa Vista - Zona 58 (Cam 13)",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -4089,7 +4090,7 @@
     },
     {
       "old_id": 909,
-      "new_id": 909,
+      "new_id": 345,
       "name": "1147 - UBS Boa Vista - Zona 59 (Cam 14)",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -4101,7 +4102,7 @@
     },
     {
       "old_id": 910,
-      "new_id": 910,
+      "new_id": 346,
       "name": "0534 - Verbena 02-c80a3a1f-9241-4d65-b5e4-ce2a87bbb125",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -4113,7 +4114,7 @@
     },
     {
       "old_id": 911,
-      "new_id": 911,
+      "new_id": 347,
       "name": "0614 - Globalmed Deposito 01-45eafe78-4dec-45df-a698-c8480d993624",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -4125,7 +4126,7 @@
     },
     {
       "old_id": 912,
-      "new_id": 912,
+      "new_id": 348,
       "name": "0613 - Demoiselle 01-3e92f870-5921-4b96-a8f8-412465b6e573",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -4137,7 +4138,7 @@
     },
     {
       "old_id": 913,
-      "new_id": 913,
+      "new_id": 349,
       "name": "0620 - Portal Patropolis-332e02cb-93a2-4fc0-a670-d139879b74db",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -4149,7 +4150,7 @@
     },
     {
       "old_id": 914,
-      "new_id": 914,
+      "new_id": 350,
       "name": "618 - Altos do Ipe - Garagem-048422e3-aee3-44e0-8f23-e9177fe6e31a",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -4161,7 +4162,7 @@
     },
     {
       "old_id": 918,
-      "new_id": 918,
+      "new_id": 351,
       "name": "Cozinha - Stratum",
       "old_client_id": 98,
       "new_client_id": 98,
@@ -4173,7 +4174,7 @@
     },
     {
       "old_id": 927,
-      "new_id": 927,
+      "new_id": 352,
       "name": "CASA DO CONTRUTOR -CAM10",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -4185,7 +4186,7 @@
     },
     {
       "old_id": 928,
-      "new_id": 928,
+      "new_id": 353,
       "name": "CASA DO CONSTRUTOR - CAM09",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -4197,7 +4198,7 @@
     },
     {
       "old_id": 929,
-      "new_id": 929,
+      "new_id": 354,
       "name": "CASA DO CONSTRUTOR - CAM 08",
       "old_client_id": 4,
       "new_client_id": 4,
@@ -4209,7 +4210,7 @@
     },
     {
       "old_id": 930,
-      "new_id": 930,
+      "new_id": 355,
       "name": "BOULEVARD FIXA DIREITA PEDESTRE",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4221,7 +4222,7 @@
     },
     {
       "old_id": 931,
-      "new_id": 931,
+      "new_id": 356,
       "name": "BOULEVARD FIXA ESQUERDA VEICULOS",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4233,7 +4234,7 @@
     },
     {
       "old_id": 932,
-      "new_id": 932,
+      "new_id": 357,
       "name": "PORTAO VEICULOS 1 CAM 1",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4245,7 +4246,7 @@
     },
     {
       "old_id": 933,
-      "new_id": 933,
+      "new_id": 358,
       "name": "PORTAO VEICULOS 2 CAM 2",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4257,7 +4258,7 @@
     },
     {
       "old_id": 935,
-      "new_id": 935,
+      "new_id": 359,
       "name": "Loja Frosty",
       "old_client_id": 99,
       "new_client_id": 99,
@@ -4269,7 +4270,7 @@
     },
     {
       "old_id": 936,
-      "new_id": 936,
+      "new_id": 360,
       "name": "0076 - Proeng Hall - Deck",
       "old_client_id": 97,
       "new_client_id": 97,
@@ -4281,7 +4282,7 @@
     },
     {
       "old_id": 937,
-      "new_id": 937,
+      "new_id": 361,
       "name": "0620 - Portal Petropolis-c92c772d-965a-40f4-8036-5df4d9364c12",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -4293,7 +4294,7 @@
     },
     {
       "old_id": 938,
-      "new_id": 938,
+      "new_id": 362,
       "name": "0613 - Demoiselle 02-7110b300-f7f0-44b4-b4ff-0ae7859f95c8",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -4305,7 +4306,7 @@
     },
     {
       "old_id": 939,
-      "new_id": 939,
+      "new_id": 363,
       "name": "0552 - Quinta de Evora  01-20dcd127-5151-4fc4-b2fa-4756b147756f",
       "old_client_id": 0,
       "new_client_id": 0,
@@ -4317,7 +4318,7 @@
     },
     {
       "old_id": 971,
-      "new_id": 971,
+      "new_id": 364,
       "name": "2000 - ACESSO HALL RECEPCAO - CAM11 ZONA 11",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4329,7 +4330,7 @@
     },
     {
       "old_id": 978,
-      "new_id": 978,
+      "new_id": 365,
       "name": "5050 - LOJA SOLUTION CAM01 ZONA01",
       "old_client_id": 100,
       "new_client_id": 100,
@@ -4341,7 +4342,7 @@
     },
     {
       "old_id": 979,
-      "new_id": 979,
+      "new_id": 366,
       "name": "2000 - SAIDA SERVIP PEDESTRE - CAM17 ZONA 17",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4353,7 +4354,7 @@
     },
     {
       "old_id": 980,
-      "new_id": 980,
+      "new_id": 367,
       "name": "2000 - ENTRADA CLAUSURA GARAGEM - CAM06 ZONA 06",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4365,7 +4366,7 @@
     },
     {
       "old_id": 981,
-      "new_id": 981,
+      "new_id": 368,
       "name": "0563 - Hyde Menino Deus 3",
       "old_client_id": 46,
       "new_client_id": 46,
@@ -4377,7 +4378,7 @@
     },
     {
       "old_id": 982,
-      "new_id": 982,
+      "new_id": 369,
       "name": "FRENTE VSG",
       "old_client_id": 82,
       "new_client_id": 82,
@@ -4389,7 +4390,7 @@
     },
     {
       "old_id": 983,
-      "new_id": 983,
+      "new_id": 370,
       "name": "0620 - Portal Patropolis = Jardim",
       "old_client_id": 46,
       "new_client_id": 46,
@@ -4401,7 +4402,7 @@
     },
     {
       "old_id": 985,
-      "new_id": 985,
+      "new_id": 371,
       "name": "POC Ibiracu",
       "old_client_id": 98,
       "new_client_id": 98,
@@ -4413,7 +4414,7 @@
     },
     {
       "old_id": 986,
-      "new_id": 986,
+      "new_id": 372,
       "name": "0123 - AFFETTO PAPELARIA - ANEXO",
       "old_client_id": 97,
       "new_client_id": 97,
@@ -4425,7 +4426,7 @@
     },
     {
       "old_id": 987,
-      "new_id": 987,
+      "new_id": 373,
       "name": "0123 - AFFETTO PAPELARIA - ENTRADA RECEPCAO",
       "old_client_id": 97,
       "new_client_id": 97,
@@ -4437,7 +4438,7 @@
     },
     {
       "old_id": 988,
-      "new_id": 988,
+      "new_id": 374,
       "name": "0124 - GALERIA VITORIA - CALCADA LADO DIREITO",
       "old_client_id": 97,
       "new_client_id": 97,
@@ -4449,7 +4450,7 @@
     },
     {
       "old_id": 989,
-      "new_id": 989,
+      "new_id": 375,
       "name": "0124 - GALERIA VITORIA - CALCADA LADO ESQUERDO",
       "old_client_id": 97,
       "new_client_id": 97,
@@ -4461,7 +4462,7 @@
     },
     {
       "old_id": 990,
-      "new_id": 990,
+      "new_id": 376,
       "name": "0124 - GALERIA VITORIA - PADRAO DE ENERGIA",
       "old_client_id": 97,
       "new_client_id": 97,
@@ -4473,7 +4474,7 @@
     },
     {
       "old_id": 991,
-      "new_id": 991,
+      "new_id": 377,
       "name": "ESTOQUE VERTEX CAM 2",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4485,7 +4486,7 @@
     },
     {
       "old_id": 992,
-      "new_id": 992,
+      "new_id": 378,
       "name": "ESTOQUE VERTEX CAM 3",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4497,7 +4498,7 @@
     },
     {
       "old_id": 993,
-      "new_id": 993,
+      "new_id": 379,
       "name": "PET LAND",
       "old_client_id": 101,
       "new_client_id": 101,
@@ -4509,7 +4510,7 @@
     },
     {
       "old_id": 994,
-      "new_id": 994,
+      "new_id": 380,
       "name": "Porta ECO 1",
       "old_client_id": 101,
       "new_client_id": 101,
@@ -4521,7 +4522,7 @@
     },
     {
       "old_id": 995,
-      "new_id": 995,
+      "new_id": 381,
       "name": "P10 - Sa Vendas",
       "old_client_id": 101,
       "new_client_id": 101,
@@ -4533,7 +4534,7 @@
     },
     {
       "old_id": 996,
-      "new_id": 996,
+      "new_id": 382,
       "name": "P10 - Loterica",
       "old_client_id": 101,
       "new_client_id": 101,
@@ -4545,7 +4546,7 @@
     },
     {
       "old_id": 997,
-      "new_id": 997,
+      "new_id": 383,
       "name": "ESTACIONAMENTO G2",
       "old_client_id": 101,
       "new_client_id": 101,
@@ -4557,7 +4558,7 @@
     },
     {
       "old_id": 998,
-      "new_id": 998,
+      "new_id": 384,
       "name": "TESTE",
       "old_client_id": 90,
       "new_client_id": 90,
@@ -4569,7 +4570,7 @@
     },
     {
       "old_id": 1000,
-      "new_id": 1000,
+      "new_id": 385,
       "name": "Porta ECO 2",
       "old_client_id": 101,
       "new_client_id": 101,
@@ -4581,7 +4582,7 @@
     },
     {
       "old_id": 1001,
-      "new_id": 1001,
+      "new_id": 386,
       "name": "0085_VITORIA FUTEBOL CLUBE",
       "old_client_id": 97,
       "new_client_id": 97,
@@ -4593,7 +4594,7 @@
     },
     {
       "old_id": 1002,
-      "new_id": 1002,
+      "new_id": 387,
       "name": "ACESSO HALL",
       "old_client_id": 102,
       "new_client_id": 102,
@@ -4605,7 +4606,7 @@
     },
     {
       "old_id": 1003,
-      "new_id": 1003,
+      "new_id": 388,
       "name": "0033 - SCARDUA - DVR 1 - CAMERA 04 - ZONA 41",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4617,7 +4618,7 @@
     },
     {
       "old_id": 1004,
-      "new_id": 1004,
+      "new_id": 389,
       "name": "0033 - SCARDUA - DVR 1 - CAMERA 28 - ZONA 42",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4629,7 +4630,7 @@
     },
     {
       "old_id": 1005,
-      "new_id": 1005,
+      "new_id": 390,
       "name": "0033 - SCARDUA - DVR 1 - CAMERA 29 - ZONA 43",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4641,7 +4642,7 @@
     },
     {
       "old_id": 1006,
-      "new_id": 1006,
+      "new_id": 391,
       "name": "0033 - SCARDUA - DVR 1 - CAMERA 10 - ZONA 45",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4653,7 +4654,7 @@
     },
     {
       "old_id": 1007,
-      "new_id": 1007,
+      "new_id": 392,
       "name": "Camera",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4665,7 +4666,7 @@
     },
     {
       "old_id": 1008,
-      "new_id": 1008,
+      "new_id": 393,
       "name": "CAM 2",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4677,7 +4678,7 @@
     },
     {
       "old_id": 1010,
-      "new_id": 1010,
+      "new_id": 394,
       "name": "0033 - SCARDUA - DVR 1 - CAMERA 30 - ZONA 44",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4689,7 +4690,7 @@
     },
     {
       "old_id": 1011,
-      "new_id": 1011,
+      "new_id": 395,
       "name": "FIXA DIREITA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4701,7 +4702,7 @@
     },
     {
       "old_id": 1012,
-      "new_id": 1012,
+      "new_id": 396,
       "name": "FIXA ESQUERDA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4713,7 +4714,7 @@
     },
     {
       "old_id": 1013,
-      "new_id": 1013,
+      "new_id": 397,
       "name": "AGRALE CAM04",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4725,7 +4726,7 @@
     },
     {
       "old_id": 1014,
-      "new_id": 1014,
+      "new_id": 398,
       "name": "AGRALE CAM10",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4737,7 +4738,7 @@
     },
     {
       "old_id": 1015,
-      "new_id": 1015,
+      "new_id": 399,
       "name": "AGRALE CAM11",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4749,7 +4750,7 @@
     },
     {
       "old_id": 1016,
-      "new_id": 1016,
+      "new_id": 400,
       "name": "AGRALE CAM12",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4761,7 +4762,7 @@
     },
     {
       "old_id": 1017,
-      "new_id": 1017,
+      "new_id": 401,
       "name": "AGRALE CAM13",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4773,7 +4774,7 @@
     },
     {
       "old_id": 1018,
-      "new_id": 1018,
+      "new_id": 402,
       "name": "AGRALE CAM14",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4785,7 +4786,7 @@
     },
     {
       "old_id": 1019,
-      "new_id": 1019,
+      "new_id": 403,
       "name": "AGRALE CAM15",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4797,7 +4798,7 @@
     },
     {
       "old_id": 1020,
-      "new_id": 1020,
+      "new_id": 404,
       "name": "AGRALE CAM16",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4809,7 +4810,7 @@
     },
     {
       "old_id": 1021,
-      "new_id": 1021,
+      "new_id": 405,
       "name": "AGRALE CAM17",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4821,7 +4822,7 @@
     },
     {
       "old_id": 1022,
-      "new_id": 1022,
+      "new_id": 406,
       "name": "AGRALE CAM18",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4833,7 +4834,7 @@
     },
     {
       "old_id": 1023,
-      "new_id": 1023,
+      "new_id": 407,
       "name": "AGRALE CAM19",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4845,7 +4846,7 @@
     },
     {
       "old_id": 1024,
-      "new_id": 1024,
+      "new_id": 408,
       "name": "AGRALE CAM20",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4857,7 +4858,7 @@
     },
     {
       "old_id": 1025,
-      "new_id": 1025,
+      "new_id": 409,
       "name": "AGRALE CAM21",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4869,7 +4870,7 @@
     },
     {
       "old_id": 1026,
-      "new_id": 1026,
+      "new_id": 410,
       "name": "AGRALE CAM22",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4881,7 +4882,7 @@
     },
     {
       "old_id": 1027,
-      "new_id": 1027,
+      "new_id": 411,
       "name": "AGRALE CAM23",
       "old_client_id": 6,
       "new_client_id": 6,
@@ -4893,7 +4894,7 @@
     },
     {
       "old_id": 1028,
-      "new_id": 1028,
+      "new_id": 412,
       "name": "CASCAAIS CAM 4 RECON. FACIAL",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4905,7 +4906,7 @@
     },
     {
       "old_id": 1029,
-      "new_id": 1029,
+      "new_id": 413,
       "name": "CASCAIS CAM 15 RECON. FACIAL",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4917,7 +4918,7 @@
     },
     {
       "old_id": 1030,
-      "new_id": 1030,
+      "new_id": 414,
       "name": "FIXA DIREITA AMERICA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4929,7 +4930,7 @@
     },
     {
       "old_id": 1031,
-      "new_id": 1031,
+      "new_id": 415,
       "name": "FIXA ESQUERDA AMERICA",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4941,7 +4942,7 @@
     },
     {
       "old_id": 1032,
-      "new_id": 1032,
+      "new_id": 416,
       "name": "VILA VERDE CAM 5",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4953,7 +4954,7 @@
     },
     {
       "old_id": 1033,
-      "new_id": 1033,
+      "new_id": 417,
       "name": "FIXA ESQUERDA COLLINE DI NICE PORTAO S1",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -4965,7 +4966,7 @@
     },
     {
       "old_id": 1034,
-      "new_id": 1034,
+      "new_id": 418,
       "name": "FIXA DIREITA COLLINE DI NICE PORTAO S2",
       "old_client_id": 8,
       "new_client_id": 8,
@@ -7589,5 +7590,30 @@
       "reason": "status = -1 (excluded)"
     }
   ],
-  "unmapped_new": []
+  "unmapped_new": [
+    {
+      "id": 1,
+      "name": "TESTE",
+      "client_id": "0",
+      "parent_id": "0"
+    },
+    {
+      "id": 2,
+      "name": "PACAEMBU SP",
+      "client_id": "0",
+      "parent_id": "0"
+    },
+    {
+      "id": 3,
+      "name": "FRENTE VSG",
+      "client_id": "0",
+      "parent_id": "0"
+    },
+    {
+      "id": 4,
+      "name": "ECO 1",
+      "client_id": "0",
+      "parent_id": "0"
+    }
+  ]
 }

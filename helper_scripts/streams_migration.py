@@ -13,7 +13,7 @@ import json
 import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 
 OLD_STREAMS_PATH = Path("old_dataset/_streams__202512301049.txt")
@@ -147,6 +147,43 @@ def parse_pipe_table(path: Path) -> List[Dict[str, Optional[str]]]:
     return data_rows
 
 
+def parse_existing_dataset(
+    path: Path,
+) -> Tuple[Sequence[str], List[str], List[Dict[str, Any]], int]:
+    """Read the current new_dataset file, preserving existing rows.
+
+    Returns (header_lines, existing_line_strings, parsed_existing_rows, max_existing_id).
+    """
+    lines = path.read_text(encoding="utf-8").splitlines()
+    if len(lines) < 2:
+        raise ValueError("Existing streams dataset is missing header rows.")
+
+    header_lines = lines[:2]
+    data_lines = [line for line in lines[2:] if line.strip()]
+
+    headers = [header.strip() for header in header_lines[0].strip("|").split("|")]
+    parsed_rows: List[Dict[str, Any]] = []
+    max_id = 0
+    for line in data_lines:
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        row = dict(zip(headers, cells))
+        try:
+            row_id = int(row["id"].replace(",", ""))
+        except Exception:
+            continue
+        max_id = max(max_id, row_id)
+        parsed_rows.append(
+            {
+                "id": row_id,
+                "name": row.get("name"),
+                "client_id": row.get("client_id"),
+                "parent_id": row.get("parent_id"),
+            }
+        )
+
+    return header_lines, data_lines, parsed_rows, max_id
+
+
 def load_id_map(path: Path) -> Dict[int, int]:
     """Load an old->new id mapping from an existing mapping file."""
     mapping_data = json.loads(path.read_text(encoding="utf-8"))
@@ -158,6 +195,7 @@ def build_records(
     client_map: Dict[int, int],
     stream_group_map: Dict[int, int],
     user_map: Dict[int, int],
+    starting_id: int,
 ) -> tuple[List[StreamRecord], List[Dict[str, Any]]]:
     """Normalize and remap rows, preserving deterministic ordering.
 
@@ -165,6 +203,7 @@ def build_records(
     """
     records: List[StreamRecord] = []
     unmapped_old: List[Dict[str, Any]] = []
+    next_id = starting_id
 
     for row in rows:
         status = to_int(row.get("status"))
@@ -225,7 +264,7 @@ def build_records(
             restrictions = {**restrictions, "creator_id": new_creator_id}
 
         record = StreamRecord(
-            id=to_int(row.get("id")) or 0,
+            id=next_id,
             old_id=to_int(row.get("id")) or 0,
             name=normalized_name,
             path=normalize_text(strip_outer_quotes(row.get("path"))),
@@ -254,6 +293,7 @@ def build_records(
             old_parent_id=parent_id,
         )
         records.append(record)
+        next_id += 1
 
     records.sort(key=lambda record: record.id)
     unmapped_old.sort(key=lambda record: (record["old_id"] or 0))
@@ -274,12 +314,11 @@ def format_cell(value: Optional[Any]) -> str:
     return str(value)
 
 
-def write_new_dataset(records: List[StreamRecord], path: Path) -> None:
-    """Write the normalized streams table to the new dataset file."""
-    lines = [
-        "|id |name|path|width|height|file_name|status|created_at|lat|lng|type|uuid|address|params|auth|direction|client_id|codec|timezone|duration|restrictions|parent_id|",
-        "|---|----|----|-----|------|---------|------|----------|---|---|----|----|-------|------|----|---------|---------|-----|--------|--------|------------|---------|",
-    ]
+def write_new_dataset(
+    header_lines: Sequence[str], existing_lines: List[str], records: List[StreamRecord], path: Path
+) -> None:
+    """Write the merged streams table to the new dataset file."""
+    lines = list(header_lines) + list(existing_lines)
     for record in records:
         lines.append(
             "|".join(
@@ -379,12 +418,16 @@ def write_sql(records: List[StreamRecord], path: Path) -> None:
 
 
 def write_mapping(
-    records: List[StreamRecord], unmapped_old: List[Dict[str, Any]], path: Path
+    records: List[StreamRecord],
+    unmapped_old: List[Dict[str, Any]],
+    unmapped_new: List[Dict[str, Any]],
+    path: Path,
 ) -> None:
     """Create the mapping JSON artifact."""
     mapping = {
         "match_keys": [
-            "id preserved 1:1 to id",
+            "existing new_dataset rows preserved with ids",
+            "legacy ids remapped sequentially (no collision) to id",
             "name (ASCII normalized) to name",
             "client_id remapped via clients.json to client_id",
             "parent_id remapped via stream_groups.json to parent_id",
@@ -406,7 +449,7 @@ def write_mapping(
             for record in records
         ],
         "unmapped_old": unmapped_old,
-        "unmapped_new": [],
+        "unmapped_new": unmapped_new,
     }
     path.write_text(json.dumps(mapping, indent=2), encoding="utf-8")
 
@@ -415,13 +458,23 @@ def main() -> None:
     client_map = load_id_map(CLIENT_MAP_PATH)
     stream_group_map = load_id_map(STREAM_GROUP_MAP_PATH)
     user_map = load_id_map(USER_MAP_PATH)
-    legacy_rows = parse_pipe_table(OLD_STREAMS_PATH)
-    records, unmapped_old = build_records(legacy_rows, client_map, stream_group_map, user_map)
+    header_lines, existing_lines, existing_rows, max_existing_id = parse_existing_dataset(
+        NEW_STREAMS_PATH
+    )
 
-    write_new_dataset(records, NEW_STREAMS_PATH)
+    legacy_rows = parse_pipe_table(OLD_STREAMS_PATH)
+    starting_id = max_existing_id + 1
+    records, unmapped_old = build_records(
+        legacy_rows, client_map, stream_group_map, user_map, starting_id
+    )
+
+    write_new_dataset(header_lines, existing_lines, records, NEW_STREAMS_PATH)
     write_sql(records, SQL_OUTPUT_PATH)
-    write_mapping(records, unmapped_old, MAP_OUTPUT_PATH)
-    print(f"Processed {len(records)} mapped streams, {len(unmapped_old)} unmapped.")
+    write_mapping(records, unmapped_old, existing_rows, MAP_OUTPUT_PATH)
+    print(
+        f"Processed {len(records)} mapped streams (starting id {starting_id}), "
+        f"{len(unmapped_old)} unmapped legacy, {len(existing_rows)} preserved existing."
+    )
 
 
 if __name__ == "__main__":
