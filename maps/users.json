@@ -20,308 +20,20 @@
       "status": 1
     },
     {
-      "old_id": 5,
-      "new_id": 5,
-      "email": "suporte@megavig.com.br",
-      "fullname": "Megavig",
-      "client_id": 4,
-      "old_role_id": 5,
+      "old_id": 127,
+      "new_id": 29,
+      "email": "monitoryplus@gmail.com",
+      "fullname": "Operador Monitory",
+      "client_id": 103,
+      "old_role_id": 119,
       "new_role_ids": [
-        5
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 8,
-      "new_id": 8,
-      "email": "sutec@serviptecnologia.com.br",
-      "fullname": "Supervisor",
-      "client_id": 6,
-      "old_role_id": 7,
-      "new_role_ids": [
-        7
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 9,
-      "new_id": 9,
-      "email": "operador@serviptecnologia.com.br",
-      "fullname": "Operador Servip",
-      "client_id": 6,
-      "old_role_id": 9,
-      "new_role_ids": [
-        9
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 11,
-      "new_id": 11,
-      "email": "vertex@vertex.com.br",
-      "fullname": "Vertex",
-      "client_id": 8,
-      "old_role_id": 11,
-      "new_role_ids": [
-        11
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 43,
-      "new_id": 43,
-      "email": "komtek@komtektecnologia.com.br",
-      "fullname": "OPERADOR",
-      "client_id": 40,
-      "old_role_id": 43,
-      "new_role_ids": [
-        43
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 48,
-      "new_id": 48,
-      "email": "tiago@monitoramento.com",
-      "fullname": "Tiago",
-      "client_id": 46,
-      "old_role_id": 48,
-      "new_role_ids": [
-        48
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 52,
-      "new_id": 52,
-      "email": "supervisor",
-      "fullname": "Supervisor",
-      "client_id": 46,
-      "old_role_id": 53,
-      "new_role_ids": [
-        53
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 53,
-      "new_id": 53,
-      "email": "operador",
-      "fullname": "Operador trontec",
-      "client_id": 46,
-      "old_role_id": 52,
-      "new_role_ids": [
-        52
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 88,
-      "new_id": 88,
-      "email": "capixaba@capixaba.com.br",
-      "fullname": "Capixaba Servicos",
-      "client_id": 80,
-      "old_role_id": 87,
-      "new_role_ids": [
-        87
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 90,
-      "new_id": 90,
-      "email": "cconet@cconet.com.br",
-      "fullname": "CCONET",
-      "client_id": 1,
-      "old_role_id": 2,
-      "new_role_ids": [
-        2
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 105,
-      "new_id": 105,
-      "email": "sutec@grupovsg.com.br",
-      "fullname": "Supervisor",
-      "client_id": 89,
-      "old_role_id": 100,
-      "new_role_ids": [
-        100
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 107,
-      "new_id": 107,
-      "email": "fernando.hyga@ondistribuidora.com.br",
-      "fullname": "Fernando",
-      "client_id": 90,
-      "old_role_id": 101,
-      "new_role_ids": [
-        101
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 109,
-      "new_id": 109,
-      "email": "natalia.braga@grupovsg.com.br",
-      "fullname": "Natalia Braga",
-      "client_id": 89,
-      "old_role_id": 103,
-      "new_role_ids": [
-        103
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 110,
-      "new_id": 110,
-      "email": "monitoramento@praiafort.com",
-      "fullname": "Operador Praia Fort",
-      "client_id": 93,
-      "old_role_id": 104,
-      "new_role_ids": [
-        104
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 113,
-      "new_id": 113,
-      "email": "Integracao_Sigma",
-      "fullname": "Integracao_Sigma",
-      "client_id": 82,
-      "old_role_id": 99,
-      "new_role_ids": [
-        99
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 114,
-      "new_id": 114,
-      "email": "just-sil@hotmail.com",
-      "fullname": "Just",
-      "client_id": 82,
-      "old_role_id": 99,
-      "new_role_ids": [
-        99
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 115,
-      "new_id": 115,
-      "email": "operador@vertexsecurity.com",
-      "fullname": "OPERACAO",
-      "client_id": 8,
-      "old_role_id": 105,
-      "new_role_ids": [
-        105
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 116,
-      "new_id": 116,
-      "email": "supervisao",
-      "fullname": "supervisao martel",
-      "client_id": 96,
-      "old_role_id": 53,
-      "new_role_ids": [
-        53
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 117,
-      "new_id": 117,
-      "email": "ti@gttam.com.br",
-      "fullname": "Suporte",
-      "client_id": 97,
-      "old_role_id": 110,
-      "new_role_ids": [
-        110
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 118,
-      "new_id": 118,
-      "email": "isaias.matias@megavig.com.br",
-      "fullname": "Isaias",
-      "client_id": 4,
-      "old_role_id": 5,
-      "new_role_ids": [
-        5
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 120,
-      "new_id": 120,
-      "email": "vemco@vemco.com.br",
-      "fullname": "Grupo Vemco",
-      "client_id": 99,
-      "old_role_id": 112,
-      "new_role_ids": [
-        112
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 121,
-      "new_id": 121,
-      "email": "cliente01@vemco.com.br",
-      "fullname": "Cliente1",
-      "client_id": 99,
-      "old_role_id": 113,
-      "new_role_ids": [
-        113
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 122,
-      "new_id": 122,
-      "email": "marcos@solution.com.br",
-      "fullname": "marcos@solution.com.br",
-      "client_id": 100,
-      "old_role_id": 114,
-      "new_role_ids": [
-        114
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 124,
-      "new_id": 124,
-      "email": "jpcabaleiro@atcom.com.br",
-      "fullname": "jpcabaleiro@atcom.com.br",
-      "client_id": 101,
-      "old_role_id": 115,
-      "new_role_ids": [
-        115
-      ],
-      "status": 1
-    },
-    {
-      "old_id": 125,
-      "new_id": 125,
-      "email": "spc@atcom.com.br",
-      "fullname": "spc",
-      "client_id": 101,
-      "old_role_id": 117,
-      "new_role_ids": [
-        117
+        119
       ],
       "status": 1
     },
     {
       "old_id": 126,
-      "new_id": 126,
+      "new_id": 30,
       "email": "marco@benuvem.com",
       "fullname": "Marco",
       "client_id": 102,
@@ -332,14 +44,302 @@
       "status": 1
     },
     {
-      "old_id": 127,
-      "new_id": 127,
-      "email": "monitoryplus@gmail.com",
-      "fullname": "Operador Monitory",
-      "client_id": 103,
-      "old_role_id": 119,
+      "old_id": 125,
+      "new_id": 31,
+      "email": "spc@atcom.com.br",
+      "fullname": "spc",
+      "client_id": 101,
+      "old_role_id": 117,
       "new_role_ids": [
-        119
+        117
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 124,
+      "new_id": 32,
+      "email": "jpcabaleiro@atcom.com.br",
+      "fullname": "jpcabaleiro@atcom.com.br",
+      "client_id": 101,
+      "old_role_id": 115,
+      "new_role_ids": [
+        115
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 122,
+      "new_id": 33,
+      "email": "marcos@solution.com.br",
+      "fullname": "marcos@solution.com.br",
+      "client_id": 100,
+      "old_role_id": 114,
+      "new_role_ids": [
+        114
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 121,
+      "new_id": 34,
+      "email": "cliente01@vemco.com.br",
+      "fullname": "Cliente1",
+      "client_id": 99,
+      "old_role_id": 113,
+      "new_role_ids": [
+        113
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 120,
+      "new_id": 35,
+      "email": "vemco@vemco.com.br",
+      "fullname": "Grupo Vemco",
+      "client_id": 99,
+      "old_role_id": 112,
+      "new_role_ids": [
+        112
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 118,
+      "new_id": 36,
+      "email": "isaias.matias@megavig.com.br",
+      "fullname": "Isaias",
+      "client_id": 4,
+      "old_role_id": 5,
+      "new_role_ids": [
+        5
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 117,
+      "new_id": 37,
+      "email": "ti@gttam.com.br",
+      "fullname": "Suporte",
+      "client_id": 97,
+      "old_role_id": 110,
+      "new_role_ids": [
+        110
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 116,
+      "new_id": 38,
+      "email": "supervisao",
+      "fullname": "supervisao martel",
+      "client_id": 96,
+      "old_role_id": 53,
+      "new_role_ids": [
+        53
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 115,
+      "new_id": 39,
+      "email": "operador@vertexsecurity.com",
+      "fullname": "OPERACAO",
+      "client_id": 8,
+      "old_role_id": 105,
+      "new_role_ids": [
+        105
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 114,
+      "new_id": 40,
+      "email": "just-sil@hotmail.com",
+      "fullname": "Just",
+      "client_id": 82,
+      "old_role_id": 99,
+      "new_role_ids": [
+        99
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 113,
+      "new_id": 41,
+      "email": "Integracao_Sigma",
+      "fullname": "Integracao_Sigma",
+      "client_id": 82,
+      "old_role_id": 99,
+      "new_role_ids": [
+        99
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 110,
+      "new_id": 42,
+      "email": "monitoramento@praiafort.com",
+      "fullname": "Operador Praia Fort",
+      "client_id": 93,
+      "old_role_id": 104,
+      "new_role_ids": [
+        104
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 109,
+      "new_id": 43,
+      "email": "natalia.braga@grupovsg.com.br",
+      "fullname": "Natalia Braga",
+      "client_id": 89,
+      "old_role_id": 103,
+      "new_role_ids": [
+        103
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 107,
+      "new_id": 44,
+      "email": "fernando.hyga@ondistribuidora.com.br",
+      "fullname": "Fernando",
+      "client_id": 90,
+      "old_role_id": 101,
+      "new_role_ids": [
+        101
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 105,
+      "new_id": 45,
+      "email": "sutec@grupovsg.com.br",
+      "fullname": "Supervisor",
+      "client_id": 89,
+      "old_role_id": 100,
+      "new_role_ids": [
+        100
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 90,
+      "new_id": 46,
+      "email": "cconet@cconet.com.br",
+      "fullname": "CCONET",
+      "client_id": 1,
+      "old_role_id": 2,
+      "new_role_ids": [
+        2
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 88,
+      "new_id": 47,
+      "email": "capixaba@capixaba.com.br",
+      "fullname": "Capixaba Servicos",
+      "client_id": 80,
+      "old_role_id": 87,
+      "new_role_ids": [
+        87
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 53,
+      "new_id": 48,
+      "email": "operador",
+      "fullname": "Operador trontec",
+      "client_id": 46,
+      "old_role_id": 52,
+      "new_role_ids": [
+        52
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 52,
+      "new_id": 49,
+      "email": "supervisor",
+      "fullname": "Supervisor",
+      "client_id": 46,
+      "old_role_id": 53,
+      "new_role_ids": [
+        53
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 48,
+      "new_id": 50,
+      "email": "tiago@monitoramento.com",
+      "fullname": "Tiago",
+      "client_id": 46,
+      "old_role_id": 48,
+      "new_role_ids": [
+        48
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 43,
+      "new_id": 51,
+      "email": "komtek@komtektecnologia.com.br",
+      "fullname": "OPERADOR",
+      "client_id": 40,
+      "old_role_id": 43,
+      "new_role_ids": [
+        43
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 11,
+      "new_id": 52,
+      "email": "vertex@vertex.com.br",
+      "fullname": "Vertex",
+      "client_id": 8,
+      "old_role_id": 11,
+      "new_role_ids": [
+        11
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 9,
+      "new_id": 53,
+      "email": "operador@serviptecnologia.com.br",
+      "fullname": "Operador Servip",
+      "client_id": 6,
+      "old_role_id": 9,
+      "new_role_ids": [
+        9
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 8,
+      "new_id": 54,
+      "email": "sutec@serviptecnologia.com.br",
+      "fullname": "Supervisor",
+      "client_id": 6,
+      "old_role_id": 7,
+      "new_role_ids": [
+        7
+      ],
+      "status": 1
+    },
+    {
+      "old_id": 5,
+      "new_id": 55,
+      "email": "suporte@megavig.com.br",
+      "fullname": "Megavig",
+      "client_id": 4,
+      "old_role_id": 5,
+      "new_role_ids": [
+        5
       ],
       "status": 1
     }
