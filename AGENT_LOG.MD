@@ -25,3 +25,5 @@
 - 18:32 UTC — Migrated ALPR list items (466 rows tied to migrated lists) into new_dataset/alpr_list_items_202512301039.txt, generated sql/alpr_list_items_inserts.sql, and created maps/alpr_list_items.json.
 - 18:43 UTC — Updated /helper_scripts/alpr_lists_migration.py to default unmapped/missing created_by values to admin id 1 for ALPR list items to satisfy NOT NULL constraint and regenerated new_dataset/sql/mapping outputs.
 - 18:44 UTC — Added AGENTS.md guidance about defaulting ALPR list item created_by to admin id 1 when creator is unmapped.
+- 19:05 UTC — Added /helper_scripts/face_lists_migration.py to migrate face lists/items/images, remap clients/users/analytics, and reorganize assets into per-list folders with slugified filenames.
+- 19:05 UTC — Migrated active face_lists, face_list_items, and face_list_items_images into new_dataset/sql/mapping outputs; moved source photos into face_lists/<list_id>_<slug>/ and recorded unmapped legacy rows where status=-1 or references were missing.
