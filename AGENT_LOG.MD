@@ -38,3 +38,8 @@
 - 22:57 UTC — Enhanced img_rename.sh logging (per-file actions, manifest gaps, summary) to diagnose why most assets are not moving.
 - 23:23 UTC — Reworked img_rename.sh to load the manifest in a single jq pass, add error trapping, safe counters for set -e, and periodic progress logging.
 - 23:24 UTC — Ran img_rename.sh; moved 531 images into face_lists_new, skipped 494 unmapped source files, and logged 1,110 manifest entries missing from source with per-file details in face_lists_new/img_rename.log.
+
+## 2026-01-06
+
+- 17:38 UTC — Updated img_rename.sh to allow MANIFEST/SOURCE_DIR/TARGET_ROOT environment overrides so renamed assets can be routed to alternate destinations.
+- 17:38 UTC — Ran img_rename.sh with TARGET_ROOT=face_lists_new1; moved 532 images from face_lists, skipped 498 unmapped, and recorded 1,109 manifest-missing entries in face_lists_new1/img_rename.log.
