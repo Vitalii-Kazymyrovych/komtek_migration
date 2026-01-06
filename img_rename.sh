@@ -4,9 +4,9 @@
 
 set -euo pipefail
 
-MANIFEST="docs/face_list_items_images.json"
-SOURCE_DIR="face_lists"
-TARGET_ROOT="face_lists_new"
+MANIFEST="${MANIFEST:-docs/face_list_items_images.json}"
+SOURCE_DIR="${SOURCE_DIR:-face_lists}"
+TARGET_ROOT="${TARGET_ROOT:-face_lists_new}"
 LOG_FILE="${LOG_FILE:-${TARGET_ROOT}/img_rename.log}"
 
 SCRIPT_START="$(date +%s)"
