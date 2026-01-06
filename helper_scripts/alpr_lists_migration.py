@@ -12,6 +12,7 @@ using existing mappings, and regenerates:
 """
 from __future__ import annotations
 
+import csv
 import json
 import unicodedata
 from dataclasses import dataclass
@@ -28,6 +29,7 @@ USER_MAP_PATH = Path("maps/users.json")
 ANALYTICS_MAP_PATH = Path("maps/analytics.json")
 SQL_LISTS_PATH = Path("sql/alpr_lists_inserts.sql")
 SQL_ITEMS_PATH = Path("sql/alpr_list_items_inserts.sql")
+SQL_ITEMS_BACKFILL_PATH = Path("sql/alpr_list_items_backfill.sql")
 MAP_LISTS_PATH = Path("maps/alpr_lists.json")
 MAP_ITEMS_PATH = Path("maps/alpr_list_items.json")
 PRESERVE_LIST_IDS = {1}
@@ -151,8 +153,34 @@ def parse_json_field(raw: Optional[str]) -> Optional[Any]:
         return None
 
 
-def parse_pipe_table(path: Path) -> List[Dict[str, Optional[str]]]:
-    """Parse a pipe-delimited table file with a header row."""
+def parse_pipe_table(path: Path, multiline: bool = False) -> List[Dict[str, Optional[str]]]:
+    """Parse a pipe-delimited table file with a header row.
+
+    When multiline is True, csv.reader is used to allow line breaks within quoted
+    fields (needed for ALPR list items). Otherwise, a simple split is used to
+    preserve escaped quotes verbatim for JSON fields.
+    """
+    if multiline:
+        with path.open(newline="", encoding="utf-8") as handle:
+            reader = csv.reader(handle, delimiter="|")
+            rows = list(reader)
+
+        if len(rows) < 2:
+            return []
+
+        headers = [header.strip() for header in rows[0][1:-1]]
+        data_rows: List[Dict[str, Optional[str]]] = []
+        for row in rows[2:]:
+            if not row or all(not cell.strip() for cell in row):
+                continue
+            trimmed = row[1:-1]
+            if len(trimmed) < len(headers):
+                trimmed += [None] * (len(headers) - len(trimmed))
+            data_rows.append(
+                dict(zip(headers, (cell.strip() if cell is not None else None for cell in trimmed)))
+            )
+        return data_rows
+
     lines = path.read_text(encoding="utf-8").splitlines()
     if len(lines) < 2:
         return []
@@ -195,6 +223,21 @@ def load_id_map(path: Path) -> Dict[int, int]:
     """Load an old->new id mapping from an existing mapping file."""
     mapping_data = json.loads(path.read_text(encoding="utf-8"))
     return {entry["old_id"]: entry["new_id"] for entry in mapping_data.get("mapped", [])}
+
+
+def load_existing_item_map(path: Path) -> Dict[int, int]:
+    """Load an existing ALPR list item mapping (old_id -> new_id) if present."""
+    if not path.exists():
+        return {}
+    mapping_data = json.loads(path.read_text(encoding="utf-8"))
+    mapping: Dict[int, int] = {}
+    for entry in mapping_data.get("mapped", []):
+        old_id = entry.get("old_id")
+        new_id = entry.get("new_id")
+        if old_id is None or new_id is None:
+            continue
+        mapping[int(old_id)] = int(new_id)
+    return mapping
 
 
 def build_alpr_analytics_map(path: Path) -> Dict[int, List[int]]:
@@ -409,6 +452,7 @@ def build_list_item_records(
     list_id_map: Dict[int, int],
     client_map: Dict[int, int],
     user_map: Dict[int, int],
+    existing_item_map: Dict[int, int],
 ) -> Tuple[List[AlprListItemRecord], List[Dict[str, Any]], List[Dict[str, Any]]]:
     """Build normalized list item records and mapping/unmapped sets."""
     records: List[AlprListItemRecord] = []
@@ -462,8 +506,15 @@ def build_list_item_records(
         normalized_number = normalize_text(strip_outer_quotes(row.get("number"))) or ""
         normalized_comment = normalize_text(strip_outer_quotes(row.get("comment")))
 
+        mapped_new_id = existing_item_map.get(old_id)
+        if mapped_new_id is not None:
+            record_id = mapped_new_id
+        else:
+            record_id = next_id
+            next_id += 1
+
         record = AlprListItemRecord(
-            id=next_id,
+            id=record_id,
             old_id=old_id,
             number=normalized_number,
             comment=normalized_comment,
@@ -492,8 +543,9 @@ def build_list_item_records(
                 "status": status,
             }
         )
-        next_id += 1
 
+    records = sorted(records, key=lambda r: r.id)
+    mapped_entries = sorted(mapped_entries, key=lambda entry: entry["new_id"])
     return records, mapped_entries, unmapped_old
 
 
@@ -648,7 +700,7 @@ def write_mapping_file(
 
 def main() -> None:
     legacy_lists = parse_pipe_table(OLD_LISTS_PATH)
-    legacy_items = parse_pipe_table(OLD_ITEMS_PATH)
+    legacy_items = parse_pipe_table(OLD_ITEMS_PATH, multiline=True)
     header_lists, existing_list_lines, _ = parse_existing_dataset(NEW_LISTS_PATH)
     header_items, existing_item_lines, _ = parse_existing_dataset(NEW_ITEMS_PATH)
     existing_list_rows = parse_data_lines(header_lists[0], existing_list_lines)
@@ -677,20 +729,24 @@ def main() -> None:
     client_map = load_id_map(CLIENT_MAP_PATH)
     user_map = load_id_map(USER_MAP_PATH)
     analytics_by_stream = build_alpr_analytics_map(ANALYTICS_MAP_PATH)
+    existing_item_map = load_existing_item_map(MAP_ITEMS_PATH)
 
     list_records, list_mapped, list_unmapped_old = build_list_records(
         legacy_lists, max_preserved_list_id + 1, client_map, analytics_by_stream, user_map
     )
     list_id_map = {entry["old_id"]: entry["new_id"] for entry in list_mapped}
 
+    next_item_id = max(max_preserved_item_id, max(existing_item_map.values(), default=0)) + 1
     item_records, item_mapped, item_unmapped_old = build_list_item_records(
-        legacy_items, max_preserved_item_id + 1, list_id_map, client_map, user_map
+        legacy_items, next_item_id, list_id_map, client_map, user_map, existing_item_map
     )
+    new_item_records = [record for record in item_records if record.old_id not in existing_item_map]
 
     write_lists_dataset(header_lists, preserved_list_lines, list_records, NEW_LISTS_PATH)
     write_items_dataset(header_items, preserved_item_lines, item_records, NEW_ITEMS_PATH)
     write_lists_sql(list_records, SQL_LISTS_PATH)
     write_items_sql(item_records, SQL_ITEMS_PATH)
+    write_items_sql(new_item_records, SQL_ITEMS_BACKFILL_PATH)
 
     write_mapping_file(
         MAP_LISTS_PATH,

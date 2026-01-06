@@ -43,3 +43,7 @@
 
 - 17:38 UTC — Updated img_rename.sh to allow MANIFEST/SOURCE_DIR/TARGET_ROOT environment overrides so renamed assets can be routed to alternate destinations.
 - 17:38 UTC — Ran img_rename.sh with TARGET_ROOT=face_lists_new1; moved 532 images from face_lists, skipped 498 unmapped, and recorded 1,109 manifest-missing entries in face_lists_new1/img_rename.log.
+## 2026-01-06
+- 18:56 UTC — Investigated ALPR list item count gaps; discovered multiline comments in old_dataset/_alpr_list_items__202512301049.txt caused the parser to split 567 rows, dropping items (e.g., ÂNIMA PLACAS 110 entries -> 73).
+- 18:56 UTC — Updated helper_scripts/alpr_lists_migration.py to parse multiline item rows safely, preserve existing item id mappings, and emit a backfill SQL for newly surfaced records.
+- 18:56 UTC — Regenerated new_dataset/sql/mapping outputs for ALPR list items (721 active items, ANIMA PLACAS now 110) and created sql/alpr_list_items_backfill.sql with 255 missing records appended after prior ids.
