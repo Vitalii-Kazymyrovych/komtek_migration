@@ -1,4 +1,0 @@
-|category_id|retention_period|
-|-----------|----------------|
-|metadata   |30              |
-|alerts     |30              |

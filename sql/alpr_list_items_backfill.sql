@@ -1,6 +1,6 @@
 INSERT INTO videoanalytics.alpr_list_items (id, "number", "comment", status, created_at, created_by, closed_at, list_id, client_id)
 VALUES
-  (467, 'EZT5090', 'Apto 11 - Agile', 1, '2025-08-06 15:01:13.503', 52, NULL, 10, 8),
+  (722, 'EZT5090', 'Apto 11 - Agile', 1, '2025-08-06 15:01:13.503', 52, NULL, 10, 8),
   (468, 'DYJ9497', 'Apto 11 - Fit', 1, '2025-08-06 15:05:54.341', 52, NULL, 10, 8),
   (469, 'CLV7320', 'Sindico Rafael - Gol', 1, '2025-08-06 15:09:16.625', 52, NULL, 10, 8),
   (470, 'SVL8F37', 'Apto 12 - Onix Plus', 1, '2025-08-06 15:09:33.147', 52, NULL, 10, 8),

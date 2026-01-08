@@ -1,2 +1,0 @@
-|id |list_item_id|path|encoding|points|
-|---|------------|----|--------|------|

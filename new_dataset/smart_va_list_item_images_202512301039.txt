@@ -1,2 +1,0 @@
-|id |image|list_item_id|client_id|
-|---|-----|------------|---------|
