@@ -17,7 +17,7 @@ If you need a different location, pass one of:
 
 The app executes deterministic table migration order:
 
-`clients -> roles -> users -> stream_groups -> streams -> analytics_groups -> analytics -> traffic_counters -> traffic_stat -> event_manager -> alpr_lists -> alpr_list_items -> face_lists`
+`clients -> roles -> users -> stream_groups -> streams -> analytics_groups -> analytics -> traffic_counters -> traffic_stat -> event_manager -> alpr_lists -> alpr_list_items -> face_lists -> face_list_items -> face_list_items_images`
 
 Rules applied in migration:
 - `status = -1` rows are skipped.
@@ -30,6 +30,12 @@ Rules applied in migration:
 
 After DB rows are migrated, face list item images are moved/renamed to:
 - `<images.target_dir>/<list_id>/<item_id>.<ext>`
+
+Image source filename mapping is resolved from:
+- `face_list_items.image` when present for that item;
+- if `face_list_items.image` is empty/missing, all `face_list_items_images.path` rows linked by `face_list_items_images.list_item_id -> face_list_items.id` are used.
+
+If multiple source files map to the same `<list_id>/<item_id>.<ext>` destination, additional files are saved deterministically as `<item_id>_2.<ext>`, `<item_id>_3.<ext>`, etc.
 
 ## config.json example
 
