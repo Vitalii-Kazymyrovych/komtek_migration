@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.io.Reader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -36,6 +37,9 @@ public class MigratorsManager {
             "face_lists"
     );
     private static final Pattern SENSITIVE = Pattern.compile("(?i)(password|hash|token|secret|signature|base64)");
+    private static final Pattern DUMP_STATEMENT_SKIP = Pattern.compile("(?is)^\\s*(LOCK\\s+TABLES|UNLOCK\\s+TABLES|DELIMITER)\\b.*");
+    private static final Pattern DUMP_ENGINE_SUFFIX = Pattern.compile("(?is)\\s+ENGINE\\s*=\\s*[^\\s;]+(?:\\s+AUTO_INCREMENT\\s*=\\s*\\d+)?");
+    private static final Pattern DUMP_DEFAULT_CHARSET_SUFFIX = Pattern.compile("(?is)\\s+DEFAULT\\s+CHARSET\\s*=\\s*[^\\s;]+");
 
     private final ObjectMapper objectMapper;
 
@@ -85,18 +89,106 @@ public class MigratorsManager {
         Class.forName("org.h2.Driver");
         String jdbc = "jdbc:h2:mem:legacy;MODE=" + (config.sourceType.equalsIgnoreCase("mysql_dump") ? "MySQL" : "Regular") + ";DATABASE_TO_LOWER=TRUE;NON_KEYWORDS=VALUE";
         Connection connection = DriverManager.getConnection(jdbc, "sa", "");
-        String dumpSql = Files.readString(Path.of(config.dumpPath), StandardCharsets.UTF_8);
-        for (String statement : splitSqlStatements(cleanDumpSql(dumpSql))) {
-            if (statement.isBlank()) {
-                continue;
-            }
-            try (Statement st = connection.createStatement()) {
-                st.execute(statement);
-            } catch (SQLException ex) {
-                log.debug("Skipped source statement: {}", ex.getMessage());
+        executeDumpSqlStreaming(Path.of(config.dumpPath), connection);
+        return connection;
+    }
+
+    private void executeDumpSqlStreaming(Path dumpPath, Connection connection) throws IOException {
+        StringBuilder statementBuilder = new StringBuilder(8 * 1024);
+        boolean inSingleQuote = false;
+        boolean inDoubleQuote = false;
+        boolean inLineComment = false;
+        boolean inBlockComment = false;
+
+        try (Reader reader = Files.newBufferedReader(dumpPath, StandardCharsets.UTF_8)) {
+            char[] buffer = new char[16 * 1024];
+            int read;
+            while ((read = reader.read(buffer)) != -1) {
+                for (int i = 0; i < read; i++) {
+                    char current = buffer[i];
+                    char next = i + 1 < read ? buffer[i + 1] : '\0';
+                    char previous = statementBuilder.isEmpty() ? '\0' : statementBuilder.charAt(statementBuilder.length() - 1);
+
+                    if (inLineComment) {
+                        if (current == '\n' || current == '\r') {
+                            inLineComment = false;
+                        }
+                        continue;
+                    }
+
+                    if (inBlockComment) {
+                        if (current == '*' && next == '/') {
+                            inBlockComment = false;
+                            i++;
+                        }
+                        continue;
+                    }
+
+                    if (!inSingleQuote && !inDoubleQuote) {
+                        if (current == '#' ) {
+                            inLineComment = true;
+                            continue;
+                        }
+                        if (current == '-' && next == '-' && Character.isWhitespace(previous == '\0' ? ' ' : previous)) {
+                            inLineComment = true;
+                            i++;
+                            continue;
+                        }
+                        if (current == '/' && next == '*') {
+                            inBlockComment = true;
+                            i++;
+                            continue;
+                        }
+                    }
+
+                    if (current == '\'' && !inDoubleQuote && previous != '\\') {
+                        inSingleQuote = !inSingleQuote;
+                    } else if (current == '"' && !inSingleQuote && previous != '\\') {
+                        inDoubleQuote = !inDoubleQuote;
+                    }
+
+                    if (current == '`' && !inSingleQuote && !inDoubleQuote) {
+                        continue;
+                    }
+
+                    if (current == ';' && !inSingleQuote && !inDoubleQuote) {
+                        executeSourceStatement(connection, statementBuilder.toString());
+                        statementBuilder.setLength(0);
+                        continue;
+                    }
+
+                    statementBuilder.append(current);
+                }
             }
         }
-        return connection;
+
+        executeSourceStatement(connection, statementBuilder.toString());
+    }
+
+    private void executeSourceStatement(Connection connection, String statement) {
+        String sql = sanitizeDumpStatement(statement);
+        if (sql.isBlank()) {
+            return;
+        }
+        try (Statement st = connection.createStatement()) {
+            st.execute(sql);
+        } catch (SQLException ex) {
+            log.debug("Skipped source statement: {}", ex.getMessage());
+        }
+    }
+
+    private String sanitizeDumpStatement(String statement) {
+        String sql = statement.trim();
+        if (sql.isBlank()) {
+            return "";
+        }
+        if (DUMP_STATEMENT_SKIP.matcher(sql).matches()) {
+            return "";
+        }
+
+        sql = DUMP_ENGINE_SUFFIX.matcher(sql).replaceAll("");
+        sql = DUMP_DEFAULT_CHARSET_SUFFIX.matcher(sql).replaceAll("");
+        return sql.trim();
     }
 
     private Connection openTargetConnection(MigrationConfig config) throws Exception {
@@ -431,39 +523,6 @@ public class MigratorsManager {
             }
         }
         return columns;
-    }
-
-    private String cleanDumpSql(String sql) {
-        return sql
-                .replace("`", "")
-                .replaceAll("/\\*!.*?\\*/", " ")
-                .replaceAll("(?im)^\\s*LOCK TABLES.*$", "")
-                .replaceAll("(?im)^\\s*UNLOCK TABLES.*$", "")
-                .replaceAll("(?im)^\\s*DELIMITER.*$", "")
-                .replaceAll("(?im)ENGINE\\s*=\\s*\\w+", "")
-                .replaceAll("(?im)DEFAULT CHARSET\\s*=\\s*\\w+", "");
-    }
-
-    private List<String> splitSqlStatements(String sql) {
-        List<String> statements = new ArrayList<>();
-        StringBuilder current = new StringBuilder();
-        boolean inQuote = false;
-        for (int i = 0; i < sql.length(); i++) {
-            char c = sql.charAt(i);
-            if (c == '\'' && (i == 0 || sql.charAt(i - 1) != '\\')) {
-                inQuote = !inQuote;
-            }
-            if (c == ';' && !inQuote) {
-                statements.add(current.toString().trim());
-                current.setLength(0);
-            } else {
-                current.append(c);
-            }
-        }
-        if (!current.isEmpty()) {
-            statements.add(current.toString().trim());
-        }
-        return statements;
     }
 
     private record MigrationConfig(String sourceType,
