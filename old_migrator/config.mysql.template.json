@@ -4,10 +4,10 @@
     "dump_path": "./old_dump.sql"
   },
   "target": {
-    "type": "postgres",
-    "jdbc_url": "jdbc:postgresql://127.0.0.1:5432/new_db",
-    "user": "postgres",
-    "password": "postgres"
+    "type": "mysql",
+    "jdbc_url": "jdbc:mysql://127.0.0.1:3306/new_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
+    "user": "root",
+    "password": "root"
   },
   "images": {
     "source_dir": "./face_lists",

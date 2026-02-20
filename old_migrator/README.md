@@ -1,6 +1,6 @@
 # Java DB dump migrator
 
-This application now performs end-to-end migration directly from an old DB dump (`mysql` or `h2`) into an existing PostgreSQL database.
+This application now performs end-to-end migration directly from an old DB dump (`mysql` or `h2`) into an existing target database (`postgres` or `mysql`).
 
 ## Runtime workflow
 
@@ -21,7 +21,7 @@ Rules applied in migration:
 - Text values are normalized to ASCII (NFKD + deterministic substitutions).
 - Sensitive machine fields (`password/hash/token/secret/signature/base64`) are not normalized.
 - `alpr_list_items.created_by` defaults to `1` when missing.
-- Inserts use `ON CONFLICT DO NOTHING` to avoid duplicate failures on reruns.
+- Inserts use target-specific duplicate-ignore SQL (`ON CONFLICT DO NOTHING` for PostgreSQL, `ON DUPLICATE KEY UPDATE id = id` for MySQL).
 
 After DB rows are migrated, face list item images are moved/renamed to:
 - `<images.target_dir>/<list_id>/<item_id>.<ext>`
@@ -35,6 +35,7 @@ After DB rows are migrated, face list item images are moved/renamed to:
     "dump_path": "./old_dump.sql"
   },
   "target": {
+    "type": "postgres",
     "jdbc_url": "jdbc:postgresql://127.0.0.1:5432/new_db",
     "user": "postgres",
     "password": "postgres"
@@ -49,3 +50,9 @@ After DB rows are migrated, face list item images are moved/renamed to:
 Supported `source.type` values:
 - `mysql_dump`
 - `h2_dump`
+
+Supported `target.type` values:
+- `postgres`
+- `mysql`
+
+Additional MySQL target template: `config.mysql.template.json`.
