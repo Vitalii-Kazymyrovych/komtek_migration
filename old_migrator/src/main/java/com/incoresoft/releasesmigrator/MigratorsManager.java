@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.Reader;
 import java.io.IOException;
+import java.nio.charset.MalformedInputException;
 import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -22,6 +24,11 @@ import java.util.regex.Pattern;
 @Component
 @RequiredArgsConstructor
 public class MigratorsManager {
+    private static final List<Charset> DUMP_CHARSETS = List.of(
+            StandardCharsets.UTF_8,
+            Charset.forName("windows-1251"),
+            StandardCharsets.ISO_8859_1
+    );
     private static final List<String> TABLE_ORDER = List.of(
             "clients",
             "roles",
@@ -97,13 +104,30 @@ public class MigratorsManager {
     }
 
     private void executeDumpSqlStreaming(Path dumpPath, Connection connection) throws IOException {
+        IOException lastException = null;
+        for (Charset charset : DUMP_CHARSETS) {
+            try {
+                executeDumpSqlStreaming(dumpPath, connection, charset);
+                if (!StandardCharsets.UTF_8.equals(charset)) {
+                    log.warn("Decoded dump {} with fallback charset {}", dumpPath, charset);
+                }
+                return;
+            } catch (MalformedInputException ex) {
+                lastException = ex;
+                log.warn("Failed to decode dump {} as {}: {}", dumpPath, charset, ex.getMessage());
+            }
+        }
+        throw new IOException("Failed to decode dump with supported charsets: " + dumpPath, lastException);
+    }
+
+    private void executeDumpSqlStreaming(Path dumpPath, Connection connection, Charset charset) throws IOException {
         StringBuilder statementBuilder = new StringBuilder(8 * 1024);
         boolean inSingleQuote = false;
         boolean inDoubleQuote = false;
         boolean inLineComment = false;
         boolean inBlockComment = false;
 
-        try (Reader reader = Files.newBufferedReader(dumpPath, StandardCharsets.UTF_8)) {
+        try (Reader reader = Files.newBufferedReader(dumpPath, charset)) {
             char[] buffer = new char[16 * 1024];
             int read;
             while ((read = reader.read(buffer)) != -1) {

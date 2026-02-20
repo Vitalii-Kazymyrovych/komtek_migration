@@ -103,3 +103,8 @@
 - 19:09 UTC+00 — Updated `AGENTS.md` behavior rules to require running tests after each code change and executing `helper_scripts/pre_commit_checks.sh` before every commit.
 - 19:10 UTC+00 — Ran `helper_scripts/pre_commit_checks.sh`; initial run surfaced failing/new unit tests and I iterated on H2 test schema setup to ensure deterministic lowercase table discovery.
 - 19:10 UTC+00 — Re-ran `helper_scripts/pre_commit_checks.sh` successfully (unit tests + clean package), confirming compile/test/package verification before commit.
+- 19:17 UTC+00 — Investigated reported `MalformedInputException` during dump ingestion and traced the failure to strict UTF-8 decoding in `executeDumpSqlStreaming`.
+- 19:17 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/MigratorsManager.java` to support deterministic charset fallback (`UTF-8` → `windows-1251` → `ISO-8859-1`) for SQL dump streaming.
+- 19:18 UTC+00 — Added `executeDumpSqlStreamingFallsBackToWindows1251WhenUtf8DecodingFails` in `old_migrator/src/test/java/com/incoresoft/releasesmigrator/MigratorsManagerTest.java` to verify fallback decoding executes inserts correctly.
+- 19:18 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` successfully (4 tests passed).
+- 19:19 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` successfully (tests + package verification passed).
