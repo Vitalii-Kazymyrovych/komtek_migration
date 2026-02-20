@@ -39,17 +39,17 @@ public class MigratorsManager {
             "analytics",
             "traffic_counters",
             "traffic_stat",
+            "stats_traffic_minutely",
             "event_manager",
+            "sounds_settings",
             "alpr_lists",
-            "alpr_list_items",
-            "face_lists",
-            "face_list_items",
-            "face_list_items_images"
+            "alpr_list_items"
     );
     private static final Pattern SENSITIVE = Pattern.compile("(?i)(password|hash|token|secret|signature|base64)");
     private static final Pattern DUMP_STATEMENT_SKIP = Pattern.compile("(?is)^\\s*(LOCK\\s+TABLES|UNLOCK\\s+TABLES|DELIMITER)\\b.*");
     private static final Pattern DUMP_ENGINE_SUFFIX = Pattern.compile("(?is)\\s+ENGINE\\s*=\\s*[^\\s;]+(?:\\s+AUTO_INCREMENT\\s*=\\s*\\d+)?");
     private static final Pattern DUMP_DEFAULT_CHARSET_SUFFIX = Pattern.compile("(?is)\\s+DEFAULT\\s+CHARSET\\s*=\\s*[^\\s;]+");
+    private static final Pattern DUMP_SCHEMA_PREFIX = Pattern.compile("(?i)\\bvideoanalytics\\.");
     private static final Pattern CRITICAL_DUMP_STATEMENT = Pattern.compile("(?is)^\\s*(CREATE\\s+TABLE|INSERT\\s+INTO|ALTER\\s+TABLE|CREATE\\s+INDEX)\\b.*");
     private static final Pattern JSON_NUMERIC_KEY = Pattern.compile("(^|\\{|,)\\s*(\\d+)\\s*:");
 
@@ -66,7 +66,6 @@ public class MigratorsManager {
             }
 
             targetConnection.commit();
-            renameFaceImages(config, targetConnection);
             log.info("Migration completed at {}", Instant.now());
         } catch (Exception e) {
             throw new IllegalStateException("Migration failed", e);
@@ -230,6 +229,7 @@ public class MigratorsManager {
 
         sql = DUMP_ENGINE_SUFFIX.matcher(sql).replaceAll("");
         sql = DUMP_DEFAULT_CHARSET_SUFFIX.matcher(sql).replaceAll("");
+        sql = DUMP_SCHEMA_PREFIX.matcher(sql).replaceAll("");
         return sql.trim();
     }
 
