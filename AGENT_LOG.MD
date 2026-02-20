@@ -123,3 +123,16 @@
 - 19:50 UTC+00 — Investigated recurring startup failure in `event_manager` JSON parsing and confirmed migrated payloads can remain dump-escaped (e.g., `[{"id":...}]`) and include numeric object keys (`{0:"..."}`).
 - 19:53 UTC+00 — Updated `MigratorsManager.normalizeValue` JSON handling to apply unescape/validation for any JSON-like field (not just `roles.permissions`) and added numeric-key normalization (`0:` → `"0":`) before validation.
 - 19:54 UTC+00 — Added regression test `normalizeValueUnescapesEventManagerNodesAndFixesNumericJsonKeys` and reran `mvn -f old_migrator/pom.xml test` (7/7 pass) plus `./helper_scripts/pre_commit_checks.sh` (pass).
+
+## 2026-02-20
+
+- 20:41 UTC+00 — Compared `old_migrator/dump.txt` (INSERT tables) vs `old_migrator/newDB.txt` (DDL tables) and identified dump-only migration tables not in current `TABLE_ORDER` (`sounds_settings`, `stats_traffic_minutely`) plus face tables to skip.
+- 20:41 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/MigratorsManager.java` table order to include `stats_traffic_minutely` and `sounds_settings`, and removed direct face-table migration entries as requested.
+- 20:42 UTC+00 — Updated dump sanitization to strip `videoanalytics.` schema prefixes so schema-qualified dump INSERTs map onto in-memory legacy tables consistently.
+- 20:42 UTC+00 — Updated `old_migrator/src/test/java/com/incoresoft/releasesmigrator/MigratorsManagerTest.java` with coverage for schema-prefix sanitization and migration table-order expectations.
+- 20:42 UTC+00 — Updated `old_migrator/README.md` migration order and documented that face tables are intentionally skipped in direct DB migration.
+- 20:42 UTC+00 — Ran `mvn -f old_migrator/pom.xml test`; first run failed due assertion mismatch in new sanitizer expectation, then fixed and reran successfully (8/8 tests passed).
+- 20:42 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` successfully (tests + clean package verification passed).
+- 20:43 UTC+00 — Re-ran `mvn -f old_migrator/pom.xml test` and `./helper_scripts/pre_commit_checks.sh` after final code/docs edits; both passed before commit.
+- 20:44 UTC+00 — Corrected `old_migrator/README.md` to reflect current behavior: face image copy/rename is disabled along with face-table migration in this flow.
+- 20:44 UTC+00 — Executed `./helper_scripts/pre_commit_checks.sh` again before commit after README finalization; full checks passed.

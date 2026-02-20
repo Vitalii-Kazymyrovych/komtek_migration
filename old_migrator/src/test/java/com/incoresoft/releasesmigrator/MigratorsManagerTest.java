@@ -7,11 +7,13 @@ import org.junit.jupiter.api.io.TempDir;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -29,6 +31,23 @@ class MigratorsManagerTest {
         assertEquals("CREATE TABLE users (id BIGINT)", sanitized);
         assertEquals("", invokeStringMethod("sanitizeDumpStatement", "LOCK TABLES users WRITE"));
         assertEquals("", invokeStringMethod("sanitizeDumpStatement", "DELIMITER $$"));
+        assertEquals(
+                "INSERT INTO analytics (id, `type`) VALUES (1, 'FaceAnalyticsModule')",
+                invokeStringMethod("sanitizeDumpStatement", "INSERT INTO videoanalytics.analytics (id, `type`) VALUES (1, 'FaceAnalyticsModule')")
+        );
+    }
+
+    @Test
+    void tableOrderIncludesNewDumpTablesAndExcludesFaceTables() throws Exception {
+        Field tableOrder = MigratorsManager.class.getDeclaredField("TABLE_ORDER");
+        tableOrder.setAccessible(true);
+
+        @SuppressWarnings("unchecked")
+        List<String> order = (List<String>) tableOrder.get(null);
+
+        assertTrue(order.contains("sounds_settings"));
+        assertTrue(order.contains("stats_traffic_minutely"));
+        assertTrue(order.stream().noneMatch(name -> name.startsWith("face_")));
     }
 
     @Test
