@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.Reader;
 import java.io.IOException;
-import java.nio.charset.MalformedInputException;
+import java.nio.charset.CharacterCodingException;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -112,7 +112,7 @@ public class MigratorsManager {
                     log.warn("Decoded dump {} with fallback charset {}", dumpPath, charset);
                 }
                 return;
-            } catch (MalformedInputException ex) {
+            } catch (CharacterCodingException ex) {
                 lastException = ex;
                 log.warn("Failed to decode dump {} as {}: {}", dumpPath, charset, ex.getMessage());
             }

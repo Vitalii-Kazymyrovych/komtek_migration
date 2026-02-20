@@ -108,3 +108,7 @@
 - 19:18 UTC+00 — Added `executeDumpSqlStreamingFallsBackToWindows1251WhenUtf8DecodingFails` in `old_migrator/src/test/java/com/incoresoft/releasesmigrator/MigratorsManagerTest.java` to verify fallback decoding executes inserts correctly.
 - 19:18 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` successfully (4 tests passed).
 - 19:19 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` successfully (tests + package verification passed).
+- 19:27 UTC+00 — Investigated startup crash with `UnmappableCharacterException` during dump decoding and identified that charset fallback only caught `MalformedInputException`.
+- 19:27 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/MigratorsManager.java` to catch `CharacterCodingException` so both malformed and unmappable decode errors trigger deterministic fallback charsets.
+- 19:28 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` successfully (4 tests passed).
+- 19:28 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` successfully (tests + clean package passed).
