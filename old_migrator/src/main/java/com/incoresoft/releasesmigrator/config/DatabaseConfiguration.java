@@ -30,6 +30,8 @@ import static com.fasterxml.jackson.databind.PropertyNamingStrategies.SNAKE_CASE
 @Slf4j
 @Configuration
 public class DatabaseConfiguration {
+    private static final String DEFAULT_CONFIG_FILE = "config.json";
+
     @Bean
     public ObjectMapper getObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -39,11 +41,14 @@ public class DatabaseConfiguration {
 
     @Bean
     public DatabaseConfigDTO databaseConfigDTO(ObjectMapper objectMapper) throws IOException {
-        File file = new File("config.json");
+        File file = resolveConfigFile();
         DatabaseConfigDTO dbConfig = objectMapper.readValue(file, ConfigDTO.class).db();
         if (dbConfig == null) {
             JsonNode root = objectMapper.readTree(file);
             JsonNode target = root.path("target");
+            if (target.isMissingNode()) {
+                target = root.path("database");
+            }
             String type = target.path("type").asText();
             String jdbcUrl = target.path("jdbc_url").asText();
             String user = target.path("user").asText();
@@ -55,7 +60,7 @@ public class DatabaseConfiguration {
         }
 
         if (dbConfig == null) {
-            throw new IllegalArgumentException("Database config is missing. Expected either 'db' or 'target' section in config.json.");
+            throw new IllegalArgumentException("Database config is missing. Expected either 'db', 'target', or 'database' section in " + file.getAbsolutePath() + ".");
         }
 
         if (!"mysql".equalsIgnoreCase(dbConfig.type()) && !"postgres".equalsIgnoreCase(dbConfig.type()) && !"postgresql".equalsIgnoreCase(dbConfig.type())) {
@@ -63,6 +68,23 @@ public class DatabaseConfiguration {
         }
 
         return dbConfig;
+    }
+
+    private File resolveConfigFile() {
+        String customPath = System.getProperty("config.path");
+        if (customPath == null || customPath.isBlank()) {
+            customPath = System.getenv("MIGRATOR_CONFIG_PATH");
+        }
+
+        File file = (customPath == null || customPath.isBlank())
+                ? new File(DEFAULT_CONFIG_FILE)
+                : new File(customPath);
+
+        if (!file.exists()) {
+            throw new IllegalArgumentException("Config file not found: " + file.getAbsolutePath() + ". Provide -Dconfig.path=<path> or MIGRATOR_CONFIG_PATH.");
+        }
+
+        return file;
     }
 
     @Bean

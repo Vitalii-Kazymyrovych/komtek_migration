@@ -72,3 +72,5 @@
 - 17:08 UTC — Validation attempt: `sh ./mvnw -q -DskipTests compile` failed because Maven wrapper could not fetch Apache Maven zip from repo.maven.apache.org in this environment.
 
 - 17:29 UTC — Updated old_migrator DatabaseConfiguration to accept both legacy `db` and new `target` config.json sections, with null-safe validation and mysql/postgres DSLContext creation to prevent startup NPE when `db` is absent.
+- 18:04 UTC — Hardened old_migrator DatabaseConfiguration config loading to support custom config path (`-Dconfig.path` / `MIGRATOR_CONFIG_PATH`), accept legacy `database` section, and throw explicit missing-config errors instead of null-pointer startup failures.
+- 18:04 UTC — Updated old_migrator/README.md with config path override usage and troubleshooting steps for missing/invalid database config at startup.

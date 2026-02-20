@@ -10,6 +10,11 @@ This application now performs end-to-end migration directly from an old DB dump 
 4. Put face images into the folder from config.
 5. Run the app.
 
+By default the app reads `config.json` from the current working directory.
+If you need a different location, pass one of:
+- JVM property: `-Dconfig.path=C:\\Scripts\\config.json`
+- Environment variable: `MIGRATOR_CONFIG_PATH=C:\\Scripts\\config.json`
+
 The app executes deterministic table migration order:
 
 `clients -> roles -> users -> stream_groups -> streams -> analytics_groups -> analytics -> traffic_counters -> traffic_stat -> event_manager -> alpr_lists -> alpr_list_items -> face_lists`
@@ -56,3 +61,10 @@ Supported `target.type` values:
 - `mysql`
 
 Additional MySQL target template: `config.mysql.template.json`.
+
+## Troubleshooting
+
+- `Cannot invoke ... dbConfig is null` or `Database config is missing`
+  - Ensure `config.json` exists in the working directory where you run `java -jar ...`.
+  - Or explicitly set `-Dconfig.path=...` / `MIGRATOR_CONFIG_PATH`.
+  - Ensure config has one of `db`, `target`, or `database` sections with `type`, `jdbc_url`, `user`, `password`.
