@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.*;
 import java.text.Normalizer;
 import java.time.Instant;
@@ -34,7 +35,9 @@ public class MigratorsManager {
             "event_manager",
             "alpr_lists",
             "alpr_list_items",
-            "face_lists"
+            "face_lists",
+            "face_list_items",
+            "face_list_items_images"
     );
     private static final Pattern SENSITIVE = Pattern.compile("(?i)(password|hash|token|secret|signature|base64)");
     private static final Pattern DUMP_STATEMENT_SKIP = Pattern.compile("(?is)^\\s*(LOCK\\s+TABLES|UNLOCK\\s+TABLES|DELIMITER)\\b.*");
@@ -442,17 +445,41 @@ public class MigratorsManager {
             return;
         }
 
-        try (PreparedStatement ps = target.prepareStatement("SELECT id, list_id, image FROM face_list_items");
+        String faceItemsQuery = resolveFaceImageSelectQuery(target);
+        if (faceItemsQuery == null) {
+            log.info("Image rename is skipped (neither face_list_items.image nor face_list_items_images.path is available)");
+            return;
+        }
+
+        try (PreparedStatement ps = target.prepareStatement(faceItemsQuery);
              ResultSet rs = ps.executeQuery()) {
             Map<String, FaceItem> imageToItem = new HashMap<>();
             while (rs.next()) {
                 String image = rs.getString("image");
                 if (image != null && !image.isBlank()) {
-                    imageToItem.put(image, new FaceItem(rs.getLong("id"), rs.getLong("list_id"), image));
+                    String normalizedImageName = extractFileName(image);
+                    int imageOrder = rs.getInt("image_order");
+                    FaceItem candidate = new FaceItem(rs.getLong("id"), rs.getLong("list_id"), normalizedImageName, imageOrder);
+                    imageToItem.compute(normalizedImageName, (key, existing) -> {
+                        if (existing == null) {
+                            return candidate;
+                        }
+                        if (candidate.listId < existing.listId) {
+                            return candidate;
+                        }
+                        if (candidate.listId == existing.listId && candidate.id < existing.id) {
+                            return candidate;
+                        }
+                        if (candidate.listId == existing.listId && candidate.id == existing.id && candidate.imageOrder < existing.imageOrder) {
+                            return candidate;
+                        }
+                        return existing;
+                    });
                 }
             }
 
             Files.createDirectories(targetDir);
+            Map<String, Integer> destinationCounters = new HashMap<>();
             try (var paths = Files.list(sourceDir)) {
                 paths.filter(Files::isRegularFile).forEach(path -> {
                     String filename = path.getFileName().toString();
@@ -466,10 +493,14 @@ public class MigratorsManager {
                         ext = filename.substring(idx);
                     }
                     Path listDir = targetDir.resolve(String.valueOf(item.listId));
-                    Path destination = listDir.resolve(item.id + ext);
+                    String destinationKey = item.listId + ":" + item.id + ":" + ext.toLowerCase(Locale.ROOT);
+                    int seq = destinationCounters.getOrDefault(destinationKey, 0) + 1;
+                    destinationCounters.put(destinationKey, seq);
+                    String destinationName = seq == 1 ? (item.id + ext) : (item.id + "_" + seq + ext);
+                    Path destination = listDir.resolve(destinationName);
                     try {
                         Files.createDirectories(listDir);
-                        Files.move(path, destination);
+                        Files.move(path, destination, StandardCopyOption.REPLACE_EXISTING);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -478,6 +509,49 @@ public class MigratorsManager {
         } catch (Exception e) {
             throw new IllegalStateException("Face image rename failed", e);
         }
+    }
+
+    private String resolveFaceImageSelectQuery(Connection target) throws SQLException {
+        if (!tableExists(target, "face_list_items")) {
+            return null;
+        }
+
+        List<String> faceItemColumns = tableColumns(target, "face_list_items");
+        boolean hasFaceItemsImage = faceItemColumns.contains("image");
+
+        if (tableExists(target, "face_list_items_images")) {
+            List<String> imageColumns = tableColumns(target, "face_list_items_images");
+            if (imageColumns.contains("path") && imageColumns.contains("list_item_id")) {
+                String imageRowsSql = "SELECT i.id, i.list_id, m.path AS image, m.id AS image_order " +
+                        "FROM face_list_items i " +
+                        "JOIN face_list_items_images m ON m.list_item_id = i.id " +
+                        "WHERE NULLIF(TRIM(m.path), '') IS NOT NULL";
+
+                if (hasFaceItemsImage) {
+                    return "SELECT i.id, i.list_id, i.image AS image, 0 AS image_order " +
+                            "FROM face_list_items i " +
+                            "WHERE NULLIF(TRIM(i.image), '') IS NOT NULL " +
+                            "UNION ALL " + imageRowsSql + " AND NULLIF(TRIM(i.image), '') IS NULL";
+                }
+
+                return imageRowsSql;
+            }
+        }
+
+        if (hasFaceItemsImage) {
+            return "SELECT id, list_id, image, 0 AS image_order FROM face_list_items";
+        }
+
+        return null;
+    }
+
+    private String extractFileName(String rawPath) {
+        String normalized = rawPath.replace('\\', '/').trim();
+        int slashIndex = normalized.lastIndexOf('/');
+        if (slashIndex >= 0 && slashIndex + 1 < normalized.length()) {
+            return normalized.substring(slashIndex + 1);
+        }
+        return normalized;
     }
 
     private Object normalizeValue(String table, String column, Object value) {
@@ -535,6 +609,6 @@ public class MigratorsManager {
                                    String imageTargetDir) {
     }
 
-    private record FaceItem(long id, long listId, String image) {
+    private record FaceItem(long id, long listId, String image, int imageOrder) {
     }
 }

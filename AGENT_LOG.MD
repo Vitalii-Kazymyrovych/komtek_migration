@@ -80,3 +80,17 @@
 - 18:25 UTC — Refactored `MigratorsManager` dump loading to stream and execute SQL statements incrementally (line-by-line preprocessing + statement batching) to avoid full-file memory allocation.
 - 18:29 UTC — Disabled Spring `DataSourceAutoConfiguration` in `ReleasesMigratorApplication` so Boot no longer auto-starts an embedded H2 datasource when target config is MySQL/PostgreSQL.
 - 18:33 UTC — Reworked dump parser in `MigratorsManager` to character-buffer streaming (no `readLine`), preventing giant single-line INSERTs from causing memory spikes on very large dumps (e.g., 32 GB).
+
+- 18:50 UTC+00 — Updated old_migrator table migration order to include face_list_items and face_list_items_images so required face asset tables are not skipped.
+- 18:50 UTC+00 — Enhanced old_migrator face image rename logic to resolve filenames from face_list_items.image or fallback join with face_list_items_images.path via list_item_id.
+- 18:51 UTC+00 — Updated old_migrator/README.md table-order and face image mapping docs to reflect face_list_items_images-backed rename behavior.
+
+- 18:59 UTC+00 — Hardened face image rename query: now resolves filename via COALESCE(face_list_items.image, face_list_items_images.path) with deterministic MIN(face_list_items_images.id) fallback per list item.
+- 19:00 UTC+00 — Improved image filename extraction to support both Unix and Windows-style separators and enabled REPLACE_EXISTING during move to avoid duplicate-name move failures.
+- 19:01 UTC+00 — Updated old_migrator/README.md face image mapping notes to document COALESCE fallback and deterministic first-image selection from face_list_items_images.
+
+- 19:11 UTC+00 — Reworked face image rename mapping to keep deterministic winner per duplicated source filename using (list_id, item_id, image_order) precedence and avoid random overrides.
+- 19:11 UTC+00 — Added deterministic destination suffixing (<item_id>_2, _3, ...) when multiple images resolve to the same list item/ext so extra images are not dropped.
+- 19:12 UTC+00 — Updated old_migrator/README.md with deterministic multi-image destination naming behavior.
+- 19:18 UTC+00 — Corrected face image source SQL to include all face_list_items_images.path rows when face_list_items.image is empty, preserving list_id <- list_item_id linkage and avoiding dropped extra item images.
+- 19:18 UTC+00 — Updated old_migrator/README.md to document per-item precedence: use face_list_items.image if present, else use all linked face_list_items_images.path rows.
