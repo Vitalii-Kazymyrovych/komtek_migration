@@ -65,3 +65,5 @@
 - 16:28 UTC — Added post-insert identity sequence synchronization for migrated tables with id columns to avoid future id collisions after legacy-id inserts.
 - 16:28 UTC — Updated old_migrator README rules to document legacy analytics id preservation and deterministic uuid fallback behavior.
 - 16:29 UTC — Validation attempt: `sh ./mvnw test` still failed because Maven wrapper could not fetch Apache Maven zip from repo.maven.apache.org in this environment.
+- 16:38 UTC — Added old_migrator/config.template.json as a ready-to-copy jar-side config template for MySQL/H2 dump to PostgreSQL migration.
+- 16:38 UTC — Updated old_migrator/README.md runtime step to instruct copying config.template.json to config.json before running migrator.jar.
