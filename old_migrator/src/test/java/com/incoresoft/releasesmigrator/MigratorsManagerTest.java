@@ -77,6 +77,44 @@ class MigratorsManagerTest {
         }
     }
 
+    @Test
+    void normalizeValueUnescapesRolesPermissionsJsonArray() throws Exception {
+        Method method = MigratorsManager.class.getDeclaredMethod("normalizeValue", String.class, String.class, Object.class);
+        method.setAccessible(true);
+
+        Object normalized = method.invoke(manager, "roles", "permissions", "[\\\"ManageTrafficAnalytic\\\",\\\"ViewFaceEvents\\\"]");
+
+        assertEquals("[\"ManageTrafficAnalytic\",\"ViewFaceEvents\"]", normalized);
+    }
+
+    @Test
+    void normalizeValueKeepsRolesPermissionsJsonWhenAlreadyValid() throws Exception {
+        Method method = MigratorsManager.class.getDeclaredMethod("normalizeValue", String.class, String.class, Object.class);
+        method.setAccessible(true);
+
+        Object normalized = method.invoke(manager, "roles", "permissions", "[\"ManageTrafficAnalytic\",\"ViewFaceEvents\"]");
+
+        assertEquals("[\"ManageTrafficAnalytic\",\"ViewFaceEvents\"]", normalized);
+    }
+
+    @Test
+    void normalizeValueUnescapesEventManagerNodesAndFixesNumericJsonKeys() throws Exception {
+        Method method = MigratorsManager.class.getDeclaredMethod("normalizeValue", String.class, String.class, Object.class);
+        method.setAccessible(true);
+
+        Object normalized = method.invoke(
+                manager,
+                "event_manager",
+                "nodes",
+                "[{\\\"id\\\":\\\"7dc55f4a-2f0c-4ce3-807f-59e34217c36e\\\",\\\"outputs\\\":{0:\\\"1758272328595\\\"},\\\"params\\\":{},\\\"type\\\":\\\"start\\\",\\\"x\\\":100,\\\"y\\\":100}]"
+        );
+
+        assertEquals(
+                "[{\"id\":\"7dc55f4a-2f0c-4ce3-807f-59e34217c36e\",\"outputs\":{\"0\":\"1758272328595\"},\"params\":{},\"type\":\"start\",\"x\":100,\"y\":100}]",
+                normalized
+        );
+    }
+
     private String invokeStringMethod(String methodName, String input) throws Exception {
         Method method = MigratorsManager.class.getDeclaredMethod(methodName, String.class);
         method.setAccessible(true);

@@ -50,6 +50,8 @@ public class MigratorsManager {
     private static final Pattern DUMP_STATEMENT_SKIP = Pattern.compile("(?is)^\\s*(LOCK\\s+TABLES|UNLOCK\\s+TABLES|DELIMITER)\\b.*");
     private static final Pattern DUMP_ENGINE_SUFFIX = Pattern.compile("(?is)\\s+ENGINE\\s*=\\s*[^\\s;]+(?:\\s+AUTO_INCREMENT\\s*=\\s*\\d+)?");
     private static final Pattern DUMP_DEFAULT_CHARSET_SUFFIX = Pattern.compile("(?is)\\s+DEFAULT\\s+CHARSET\\s*=\\s*[^\\s;]+");
+    private static final Pattern CRITICAL_DUMP_STATEMENT = Pattern.compile("(?is)^\\s*(CREATE\\s+TABLE|INSERT\\s+INTO|ALTER\\s+TABLE|CREATE\\s+INDEX)\\b.*");
+    private static final Pattern JSON_NUMERIC_KEY = Pattern.compile("(^|\\{|,)\\s*(\\d+)\\s*:");
 
     private final ObjectMapper objectMapper;
 
@@ -200,8 +202,21 @@ public class MigratorsManager {
         try (Statement st = connection.createStatement()) {
             st.execute(sql);
         } catch (SQLException ex) {
-            log.debug("Skipped source statement: {}", ex.getMessage());
+            if (CRITICAL_DUMP_STATEMENT.matcher(sql).matches()) {
+                log.warn("Failed critical dump statement: {} | reason: {}", abbreviateSql(sql), ex.getMessage());
+            } else {
+                log.debug("Skipped source statement: {}", ex.getMessage());
+            }
         }
+    }
+
+    private String abbreviateSql(String sql) {
+        String singleLine = sql.replaceAll("\\s+", " ").trim();
+        int maxLength = 180;
+        if (singleLine.length() <= maxLength) {
+            return singleLine;
+        }
+        return singleLine.substring(0, maxLength) + "...";
     }
 
     private String sanitizeDumpStatement(String statement) {
@@ -592,12 +607,51 @@ public class MigratorsManager {
             if (trimmed.isEmpty() || trimmed.equals("-") || trimmed.equalsIgnoreCase("NULL")) {
                 return table.equals("alpr_list_items") && column.equals("created_by") ? 1 : null;
             }
+            String jsonNormalized = normalizeJsonText(trimmed);
+            if (jsonNormalized != null) {
+                return jsonNormalized;
+            }
             if (SENSITIVE.matcher(column).find()) {
                 return trimmed;
             }
             return normalizeAscii(trimmed);
         }
         return value;
+    }
+
+    private String normalizeJsonText(String text) {
+        String candidate = text;
+        if (isValidJson(candidate)) {
+            return candidate;
+        }
+
+        if (candidate.startsWith("\"") && candidate.endsWith("\"") && candidate.length() > 1) {
+            candidate = candidate.substring(1, candidate.length() - 1);
+        }
+
+        String unescapedQuotes = candidate.replace("\\\"", "\"");
+        if (isValidJson(unescapedQuotes)) {
+            return unescapedQuotes;
+        }
+
+        String normalizedObjectKeys = JSON_NUMERIC_KEY.matcher(unescapedQuotes).replaceAll("$1\"$2\":");
+        if (isValidJson(normalizedObjectKeys)) {
+            return normalizedObjectKeys;
+        }
+
+        return null;
+    }
+
+    private boolean isValidJson(String value) {
+        if (value == null || value.isBlank()) {
+            return false;
+        }
+        try {
+            objectMapper.readTree(value);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 
     private String normalizeAscii(String text) {

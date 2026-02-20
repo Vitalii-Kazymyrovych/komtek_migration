@@ -112,3 +112,14 @@
 - 19:27 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/MigratorsManager.java` to catch `CharacterCodingException` so both malformed and unmappable decode errors trigger deterministic fallback charsets.
 - 19:28 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` successfully (4 tests passed).
 - 19:28 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` successfully (tests + clean package passed).
+
+- 19:36 UTC+00 — Investigating user-reported skipped tables (clients/users/streams/alpr/face lists) from runtime logs to identify source/target table detection mismatch.
+- 19:38 UTC+00 — Updated dump statement error handling in `MigratorsManager`: failed critical DDL/DML statements (`CREATE TABLE`/`INSERT INTO`/`ALTER TABLE`/`CREATE INDEX`) now log WARN with SQL preview so missing-table root causes are visible instead of silent debug skips.
+- 19:37 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after code change; all tests passed (4/4).
+- 19:37 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit; verification completed successfully (tests + package).
+- 19:44 UTC+00 — Investigated reported roles migration failure and identified escaped JSON permission arrays (e.g., [\"...\"]) causing downstream JSONException in RoleManager init.
+- 19:44 UTC+00 — Updated `MigratorsManager.normalizeValue` to normalize `roles.permissions` as valid JSON (unescape dump-style backslash-quoted arrays only when needed) while preserving already-valid payloads.
+- 19:44 UTC+00 — Added regression tests in `MigratorsManagerTest` for escaped and already-valid `roles.permissions` JSON normalization paths.
+- 19:50 UTC+00 — Investigated recurring startup failure in `event_manager` JSON parsing and confirmed migrated payloads can remain dump-escaped (e.g., `[{"id":...}]`) and include numeric object keys (`{0:"..."}`).
+- 19:53 UTC+00 — Updated `MigratorsManager.normalizeValue` JSON handling to apply unescape/validation for any JSON-like field (not just `roles.permissions`) and added numeric-key normalization (`0:` → `"0":`) before validation.
+- 19:54 UTC+00 — Added regression test `normalizeValueUnescapesEventManagerNodesAndFixesNumericJsonKeys` and reran `mvn -f old_migrator/pom.xml test` (7/7 pass) plus `./helper_scripts/pre_commit_checks.sh` (pass).
