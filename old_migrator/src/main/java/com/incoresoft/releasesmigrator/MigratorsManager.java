@@ -28,6 +28,8 @@ public class MigratorsManager {
             "streams",
             "analytics_groups",
             "analytics",
+            "traffic_counters",
+            "traffic_stat",
             "event_manager",
             "alpr_lists",
             "alpr_list_items",
@@ -102,6 +104,11 @@ public class MigratorsManager {
     }
 
     private void migrateTable(Connection source, Connection target, String table) throws SQLException {
+        if ("analytics".equals(table)) {
+            migrateAnalyticsWithLegacyIds(source, target);
+            return;
+        }
+
         if (!tableExists(source, table) || !tableExists(target, table)) {
             log.info("Skipping table {} because it does not exist in source or target", table);
             return;
@@ -139,7 +146,159 @@ public class MigratorsManager {
             }
             insert.executeBatch();
         }
+
+        syncIdentitySequence(target, table);
         log.info("Migrated {} rows into {}", migrated, table);
+    }
+
+    private void migrateAnalyticsWithLegacyIds(Connection source, Connection target) throws SQLException {
+        final String table = "analytics";
+        if (!tableExists(source, table) || !tableExists(target, table)) {
+            log.info("Skipping table {} because it does not exist in source or target", table);
+            return;
+        }
+
+        List<String> targetColumns = tableColumns(target, table);
+        List<String> sourceColumns = tableColumns(source, table);
+        Set<String> sourceColumnSet = new HashSet<>(sourceColumns);
+
+        List<String> commonColumns = targetColumns.stream()
+                .filter(sourceColumnSet::contains)
+                .filter(column -> !"uuid".equals(column))
+                .toList();
+
+        List<String> insertColumns = new ArrayList<>(commonColumns);
+        if (!insertColumns.contains("uuid")) {
+            insertColumns.add("uuid");
+        }
+        if (targetColumns.contains("stream_uuid") && !insertColumns.contains("stream_uuid")) {
+            insertColumns.add("stream_uuid");
+        }
+
+        String selectSql = "SELECT " + String.join(",", commonColumns) + " FROM " + table
+                + (sourceColumnSet.contains("status") ? " WHERE status <> -1" : "");
+        String insertSql = "INSERT INTO " + table + " (" + String.join(",", insertColumns)
+                + ") VALUES (" + String.join(",", Collections.nCopies(insertColumns.size(), "?"))
+                + ") ON CONFLICT DO NOTHING";
+
+        Map<Integer, UUID> streamIdToUuid = loadStreamUuidMap(source);
+
+        int migrated = 0;
+        try (PreparedStatement select = source.prepareStatement(selectSql);
+             ResultSet rs = select.executeQuery();
+             PreparedStatement insert = target.prepareStatement(insertSql)) {
+            while (rs.next()) {
+                Map<String, Object> rowValues = new HashMap<>();
+                for (int i = 0; i < commonColumns.size(); i++) {
+                    String column = commonColumns.get(i);
+                    Object value = normalizeValue(table, column, rs.getObject(i + 1));
+                    rowValues.put(column, value);
+                }
+
+                Integer analyticsId = asInteger(rowValues.get("id"));
+                UUID analyticsUuid = parseUuid(rowValues.get("uuid"));
+                if (analyticsUuid == null) {
+                    analyticsUuid = deterministicUuid("analytics", analyticsId);
+                }
+                rowValues.put("uuid", analyticsUuid);
+
+                if (insertColumns.contains("stream_uuid")) {
+                    UUID streamUuid = parseUuid(rowValues.get("stream_uuid"));
+                    if (streamUuid == null && sourceColumnSet.contains("stream_id")) {
+                        Integer streamId = asInteger(rowValues.get("stream_id"));
+                        streamUuid = streamId == null ? null : streamIdToUuid.get(streamId);
+                    }
+                    rowValues.put("stream_uuid", streamUuid);
+                }
+
+                for (int i = 0; i < insertColumns.size(); i++) {
+                    insert.setObject(i + 1, rowValues.get(insertColumns.get(i)));
+                }
+                insert.addBatch();
+                migrated++;
+                if (migrated % 500 == 0) {
+                    insert.executeBatch();
+                }
+            }
+            insert.executeBatch();
+        }
+
+        syncIdentitySequence(target, table);
+        log.info("Migrated {} rows into {} with legacy ids", migrated, table);
+    }
+
+    private Map<Integer, UUID> loadStreamUuidMap(Connection source) {
+        Map<Integer, UUID> map = new HashMap<>();
+        try {
+            if (!tableExists(source, "streams")) {
+                return map;
+            }
+            List<String> streamColumns = tableColumns(source, "streams");
+            if (!streamColumns.contains("id") || !streamColumns.contains("uuid")) {
+                return map;
+            }
+            try (PreparedStatement ps = source.prepareStatement("SELECT id, uuid FROM streams");
+                 ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    UUID streamUuid = parseUuid(rs.getObject("uuid"));
+                    if (streamUuid != null) {
+                        map.put(rs.getInt("id"), streamUuid);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            log.warn("Failed to preload stream UUID mapping for analytics migration: {}", e.getMessage());
+        }
+        return map;
+    }
+
+    private void syncIdentitySequence(Connection target, String table) {
+        try {
+            List<String> columns = tableColumns(target, table);
+            if (!columns.contains("id")) {
+                return;
+            }
+            String sql = "SELECT setval(pg_get_serial_sequence(?, 'id'), GREATEST((SELECT COALESCE(MAX(id), 0) FROM " + table + "), 1), true)";
+            try (PreparedStatement ps = target.prepareStatement(sql)) {
+                ps.setString(1, table);
+                ps.execute();
+            }
+        } catch (Exception e) {
+            log.debug("Sequence sync skipped for {}: {}", table, e.getMessage());
+        }
+    }
+
+    private Integer asInteger(Object value) {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof Number number) {
+            return number.intValue();
+        }
+        if (value instanceof String text && !text.isBlank()) {
+            try {
+                return Integer.parseInt(text.trim());
+            } catch (NumberFormatException ignored) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    private UUID parseUuid(Object value) {
+        if (value == null) {
+            return null;
+        }
+        try {
+            return UUID.fromString(String.valueOf(value).trim());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private UUID deterministicUuid(String namespace, Integer id) {
+        String raw = namespace + ":" + (id == null ? "null" : id);
+        return UUID.nameUUIDFromBytes(raw.getBytes(StandardCharsets.UTF_8));
     }
 
     private void renameFaceImages(MigrationConfig config, Connection target) {
