@@ -453,59 +453,60 @@ public class MigratorsManager {
             }
 
             try (PreparedStatement ps = target.prepareStatement(faceItemsQuery);
-             ResultSet rs = ps.executeQuery()) {
-            Map<String, FaceItem> imageToItem = new HashMap<>();
-            while (rs.next()) {
-                String image = rs.getString("image");
-                if (image != null && !image.isBlank()) {
-                    String normalizedImageName = extractFileName(image);
-                    int imageOrder = rs.getInt("image_order");
-                    FaceItem candidate = new FaceItem(rs.getLong("id"), rs.getLong("list_id"), normalizedImageName, imageOrder);
-                    imageToItem.compute(normalizedImageName, (key, existing) -> {
-                        if (existing == null) {
-                            return candidate;
+                 ResultSet rs = ps.executeQuery()) {
+                Map<String, FaceItem> imageToItem = new HashMap<>();
+                while (rs.next()) {
+                    String image = rs.getString("image");
+                    if (image != null && !image.isBlank()) {
+                        String normalizedImageName = extractFileName(image);
+                        int imageOrder = rs.getInt("image_order");
+                        FaceItem candidate = new FaceItem(rs.getLong("id"), rs.getLong("list_id"), normalizedImageName, imageOrder);
+                        imageToItem.compute(normalizedImageName, (key, existing) -> {
+                            if (existing == null) {
+                                return candidate;
+                            }
+                            if (candidate.listId < existing.listId) {
+                                return candidate;
+                            }
+                            if (candidate.listId == existing.listId && candidate.id < existing.id) {
+                                return candidate;
+                            }
+                            if (candidate.listId == existing.listId && candidate.id == existing.id && candidate.imageOrder < existing.imageOrder) {
+                                return candidate;
+                            }
+                            return existing;
+                        });
+                    }
+                }
+
+                Files.createDirectories(targetDir);
+                Map<String, Integer> destinationCounters = new HashMap<>();
+                try (var paths = Files.list(sourceDir)) {
+                    paths.filter(Files::isRegularFile).forEach(path -> {
+                        String filename = path.getFileName().toString();
+                        FaceItem item = imageToItem.get(filename);
+                        if (item == null) {
+                            return;
                         }
-                        if (candidate.listId < existing.listId) {
-                            return candidate;
+                        String ext = "";
+                        int idx = filename.lastIndexOf('.');
+                        if (idx >= 0) {
+                            ext = filename.substring(idx);
                         }
-                        if (candidate.listId == existing.listId && candidate.id < existing.id) {
-                            return candidate;
+                        Path listDir = targetDir.resolve(String.valueOf(item.listId));
+                        String destinationKey = item.listId + ":" + item.id + ":" + ext.toLowerCase(Locale.ROOT);
+                        int seq = destinationCounters.getOrDefault(destinationKey, 0) + 1;
+                        destinationCounters.put(destinationKey, seq);
+                        String destinationName = seq == 1 ? (item.id + ext) : (item.id + "_" + seq + ext);
+                        Path destination = listDir.resolve(destinationName);
+                        try {
+                            Files.createDirectories(listDir);
+                            Files.move(path, destination, StandardCopyOption.REPLACE_EXISTING);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
                         }
-                        if (candidate.listId == existing.listId && candidate.id == existing.id && candidate.imageOrder < existing.imageOrder) {
-                            return candidate;
-                        }
-                        return existing;
                     });
                 }
-            }
-
-            Files.createDirectories(targetDir);
-            Map<String, Integer> destinationCounters = new HashMap<>();
-            try (var paths = Files.list(sourceDir)) {
-                paths.filter(Files::isRegularFile).forEach(path -> {
-                    String filename = path.getFileName().toString();
-                    FaceItem item = imageToItem.get(filename);
-                    if (item == null) {
-                        return;
-                    }
-                    String ext = "";
-                    int idx = filename.lastIndexOf('.');
-                    if (idx >= 0) {
-                        ext = filename.substring(idx);
-                    }
-                    Path listDir = targetDir.resolve(String.valueOf(item.listId));
-                    String destinationKey = item.listId + ":" + item.id + ":" + ext.toLowerCase(Locale.ROOT);
-                    int seq = destinationCounters.getOrDefault(destinationKey, 0) + 1;
-                    destinationCounters.put(destinationKey, seq);
-                    String destinationName = seq == 1 ? (item.id + ext) : (item.id + "_" + seq + ext);
-                    Path destination = listDir.resolve(destinationName);
-                    try {
-                        Files.createDirectories(listDir);
-                        Files.move(path, destination, StandardCopyOption.REPLACE_EXISTING);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
             }
         } catch (Exception e) {
             throw new IllegalStateException("Face image rename failed", e);

@@ -170,6 +170,8 @@ Each mapping file must follow this structure:
 - Never invent missing data
 - Never assume matches with insufficient keys
 - Prefer correctness and auditability over speed
+- ✅ After every code change, run automated tests before proceeding (at minimum: `mvn -f old_migrator/pom.xml test`).
+- ✅ Before every commit, run the full verification checklist (`helper_scripts/pre_commit_checks.sh`) and fix failures before committing.
 
 ---
 

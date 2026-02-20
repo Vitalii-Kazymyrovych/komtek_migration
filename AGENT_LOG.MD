@@ -97,3 +97,9 @@
 - 19:01 UTC+00 — Investigated user-reported Maven compilation error in old_migrator and traced it to `renameFaceImages` calling `resolveFaceImageSelectQuery` (throws SQLException) outside handled scope.
 - 19:02 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/MigratorsManager.java` to resolve face image select SQL inside the existing guarded block so checked SQL exceptions are wrapped consistently.
 - 19:03 UTC+00 — Validation attempt: `mvn clean package -DskipTests` in old_migrator failed due to Maven Central HTTP 403 while resolving spring-boot-starter-parent, so full compile verification could not be completed in this environment.
+- 19:09 UTC+00 — Fixed `old_migrator/src/main/java/com/incoresoft/releasesmigrator/MigratorsManager.java` brace/try scoping in `renameFaceImages` so the project compiles and SQL exception handling remains inside guarded block.
+- 19:09 UTC+00 — Added `old_migrator/src/test/java/com/incoresoft/releasesmigrator/MigratorsManagerTest.java` with unit tests for dump SQL sanitization and face image query resolution logic.
+- 19:09 UTC+00 — Added `/helper_scripts/pre_commit_checks.sh` (runs `mvn test` + `mvn -DskipTests clean package`) to enforce pre-commit verification; needed to add an additional deterministic correctness gate beyond unit tests.
+- 19:09 UTC+00 — Updated `AGENTS.md` behavior rules to require running tests after each code change and executing `helper_scripts/pre_commit_checks.sh` before every commit.
+- 19:10 UTC+00 — Ran `helper_scripts/pre_commit_checks.sh`; initial run surfaced failing/new unit tests and I iterated on H2 test schema setup to ensure deterministic lowercase table discovery.
+- 19:10 UTC+00 — Re-ran `helper_scripts/pre_commit_checks.sh` successfully (unit tests + clean package), confirming compile/test/package verification before commit.
