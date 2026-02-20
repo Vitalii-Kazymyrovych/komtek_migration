@@ -55,3 +55,13 @@
 - 14:08 UTC — Reworked old_migrator Java logic to migrate directly from configurable MySQL/H2 dump into PostgreSQL with ordered table inserts, status filtering, text normalization, and ALPR created_by fallback.
 - 14:08 UTC — Added integrated face list image rename step in Java migrator to move images into <target>/<list_id>/<item_id> naming convention after DB migration.
 - 14:08 UTC — Updated old_migrator README and pom dependencies (H2/PostgreSQL drivers) for jar+config+dump runtime workflow.
+
+## 2026-02-20
+- 16:19 UTC — Extended old_migrator table migration order to include traffic_counters and traffic_stat so traffic analytics tables are copied into PostgreSQL during app migration.
+- 16:19 UTC — Updated old_migrator/README.md migration-order documentation to include traffic_counters and traffic_stat.
+- 16:21 UTC — Validation attempt: ran old_migrator build checks (`./mvnw test`, `mvn test`); wrapper is non-executable and Maven dependency download returned 403 from repo.maven.apache.org in this environment.
+- 16:22 UTC — Retried wrapper via `sh ./mvnw test`; wrapper launched but could not download Maven distribution from repo.maven.apache.org in this environment.
+- 16:28 UTC — Updated old_migrator analytics migration logic to preserve legacy analytics ids, generate deterministic UUID fallback when missing/invalid, and map stream_id to stream_uuid when possible.
+- 16:28 UTC — Added post-insert identity sequence synchronization for migrated tables with id columns to avoid future id collisions after legacy-id inserts.
+- 16:28 UTC — Updated old_migrator README rules to document legacy analytics id preservation and deterministic uuid fallback behavior.
+- 16:29 UTC — Validation attempt: `sh ./mvnw test` still failed because Maven wrapper could not fetch Apache Maven zip from repo.maven.apache.org in this environment.

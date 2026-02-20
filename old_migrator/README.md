@@ -12,10 +12,11 @@ This application now performs end-to-end migration directly from an old DB dump 
 
 The app executes deterministic table migration order:
 
-`clients -> roles -> users -> stream_groups -> streams -> analytics_groups -> analytics -> event_manager -> alpr_lists -> alpr_list_items -> face_lists`
+`clients -> roles -> users -> stream_groups -> streams -> analytics_groups -> analytics -> traffic_counters -> traffic_stat -> event_manager -> alpr_lists -> alpr_list_items -> face_lists`
 
 Rules applied in migration:
 - `status = -1` rows are skipped.
+- `analytics.id` values are preserved from the legacy DB; missing/invalid `analytics.uuid` values are filled deterministically from legacy ids so inserts remain valid.
 - Empty/`-`/`NULL` string values are converted to SQL `NULL`.
 - Text values are normalized to ASCII (NFKD + deterministic substitutions).
 - Sensitive machine fields (`password/hash/token/secret/signature/base64`) are not normalized.
