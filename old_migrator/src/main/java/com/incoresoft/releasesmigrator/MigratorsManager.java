@@ -445,13 +445,14 @@ public class MigratorsManager {
             return;
         }
 
-        String faceItemsQuery = resolveFaceImageSelectQuery(target);
-        if (faceItemsQuery == null) {
-            log.info("Image rename is skipped (neither face_list_items.image nor face_list_items_images.path is available)");
-            return;
-        }
+        try {
+            String faceItemsQuery = resolveFaceImageSelectQuery(target);
+            if (faceItemsQuery == null) {
+                log.info("Image rename is skipped (neither face_list_items.image nor face_list_items_images.path is available)");
+                return;
+            }
 
-        try (PreparedStatement ps = target.prepareStatement(faceItemsQuery);
+            try (PreparedStatement ps = target.prepareStatement(faceItemsQuery);
              ResultSet rs = ps.executeQuery()) {
             Map<String, FaceItem> imageToItem = new HashMap<>();
             while (rs.next()) {
