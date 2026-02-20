@@ -70,6 +70,7 @@ public class MigratorsManager {
             return new MigrationConfig(
                     source.path("type").asText("mysql_dump"),
                     source.path("dump_path").asText(),
+                    target.path("type").asText("postgres"),
                     target.path("jdbc_url").asText(),
                     target.path("user").asText(),
                     target.path("password").asText(),
@@ -99,7 +100,12 @@ public class MigratorsManager {
     }
 
     private Connection openTargetConnection(MigrationConfig config) throws Exception {
-        Class.forName("org.postgresql.Driver");
+        String targetType = config.targetType.toLowerCase(Locale.ROOT);
+        if ("mysql".equals(targetType)) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } else {
+            Class.forName("org.postgresql.Driver");
+        }
         return DriverManager.getConnection(config.targetJdbcUrl, config.targetUser, config.targetPassword);
     }
 
@@ -125,7 +131,7 @@ public class MigratorsManager {
         String where = sourceColumns.contains("status") ? " WHERE status <> -1" : "";
         String selectSql = "SELECT " + String.join(",", columns) + " FROM " + table + where;
 
-        String insertSql = "INSERT INTO " + table + " (" + String.join(",", columns) + ") VALUES (" + String.join(",", Collections.nCopies(columns.size(), "?")) + ") ON CONFLICT DO NOTHING";
+        String insertSql = "INSERT INTO " + table + " (" + String.join(",", columns) + ") VALUES (" + String.join(",", Collections.nCopies(columns.size(), "?")) + ") " + duplicateIgnoreClause(configuredTargetType(target));
 
         int migrated = 0;
         try (PreparedStatement select = source.prepareStatement(selectSql);
@@ -179,7 +185,7 @@ public class MigratorsManager {
                 + (sourceColumnSet.contains("status") ? " WHERE status <> -1" : "");
         String insertSql = "INSERT INTO " + table + " (" + String.join(",", insertColumns)
                 + ") VALUES (" + String.join(",", Collections.nCopies(insertColumns.size(), "?"))
-                + ") ON CONFLICT DO NOTHING";
+                + ") " + duplicateIgnoreClause(configuredTargetType(target));
 
         Map<Integer, UUID> streamIdToUuid = loadStreamUuidMap(source);
 
@@ -254,18 +260,48 @@ public class MigratorsManager {
 
     private void syncIdentitySequence(Connection target, String table) {
         try {
+            String targetType = configuredTargetType(target);
             List<String> columns = tableColumns(target, table);
             if (!columns.contains("id")) {
                 return;
             }
-            String sql = "SELECT setval(pg_get_serial_sequence(?, 'id'), GREATEST((SELECT COALESCE(MAX(id), 0) FROM " + table + "), 1), true)";
-            try (PreparedStatement ps = target.prepareStatement(sql)) {
-                ps.setString(1, table);
-                ps.execute();
+            if ("mysql".equals(targetType)) {
+                long nextId = 1;
+                try (PreparedStatement ps = target.prepareStatement("SELECT GREATEST(COALESCE(MAX(id), 0) + 1, 1) FROM " + table);
+                     ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        nextId = rs.getLong(1);
+                    }
+                }
+                try (Statement st = target.createStatement()) {
+                    st.execute("ALTER TABLE " + table + " AUTO_INCREMENT = " + nextId);
+                }
+            } else {
+                String sql = "SELECT setval(pg_get_serial_sequence(?, 'id'), GREATEST((SELECT COALESCE(MAX(id), 0) FROM " + table + "), 1), true)";
+                try (PreparedStatement ps = target.prepareStatement(sql)) {
+                    ps.setString(1, table);
+                    ps.execute();
+                }
             }
         } catch (Exception e) {
             log.debug("Sequence sync skipped for {}: {}", table, e.getMessage());
         }
+    }
+
+    private String duplicateIgnoreClause(String targetType) {
+        return "mysql".equals(targetType) ? "ON DUPLICATE KEY UPDATE id = id" : "ON CONFLICT DO NOTHING";
+    }
+
+    private String configuredTargetType(Connection target) {
+        try {
+            String dbName = target.getMetaData().getDatabaseProductName();
+            if (dbName != null && dbName.toLowerCase(Locale.ROOT).contains("mysql")) {
+                return "mysql";
+            }
+        } catch (SQLException ignored) {
+            // fallback below
+        }
+        return "postgres";
     }
 
     private Integer asInteger(Object value) {
@@ -432,6 +468,7 @@ public class MigratorsManager {
 
     private record MigrationConfig(String sourceType,
                                    String dumpPath,
+                                   String targetType,
                                    String targetJdbcUrl,
                                    String targetUser,
                                    String targetPassword,

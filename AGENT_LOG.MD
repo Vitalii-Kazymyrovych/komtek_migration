@@ -67,3 +67,6 @@
 - 16:29 UTC — Validation attempt: `sh ./mvnw test` still failed because Maven wrapper could not fetch Apache Maven zip from repo.maven.apache.org in this environment.
 - 16:38 UTC — Added old_migrator/config.template.json as a ready-to-copy jar-side config template for MySQL/H2 dump to PostgreSQL migration.
 - 16:38 UTC — Updated old_migrator/README.md runtime step to instruct copying config.template.json to config.json before running migrator.jar.
+- 17:08 UTC — Extended old_migrator migration runtime to support configurable target DB type (`postgres` or `mysql`) including target-specific duplicate-ignore SQL and identity sync behavior.
+- 17:08 UTC — Updated old_migrator config templates and README: added `target.type` in config.template.json and created old_migrator/config.mysql.template.json for MySQL target setup.
+- 17:08 UTC — Validation attempt: `sh ./mvnw -q -DskipTests compile` failed because Maven wrapper could not fetch Apache Maven zip from repo.maven.apache.org in this environment.
