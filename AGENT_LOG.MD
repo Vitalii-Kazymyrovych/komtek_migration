@@ -74,3 +74,5 @@
 - 17:29 UTC — Updated old_migrator DatabaseConfiguration to accept both legacy `db` and new `target` config.json sections, with null-safe validation and mysql/postgres DSLContext creation to prevent startup NPE when `db` is absent.
 - 18:04 UTC — Hardened old_migrator DatabaseConfiguration config loading to support custom config path (`-Dconfig.path` / `MIGRATOR_CONFIG_PATH`), accept legacy `database` section, and throw explicit missing-config errors instead of null-pointer startup failures.
 - 18:04 UTC — Updated old_migrator/README.md with config path override usage and troubleshooting steps for missing/invalid database config at startup.
+- 18:17 UTC — Updated old_migrator/pom.xml to add spring-jdbc (for DriverManagerDataSource) and switch MySQL dependency to com.mysql:mysql-connector-j to fix compilation and remove relocation warning.
+- 18:17 UTC — Validation attempt: `mvn clean package -DskipTests` in old_migrator failed in this environment because Maven Central access returned HTTP 403 while resolving spring-boot-starter-parent.
