@@ -94,3 +94,6 @@
 - 19:12 UTC+00 — Updated old_migrator/README.md with deterministic multi-image destination naming behavior.
 - 19:18 UTC+00 — Corrected face image source SQL to include all face_list_items_images.path rows when face_list_items.image is empty, preserving list_id <- list_item_id linkage and avoiding dropped extra item images.
 - 19:18 UTC+00 — Updated old_migrator/README.md to document per-item precedence: use face_list_items.image if present, else use all linked face_list_items_images.path rows.
+- 19:01 UTC+00 — Investigated user-reported Maven compilation error in old_migrator and traced it to `renameFaceImages` calling `resolveFaceImageSelectQuery` (throws SQLException) outside handled scope.
+- 19:02 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/MigratorsManager.java` to resolve face image select SQL inside the existing guarded block so checked SQL exceptions are wrapped consistently.
+- 19:03 UTC+00 — Validation attempt: `mvn clean package -DskipTests` in old_migrator failed due to Maven Central HTTP 403 while resolving spring-boot-starter-parent, so full compile verification could not be completed in this environment.
