@@ -76,3 +76,7 @@
 - 18:04 UTC — Updated old_migrator/README.md with config path override usage and troubleshooting steps for missing/invalid database config at startup.
 - 18:17 UTC — Updated old_migrator/pom.xml to add spring-jdbc (for DriverManagerDataSource) and switch MySQL dependency to com.mysql:mysql-connector-j to fix compilation and remove relocation warning.
 - 18:17 UTC — Validation attempt: `mvn clean package -DskipTests` in old_migrator failed in this environment because Maven Central access returned HTTP 403 while resolving spring-boot-starter-parent.
+- 18:25 UTC — Investigated migrator startup OutOfMemoryError and traced it to `Files.readString` loading the full SQL dump in `MigratorsManager.openSourceConnection`.
+- 18:25 UTC — Refactored `MigratorsManager` dump loading to stream and execute SQL statements incrementally (line-by-line preprocessing + statement batching) to avoid full-file memory allocation.
+- 18:29 UTC — Disabled Spring `DataSourceAutoConfiguration` in `ReleasesMigratorApplication` so Boot no longer auto-starts an embedded H2 datasource when target config is MySQL/PostgreSQL.
+- 18:33 UTC — Reworked dump parser in `MigratorsManager` to character-buffer streaming (no `readLine`), preventing giant single-line INSERTs from causing memory spikes on very large dumps (e.g., 32 GB).
