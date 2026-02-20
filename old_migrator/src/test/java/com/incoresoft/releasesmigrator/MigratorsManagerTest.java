@@ -2,10 +2,15 @@ package com.incoresoft.releasesmigrator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,6 +54,26 @@ class MigratorsManagerTest {
             statement.execute("CREATE TABLE face_list_items_images (id BIGINT PRIMARY KEY, list_item_id BIGINT)");
 
             assertNull(invokeFaceQuery(connection));
+        }
+    }
+
+    @Test
+    void executeDumpSqlStreamingFallsBackToWindows1251WhenUtf8DecodingFails(@TempDir Path tempDir) throws Exception {
+        Path dumpPath = tempDir.resolve("legacy.sql");
+        String dumpSql = "CREATE TABLE users (id BIGINT PRIMARY KEY, fullname VARCHAR(255));"
+                + "INSERT INTO users (id, fullname) VALUES (1, 'Тест');";
+        Files.writeString(dumpPath, dumpSql, Charset.forName("windows-1251"));
+
+        try (Connection connection = DriverManager.getConnection("jdbc:h2:mem:dump_cp1251;MODE=MySQL;DATABASE_TO_LOWER=TRUE", "sa", "")) {
+            Method method = MigratorsManager.class.getDeclaredMethod("executeDumpSqlStreaming", Path.class, Connection.class);
+            method.setAccessible(true);
+            method.invoke(manager, dumpPath, connection);
+
+            try (Statement statement = connection.createStatement();
+                 ResultSet rs = statement.executeQuery("SELECT fullname FROM users WHERE id = 1")) {
+                assertTrue(rs.next());
+                assertEquals("Тест", rs.getString(1));
+            }
         }
     }
 
