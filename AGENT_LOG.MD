@@ -70,3 +70,5 @@
 - 17:08 UTC — Extended old_migrator migration runtime to support configurable target DB type (`postgres` or `mysql`) including target-specific duplicate-ignore SQL and identity sync behavior.
 - 17:08 UTC — Updated old_migrator config templates and README: added `target.type` in config.template.json and created old_migrator/config.mysql.template.json for MySQL target setup.
 - 17:08 UTC — Validation attempt: `sh ./mvnw -q -DskipTests compile` failed because Maven wrapper could not fetch Apache Maven zip from repo.maven.apache.org in this environment.
+
+- 17:29 UTC — Updated old_migrator DatabaseConfiguration to accept both legacy `db` and new `target` config.json sections, with null-safe validation and mysql/postgres DSLContext creation to prevent startup NPE when `db` is absent.
