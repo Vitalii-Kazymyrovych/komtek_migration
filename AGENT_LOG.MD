@@ -47,3 +47,11 @@
 - 18:56 UTC — Investigated ALPR list item count gaps; discovered multiline comments in old_dataset/_alpr_list_items__202512301049.txt caused the parser to split 567 rows, dropping items (e.g., ÂNIMA PLACAS 110 entries -> 73).
 - 18:56 UTC — Updated helper_scripts/alpr_lists_migration.py to parse multiline item rows safely, preserve existing item id mappings, and emit a backfill SQL for newly surfaced records.
 - 18:56 UTC — Regenerated new_dataset/sql/mapping outputs for ALPR list items (721 active items, ANIMA PLACAS now 110) and created sql/alpr_list_items_backfill.sql with 255 missing records appended after prior ids.
+
+## 2026-02-19
+
+- 12:29 UTC — Rewrote old_migrator Java orchestration (MigratorsManager) to run the established helper_scripts pipeline in deterministic order and fail fast on script errors.
+- 12:29 UTC — Replaced old_migrator/README.md with dataset-pipeline documentation and run instructions for the new Java script-runner migrator.
+- 14:08 UTC — Reworked old_migrator Java logic to migrate directly from configurable MySQL/H2 dump into PostgreSQL with ordered table inserts, status filtering, text normalization, and ALPR created_by fallback.
+- 14:08 UTC — Added integrated face list image rename step in Java migrator to move images into <target>/<list_id>/<item_id> naming convention after DB migration.
+- 14:08 UTC — Updated old_migrator README and pom dependencies (H2/PostgreSQL drivers) for jar+config+dump runtime workflow.
