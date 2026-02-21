@@ -112,6 +112,12 @@ public class GeneralTablesMigrator implements Migrator {
         if (blank(values.get("name"))) {
             values.put("name", "Unnamed face list " + rowNumber);
         }
+        if (blank(values.get("color"))) {
+            values.put("color", "#FFFFFF");
+        }
+        if (blank(values.get("list_permissions"))) {
+            values.put("list_permissions", "{}");
+        }
     }
 
     private void insertRows(JdbcTemplate jdbcTemplate, String targetType, String table, List<DumpParser.Row> rows) {
