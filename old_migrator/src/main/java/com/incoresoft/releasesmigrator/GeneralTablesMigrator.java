@@ -71,7 +71,9 @@ public class GeneralTablesMigrator implements Migrator {
 
     private List<DumpParser.Row> prepareRows(String table, List<DumpParser.Row> rows, Map<Object, String> streamUuidByRef) {
         List<DumpParser.Row> out = new ArrayList<>();
+        int rowNumber = 0;
         for (DumpParser.Row row : rows) {
+            rowNumber++;
             Map<String, Object> values = new LinkedHashMap<>(row.values());
             if (isExcludedByStatus(values)) {
                 continue;
@@ -97,9 +99,19 @@ public class GeneralTablesMigrator implements Migrator {
                 }
             }
             values.replaceAll((k, v) -> normalizeValue(k, v));
+            applyRequiredDefaults(table, values, rowNumber);
             out.add(new DumpParser.Row(row.table(), values));
         }
         return out;
+    }
+
+    private void applyRequiredDefaults(String table, Map<String, Object> values, int rowNumber) {
+        if (!"face_lists".equals(table)) {
+            return;
+        }
+        if (blank(values.get("name"))) {
+            values.put("name", "Unnamed face list " + rowNumber);
+        }
     }
 
     private void insertRows(JdbcTemplate jdbcTemplate, String targetType, String table, List<DumpParser.Row> rows) {
