@@ -30,3 +30,7 @@
 - 11:45 UTC+00 — Updated `resolveSourceImagePath` to resolve face images by basename only (last path segment) under `images.source_dir`, matching legacy storage layout where files are flat in `face_lists/`.
 - 11:46 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after basename-only face image lookup change (build successful; no tests discovered).
 - 11:46 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+- 12:33 UTC+00 — Updated `GeneralTablesMigrator` table order to exclude direct migration of face tables except `face_lists` (kept `face_list_items`/`face_list_items_images` for filesystem processing only).
+- 12:33 UTC+00 — Updated `old_migrator/README.md` migration order and face-table behavior notes to match the new exclusion rule.
+- 12:33 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after face-table exclusion update (build successful; no tests discovered).
+- 12:33 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).

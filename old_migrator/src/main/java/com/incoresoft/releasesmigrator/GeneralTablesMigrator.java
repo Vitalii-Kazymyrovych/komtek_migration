@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class GeneralTablesMigrator implements Migrator {
     private static final List<String> TABLE_ORDER = List.of(
             "analytics_groups", "api_tokens", "cleaning_settings", "clients", "event_manager",
-            "face_lists", "face_detections", "face_notifications", "plugin_configurations", "roles",
+            "face_lists", "plugin_configurations", "roles",
             "servers", "sounds_settings", "stats_traffic_minutely", "stream_groups", "streams",
             "system_settings", "traffic_counters", "traffic_stat", "users", "analytics", "heatmap_plans"
     );
