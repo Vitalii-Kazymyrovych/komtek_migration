@@ -143,3 +143,6 @@
 - 09:14 UTC+00 — Implemented face list asset logic in the new migrator: creates per-list folders in `face_lists_new`, strips image paths to basenames, moves files from `face_lists`, and renames each image to the corresponding person name.
 - 09:14 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` successfully after recreating migrator code (build passes; no tests present).
 - 09:15 UTC+00 — Updated `old_migrator/README.md` to document new general-table mapping coverage and the dedicated face item/image filesystem move workflow.
+- 09:33 UTC+00 — Reviewed `old_migrator/old_dump.sql` and `old_migrator/newDB.txt` for `cleaning_settings`; confirmed table uses unique `category_id` and has no `id` column, matching runtime SQL error.
+- 09:33 UTC+00 — Updated `GeneralTablesMigrator` duplicate-key SQL generation to use a deterministic no-op on the first inserted column instead of hardcoded `id=id`, preventing MySQL failures on tables without `id`.
+- 09:33 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` (build success; no tests discovered) and `./helper_scripts/pre_commit_checks.sh` (success) before commit.

@@ -109,7 +109,7 @@ public class GeneralTablesMigrator implements Migrator {
             List<DumpParser.Row> chunk = rows.subList(i, Math.min(i + chunkSize, rows.size()));
             String placeholders = "(" + String.join(",", Collections.nCopies(columns.size(), "?")) + ")";
             String sql = "INSERT INTO " + table + " (" + String.join(",", columns) + ") VALUES " +
-                    chunk.stream().map(r -> placeholders).collect(Collectors.joining(",")) + duplicateClause(targetType, table);
+                    chunk.stream().map(r -> placeholders).collect(Collectors.joining(",")) + duplicateClause(targetType, columns);
 
             List<Object> params = new ArrayList<>();
             for (DumpParser.Row row : chunk) {
@@ -132,11 +132,12 @@ public class GeneralTablesMigrator implements Migrator {
         }
     }
 
-    private String duplicateClause(String targetType, String table) {
+    private String duplicateClause(String targetType, List<String> columns) {
         if ("postgres".equalsIgnoreCase(targetType)) {
             return " ON CONFLICT DO NOTHING";
         }
-        return " ON DUPLICATE KEY UPDATE id=id";
+        String noOpColumn = columns.getFirst();
+        return " ON DUPLICATE KEY UPDATE " + noOpColumn + "=" + noOpColumn;
     }
 
     private DataSource buildTargetDataSource(MigrationConfig config) {
