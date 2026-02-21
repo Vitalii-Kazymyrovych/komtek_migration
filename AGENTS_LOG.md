@@ -1,3 +1,7 @@
 - 09:40 UTC+00 — Investigated runtime failure `Column 'name' cannot be null` for `face_lists` and updated `GeneralTablesMigrator` to apply deterministic fallback names (`Unnamed face list <row_number>`) when legacy names are blank after normalization.
 - 09:40 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after the fix (build successful; no tests discovered).
 - 09:40 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+- 09:49 UTC+00 — Reviewed target schema rules in `old_migrator/newDB.txt` and `new_dataset/dump-videoanalytics-202601121700.sql` to confirm `face_lists.color` and `face_lists.list_permissions` are NOT NULL with defaults.
+- 09:49 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/GeneralTablesMigrator.java` to apply required `face_lists` fallbacks for blank values: `color='#FFFFFF'` and `list_permissions='{}'`.
+- 09:50 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after the fix (build successful; no tests discovered).
+- 09:51 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
