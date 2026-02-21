@@ -6,3 +6,5 @@
 2026-02-20 21:56:46 WARN  MigratorsManager:114 - Decoded dump C:\Users\user\AppData\Local\Temp\junit-9917058219385169689\legacy.sql with fallback charset windows-1251
 2026-02-20 22:12:23 WARN  MigratorsManager:119 - Failed to decode dump C:\Users\user\AppData\Local\Temp\junit-5935981676600513553\legacy.sql as UTF-8: Input length = 1
 2026-02-20 22:12:23 WARN  MigratorsManager:114 - Decoded dump C:\Users\user\AppData\Local\Temp\junit-5935981676600513553\legacy.sql with fallback charset windows-1251
+2026-02-20 22:51:17 WARN  MigratorsManager:118 - Failed to decode dump C:\Users\user\AppData\Local\Temp\junit-6669908979157736834\legacy.sql as UTF-8: Input length = 1
+2026-02-20 22:51:17 WARN  MigratorsManager:113 - Decoded dump C:\Users\user\AppData\Local\Temp\junit-6669908979157736834\legacy.sql with fallback charset windows-1251
