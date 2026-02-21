@@ -199,19 +199,40 @@ public class GeneralTablesMigrator implements Migrator {
 
     private Map<Object, String> buildStreamUuidMap(List<DumpParser.Row> streamRows) {
         Map<Object, String> map = new HashMap<>();
+        long nextGeneratedId = 1L;
         for (DumpParser.Row row : streamRows) {
             Map<String, Object> values = row.values();
-            String uuid = values.get("uuid") == null || String.valueOf(values.get("uuid")).isBlank()
-                    ? deterministicUuid("stream", values.get("id"))
-                    : String.valueOf(values.get("uuid"));
             Object id = values.get("id");
-            if (id != null) map.put(id, uuid);
-            map.put(String.valueOf(id), uuid);
+            Long numericId = parseLong(id);
+            if (numericId == null) {
+                numericId = nextGeneratedId;
+            }
+            nextGeneratedId = numericId + 1;
+            String uuid = values.get("uuid") == null || String.valueOf(values.get("uuid")).isBlank()
+                    ? deterministicUuid("stream", numericId)
+                    : String.valueOf(values.get("uuid"));
+            map.put(numericId, uuid);
+            map.put(String.valueOf(numericId), uuid);
+            if (id != null) {
+                map.put(id, uuid);
+                map.put(String.valueOf(id), uuid);
+            }
             addMap(values.get("path"), uuid, map);
             addMap(values.get("name"), uuid, map);
             addMap(values.get("file_name"), uuid, map);
         }
         return map;
+    }
+
+    private Long parseLong(Object value) {
+        if (value == null) {
+            return null;
+        }
+        try {
+            return Long.parseLong(String.valueOf(value));
+        } catch (NumberFormatException ignored) {
+            return null;
+        }
     }
 
     private void addMap(Object key, String value, Map<Object, String> map) {
@@ -288,7 +309,7 @@ public class GeneralTablesMigrator implements Migrator {
             String fileName = Path.of(rawPath).getFileName().toString();
             String extension = fileName.contains(".") ? fileName.substring(fileName.lastIndexOf('.')) : "";
 
-            Path src = sourceDir.resolve(fileName);
+            Path src = resolveSourceImagePath(sourceDir, rawPath);
             Path dstDir = targetDir.resolve(listFolder);
             Path dst = uniquePath(dstDir, personName + extension);
 
@@ -305,6 +326,33 @@ public class GeneralTablesMigrator implements Migrator {
             }
         }
         log.info("Face list image move completed. moved={}", moved);
+    }
+
+
+    private Path resolveSourceImagePath(Path sourceDir, String rawPath) {
+        String normalizedRaw = rawPath == null ? "" : rawPath.trim();
+        if (normalizedRaw.isEmpty()) {
+            return sourceDir.resolve("missing_image");
+        }
+
+        String withoutLeadingSlash = normalizedRaw.replaceFirst("^/+", "");
+        List<Path> candidates = new ArrayList<>();
+        candidates.add(sourceDir.resolve(withoutLeadingSlash));
+        candidates.add(Path.of(withoutLeadingSlash));
+        if (withoutLeadingSlash.startsWith("face_lists/")) {
+            candidates.add(sourceDir.resolve(withoutLeadingSlash.substring("face_lists/".length())));
+        }
+
+        String fileName = Path.of(withoutLeadingSlash).getFileName().toString();
+        candidates.add(sourceDir.resolve(fileName));
+
+        for (Path candidate : candidates) {
+            if (Files.exists(candidate)) {
+                return candidate;
+            }
+        }
+
+        return candidates.getFirst();
     }
 
     private Path uniquePath(Path dir, String baseName) {
