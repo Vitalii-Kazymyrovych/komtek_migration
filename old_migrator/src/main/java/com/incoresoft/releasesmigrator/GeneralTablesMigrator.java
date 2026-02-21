@@ -335,16 +335,39 @@ public class GeneralTablesMigrator implements Migrator {
         List<DumpParser.Row> lists = dumpData.rowsByTable().getOrDefault("face_lists", List.of());
         List<DumpParser.Row> items = dumpData.rowsByTable().getOrDefault("face_list_items", List.of());
         List<DumpParser.Row> images = dumpData.rowsByTable().getOrDefault("face_list_items_images", List.of());
-        if (lists.isEmpty() || items.isEmpty() || images.isEmpty()) {
-            log.info("Skipping face image move: missing required face tables in dump.");
+        if (lists.isEmpty()) {
+            log.info("Skipping face image move: missing face_lists table data in dump.");
             return;
         }
 
-        Map<Object, String> listNames = lists.stream().collect(Collectors.toMap(r -> r.values().get("id"), r -> safeFolderName(String.valueOf(r.values().get("name"))), (a, b) -> a));
-        Map<Object, DumpParser.Row> itemById = items.stream().collect(Collectors.toMap(r -> r.values().get("id"), r -> r, (a, b) -> a));
-
         Path sourceDir = Path.of(Optional.ofNullable(config.getImages()).map(MigrationConfig.ImagesConfig::getSourceDir).orElse("./face_lists"));
         Path targetDir = Path.of(Optional.ofNullable(config.getImages()).map(MigrationConfig.ImagesConfig::getTargetDir).orElse("./face_lists_new"));
+
+        Map<Object, String> listNames = new LinkedHashMap<>();
+        for (DumpParser.Row list : lists) {
+            if (isExcludedByStatus(list.values())) {
+                continue;
+            }
+            Object listId = list.values().get("id");
+            String listName = String.valueOf(normalizeValue("name", list.values().get("name")));
+            if (blank(listName) || "null".equalsIgnoreCase(listName)) {
+                listName = "Unnamed face list " + listId;
+            }
+            String listFolder = safeFolderName(listName);
+            listNames.putIfAbsent(listId, listFolder);
+            try {
+                Files.createDirectories(targetDir.resolve(listFolder));
+            } catch (IOException e) {
+                log.warn("Failed to create face list folder {}: {}", listFolder, e.getMessage());
+            }
+        }
+
+        if (items.isEmpty() || images.isEmpty()) {
+            log.info("Skipping face image move: missing face item/image rows in dump. Created list folders only.");
+            return;
+        }
+
+        Map<Object, DumpParser.Row> itemById = items.stream().collect(Collectors.toMap(r -> r.values().get("id"), r -> r, (a, b) -> a));
 
         int moved = 0;
         for (DumpParser.Row imageRow : images) {
@@ -387,23 +410,14 @@ public class GeneralTablesMigrator implements Migrator {
         }
 
         String withoutLeadingSlash = normalizedRaw.replaceFirst("^/+", "");
-        List<Path> candidates = new ArrayList<>();
-        candidates.add(sourceDir.resolve(withoutLeadingSlash));
-        candidates.add(Path.of(withoutLeadingSlash));
-        if (withoutLeadingSlash.startsWith("face_lists/")) {
-            candidates.add(sourceDir.resolve(withoutLeadingSlash.substring("face_lists/".length())));
-        }
-
         String fileName = Path.of(withoutLeadingSlash).getFileName().toString();
-        candidates.add(sourceDir.resolve(fileName));
+        Path candidate = sourceDir.resolve(fileName);
 
-        for (Path candidate : candidates) {
-            if (Files.exists(candidate)) {
-                return candidate;
-            }
+        if (Files.exists(candidate)) {
+            return candidate;
         }
 
-        return candidates.getFirst();
+        return candidate;
     }
 
     private Path uniquePath(Path dir, String baseName) {
