@@ -85,11 +85,7 @@ public class GeneralTablesMigrator implements Migrator {
                 if (blank(values.get("uuid"))) {
                     values.put("uuid", deterministicUuid("analytics", values.get("id")));
                 }
-                Object streamRef = values.get("stream");
-                String streamUuid = streamUuidByRef.get(streamRef);
-                if (streamUuid == null && streamRef != null) {
-                    streamUuid = streamUuidByRef.get(String.valueOf(streamRef));
-                }
+                String streamUuid = resolveAnalyticsStreamUuid(values, streamUuidByRef);
                 if (streamUuid != null) {
                     values.put("stream_uuid", streamUuid);
                 }
@@ -103,6 +99,54 @@ public class GeneralTablesMigrator implements Migrator {
             out.add(new DumpParser.Row(row.table(), values));
         }
         return out;
+    }
+
+    private String resolveAnalyticsStreamUuid(Map<String, Object> analyticsValues, Map<Object, String> streamUuidByRef) {
+        Object streamRef = analyticsValues.get("stream");
+        String streamUuid = lookupStreamUuid(streamUuidByRef, streamRef);
+        if (streamUuid != null) {
+            return streamUuid;
+        }
+
+        Object analyticsName = analyticsValues.get("name");
+        streamUuid = lookupStreamUuid(streamUuidByRef, analyticsName);
+        if (streamUuid != null) {
+            log.debug("Resolved analytics stream by name fallback: analytics_name={} stream_ref={}", analyticsName, streamRef);
+        }
+        return streamUuid;
+    }
+
+    private String lookupStreamUuid(Map<Object, String> streamUuidByRef, Object key) {
+        if (key == null) {
+            return null;
+        }
+        String direct = streamUuidByRef.get(key);
+        if (direct != null) {
+            return direct;
+        }
+
+        String asString = String.valueOf(key);
+        String fromString = streamUuidByRef.get(asString);
+        if (fromString != null) {
+            return fromString;
+        }
+
+        String trimmed = asString.trim();
+        if (!trimmed.equals(asString)) {
+            String fromTrimmed = streamUuidByRef.get(trimmed);
+            if (fromTrimmed != null) {
+                return fromTrimmed;
+            }
+        }
+
+        String normalized = normalizeAscii(trimmed);
+        if (!normalized.equals(trimmed)) {
+            String fromNormalized = streamUuidByRef.get(normalized);
+            if (fromNormalized != null) {
+                return fromNormalized;
+            }
+        }
+        return streamUuidByRef.get(normalized.toLowerCase(Locale.ROOT));
     }
 
     private void applyRequiredDefaults(String table, Map<String, Object> values, int rowNumber) {
@@ -239,6 +283,13 @@ public class GeneralTablesMigrator implements Migrator {
         if (key == null) return;
         String s = String.valueOf(key);
         map.put(s, value);
+        String trimmed = s.trim();
+        if (!trimmed.equals(s)) {
+            map.put(trimmed, value);
+        }
+        String normalized = normalizeAscii(trimmed);
+        map.put(normalized, value);
+        map.put(normalized.toLowerCase(Locale.ROOT), value);
     }
 
     private boolean isExcludedByStatus(Map<String, Object> values) {

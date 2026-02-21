@@ -21,3 +21,6 @@
 - 10:41 UTC+00 — Investigated empty `face_lists_new` output and fixed face image source lookup: migrator now resolves legacy `face_list_items_images.path` values (including nested `face_lists/...` paths) against `images.source_dir` instead of basename-only matching.
 - 10:41 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after face image source-path fix; build succeeded (no tests discovered).
 - 10:41 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit; full verification succeeded.
+- 11:28 UTC+00 — Updated `GeneralTablesMigrator` analytics-to-stream binding: when stream lookup by legacy `analytics.stream` id/reference fails, migrator now falls back to stream-name matching via `analytics.name` and writes resolved `stream_uuid`.
+- 11:29 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after analytics stream-name fallback change (build successful; no tests discovered).
+- 11:29 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
