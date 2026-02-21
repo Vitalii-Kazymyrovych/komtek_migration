@@ -106,17 +106,31 @@ public class GeneralTablesMigrator implements Migrator {
     }
 
     private void applyRequiredDefaults(String table, Map<String, Object> values, int rowNumber) {
-        if (!"face_lists".equals(table)) {
+        if ("face_lists".equals(table)) {
+            if (blank(values.get("name"))) {
+                values.put("name", "Unnamed face list " + rowNumber);
+            }
+            if (blank(values.get("color"))) {
+                values.put("color", "#FFFFFF");
+            }
+            if (blank(values.get("list_permissions"))) {
+                values.put("list_permissions", "{}");
+            }
             return;
         }
-        if (blank(values.get("name"))) {
-            values.put("name", "Unnamed face list " + rowNumber);
+
+        if ("streams".equals(table) && values.get("address") == null) {
+            values.put("address", "");
+            return;
         }
-        if (blank(values.get("color"))) {
-            values.put("color", "#FFFFFF");
-        }
-        if (blank(values.get("list_permissions"))) {
-            values.put("list_permissions", "{}");
+
+        if ("users".equals(table)) {
+            if (values.get("email") == null) values.put("email", "");
+            if (values.get("fullname") == null) values.put("fullname", "");
+            if (values.get("password") == null) values.put("password", "");
+            if (values.get("type") == null) values.put("type", "basic");
+            if (values.get("ip_params") == null) values.put("ip_params", "{}");
+            if (values.get("role_ids") == null) values.put("role_ids", "[]");
         }
     }
 

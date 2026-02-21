@@ -5,3 +5,13 @@
 - 09:49 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/GeneralTablesMigrator.java` to apply required `face_lists` fallbacks for blank values: `color='#FFFFFF'` and `list_permissions='{}'`.
 - 09:50 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after the fix (build successful; no tests discovered).
 - 09:51 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+
+- 09:55 UTC+00 — Started task: install MySQL, initialize `incoreanalytics` from `old_migrator/newDB.txt`, and run migrator verification commands.
+- 10:00 UTC+00 — Installed MySQL packages (`default-mysql-server`/`default-mysql-client`) and launched an isolated local MySQL instance from `/tmp/mysql-local` for deterministic testing.
+- 10:01 UTC+00 — Created database `incoreanalytics` (`utf8mb4` / `utf8mb4_unicode_ci`) and loaded schema from `old_migrator/newDB.txt`.
+- 10:02 UTC+00 — Ran migrator verification commands: `mvn -f old_migrator/pom.xml test`, `mvn -f old_migrator/pom.xml -DskipTests package`, and `./helper_scripts/pre_commit_checks.sh`.
+- 10:02 UTC+00 — Executed migrator run against MySQL target (`MIGRATOR_CONFIG_PATH=/tmp/migrator.mysql.config.json java -jar ...`); migration aborted on `streams` insert with `SQLIntegrityConstraintViolationException: Column 'address' cannot be null`.
+- 10:11 UTC+00 — Updated `GeneralTablesMigrator.applyRequiredDefaults` to force `streams.address` to empty string when legacy value normalizes to NULL, matching target NOT NULL constraint.
+- 10:13 UTC+00 — Iteration 1 cycle completed (drop/setup/run): migrator progressed through `streams` and `traffic_stat` then failed on `users` with `Column 'ip_params' cannot be null`.
+- 10:13 UTC+00 — Updated `GeneralTablesMigrator.applyRequiredDefaults` with `users` NOT NULL fallbacks (`email`, `fullname`, `password`, `type`, `ip_params`, `role_ids`) and retained `streams.address` fallback.
+- 10:14 UTC+00 — Iteration 2 cycle completed (drop/setup/run): migrator finished successfully through `users`, `analytics`, and face image post-processing with no SQL exceptions.
