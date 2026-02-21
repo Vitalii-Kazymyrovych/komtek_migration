@@ -136,3 +136,10 @@
 - 20:43 UTC+00 — Re-ran `mvn -f old_migrator/pom.xml test` and `./helper_scripts/pre_commit_checks.sh` after final code/docs edits; both passed before commit.
 - 20:44 UTC+00 — Corrected `old_migrator/README.md` to reflect current behavior: face image copy/rename is disabled along with face-table migration in this flow.
 - 20:44 UTC+00 — Executed `./helper_scripts/pre_commit_checks.sh` again before commit after README finalization; full checks passed.
+
+## 2026-02-21
+
+- 09:13 UTC+00 — Rebuilt migration runtime from scratch in `old_migrator` by adding core migrator interfaces/config loader and a new `GeneralTablesMigrator` that parses dump INSERTs, migrates mapped tables, skips dropped tables, and handles heatmap table rename and UUID rules.
+- 09:14 UTC+00 — Implemented face list asset logic in the new migrator: creates per-list folders in `face_lists_new`, strips image paths to basenames, moves files from `face_lists`, and renames each image to the corresponding person name.
+- 09:14 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` successfully after recreating migrator code (build passes; no tests present).
+- 09:15 UTC+00 — Updated `old_migrator/README.md` to document new general-table mapping coverage and the dedicated face item/image filesystem move workflow.
