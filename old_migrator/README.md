@@ -15,9 +15,9 @@ If you need a different location, pass one of:
 - JVM property: `-Dconfig.path=C:\\Scripts\\config.json`
 - Environment variable: `MIGRATOR_CONFIG_PATH=C:\\Scripts\\config.json`
 
-The app executes deterministic table migration order:
+The app executes deterministic table migration order (general tables + mapped rename):
 
-`clients -> roles -> users -> stream_groups -> streams -> analytics_groups -> analytics -> traffic_counters -> traffic_stat -> stats_traffic_minutely -> event_manager -> sounds_settings -> alpr_lists -> alpr_list_items`
+`analytics_groups -> api_tokens -> cleaning_settings -> clients -> event_manager -> face_lists -> face_detections -> face_notifications -> plugin_configurations -> roles -> servers -> sounds_settings -> stats_traffic_minutely -> stream_groups -> streams -> system_settings -> traffic_counters -> traffic_stat -> users -> analytics -> smart_va_heatmap_plans (from heatmap_plans)`
 
 Rules applied in migration:
 - `status = -1` rows are skipped.
@@ -28,9 +28,9 @@ Rules applied in migration:
 - `alpr_list_items.created_by` defaults to `1` when missing.
 - Inserts use target-specific duplicate-ignore SQL (`ON CONFLICT DO NOTHING` for PostgreSQL, `ON DUPLICATE KEY UPDATE id = id` for MySQL).
 
-- Face-related tables (`face_lists`, `face_list_items`, `face_list_items_images`) are intentionally skipped in direct DB migration.
-
-Face image copy/rename is currently disabled together with face-table migration in this flow.
+- `face_list_items` and `face_list_items_images` are intentionally skipped in DB inserts.
+- `face_lists`, `face_detections`, and `face_notifications` are migrated directly.
+- The migrator then processes legacy face item/image rows only for filesystem preparation: files from `images.source_dir` are moved into per-list folders in `images.target_dir` and renamed to person names.
 
 ## config.json example
 
