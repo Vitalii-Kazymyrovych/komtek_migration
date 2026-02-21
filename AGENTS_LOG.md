@@ -15,3 +15,9 @@
 - 10:13 UTC+00 — Iteration 1 cycle completed (drop/setup/run): migrator progressed through `streams` and `traffic_stat` then failed on `users` with `Column 'ip_params' cannot be null`.
 - 10:13 UTC+00 — Updated `GeneralTablesMigrator.applyRequiredDefaults` with `users` NOT NULL fallbacks (`email`, `fullname`, `password`, `type`, `ip_params`, `role_ids`) and retained `streams.address` fallback.
 - 10:14 UTC+00 — Iteration 2 cycle completed (drop/setup/run): migrator finished successfully through `users`, `analytics`, and face image post-processing with no SQL exceptions.
+- 10:37 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/GeneralTablesMigrator.java` stream UUID mapping: when `streams.id` is absent in dump rows, assign deterministic sequential legacy ids (insert-order) and use them to populate `analytics.stream_uuid` from `streams` UUIDs correctly.
+- 10:38 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after analytics stream UUID remap change; build succeeded (no tests discovered).
+- 10:38 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit; full verification succeeded.
+- 10:41 UTC+00 — Investigated empty `face_lists_new` output and fixed face image source lookup: migrator now resolves legacy `face_list_items_images.path` values (including nested `face_lists/...` paths) against `images.source_dir` instead of basename-only matching.
+- 10:41 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after face image source-path fix; build succeeded (no tests discovered).
+- 10:41 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit; full verification succeeded.
