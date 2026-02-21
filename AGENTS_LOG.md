@@ -30,3 +30,7 @@
 - 11:45 UTC+00 — Updated `resolveSourceImagePath` to resolve face images by basename only (last path segment) under `images.source_dir`, matching legacy storage layout where files are flat in `face_lists/`.
 - 11:46 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after basename-only face image lookup change (build successful; no tests discovered).
 - 11:46 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+- 11:57 UTC+00 — Diagnosed face image move regression: legacy `face_list_items` inserts can omit `id`, causing all item ids to map as null and preventing `face_list_items_images.list_item_id` joins.
+- 11:57 UTC+00 — Updated `GeneralTablesMigrator.migrateFaceListImages` to assign deterministic synthetic item ids (insert-order) when `face_list_items.id` is absent so image rows can resolve and move/rename correctly.
+- 11:58 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after synthetic face-list-item id fix (build successful; no tests discovered).
+- 11:58 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).

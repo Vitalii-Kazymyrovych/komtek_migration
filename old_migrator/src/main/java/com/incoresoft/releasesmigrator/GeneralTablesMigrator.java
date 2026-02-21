@@ -367,7 +367,16 @@ public class GeneralTablesMigrator implements Migrator {
             return;
         }
 
-        Map<Object, DumpParser.Row> itemById = items.stream().collect(Collectors.toMap(r -> r.values().get("id"), r -> r, (a, b) -> a));
+        Map<Object, DumpParser.Row> itemById = new LinkedHashMap<>();
+        long syntheticItemId = 0L;
+        for (DumpParser.Row itemRow : items) {
+            syntheticItemId++;
+            Object itemId = itemRow.values().get("id");
+            if (itemId == null) {
+                itemId = syntheticItemId;
+            }
+            itemById.putIfAbsent(itemId, itemRow);
+        }
 
         int moved = 0;
         for (DumpParser.Row imageRow : images) {
