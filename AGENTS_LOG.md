@@ -1,0 +1,3 @@
+- 09:40 UTC+00 — Investigated runtime failure `Column 'name' cannot be null` for `face_lists` and updated `GeneralTablesMigrator` to apply deterministic fallback names (`Unnamed face list <row_number>`) when legacy names are blank after normalization.
+- 09:40 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after the fix (build successful; no tests discovered).
+- 09:40 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
