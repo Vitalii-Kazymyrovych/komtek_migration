@@ -3,6 +3,7 @@ package com.incoresoft.releasesmigrator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -100,7 +101,8 @@ class GeneralTablesMigratorDumpParserTest {
                 StandardCharsets.UTF_8
         );
 
-        var parsed = GeneralTablesMigrator.DumpParser.parseDump(tempDir.resolve("old_dump_part_*.sql"));
+        String dumpGlob = tempDir + File.separator + "old_dump_part_*.sql";
+        var parsed = GeneralTablesMigrator.DumpParser.parseDump(dumpGlob);
 
         List<GeneralTablesMigrator.DumpParser.Row> clientsRows = parsed.rowsByTable().get("clients");
         assertNotNull(clientsRows);
