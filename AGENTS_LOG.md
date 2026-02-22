@@ -37,3 +37,7 @@
 - 10:32 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/GeneralTablesMigrator.java` so `mapping.json` is resolved from the application location (jar directory) instead of hardcoded `old_migrator/mapping.json`.
 - 10:33 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after mapping-path update (build successful; no tests discovered).
 - 10:33 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+- 10:37 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/GeneralTablesMigrator.java` mapping config lookup to support explicit `mapping.path`/`MIGRATOR_MAPPING_PATH`, then fallback to working directory and JAR directory to avoid `/mapping.json` resolution failures.
+- 10:37 UTC+00 — Updated `old_migrator/README.md` with mapping.json resolution order and new override options.
+- 10:38 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after mapping-path fallback changes (build successful; no tests discovered).
+- 10:38 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).

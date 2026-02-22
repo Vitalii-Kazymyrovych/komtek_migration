@@ -219,6 +219,20 @@ public class GeneralTablesMigrator implements Migrator {
     }
 
     private Path resolveMappingConfigPath() {
+        String explicitPath = System.getProperty("mapping.path", System.getenv("MIGRATOR_MAPPING_PATH"));
+        if (explicitPath != null && !explicitPath.isBlank()) {
+            Path explicit = Path.of(explicitPath).toAbsolutePath().normalize();
+            if (!Files.exists(explicit)) {
+                throw new RuntimeException("Cannot find mapping config from explicit path: " + explicit);
+            }
+            return explicit;
+        }
+
+        Path workingDirMapping = Path.of("mapping.json").toAbsolutePath().normalize();
+        if (Files.exists(workingDirMapping)) {
+            return workingDirMapping;
+        }
+
         Path appPath;
         try {
             appPath = Path.of(GeneralTablesMigrator.class
@@ -235,11 +249,13 @@ public class GeneralTablesMigrator implements Migrator {
             throw new RuntimeException("Cannot determine application directory for mapping.json lookup");
         }
 
-        Path mappingPath = baseDir.resolve("mapping.json");
-        if (!Files.exists(mappingPath)) {
-            throw new RuntimeException("Cannot find mapping config in application directory: " + mappingPath);
+        Path appDirMapping = baseDir.resolve("mapping.json").toAbsolutePath().normalize();
+        if (Files.exists(appDirMapping)) {
+            return appDirMapping;
         }
-        return mappingPath;
+
+        throw new RuntimeException("Cannot find mapping config. Checked: explicit mapping.path/MIGRATOR_MAPPING_PATH, working directory "
+                + workingDirMapping + ", and application directory " + appDirMapping);
     }
 
     private Map<String, LookupIndex> buildLookupIndexes(Map<String, List<DumpParser.Row>> rowsByTable) {

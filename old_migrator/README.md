@@ -15,6 +15,11 @@ If you need a different location, pass one of:
 - JVM property: `-Dconfig.path=C:\\Scripts\\config.json`
 - Environment variable: `MIGRATOR_CONFIG_PATH=C:\\Scripts\\config.json`
 
+`mapping.json` is resolved in this order:
+1. Explicit path (`-Dmapping.path=...` or `MIGRATOR_MAPPING_PATH`)
+2. Current working directory (`./mapping.json`)
+3. Application directory (same folder as the JAR)
+
 The app executes deterministic table migration order (general tables + mapped rename):
 
 `analytics_groups -> api_tokens -> cleaning_settings -> clients -> event_manager -> face_lists -> plugin_configurations -> roles -> servers -> sounds_settings -> stats_traffic_minutely -> stream_groups -> streams -> system_settings -> traffic_counters -> traffic_stat -> users -> analytics -> smart_va_heatmap_plans (from heatmap_plans)`
