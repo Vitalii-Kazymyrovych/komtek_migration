@@ -41,3 +41,7 @@
 - 10:37 UTC+00 — Updated `old_migrator/README.md` with mapping.json resolution order and new override options.
 - 10:38 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after mapping-path fallback changes (build successful; no tests discovered).
 - 10:38 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+
+- 10:43 UTC+00 — Updated `GeneralTablesMigrator.TableMapping` deserialization to ignore unknown mapping config fields (e.g., `notes`) so `mapping.json` can include metadata without startup failure.
+- 10:44 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after TableMapping deserialization update (build successful; no tests discovered).
+- 10:44 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).

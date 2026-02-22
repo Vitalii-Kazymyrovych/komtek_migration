@@ -412,6 +412,7 @@ public class GeneralTablesMigrator implements Migrator {
         return value == null || String.valueOf(value).isBlank();
     }
 
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown = true)
     private record TableMapping(@com.fasterxml.jackson.annotation.JsonProperty("source_table") String sourceTable,
                                 @com.fasterxml.jackson.annotation.JsonProperty("target_table") String targetTable,
                                 @com.fasterxml.jackson.annotation.JsonProperty("action") String action,
