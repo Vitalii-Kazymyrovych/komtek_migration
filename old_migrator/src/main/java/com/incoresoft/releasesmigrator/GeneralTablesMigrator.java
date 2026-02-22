@@ -34,7 +34,7 @@ public class GeneralTablesMigrator implements Migrator {
     @Override
     public void migrate() {
         MigrationConfig config = loadConfig();
-        DumpData dumpData = DumpParser.parseDump(Path.of(config.getSource().getDumpPath()));
+        DumpData dumpData = DumpParser.parseDump(config.getSource().getDumpPath());
         LinkedHashMap<String, TableMapping> mappingConfig = loadMappingConfig();
         JdbcTemplate targetJdbc = new JdbcTemplate(buildTargetDataSource(config));
         TransactionTemplate tx = new TransactionTemplate(new org.springframework.jdbc.datasource.DataSourceTransactionManager(buildTargetDataSource(config)));
@@ -517,10 +517,10 @@ public class GeneralTablesMigrator implements Migrator {
     static final class DumpParser {
         private static final Pattern INSERT_PREFIX = Pattern.compile("(?is)^\\s*(?:INSERT(?:\\s+IGNORE)?|REPLACE)\\s+INTO\\s+");
 
-        static DumpData parseDump(Path path) {
-            List<Path> dumpPaths = resolveDumpPaths(path);
+        static DumpData parseDump(String configuredPath) {
+            List<Path> dumpPaths = resolveDumpPaths(configuredPath);
             if (dumpPaths.isEmpty()) {
-                throw new RuntimeException("No dump files found for path: " + path.toAbsolutePath().normalize());
+                throw new RuntimeException("No dump files found for path: " + configuredPath);
             }
 
             Map<String, List<Row>> byTable = new LinkedHashMap<>();
@@ -528,6 +528,10 @@ public class GeneralTablesMigrator implements Migrator {
                 appendDump(dumpPath, byTable);
             }
             return new DumpData(byTable);
+        }
+
+        static DumpData parseDump(Path path) {
+            return parseDump(path.toString());
         }
 
         private static void appendDump(Path path, Map<String, List<Row>> byTable) {
@@ -547,8 +551,12 @@ public class GeneralTablesMigrator implements Migrator {
             }
         }
 
-        private static List<Path> resolveDumpPaths(Path configuredPath) {
-            Path normalized = configuredPath.toAbsolutePath().normalize();
+        private static List<Path> resolveDumpPaths(String configuredPath) {
+            if (containsGlob(configuredPath)) {
+                return resolveGlobDumpPaths(configuredPath);
+            }
+
+            Path normalized = Path.of(configuredPath).toAbsolutePath().normalize();
             if (Files.exists(normalized)) {
                 if (Files.isDirectory(normalized)) {
                     try (var stream = Files.list(normalized)) {
@@ -564,9 +572,15 @@ public class GeneralTablesMigrator implements Migrator {
                 return List.of(normalized);
             }
 
-            Path parent = normalized.getParent();
-            String pattern = normalized.getFileName() == null ? "" : normalized.getFileName().toString();
-            if (parent == null || !Files.exists(parent)) {
+            return List.of();
+        }
+
+        private static List<Path> resolveGlobDumpPaths(String configuredPath) {
+            int slashIndex = Math.max(configuredPath.lastIndexOf('/'), configuredPath.lastIndexOf('\\'));
+            String parentPart = slashIndex >= 0 ? configuredPath.substring(0, slashIndex) : ".";
+            String pattern = configuredPath.substring(slashIndex + 1);
+            Path parent = Path.of(parentPart).toAbsolutePath().normalize();
+            if (!Files.exists(parent)) {
                 return List.of();
             }
 
@@ -580,8 +594,18 @@ public class GeneralTablesMigrator implements Migrator {
                 matches.sort(Comparator.naturalOrder());
                 return matches;
             } catch (IOException e) {
-                throw new RuntimeException("Failed to resolve dump glob path: " + normalized, e);
+                throw new RuntimeException("Failed to resolve dump glob path: " + configuredPath, e);
             }
+        }
+
+        private static boolean containsGlob(String path) {
+            for (int i = 0; i < path.length(); i++) {
+                char c = path.charAt(i);
+                if (c == '*' || c == '?' || c == '[' || c == '{') {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static String readDumpText(Path path) throws IOException {

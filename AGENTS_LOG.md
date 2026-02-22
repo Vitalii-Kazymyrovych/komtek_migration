@@ -70,3 +70,8 @@
 - 12:32 UTC+00 — Added regression test `parseDumpKeepsUtf8WhenBinaryLiteralContainsNullByte` in `old_migrator/src/test/java/com/incoresoft/releasesmigrator/GeneralTablesMigratorDumpParserTest.java`.
 - 12:33 UTC+00 — Ran `mvn -f old_migrator/pom.xml test`; dump parser tests passed (4/4).
 - 12:33 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit; full verification passed.
+- 12:45 UTC+00 — Investigated Windows jar build failure and reproduced root cause in `GeneralTablesMigratorDumpParserTest`: creating `Path` with wildcard (`old_dump_part_*.sql`) throws `InvalidPathException` on Windows.
+- 12:45 UTC+00 — Updated `GeneralTablesMigrator.DumpParser` to support glob-aware dump path resolution from raw string paths (including Windows), and switched migrator runtime to call `parseDump(String)`.
+- 12:45 UTC+00 — Updated `GeneralTablesMigratorDumpParserTest` glob test to pass a string pattern (`<tempDir>/old_dump_part_*.sql`) instead of constructing an invalid wildcard `Path`.
+- 12:46 UTC+00 — Ran `mvn -f old_migrator/pom.xml test`; dump parser test suite passed (5/5), confirming Windows-safe glob handling.
+- 12:46 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit; full verification checklist passed including jar packaging.
