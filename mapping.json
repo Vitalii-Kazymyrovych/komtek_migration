@@ -1,0 +1,811 @@
+{
+  "tables" : [ {
+    "sourceTable" : "analytics",
+    "targetTable" : "analytics",
+    "columnMappings" : [ {
+      "target" : "id",
+      "strategy" : "DIRECT",
+      "source" : "id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "uuid",
+      "strategy" : "GENERATED_UUID",
+      "source" : null,
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "type",
+      "strategy" : "DIRECT",
+      "source" : "type",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "plugin_name",
+      "strategy" : "DIRECT",
+      "source" : "plugin_name",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "name",
+      "strategy" : "DIRECT",
+      "source" : "name",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "created_at",
+      "strategy" : "DIRECT",
+      "source" : "created_at",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "status",
+      "strategy" : "DIRECT",
+      "source" : "status",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "client_id",
+      "strategy" : "DIRECT",
+      "source" : "client_id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "stream",
+      "strategy" : "DIRECT",
+      "source" : "stream",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "module",
+      "strategy" : "DIRECT",
+      "source" : "module",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "last_gpu_id",
+      "strategy" : "DIRECT",
+      "source" : "last_gpu_id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "desired_server_id",
+      "strategy" : "DIRECT",
+      "source" : "desired_server_id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "disable_balancing",
+      "strategy" : "DIRECT",
+      "source" : "disable_balancing",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "start_signature",
+      "strategy" : "DIRECT",
+      "source" : "start_signature",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "allowed_server_ids",
+      "strategy" : "DIRECT",
+      "source" : "allowed_server_ids",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "restrictions",
+      "strategy" : "DIRECT",
+      "source" : "restrictions",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "events_holder",
+      "strategy" : "DIRECT",
+      "source" : "events_holder",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "start_at",
+      "strategy" : "DIRECT",
+      "source" : "start_at",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "stream_uuid",
+      "strategy" : "LOOKUP",
+      "source" : null,
+      "value" : null,
+      "lookup" : {
+        "table" : "streams",
+        "sourceColumn" : "stream_id",
+        "lookupKey" : "id",
+        "lookupValue" : "uuid"
+      }
+    }, {
+      "target" : "group_id",
+      "strategy" : "CONSTANT",
+      "source" : null,
+      "value" : "0",
+      "lookup" : null
+    } ],
+    "unmappedTargetColumns" : [ ]
+  }, {
+    "sourceTable" : "clients",
+    "targetTable" : "clients",
+    "columnMappings" : [ {
+      "target" : "id",
+      "strategy" : "DIRECT",
+      "source" : "id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "client_name",
+      "strategy" : "DIRECT",
+      "source" : "client_name",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "country",
+      "strategy" : "DIRECT",
+      "source" : "country",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "city",
+      "strategy" : "DIRECT",
+      "source" : "city",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "address",
+      "strategy" : "DIRECT",
+      "source" : "address",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "zip_code",
+      "strategy" : "DIRECT",
+      "source" : "zip_code",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "email",
+      "strategy" : "DIRECT",
+      "source" : "email",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "phone",
+      "strategy" : "DIRECT",
+      "source" : "phone",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "comment",
+      "strategy" : "DIRECT",
+      "source" : "comment",
+      "value" : null,
+      "lookup" : null
+    } ],
+    "unmappedTargetColumns" : [ ]
+  }, {
+    "sourceTable" : "event_manager",
+    "targetTable" : "event_manager",
+    "columnMappings" : [ {
+      "target" : "uuid",
+      "strategy" : "COPY_ID",
+      "source" : "id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "title",
+      "strategy" : "DIRECT",
+      "source" : "title",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "description",
+      "strategy" : "DIRECT",
+      "source" : "description",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "created_at",
+      "strategy" : "DIRECT",
+      "source" : "created_at",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "nodes",
+      "strategy" : "DIRECT",
+      "source" : "nodes",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "client_id",
+      "strategy" : "DIRECT",
+      "source" : "client_id",
+      "value" : null,
+      "lookup" : null
+    } ],
+    "unmappedTargetColumns" : [ "id" ]
+  }, {
+    "sourceTable" : "face_lists",
+    "targetTable" : "face_lists",
+    "columnMappings" : [ {
+      "target" : "id",
+      "strategy" : "DIRECT",
+      "source" : "id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "name",
+      "strategy" : "DIRECT",
+      "source" : "name",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "comment",
+      "strategy" : "DIRECT",
+      "source" : "comment",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "min_confidence",
+      "strategy" : "DIRECT",
+      "source" : "min_confidence",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "send_internal_notifications",
+      "strategy" : "DIRECT",
+      "source" : "send_internal_notifications",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "events_holder",
+      "strategy" : "DIRECT",
+      "source" : "events_holder",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "status",
+      "strategy" : "DIRECT",
+      "source" : "status",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "created_at",
+      "strategy" : "DIRECT",
+      "source" : "created_at",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "client_id",
+      "strategy" : "DIRECT",
+      "source" : "client_id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "color",
+      "strategy" : "DIRECT",
+      "source" : "color",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "time_attendance",
+      "strategy" : "DIRECT",
+      "source" : "time_attendance",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "list_permissions",
+      "strategy" : "DIRECT",
+      "source" : "list_permissions",
+      "value" : null,
+      "lookup" : null
+    } ],
+    "unmappedTargetColumns" : [ "analytics_ids", "show_popup_for_internal_notifications" ]
+  }, {
+    "sourceTable" : "roles",
+    "targetTable" : "roles",
+    "columnMappings" : [ {
+      "target" : "id",
+      "strategy" : "DIRECT",
+      "source" : "id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "role_name",
+      "strategy" : "DIRECT",
+      "source" : "role_name",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "permissions",
+      "strategy" : "DIRECT",
+      "source" : "permissions",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "client_id",
+      "strategy" : "DIRECT",
+      "source" : "client_id",
+      "value" : null,
+      "lookup" : null
+    } ],
+    "unmappedTargetColumns" : [ "description" ]
+  }, {
+    "sourceTable" : "servers",
+    "targetTable" : "servers",
+    "columnMappings" : [ {
+      "target" : "id",
+      "strategy" : "DIRECT",
+      "source" : "id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "name",
+      "strategy" : "DIRECT",
+      "source" : "name",
+      "value" : null,
+      "lookup" : null
+    } ],
+    "unmappedTargetColumns" : [ "is_external_address_enabled", "address", "port" ]
+  }, {
+    "sourceTable" : "settings",
+    "targetTable" : "system_settings",
+    "columnMappings" : [ {
+      "target" : "variable_name",
+      "strategy" : "DIRECT",
+      "source" : "Variable_name",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "value",
+      "strategy" : "DIRECT",
+      "source" : "Value",
+      "value" : null,
+      "lookup" : null
+    } ],
+    "unmappedTargetColumns" : [ "id" ]
+  }, {
+    "sourceTable" : "stats_traffic_minutely",
+    "targetTable" : "stats_traffic_minutely",
+    "columnMappings" : [ {
+      "target" : "id",
+      "strategy" : "DIRECT",
+      "source" : "id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "va_id",
+      "strategy" : "DIRECT",
+      "source" : "va_id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "line",
+      "strategy" : "DIRECT",
+      "source" : "line",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "type",
+      "strategy" : "DIRECT",
+      "source" : "type",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "count",
+      "strategy" : "DIRECT",
+      "source" : "count",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "direction",
+      "strategy" : "DIRECT",
+      "source" : "direction",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "created_at",
+      "strategy" : "DIRECT",
+      "source" : "created_at",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "client_id",
+      "strategy" : "DIRECT",
+      "source" : "client_id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "present",
+      "strategy" : "DIRECT",
+      "source" : "present",
+      "value" : null,
+      "lookup" : null
+    } ],
+    "unmappedTargetColumns" : [ ]
+  }, {
+    "sourceTable" : "stream_groups",
+    "targetTable" : "stream_groups",
+    "columnMappings" : [ {
+      "target" : "id",
+      "strategy" : "DIRECT",
+      "source" : "id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "parent_id",
+      "strategy" : "DIRECT",
+      "source" : "parent_id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "name",
+      "strategy" : "DIRECT",
+      "source" : "name",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "client_id",
+      "strategy" : "DIRECT",
+      "source" : "client_id",
+      "value" : null,
+      "lookup" : null
+    } ],
+    "unmappedTargetColumns" : [ ]
+  }, {
+    "sourceTable" : "streams",
+    "targetTable" : "streams",
+    "columnMappings" : [ {
+      "target" : "id",
+      "strategy" : "DIRECT",
+      "source" : "id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "name",
+      "strategy" : "DIRECT",
+      "source" : "name",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "path",
+      "strategy" : "DIRECT",
+      "source" : "path",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "width",
+      "strategy" : "DIRECT",
+      "source" : "width",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "height",
+      "strategy" : "DIRECT",
+      "source" : "height",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "file_name",
+      "strategy" : "DIRECT",
+      "source" : "file_name",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "status",
+      "strategy" : "DIRECT",
+      "source" : "status",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "created_at",
+      "strategy" : "DIRECT",
+      "source" : "created_at",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "lat",
+      "strategy" : "DIRECT",
+      "source" : "lat",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "lng",
+      "strategy" : "DIRECT",
+      "source" : "lng",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "type",
+      "strategy" : "DIRECT",
+      "source" : "type",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "uuid",
+      "strategy" : "DIRECT",
+      "source" : "uuid",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "address",
+      "strategy" : "DIRECT",
+      "source" : "address",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "params",
+      "strategy" : "DIRECT",
+      "source" : "params",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "auth",
+      "strategy" : "DIRECT",
+      "source" : "auth",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "direction",
+      "strategy" : "DIRECT",
+      "source" : "direction",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "client_id",
+      "strategy" : "DIRECT",
+      "source" : "client_id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "codec",
+      "strategy" : "DIRECT",
+      "source" : "codec",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "timezone",
+      "strategy" : "DIRECT",
+      "source" : "timezone",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "duration",
+      "strategy" : "DIRECT",
+      "source" : "duration",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "restrictions",
+      "strategy" : "DIRECT",
+      "source" : "restrictions",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "parent_id",
+      "strategy" : "DIRECT",
+      "source" : "parent_id",
+      "value" : null,
+      "lookup" : null
+    } ],
+    "unmappedTargetColumns" : [ ]
+  }, {
+    "sourceTable" : "traffic_stat",
+    "targetTable" : "traffic_stat",
+    "columnMappings" : [ {
+      "target" : "id",
+      "strategy" : "DIRECT",
+      "source" : "id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "stream_id",
+      "strategy" : "DIRECT",
+      "source" : "stream_id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "va_id",
+      "strategy" : "DIRECT",
+      "source" : "va_id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "line",
+      "strategy" : "DIRECT",
+      "source" : "line",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "type",
+      "strategy" : "DIRECT",
+      "source" : "type",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "count",
+      "strategy" : "DIRECT",
+      "source" : "count",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "direction",
+      "strategy" : "DIRECT",
+      "source" : "direction",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "created_at",
+      "strategy" : "DIRECT",
+      "source" : "created_at",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "client_id",
+      "strategy" : "DIRECT",
+      "source" : "client_id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "frame_image",
+      "strategy" : "DIRECT",
+      "source" : "frame_image",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "object_image",
+      "strategy" : "DIRECT",
+      "source" : "object_image",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "notification_status",
+      "strategy" : "DIRECT",
+      "source" : "notification_status",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "accepted_by",
+      "strategy" : "DIRECT",
+      "source" : "accepted_by",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "x1",
+      "strategy" : "CONSTANT",
+      "source" : null,
+      "value" : "0",
+      "lookup" : null
+    }, {
+      "target" : "y1",
+      "strategy" : "CONSTANT",
+      "source" : null,
+      "value" : "0",
+      "lookup" : null
+    }, {
+      "target" : "x2",
+      "strategy" : "CONSTANT",
+      "source" : null,
+      "value" : "0",
+      "lookup" : null
+    }, {
+      "target" : "y2",
+      "strategy" : "CONSTANT",
+      "source" : null,
+      "value" : "0",
+      "lookup" : null
+    }, {
+      "target" : "confidence",
+      "strategy" : "CONSTANT",
+      "source" : null,
+      "value" : "0",
+      "lookup" : null
+    } ],
+    "unmappedTargetColumns" : [ "line_object", "latitude", "longitude" ]
+  }, {
+    "sourceTable" : "traffic_counters",
+    "targetTable" : "traffic_counters",
+    "columnMappings" : [ ],
+    "unmappedTargetColumns" : [ "analytics_id", "type", "line_id", "direction", "count" ]
+  }, {
+    "sourceTable" : "users",
+    "targetTable" : "users",
+    "columnMappings" : [ {
+      "target" : "id",
+      "strategy" : "DIRECT",
+      "source" : "id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "email",
+      "strategy" : "DIRECT",
+      "source" : "email",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "fullname",
+      "strategy" : "DIRECT",
+      "source" : "fullname",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "password",
+      "strategy" : "DIRECT",
+      "source" : "password",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "last_ip",
+      "strategy" : "DIRECT",
+      "source" : "last_ip",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "last_login",
+      "strategy" : "DIRECT",
+      "source" : "last_login",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "ip_params",
+      "strategy" : "DIRECT",
+      "source" : "ip_params",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "status",
+      "strategy" : "DIRECT",
+      "source" : "status",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "created_at",
+      "strategy" : "DIRECT",
+      "source" : "created_at",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "settings",
+      "strategy" : "DIRECT",
+      "source" : "settings",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "client_id",
+      "strategy" : "DIRECT",
+      "source" : "client_id",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "client_info",
+      "strategy" : "DIRECT",
+      "source" : "client_info",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "type",
+      "strategy" : "DIRECT",
+      "source" : "type",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "timezone",
+      "strategy" : "DIRECT",
+      "source" : "timezone",
+      "value" : null,
+      "lookup" : null
+    }, {
+      "target" : "role_ids",
+      "strategy" : "ROLE_TO_ARRAY",
+      "source" : "role_id",
+      "value" : null,
+      "lookup" : null
+    } ],
+    "unmappedTargetColumns" : [ ]
+  } ]
+}
