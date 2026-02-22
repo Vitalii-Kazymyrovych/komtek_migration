@@ -1,0 +1,357 @@
+{
+  "analytics": {
+    "source_table": "analytics",
+    "target_table": "analytics",
+    "column_mappings": {
+      "topic": "uuid",
+      "type": "type",
+      "plugin_name": "plugin_name",
+      "name": "name",
+      "created_at": "created_at",
+      "status": "status",
+      "client_id": "client_id",
+      "stream": "stream",
+      "module": "module",
+      "last_gpu_id": "last_gpu_id",
+      "desired_server_id": "desired_server_id",
+      "disable_balancing": "disable_balancing",
+      "start_signature": "start_signature",
+      "allowed_server_ids": "allowed_server_ids",
+      "restrictions": "restrictions",
+      "events_holder": "events_holder",
+      "start_at": "start_at",
+      "stream_id": {
+        "target": "stream_uuid",
+        "lookup": {
+          "table": "streams",
+          "source_key": "id",
+          "target_key": "uuid"
+        },
+        "description": "Use the old analytics.stream_id to look up the corresponding stream.uuid in the streams table.  Set the resulting UUID into analytics.stream_uuid in the new database.  If there is no matching stream, leave this field null."
+      }
+    },
+    "defaults": {
+      "group_id": 0
+    },
+    "notes": "The numeric primary key in the new table is auto‑generated.  Do not attempt to insert old analytics.id values into the id column; instead allow the database to assign them.  The old 'topic' column has been renamed to 'uuid'.  The old 'stream_id' column no longer exists – instead the new system stores a stream UUID."
+  },
+  "clients": {
+    "source_table": "clients",
+    "target_table": "clients",
+    "column_mappings": {
+      "id": "id",
+      "client_name": "client_name",
+      "country": "country",
+      "city": "city",
+      "address": "address",
+      "zip_code": "zip_code",
+      "email": "email",
+      "phone": "phone",
+      "comment": "comment"
+    },
+    "notes": "The clients table did not change between versions, so fields can be copied directly."
+  },
+  "event_manager": {
+    "source_table": "event_manager",
+    "target_table": "event_manager",
+    "column_mappings": {
+      "id": {
+        "target": "uuid",
+        "description": "The old system stored the event identifier as a VARCHAR primary key.  In the new schema this value should be written into the uuid column.  The integer primary key in the new table is auto‑generated and should not be populated."
+      },
+      "title": "title",
+      "description": "description",
+      "created_at": "created_at",
+      "nodes": "nodes",
+      "client_id": "client_id"
+    },
+    "notes": "Do not insert the old string id into the new primary‑key field.  Instead populate event_manager.uuid with the old id and let the database assign a numeric id automatically."
+  },
+  "face_detections": {
+    "source_table": "face_detections",
+    "target_table": "face_detections",
+    "column_mappings": {
+      "id": "id",
+      "list_id": "list_id",
+      "list_item_id": "list_item_id",
+      "confidence": "confidence",
+      "box": {
+        "target": "box",
+        "description": "The old schema stored bounding boxes as a BLOB.  In the new schema the box column is a TEXT field.  Convert the BLOB into its string representation (for example base64 or JSON) before inserting."
+      },
+      "face_image": "face_image",
+      "frame_image": "frame_image",
+      "va_id": {
+        "target": "analytics_id",
+        "description": "The old va_id column referenced the analytics entry that produced the detection.  In the new schema this relationship is stored in analytics_id."
+      },
+      "age": "age",
+      "gender": "gender",
+      "race": "race",
+      "spoofed": "spoofed",
+      "mask": "mask",
+      "created_at": "created_at",
+      "client_id": "client_id"
+    },
+    "defaults": {
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "uuid": null
+    },
+    "notes": "The old face_detections table contained stream_id and va_id columns.  The stream_id field is no longer persisted, and va_id has been renamed to analytics_id.  New latitude/longitude and uuid columns should be set to default values unless your migration can derive them."
+  },
+  "face_encodings": {
+    "source_table": "face_encodings",
+    "action": "skip",
+    "notes": "The face_encodings table has been removed from the new schema.  Encoded facial feature vectors are no longer stored inside the relational database and therefore should not be migrated."
+  },
+  "face_lists": {
+    "source_table": "face_lists",
+    "target_table": "face_lists",
+    "column_mappings": {
+      "id": "id",
+      "name": "name",
+      "comment": "comment",
+      "min_confidence": "min_confidence",
+      "send_internal_notifications": "send_internal_notifications",
+      "events_holder": "events_holder",
+      "status": "status",
+      "created_at": "created_at",
+      "client_id": "client_id",
+      "color": "color",
+      "time_attendance": "time_attendance",
+      "list_permissions": "list_permissions",
+      "streams": {
+        "target": "analytics_ids",
+        "lookup": {
+          "table": "analytics",
+          "source_key": "stream_id",
+          "target_key": "id"
+        },
+        "description": "In the old schema each list stored a comma‑separated list of stream identifiers.  The new schema expects analytics identifiers instead.  For each stream_id in the old streams list, find all analytics rows where analytics.stream_id equals that stream_id and build a comma‑separated list of the corresponding analytics.id values.  Write this list into the analytics_ids column.  If there are no matching analytics, leave the analytics_ids field blank."
+      },
+      "enabled": {
+        "target": "show_popup_for_internal_notifications",
+        "description": "The old boolean enabled column controlled whether notifications displayed pop‑ups.  In the new schema this behaviour is stored in show_popup_for_internal_notifications.  Copy the enabled bit into this field."
+      }
+    },
+    "defaults": {},
+    "notes": "The streams column no longer exists; instead the new analytics_ids column holds references to analytics entries associated with the list.  The enabled flag has been renamed to show_popup_for_internal_notifications."
+  },
+  "face_notifications": {
+    "source_table": "face_notifications",
+    "target_table": "face_notifications",
+    "column_mappings": {
+      "id": "id",
+      "face_id": {
+        "target": "detection_id",
+        "description": "The face_notifications table previously referenced a detection via face_id.  In the new schema this field is named detection_id.  Use the same value."
+      },
+      "status": "status",
+      "accepted_by": "accepted_by",
+      "created_at": "created_at"
+    },
+    "defaults": {
+      "uuid": null,
+      "list_id": null,
+      "list_item_id": null,
+      "analytics_id": null,
+      "confidence": null,
+      "box": null,
+      "face_image": null,
+      "frame_image": null,
+      "age": null,
+      "gender": 2,
+      "race": null,
+      "spoofed": null,
+      "mask": null,
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "client_id": 0
+    },
+    "lookups": [
+      {
+        "source_table": "face_detections",
+        "join_on": {
+          "face_notifications.face_id": "face_detections.id"
+        },
+        "target_fields": {
+          "list_id": "list_id",
+          "list_item_id": "list_item_id",
+          "analytics_id": "analytics_id",
+          "confidence": "confidence",
+          "box": "box",
+          "face_image": "face_image",
+          "frame_image": "frame_image",
+          "age": "age",
+          "gender": "gender",
+          "race": "race",
+          "spoofed": "spoofed",
+          "mask": "mask",
+          "client_id": "client_id"
+        },
+        "description": "To fully populate the new face_notifications record, join with the face_detections table using the old face_id.  Copy over the detection’s details into the corresponding columns of face_notifications."
+      }
+    ],
+    "notes": "face_notifications now stores additional detection attributes in the same row.  For each notification, join to face_detections to fetch these attributes.  If a lookup fails, leave the fields at their default values."
+  },
+  "face_unique_person_mapping": {
+    "source_table": "face_unique_person_mapping",
+    "target_table": "face_unique_person_mapping",
+    "column_mappings": {
+      "id": "id",
+      "face_id": "face_id",
+      "list_id": "list_id",
+      "created_at": "created_at"
+    },
+    "notes": "The face_unique_person_mapping table is unchanged, so its data can be copied directly."
+  },
+  "roles": {
+    "source_table": "roles",
+    "target_table": "roles",
+    "column_mappings": {
+      "id": "id",
+      "role_name": "role_name",
+      "permissions": "permissions",
+      "client_id": "client_id"
+    },
+    "defaults": {
+      "description": null
+    },
+    "notes": "A new description column has been added to the roles table.  Since no equivalent exists in the old database, leave it null or set it to a sensible default."
+  },
+  "servers": {
+    "source_table": "servers",
+    "target_table": "servers",
+    "column_mappings": {
+      "id": "id",
+      "name": "name"
+    },
+    "defaults": {
+      "is_external_address_enabled": 0,
+      "address": null,
+      "port": null
+    },
+    "notes": "The servers table now stores network details.  Populate the id and name from the old table, and leave the new is_external_address_enabled, address and port fields at their default values."
+  },
+  "settings": {
+    "source_table": "settings",
+    "target_table": "system_settings",
+    "column_mappings": {
+      "Variable_name": "variable_name",
+      "Value": "value"
+    },
+    "notes": "The generic settings key/value table has been renamed to system_settings.  An auto‑increment id column has been introduced in the new table; it should be left to auto‑generate."
+  },
+  "stats_traffic_minutely": {
+    "source_table": "stats_traffic_minutely",
+    "target_table": "stats_traffic_minutely",
+    "column_mappings": {
+      "id": "id",
+      "va_id": "va_id",
+      "line": "line",
+      "type": "type",
+      "count": "count",
+      "direction": "direction",
+      "created_at": "created_at",
+      "client_id": "client_id",
+      "present": "present"
+    },
+    "notes": "The stats_traffic_minutely table has not changed and can be copied as‑is."
+  },
+  "stream_groups": {
+    "source_table": "stream_groups",
+    "target_table": "stream_groups",
+    "column_mappings": {
+      "id": "id",
+      "parent_id": "parent_id",
+      "name": "name",
+      "client_id": "client_id"
+    },
+    "notes": "No schema changes for stream_groups; copy the data directly."
+  },
+  "streams": {
+    "source_table": "streams",
+    "target_table": "streams",
+    "column_mappings": {
+      "id": "id",
+      "name": "name",
+      "path": "path",
+      "width": "width",
+      "height": "height",
+      "file_name": "file_name",
+      "status": "status",
+      "created_at": "created_at",
+      "lat": "lat",
+      "lng": "lng",
+      "type": "type",
+      "uuid": "uuid",
+      "address": "address",
+      "params": "params",
+      "auth": "auth",
+      "direction": "direction",
+      "client_id": "client_id",
+      "codec": "codec",
+      "timezone": "timezone",
+      "duration": "duration",
+      "restrictions": "restrictions",
+      "parent_id": "parent_id"
+    },
+    "notes": "The uuid column changed from VARCHAR(55) to CHAR(36) and became nullable.  Copy the old uuid values as strings; they will either fit or need to be truncated to 36 characters."
+  },
+  "traffic_stat": {
+    "source_table": "traffic_stat",
+    "target_table": "traffic_stat",
+    "column_mappings": {
+      "id": "id",
+      "stream_id": "stream_id",
+      "va_id": "va_id",
+      "line": "line",
+      "type": "type",
+      "count": "count",
+      "direction": "direction",
+      "created_at": "created_at",
+      "client_id": "client_id",
+      "frame_image": "frame_image",
+      "object_image": "object_image",
+      "notification_status": "notification_status",
+      "accepted_by": "accepted_by"
+    },
+    "defaults": {
+      "x1": 0.0,
+      "y1": 0.0,
+      "x2": 0.0,
+      "y2": 0.0,
+      "confidence": 0.0,
+      "line_object": null,
+      "latitude": null,
+      "longitude": null
+    },
+    "notes": "Several new columns (x1,y1,x2,y2,confidence,line_object,latitude,longitude) have been added to traffic_stat.  The old schema does not provide values for these, so default values should be used."
+  },
+  "users": {
+    "source_table": "users",
+    "target_table": "users",
+    "column_mappings": {
+      "id": "id",
+      "email": "email",
+      "fullname": "fullname",
+      "password": "password",
+      "last_ip": "last_ip",
+      "last_login": "last_login",
+      "ip_params": "ip_params",
+      "status": "status",
+      "created_at": "created_at",
+      "settings": "settings",
+      "client_id": "client_id",
+      "client_info": "client_info",
+      "type": "type",
+      "timezone": "timezone",
+      "role_id": {
+        "target": "role_ids",
+        "description": "The old schema allowed only a single role (role_id).  The new schema stores one or more role IDs in the role_ids column.  Convert the integer role_id into a string and write it into role_ids."
+      }
+    },
+    "notes": "The users table now stores roles as a text field containing a comma‑separated list of role identifiers.  Convert the single role_id into a string."
+  }
+}
