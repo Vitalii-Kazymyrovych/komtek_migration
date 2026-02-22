@@ -5,14 +5,15 @@ param(
     [string]$TablesPath,
     [string]$DdlSourcePath,
     [string]$DataOutPath,
-    [string]$OldDdlOutPath
+    [string]$OldDdlOutPath,
+    [string]$SchemaName = "videoanalytics"
 )
 
 $ErrorActionPreference = "Stop"
 
 if (-not $DumpPath) { $DumpPath = Join-Path $BasePath "videoanalytics.sql" }
 if (-not $TablesPath) { $TablesPath = Join-Path $BasePath "tables.txt" }
-if (-not $DdlSourcePath) { $DdlSourcePath = Join-Path $BasePath "OLD_DDL.txt" }
+if (-not $DdlSourcePath) { $DdlSourcePath = $DumpPath }
 if (-not $DataOutPath) { $DataOutPath = Join-Path $BasePath "inserts_selected.sql" }
 if (-not $OldDdlOutPath) { $OldDdlOutPath = Join-Path $BasePath "oldDDL_selected.txt" }
 
@@ -53,6 +54,7 @@ $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 
 Write-Host "Dump in:      $DumpPath"
 Write-Host "DDL source:   $DdlSourcePath"
+Write-Host "Schema:       $SchemaName"
 Write-Host "Data out:     $DataOutPath"
 Write-Host "Old DDL out:  $OldDdlOutPath"
 Write-Host ("Tables:       {0}" -f (($wanted | Sort-Object) -join ", "))
@@ -69,6 +71,23 @@ function Get-LockTable([string]$line) {
         return $Matches[1]
     }
     return $null
+}
+
+function StatementMentionsSchema([string]$statement, [string]$schema) {
+    if ([string]::IsNullOrWhiteSpace($schema)) { return $true }
+    $s = [Regex]::Escape($schema.Trim().Trim('"','`').ToLowerInvariant())
+    return [Regex]::IsMatch($statement.ToLowerInvariant(), "(?i)(`$s`|\"$s\"|$s)\s*\.")
+}
+
+function StatementMentionsWantedTable([string]$statement, $wantedTableNames) {
+    foreach ($tableName in $wantedTableNames) {
+        $t = [Regex]::Escape($tableName)
+        if ([Regex]::IsMatch($statement, "(?i)\.(?:`$t`|\"$t\"|$t)\b") -or
+            [Regex]::IsMatch($statement, "(?i)\b(?:`$t`|\"$t\"|$t)\b")) {
+            return $true
+        }
+    }
+    return $false
 }
 
 # 1) Extract table data exactly as present in source dump.
@@ -116,20 +135,41 @@ finally {
     $reader.Close()
 }
 
-# 2) Extract DDL blocks from an existing DDL file in the exact original formatting.
-$ddlLines = Get-Content -Path $DdlSourcePath
+# 2) Extract DDL blocks.
 $ddlWriter = New-Object System.IO.StreamWriter($OldDdlOutPath, $false, $utf8NoBom)
 
 try {
-    $inside = $false
-    foreach ($line in $ddlLines) {
-        if ($line -match '^--\s+.+\.(?:"|`)?([^"`\s]+)(?:"|`)?\s+definition\s*$') {
-            $tableName = $Matches[1]
-            $inside = $wantedSet.Contains($tableName)
-        }
+    $ddlRaw = Get-Content -Path $DdlSourcePath -Raw
+    if ($ddlRaw -match '(?im)^--\s+.+\.(?:"|`)?[^"`\s]+(?:"|`)?\s+definition\s*$') {
+        # Existing OLD_DDL.txt-like format: copy matching per-table sections unchanged.
+        $ddlLines = $ddlRaw -split "`r?`n"
+        $inside = $false
+        foreach ($line in $ddlLines) {
+            if ($line -match '^--\s+.+\.(?:"|`)?([^"`\s]+)(?:"|`)?\s+definition\s*$') {
+                $tableName = $Matches[1]
+                $inside = $wantedSet.Contains($tableName)
+            }
 
-        if ($inside) {
-            $ddlWriter.WriteLine($line)
+            if ($inside) {
+                $ddlWriter.WriteLine($line)
+            }
+        }
+    }
+    else {
+        # Original SQL dump mode: extract DDL statements directly.
+        $pattern = '(?is)\b(CREATE\s+TABLE|ALTER\s+TABLE|CREATE\s+(?:UNIQUE\s+)?INDEX|CREATE\s+VIEW|DROP\s+TABLE)\b.*?;'
+        $matches = [Regex]::Matches($ddlRaw, $pattern)
+        $first = $true
+        foreach ($m in $matches) {
+            $statement = $m.Value.Trim()
+            if (-not (StatementMentionsSchema $statement $SchemaName)) { continue }
+            if (-not (StatementMentionsWantedTable $statement $wanted)) { continue }
+
+            if (-not $first) {
+                $ddlWriter.WriteLine("")
+            }
+            $ddlWriter.WriteLine($statement)
+            $first = $false
         }
     }
 }
