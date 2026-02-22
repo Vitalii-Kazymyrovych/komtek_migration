@@ -1,0 +1,839 @@
+-- incoreanalytics.aggregated_metrics_core definition
+
+CREATE TABLE `aggregated_metrics_core` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `start_time` timestamp(3) NOT NULL,
+  `cpu_load` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `startups_number` int NOT NULL,
+  `client_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `start_time` (`start_time`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.analytics definition
+
+CREATE TABLE `analytics` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `uuid` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` text COLLATE utf8mb4_unicode_ci,
+  `plugin_name` text COLLATE utf8mb4_unicode_ci,
+  `name` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp(3) NOT NULL,
+  `status` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` int NOT NULL,
+  `stream` text COLLATE utf8mb4_unicode_ci,
+  `module` text COLLATE utf8mb4_unicode_ci,
+  `last_gpu_id` int DEFAULT NULL,
+  `desired_server_id` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `disable_balancing` bit(1) DEFAULT NULL,
+  `start_signature` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `allowed_server_ids` text COLLATE utf8mb4_unicode_ci,
+  `restrictions` text COLLATE utf8mb4_unicode_ci,
+  `events_holder` text COLLATE utf8mb4_unicode_ci,
+  `start_at` timestamp(3) NULL DEFAULT NULL,
+  `stream_uuid` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `group_id` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.analytics_groups definition
+
+CREATE TABLE `analytics_groups` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parent_id` int NOT NULL,
+  `plugin_name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.api_tokens definition
+
+CREATE TABLE `api_tokens` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int NOT NULL,
+  `api_key` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `api_key_hash` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `issued_at` timestamp(3) NOT NULL,
+  `expires_at` timestamp(3) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.audit_trail definition
+
+CREATE TABLE `audit_trail` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp(3) NOT NULL,
+  `session_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  `user_ip` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` int NOT NULL,
+  `event_category_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000',
+  `event_action_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000',
+  PRIMARY KEY (`id`),
+  KEY `audit-event_category-index` (`event_category_id`),
+  KEY `audit-event_action-index` (`event_action_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.axis_station_pro_settings definition
+
+CREATE TABLE `axis_station_pro_settings` (
+  `host` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `port` int NOT NULL,
+  `username` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.backups definition
+
+CREATE TABLE `backups` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `file_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `core_version` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp(3) NOT NULL,
+  `size` bigint NOT NULL,
+  `client_id` int NOT NULL,
+  `is_vms_integration_enabled` bit(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.cleaning_settings definition
+
+CREATE TABLE `cleaning_settings` (
+  `category_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `retention_period` int NOT NULL,
+  UNIQUE KEY `category_id` (`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.clients definition
+
+CREATE TABLE `clients` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `client_name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `city` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `address` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `zip_code` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `email` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `comment` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.databasechangelog definition
+
+CREATE TABLE `databasechangelog` (
+  `ID` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `AUTHOR` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `FILENAME` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `DATEEXECUTED` datetime NOT NULL,
+  `ORDEREXECUTED` int NOT NULL,
+  `EXECTYPE` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MD5SUM` varchar(35) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `DESCRIPTION` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `COMMENTS` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `TAG` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `LIQUIBASE` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CONTEXTS` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `LABELS` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `DEPLOYMENT_ID` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.databasechangeloglock definition
+
+CREATE TABLE `databasechangeloglock` (
+  `ID` int NOT NULL,
+  `LOCKED` bit(1) NOT NULL,
+  `LOCKGRANTED` datetime DEFAULT NULL,
+  `LOCKEDBY` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.event_manager definition
+
+CREATE TABLE `event_manager` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp(3) NULL DEFAULT NULL,
+  `nodes` text COLLATE utf8mb4_unicode_ci,
+  `client_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uuid` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.face_detections definition
+
+CREATE TABLE `face_detections` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `list_id` int DEFAULT NULL,
+  `list_item_id` int DEFAULT NULL,
+  `confidence` int DEFAULT NULL,
+  `box` text COLLATE utf8mb4_unicode_ci,
+  `face_image` text COLLATE utf8mb4_unicode_ci,
+  `frame_image` text COLLATE utf8mb4_unicode_ci,
+  `analytics_id` int DEFAULT NULL,
+  `age` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` int DEFAULT NULL,
+  `race` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `spoofed` bit(1) DEFAULT NULL,
+  `mask` bit(1) DEFAULT NULL,
+  `created_at` timestamp(3) NOT NULL,
+  `client_id` int DEFAULT NULL,
+  `latitude` decimal(9,6) DEFAULT '0.000000',
+  `longitude` decimal(9,6) DEFAULT '0.000000',
+  `uuid` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`),
+  KEY `face_detections_created_at` (`created_at` DESC),
+  KEY `face_detections_list_id` (`list_id`),
+  KEY `face_detections_list_item_id` (`list_item_id`),
+  KEY `face_detections_confidence` (`confidence`),
+  KEY `face_detections_created_at_va` (`created_at` DESC,`analytics_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.face_list_items definition
+
+CREATE TABLE `face_list_items` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `comment` text COLLATE utf8mb4_unicode_ci,
+  `status` int NOT NULL DEFAULT '1',
+  `created_at` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `created_by` int NOT NULL DEFAULT '0',
+  `closed_at` timestamp(3) NULL DEFAULT NULL,
+  `list_id` int DEFAULT NULL,
+  `expiration_settings` text COLLATE utf8mb4_unicode_ci,
+  `client_id` int NOT NULL,
+  `expiration_settings_enabled` bit(1) NOT NULL DEFAULT b'0',
+  `expiration_settings_action` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'none',
+  `expiration_settings_list_id` int DEFAULT NULL,
+  `expiration_settings_date` timestamp(3) NULL DEFAULT NULL,
+  `expiration_settings_events_holder` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`),
+  KEY `IDX__face_list_items__expiration_settings_date` (`expiration_settings_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.face_list_items_images definition
+
+CREATE TABLE `face_list_items_images` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `list_item_id` int NOT NULL,
+  `path` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `encoding` blob,
+  `points` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`),
+  KEY `list_item_id` (`list_item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.face_lists definition
+
+CREATE TABLE `face_lists` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `min_confidence` int NOT NULL DEFAULT '80',
+  `send_internal_notifications` bit(1) NOT NULL DEFAULT b'0',
+  `events_holder` text COLLATE utf8mb4_unicode_ci,
+  `status` int NOT NULL DEFAULT '1',
+  `created_at` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `client_id` int NOT NULL,
+  `color` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#FFFFFF',
+  `time_attendance` text COLLATE utf8mb4_unicode_ci,
+  `list_permissions` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `analytics_ids` text COLLATE utf8mb4_unicode_ci,
+  `show_popup_for_internal_notifications` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.face_notifications definition
+
+CREATE TABLE `face_notifications` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `detection_id` bigint DEFAULT NULL,
+  `status` int NOT NULL DEFAULT '1',
+  `accepted_by` int NOT NULL DEFAULT '0',
+  `created_at` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `list_id` int DEFAULT NULL,
+  `list_item_id` int DEFAULT NULL,
+  `analytics_id` int NOT NULL DEFAULT '1',
+  `uuid` text COLLATE utf8mb4_unicode_ci,
+  `confidence` int DEFAULT NULL,
+  `box` text COLLATE utf8mb4_unicode_ci,
+  `face_image` text COLLATE utf8mb4_unicode_ci,
+  `frame_image` text COLLATE utf8mb4_unicode_ci,
+  `age` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` int DEFAULT '2',
+  `race` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `spoofed` bit(1) DEFAULT NULL,
+  `mask` bit(1) DEFAULT NULL,
+  `latitude` decimal(9,6) DEFAULT '0.000000',
+  `longitude` decimal(9,6) DEFAULT '0.000000',
+  `client_id` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `face_notifications_face_id` (`detection_id`),
+  KEY `face_notifications_row_id_status_alert_name_created_at` (`detection_id`,`status`,`created_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.face_unique_person_mapping definition
+
+CREATE TABLE `face_unique_person_mapping` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `face_id` bigint NOT NULL,
+  `list_id` int DEFAULT NULL,
+  `created_at` timestamp(3) NOT NULL,
+  KEY `face_unique_person_mapping_face_uuid` (`id`),
+  KEY `face_unique_person_mapping_face_id` (`face_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.jettysessions definition
+
+CREATE TABLE `jettysessions` (
+  `sessionId` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contextPath` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `virtualHost` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastNode` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `accessTime` bigint DEFAULT NULL,
+  `lastAccessTime` bigint DEFAULT NULL,
+  `createTime` bigint DEFAULT NULL,
+  `cookieTime` bigint DEFAULT NULL,
+  `lastSavedTime` bigint DEFAULT NULL,
+  `expiryTime` bigint DEFAULT NULL,
+  `maxInterval` bigint DEFAULT NULL,
+  `map` blob,
+  PRIMARY KEY (`sessionId`,`contextPath`,`virtualHost`),
+  KEY `idx_JettySessions_expiry` (`expiryTime`),
+  KEY `idx_JettySessions_session` (`sessionId`,`contextPath`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.network_settings definition
+
+CREATE TABLE `network_settings` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `local_mask` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `public_address` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.plugin_configurations definition
+
+CREATE TABLE `plugin_configurations` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `plugin_name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `backup_ignored_tables` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `managed_tables` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` int NOT NULL,
+  `plugin_id` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.roles definition
+
+CREATE TABLE `roles` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `permissions` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` int NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.servers definition
+
+CREATE TABLE `servers` (
+  `id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_external_address_enabled` bit(1) DEFAULT b'0',
+  `address` text COLLATE utf8mb4_unicode_ci,
+  `port` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.service_certificate_info definition
+
+CREATE TABLE `service_certificate_info` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `certificate_password` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_alpr_filter_presets definition
+
+CREATE TABLE `smart_va_alpr_filter_presets` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `filters` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_heatmap_plans definition
+
+CREATE TABLE `smart_va_heatmap_plans` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_path` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `width` int NOT NULL,
+  `height` int NOT NULL,
+  `opacity` int NOT NULL,
+  `analytics` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_lists definition
+
+CREATE TABLE `smart_va_lists` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `enabled` bit(1) NOT NULL DEFAULT b'1',
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp(3) NOT NULL,
+  `color` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#FFFFFF',
+  `confidence_threshold_percents` float DEFAULT NULL,
+  `analytics` text COLLATE utf8mb4_unicode_ci,
+  `events_holder` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `restrictions` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` int NOT NULL,
+  `enable_internal_notifications` bit(1) NOT NULL DEFAULT b'1',
+  `show_popup_for_internal_notifications` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_minutely_stats definition
+
+CREATE TABLE `smart_va_minutely_stats` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `va_id` int NOT NULL,
+  `line` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` tinyint NOT NULL,
+  `count` int NOT NULL,
+  `present` int NOT NULL DEFAULT '0',
+  `direction` tinyint NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL,
+  `client_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `smart_va_minutely_stats_created_at` (`created_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_notifications definition
+
+CREATE TABLE `smart_va_notifications` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `status` int NOT NULL DEFAULT '1',
+  `accepted_by` int NOT NULL DEFAULT '0',
+  `va_id` int NOT NULL,
+  `stream_id` int NOT NULL,
+  `frame_image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `thumbnail_image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `trigger` int DEFAULT NULL,
+  `trigger_settings` text COLLATE utf8mb4_unicode_ci,
+  `notification_type` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'alert',
+  `resolution` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp(3) NOT NULL,
+  `rule_type` int NOT NULL,
+  `rule` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` int NOT NULL,
+  `notification_status` int NOT NULL DEFAULT '1',
+  `presence_action_type` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`),
+  KEY `smart_va_id_created_at` (`id`,`created_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_people_detections definition
+
+CREATE TABLE `smart_va_people_detections` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `uuid` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stream_id` int NOT NULL,
+  `va_id` int DEFAULT NULL,
+  `frame_image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `thumbnail_image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `confidence` float DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  `bag` int DEFAULT NULL,
+  `up_color` int DEFAULT NULL,
+  `down_color` int DEFAULT NULL,
+  `hat` bit(1) DEFAULT NULL,
+  `gender` int DEFAULT NULL,
+  `timestamp` timestamp(3) NOT NULL,
+  `client_id` int DEFAULT NULL,
+  `frame_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `x1` float DEFAULT NULL,
+  `y1` float DEFAULT NULL,
+  `x2` float DEFAULT NULL,
+  `y2` float DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `people_detections_timestamp` (`timestamp` DESC),
+  KEY `people_detections_frame_id_idx` (`frame_id`),
+  KEY `people_detections_uuid_idx` (`uuid`),
+  KEY `smart_va_age_idx` (`age`),
+  KEY `smart_va_bag_idx` (`bag`),
+  KEY `smart_va_up_color_idx` (`up_color`),
+  KEY `smart_va_down_color_idx` (`down_color`),
+  KEY `smart_va_hat_idx` (`hat`),
+  KEY `smart_va_gender_idx` (`gender`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_person_filter_presets definition
+
+CREATE TABLE `smart_va_person_filter_presets` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `filters` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_tracking definition
+
+CREATE TABLE `smart_va_tracking` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `object_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `timestamp` timestamp(3) NOT NULL,
+  `va_id` int NOT NULL,
+  `x1` float DEFAULT NULL,
+  `y1` float DEFAULT NULL,
+  `x2` float DEFAULT NULL,
+  `y2` float DEFAULT NULL,
+  `position_changed` bit(1) DEFAULT b'1',
+  PRIMARY KEY (`id`),
+  KEY `smart_va_tracking_timestamp_idx` (`timestamp`),
+  KEY `smart_va_tracking_object_id_idx` (`object_id`),
+  KEY `smart_va_tracking_compound_idx` (`va_id`,`position_changed`,`timestamp`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_traffic_counters definition
+
+CREATE TABLE `smart_va_traffic_counters` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `line_id` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `direction` int NOT NULL,
+  `object_type` int NOT NULL,
+  `count` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `line_id` (`line_id`,`direction`,`object_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_vehicle_detections definition
+
+CREATE TABLE `smart_va_vehicle_detections` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `uuid` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stream_id` int NOT NULL,
+  `va_id` int DEFAULT NULL,
+  `frame_image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `thumbnail_image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `confidence` float DEFAULT NULL,
+  `type` int DEFAULT NULL,
+  `color_id` int DEFAULT NULL,
+  `timestamp` timestamp(3) NOT NULL,
+  `client_id` int DEFAULT NULL,
+  `frame_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `x1` float DEFAULT NULL,
+  `y1` float DEFAULT NULL,
+  `x2` float DEFAULT NULL,
+  `y2` float DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `vehicle_detections_timestamp` (`timestamp` DESC),
+  KEY `vehicle_detections_frame_id_idx` (`frame_id`),
+  KEY `vehicle_detections_uuid_idx` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.sounds_settings definition
+
+CREATE TABLE `sounds_settings` (
+  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sound_file` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `enabled` bit(1) NOT NULL DEFAULT b'1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.stats_traffic_minutely definition
+
+CREATE TABLE `stats_traffic_minutely` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `va_id` int NOT NULL,
+  `line` int NOT NULL,
+  `type` int NOT NULL,
+  `count` int NOT NULL,
+  `direction` int NOT NULL DEFAULT '0',
+  `created_at` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `client_id` int NOT NULL,
+  `present` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `stats_traffic_minutely_created_at_client` (`created_at`,`client_id`),
+  KEY `stats_traffic_minutely_created_at_va_id` (`created_at`,`va_id`,`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.stream_groups definition
+
+CREATE TABLE `stream_groups` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `parent_id` int NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.streams definition
+
+CREATE TABLE `streams` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `path` text COLLATE utf8mb4_unicode_ci,
+  `width` int NOT NULL,
+  `height` int NOT NULL,
+  `file_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint NOT NULL,
+  `created_at` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `lat` double NOT NULL DEFAULT '0',
+  `lng` double NOT NULL DEFAULT '0',
+  `type` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'rtsp',
+  `uuid` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `params` text COLLATE utf8mb4_unicode_ci,
+  `auth` text COLLATE utf8mb4_unicode_ci,
+  `direction` int NOT NULL DEFAULT '0',
+  `client_id` int NOT NULL,
+  `codec` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `timezone` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `duration` bigint DEFAULT NULL,
+  `restrictions` text COLLATE utf8mb4_unicode_ci,
+  `parent_id` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.system_settings definition
+
+CREATE TABLE `system_settings` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `variable_name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.traffic_counters definition
+
+CREATE TABLE `traffic_counters` (
+  `analytics_id` int NOT NULL,
+  `type` int NOT NULL,
+  `line_id` int NOT NULL,
+  `direction` int NOT NULL,
+  `count` int NOT NULL,
+  PRIMARY KEY (`analytics_id`,`type`,`line_id`,`direction`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.traffic_stat definition
+
+CREATE TABLE `traffic_stat` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `stream_id` int NOT NULL,
+  `va_id` int NOT NULL,
+  `line` int NOT NULL,
+  `type` int NOT NULL,
+  `count` int NOT NULL,
+  `direction` int NOT NULL DEFAULT '0',
+  `created_at` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `client_id` int NOT NULL,
+  `frame_image` text COLLATE utf8mb4_unicode_ci,
+  `object_image` text COLLATE utf8mb4_unicode_ci,
+  `notification_status` int NOT NULL DEFAULT '0',
+  `accepted_by` int NOT NULL DEFAULT '0',
+  `x1` float NOT NULL DEFAULT '0',
+  `y1` float NOT NULL DEFAULT '0',
+  `x2` float NOT NULL DEFAULT '0',
+  `y2` float NOT NULL DEFAULT '0',
+  `confidence` float NOT NULL DEFAULT '0',
+  `line_object` text COLLATE utf8mb4_unicode_ci,
+  `latitude` decimal(9,6) DEFAULT NULL,
+  `longitude` decimal(9,6) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `traffic_stat_type` (`type`),
+  KEY `va_id` (`va_id`),
+  KEY `line` (`line`),
+  KEY `traffic_stat_notification_status_index` (`notification_status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.users definition
+
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `fullname` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `password` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `last_ip` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_login` timestamp(3) NOT NULL,
+  `ip_params` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int NOT NULL DEFAULT '1',
+  `created_at` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `settings` text COLLATE utf8mb4_unicode_ci,
+  `client_id` int NOT NULL,
+  `client_info` text COLLATE utf8mb4_unicode_ci,
+  `type` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'basic',
+  `timezone` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role_ids` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.windows_share_folder_configs definition
+
+CREATE TABLE `windows_share_folder_configs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `host` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `share_name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` text COLLATE utf8mb4_unicode_ci,
+  `password` text COLLATE utf8mb4_unicode_ci,
+  `domain` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.aggregated_metrics_analytics_servers definition
+
+CREATE TABLE `aggregated_metrics_analytics_servers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `start_time` timestamp(3) NOT NULL,
+  `server_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cpu_load` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK__metrics_analytics_servers__metrics_core` (`start_time`),
+  CONSTRAINT `FK__metrics_analytics_servers__metrics_core` FOREIGN KEY (`start_time`) REFERENCES `aggregated_metrics_core` (`start_time`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.aggregated_metrics_analytics_servers_gpu definition
+
+CREATE TABLE `aggregated_metrics_analytics_servers_gpu` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `server_metrics_id` int NOT NULL,
+  `gpu_id` int NOT NULL,
+  `gpu_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `load` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK__metrics_analytics_servers_gpu__metrics_analytics_servers` (`server_metrics_id`),
+  CONSTRAINT `FK__metrics_analytics_servers_gpu__metrics_analytics_servers` FOREIGN KEY (`server_metrics_id`) REFERENCES `aggregated_metrics_analytics_servers` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_list_items definition
+
+CREATE TABLE `smart_va_list_items` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `list_id` int NOT NULL,
+  `created_at` timestamp(3) NOT NULL,
+  `client_id` int NOT NULL,
+  `expiration_settings` text COLLATE utf8mb4_unicode_ci,
+  `created_by` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_smart_va_list_items__smart_va_lists` (`list_id`),
+  CONSTRAINT `FK_smart_va_list_items__smart_va_lists` FOREIGN KEY (`list_id`) REFERENCES `smart_va_lists` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_list_people_events definition
+
+CREATE TABLE `smart_va_list_people_events` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `list_item_id` int NOT NULL,
+  `stream_id` int NOT NULL,
+  `va_id` int NOT NULL,
+  `created_at` timestamp(3) NOT NULL,
+  `frame_image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `x1` float NOT NULL,
+  `y1` float NOT NULL,
+  `x2` float NOT NULL,
+  `y2` float NOT NULL,
+  `client_id` int NOT NULL,
+  `confidence` float DEFAULT NULL,
+  `accepted` bit(1) DEFAULT b'0',
+  PRIMARY KEY (`id`),
+  KEY `smart_va_list_people_events__list_item_id` (`list_item_id`),
+  KEY `smart_va_list_people_events__created_at` (`created_at`),
+  CONSTRAINT `FK_smart_va_list_people_events__smart_va_list_items` FOREIGN KEY (`list_item_id`) REFERENCES `smart_va_list_items` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_notification_objects definition
+
+CREATE TABLE `smart_va_notification_objects` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `notification_id` int NOT NULL DEFAULT '1',
+  `object_type` int DEFAULT NULL,
+  `confidence` float DEFAULT '0',
+  `x1` float NOT NULL,
+  `y1` float NOT NULL,
+  `x2` float NOT NULL,
+  `y2` float NOT NULL,
+  `intersected_line_id` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `line_intersection_direction` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK__smart_va_notifications__smart_va_object_type` (`notification_id`),
+  CONSTRAINT `FK__smart_va_notifications__smart_va_object_type` FOREIGN KEY (`notification_id`) REFERENCES `smart_va_notifications` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- incoreanalytics.smart_va_list_item_images definition
+
+CREATE TABLE `smart_va_list_item_images` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `list_item_id` int NOT NULL,
+  `client_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_smart_va_list_item_images__smart_va_list_items` (`list_item_id`),
+  CONSTRAINT `FK_smart_va_list_item_images__smart_va_list_items` FOREIGN KEY (`list_item_id`) REFERENCES `smart_va_list_items` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
