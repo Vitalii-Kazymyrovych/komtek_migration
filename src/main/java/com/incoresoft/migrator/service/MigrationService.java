@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class MigrationService {
     private static final Set<String> TABLES_TO_MIGRATE = Set.of(
-            "analytics", "clients", "event_manager", "face_lists", "roles", "servers", "settings",
+            "analytics", "clients", "event_manager", "face_lists", "roles", "servers",
             "stats_traffic_minutely", "stream_groups", "streams", "traffic_stat", "traffic_counters", "users");
 
     public void migrate(Path basePath) throws Exception {
@@ -123,8 +123,29 @@ public class MigrationService {
                 cache.computeIfAbsent(cacheKey, k -> loadLookup(h2, lk.table, lk.lookupKey, lk.lookupValue));
                 yield autoType(cache.get(cacheKey).get(row.get(lk.sourceColumn)));
             }
+            case "FACE_LIST_ANALYTICS_IDS" -> mapFaceListAnalyticsIds(row, h2, cache);
             default -> null;
         };
+    }
+
+    private String mapFaceListAnalyticsIds(Map<String, String> faceListRow, Connection h2, Map<String, Map<String, String>> cache) {
+        String streams = faceListRow.get("streams");
+        if (streams == null || streams.isBlank()) return "[]";
+
+        Set<String> streamIds = new LinkedHashSet<>();
+        java.util.regex.Matcher streamMatcher = java.util.regex.Pattern.compile("\\d+").matcher(streams);
+        while (streamMatcher.find()) streamIds.add(streamMatcher.group());
+        if (streamIds.isEmpty()) return "[]";
+
+        String cacheKey = "analytics:id:stream_id";
+        cache.computeIfAbsent(cacheKey, k -> loadLookup(h2, "analytics", "id", "stream_id"));
+
+        Set<String> analyticsIds = new LinkedHashSet<>();
+        for (Map.Entry<String, String> entry : cache.get(cacheKey).entrySet()) {
+            if (streamIds.contains(entry.getValue())) analyticsIds.add(entry.getKey());
+        }
+
+        return analyticsIds.stream().map(id -> "\"" + id + "\"").collect(Collectors.joining(",", "[", "]"));
     }
 
     private Map<String, String> loadLookup(Connection h2, String table, String key, String val) {

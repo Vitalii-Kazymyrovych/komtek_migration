@@ -22,8 +22,9 @@ This tool migrates selected data from MySQL dump files into PostgreSQL.
 ## Important behavior
 
 - Base path is current directory (`.`), so keep jar + config + dump files together.
-- `settings` table from old DB maps into PostgreSQL `system_settings`.
+- `settings` is intentionally excluded from migration.
 - Example advanced mapping: `analytics.stream_uuid` comes from `analytics.stream_id -> streams.id -> streams.uuid`.
+- `face_lists.analytics_ids` is generated from legacy `face_lists.streams` by collecting `analytics.id` values whose `analytics.stream_id` belongs to the face-list stream set.
 - Unmapped columns are listed in `mapping.json` (`unmappedTargetColumns`).
 
 ## Build and run
@@ -43,7 +44,6 @@ java -jar target/migrator-1.0.0.jar
 - face_lists
 - roles
 - servers
-- settings -> system_settings
 - stats_traffic_minutely
 - stream_groups
 - streams
