@@ -1,0 +1,20 @@
+{
+  "postgres": {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "database": "videoanalytics",
+    "schema": "videoanalytics",
+    "user": "videoanalytics",
+    "password": "videoanalytics"
+  },
+  "dumpFiles": [
+    "old_dump1.sql",
+    "old_dump2.sql",
+    "old_dump3.sql",
+    "old_dump4.sql",
+    "old_dump5.sql",
+    "old_dump6.sql",
+    "old_dump7.sql",
+    "old_dump8.sql"
+  ]
+}

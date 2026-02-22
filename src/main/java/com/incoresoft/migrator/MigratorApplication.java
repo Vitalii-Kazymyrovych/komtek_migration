@@ -1,13 +1,15 @@
 package com.incoresoft.migrator;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.incoresoft.migrator.service.MappingGenerator;
+import com.incoresoft.migrator.service.MigrationService;
 
-@SpringBootApplication
+import java.nio.file.Path;
+
 public class MigratorApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(MigratorApplication.class, args);
-	}
-
+    public static void main(String[] args) throws Exception {
+        Path basePath = Path.of(".").toAbsolutePath().normalize();
+        MappingGenerator.ensureMapping(basePath.resolve("oldDDL.sql"), basePath.resolve("newDDL.sql"), basePath.resolve("mapping.json"));
+        new MigrationService().migrate(basePath);
+        System.out.println("Migration completed.");
+    }
 }
