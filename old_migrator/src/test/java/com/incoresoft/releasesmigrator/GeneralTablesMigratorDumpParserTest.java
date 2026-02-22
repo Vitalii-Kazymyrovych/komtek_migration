@@ -49,6 +49,29 @@ class GeneralTablesMigratorDumpParserTest {
         assertEquals(Map.of("id", 7L, "name", "Admin"), roleRows.getFirst().values());
     }
 
+    @Test
+    void parseDumpSupportsFlexibleInsertWhitespace() throws IOException {
+        Path dump = tempDir.resolve("dump-whitespace.sql");
+        Files.writeString(
+                dump,
+                "INSERT   INTO `videoanalytics`.`clients` (`id`,`name`) VALUES (2,'Beta');\n"
+                        + "INSERT\nINTO videoanalytics.roles (`id`,`name`) VALUES (9,'Operator');\n",
+                StandardCharsets.UTF_8
+        );
+
+        var parsed = GeneralTablesMigrator.DumpParser.parseDump(dump);
+
+        List<GeneralTablesMigrator.DumpParser.Row> clientsRows = parsed.rowsByTable().get("clients");
+        assertNotNull(clientsRows);
+        assertEquals(1, clientsRows.size());
+        assertEquals(Map.of("id", 2L, "name", "Beta"), clientsRows.getFirst().values());
+
+        List<GeneralTablesMigrator.DumpParser.Row> rolesRows = parsed.rowsByTable().get("roles");
+        assertNotNull(rolesRows);
+        assertEquals(1, rolesRows.size());
+        assertEquals(Map.of("id", 9L, "name", "Operator"), rolesRows.getFirst().values());
+    }
+
     private static byte[] prependUtf16LeBom(byte[] payload) {
         byte[] out = new byte[payload.length + 2];
         out[0] = (byte) 0xFF;
