@@ -146,3 +146,9 @@
 - 09:33 UTC+00 — Reviewed `old_migrator/old_dump.sql` and `old_migrator/newDB.txt` for `cleaning_settings`; confirmed table uses unique `category_id` and has no `id` column, matching runtime SQL error.
 - 09:33 UTC+00 — Updated `GeneralTablesMigrator` duplicate-key SQL generation to use a deterministic no-op on the first inserted column instead of hardcoded `id=id`, preventing MySQL failures on tables without `id`.
 - 09:33 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` (build success; no tests discovered) and `./helper_scripts/pre_commit_checks.sh` (success) before commit.
+
+- 10:14 UTC+00 — Started implementing mapping-driven Java migrator update to load `old_migrator/mapping.json`, apply per-table field/lookup/default rules, and skip configured tables per new migration instructions.
+- 10:17 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/GeneralTablesMigrator.java` to load and iterate `old_migrator/mapping.json`, skip `action=skip`, ignore `face_list_items` + `face_list_items_images`, apply column mappings/defaults, and execute lookup/join enrichment rules from mapping.
+- 10:17 UTC+00 — Refactored migrator flow to map source->target columns dynamically (including `users.role_id -> role_ids`, lookup-based mappings like `analytics.stream_id -> stream_uuid`, and face notification enrichment from `face_detections`).
+- 10:17 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` (pass, no tests discovered) and `./helper_scripts/pre_commit_checks.sh` (pass).
+- 10:18 UTC+00 — Re-ran `./helper_scripts/pre_commit_checks.sh` after final mapping-driven migrator updates; full checks passed before commit.
