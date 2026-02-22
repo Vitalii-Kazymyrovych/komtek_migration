@@ -500,7 +500,7 @@ public class GeneralTablesMigrator implements Migrator {
         }
     }
 
-    private record DumpData(Map<String, List<DumpParser.Row>> rowsByTable) {
+    record DumpData(Map<String, List<DumpParser.Row>> rowsByTable) {
     }
 
     private record PrepareRowsResult(List<DumpParser.Row> rows, int excludedByStatus) {
@@ -509,14 +509,14 @@ public class GeneralTablesMigrator implements Migrator {
     private record TableMigrationStats(int sourceRows, int preparedRows, int excludedByStatus, int insertedRows) {
     }
 
-    private static final class DumpParser {
+    static final class DumpParser {
         static DumpData parseDump(Path path) {
             try {
-                String sql = Files.readString(path);
+                String sql = readDumpText(path);
                 Map<String, List<Row>> byTable = new LinkedHashMap<>();
                 for (String statement : splitStatements(sql)) {
                     String t = statement.trim();
-                    if (!t.regionMatches(true, 0, "INSERT INTO", 0, "INSERT INTO".length())) {
+                    if (!isSupportedInsertStatement(t)) {
                         continue;
                     }
                     ParsedInsert parsed = parseInsert(t);
@@ -527,6 +527,40 @@ public class GeneralTablesMigrator implements Migrator {
             } catch (IOException e) {
                 throw new RuntimeException("Failed to parse dump: " + path, e);
             }
+        }
+
+        private static String readDumpText(Path path) throws IOException {
+            byte[] bytes = Files.readAllBytes(path);
+            if (bytes.length >= 2) {
+                int b0 = bytes[0] & 0xFF;
+                int b1 = bytes[1] & 0xFF;
+                if (b0 == 0xFF && b1 == 0xFE) {
+                    return stripBom(new String(bytes, StandardCharsets.UTF_16LE));
+                }
+                if (b0 == 0xFE && b1 == 0xFF) {
+                    return stripBom(new String(bytes, StandardCharsets.UTF_16BE));
+                }
+            }
+
+            String utf8 = new String(bytes, StandardCharsets.UTF_8);
+            if (utf8.indexOf('\0') >= 0) {
+                return stripBom(new String(bytes, StandardCharsets.UTF_16LE));
+            }
+            return stripBom(utf8);
+        }
+
+        private static String stripBom(String value) {
+            if (!value.isEmpty() && value.charAt(0) == "\ufeff".charAt(0)) {
+                return value.substring(1);
+            }
+            return value;
+        }
+
+        private static boolean isSupportedInsertStatement(String statement) {
+            String normalized = statement.trim().toUpperCase(Locale.ROOT);
+            return normalized.startsWith("INSERT INTO")
+                    || normalized.startsWith("INSERT IGNORE INTO")
+                    || normalized.startsWith("REPLACE INTO");
         }
 
         private static List<String> splitStatements(String sql) {
@@ -551,7 +585,12 @@ public class GeneralTablesMigrator implements Migrator {
         }
 
         private static ParsedInsert parseInsert(String statement) {
-            int intoIdx = statement.toUpperCase(Locale.ROOT).indexOf("INSERT INTO") + "INSERT INTO".length();
+            String upper = statement.toUpperCase(Locale.ROOT);
+            int intoKeywordIdx = upper.indexOf(" INTO ");
+            if (intoKeywordIdx < 0) {
+                return null;
+            }
+            int intoIdx = intoKeywordIdx + " INTO ".length();
             int firstParen = statement.indexOf('(', intoIdx);
             if (firstParen < 0) return null;
             String tableRaw = statement.substring(intoIdx, firstParen).trim().replace("`", "");
