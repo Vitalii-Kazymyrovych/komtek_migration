@@ -29,7 +29,15 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class GeneralTablesMigrator implements Migrator {
-    private static final Set<String> IGNORED_TABLES = Set.of("face_list_items", "face_list_items_images");
+    private static final Set<String> IGNORED_TABLES = Set.of(
+            "face_list_items",
+            "face_list_items_images",
+            "face_detections",
+            "face_notifications",
+            "face_unique_person_mapping",
+            "face_encodings",
+            "face_lists"
+    );
 
     @Override
     public void migrate() {
@@ -293,6 +301,11 @@ public class GeneralTablesMigrator implements Migrator {
             return workingDirMapping;
         }
 
+        Path workingDirLegacySubfolderMapping = Path.of("old_migrator", "mapping.json").toAbsolutePath().normalize();
+        if (Files.exists(workingDirLegacySubfolderMapping)) {
+            return workingDirLegacySubfolderMapping;
+        }
+
         Path appPath;
         try {
             appPath = Path.of(GeneralTablesMigrator.class
@@ -315,7 +328,7 @@ public class GeneralTablesMigrator implements Migrator {
         }
 
         throw new RuntimeException("Cannot find mapping config. Checked: explicit mapping.path/MIGRATOR_MAPPING_PATH, working directory "
-                + workingDirMapping + ", and application directory " + appDirMapping);
+                + workingDirMapping + ", legacy subfolder " + workingDirLegacySubfolderMapping + ", and application directory " + appDirMapping);
     }
 
     private Map<String, LookupIndex> buildLookupIndexes(Map<String, List<DumpParser.Row>> rowsByTable) {
@@ -356,6 +369,8 @@ public class GeneralTablesMigrator implements Migrator {
             if (blank(values.get("list_permissions"))) {
                 values.put("list_permissions", "{}");
             }
+            normalizeBooleanFlag(values, "send_internal_notifications");
+            normalizeBooleanFlag(values, "show_popup_for_internal_notifications");
             return;
         }
 
@@ -381,8 +396,20 @@ public class GeneralTablesMigrator implements Migrator {
             Object disableBalancing = values.get("disable_balancing");
             if (disableBalancing != null) {
                 String db = String.valueOf(disableBalancing).trim().toLowerCase(Locale.ROOT);
-                if (!("0".equals(db) || "1".equals(db) || "true".equals(db) || "false".equals(db))) {
-                    values.put("disable_balancing", null);
+                if (db.startsWith("'") && db.endsWith("'") && db.length() > 1) {
+                    db = db.substring(1, db.length() - 1).trim();
+                }
+                if ("true".equals(db) || "yes".equals(db) || "on".equals(db)) {
+                    values.put("disable_balancing", 1);
+                } else if ("false".equals(db) || "no".equals(db) || "off".equals(db)) {
+                    values.put("disable_balancing", 0);
+                } else {
+                    Integer normalized = asIntegerOrNull(db.replaceAll("[^0-9-]", ""));
+                    if (normalized == null) {
+                        values.put("disable_balancing", null);
+                    } else {
+                        values.put("disable_balancing", normalized != 0 ? 1 : 0);
+                    }
                 }
             }
             return;
@@ -398,6 +425,25 @@ public class GeneralTablesMigrator implements Migrator {
         }
     }
 
+
+    private void normalizeBooleanFlag(Map<String, Object> values, String key) {
+        Object raw = values.get(key);
+        if (raw == null) {
+            return;
+        }
+        String v = String.valueOf(raw).trim().toLowerCase(Locale.ROOT);
+        if (v.startsWith("'") && v.endsWith("'") && v.length() > 1) {
+            v = v.substring(1, v.length() - 1).trim();
+        }
+        if ("true".equals(v) || "yes".equals(v) || "on".equals(v)) {
+            values.put(key, 1);
+        } else if ("false".equals(v) || "no".equals(v) || "off".equals(v)) {
+            values.put(key, 0);
+        } else {
+            Integer normalized = asIntegerOrNull(v.replaceAll("[^0-9-]", ""));
+            values.put(key, normalized == null ? null : (normalized != 0 ? 1 : 0));
+        }
+    }
 
     private Integer asIntegerOrNull(Object value) {
         if (value == null) return null;

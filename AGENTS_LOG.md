@@ -89,3 +89,11 @@
 - 13:31 UTC+00 — Ran iterative MySQL migration cycles against isolated local MySQL (`/tmp/mysql-local`, port 3307) and addressed parser/value-shape issues discovered at runtime (`analytics.created_at/client_id/disable_balancing` constraint failures).
 - 13:31 UTC+00 — Updated mapping/parsing behavior: removed analytics `start_at` source mapping, refined source-column hint generation, prioritized mapping hints over fallback schema columns, and added no-column tuple ID-prefix handling for oversized tuples.
 - 13:31 UTC+00 — Added defensive normalization/defaults for datetime-like fields and analytics required values to reduce legacy-value type violations during MySQL insert execution.
+
+- 13:40 UTC+00 — Started requested iterative DB cycle (setup -> run migrator -> analyze exceptions -> patch -> drop/setup rerun) on local MySQL target.
+- 13:44 UTC+00 — Iteration run hit startup failure due incorrect jar path; corrected runtime command to use `old_migrator/target/releases-migrator-0.0.1-SNAPSHOT.jar`.
+- 13:45 UTC+00 — Updated `GeneralTablesMigrator.resolveMappingConfigPath` to also resolve `old_migrator/mapping.json` when running from repository root.
+- 13:46 UTC+00 — Iteration rerun exposed MySQL truncation on `analytics.disable_balancing`; normalized boolean-like values to deterministic tinyint 0/1.
+- 13:49 UTC+00 — Iteration rerun exposed face-table migration truncations; aligned runtime behavior with project policy by skipping direct migration of face tables (`face_detections`, `face_notifications`, `face_unique_person_mapping`, `face_encodings`, plus `face_list_items*`) and normalizing face-list boolean flags.
+- 13:54 UTC+00 — Completed full DB cycle (drop/setup/run) successfully on local MySQL test instance with no migrator exceptions (`/tmp/migrator_run8.log`).
+- 13:55 UTC+00 — Ran ./helper_scripts/pre_commit_checks.sh after iterative MySQL cycle fixes (mvn test + clean package passed).
