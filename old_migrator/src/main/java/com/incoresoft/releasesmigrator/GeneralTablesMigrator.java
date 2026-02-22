@@ -518,9 +518,21 @@ public class GeneralTablesMigrator implements Migrator {
         private static final Pattern INSERT_PREFIX = Pattern.compile("(?is)^\\s*(?:INSERT(?:\\s+IGNORE)?|REPLACE)\\s+INTO\\s+");
 
         static DumpData parseDump(Path path) {
+            List<Path> dumpPaths = resolveDumpPaths(path);
+            if (dumpPaths.isEmpty()) {
+                throw new RuntimeException("No dump files found for path: " + path.toAbsolutePath().normalize());
+            }
+
+            Map<String, List<Row>> byTable = new LinkedHashMap<>();
+            for (Path dumpPath : dumpPaths) {
+                appendDump(dumpPath, byTable);
+            }
+            return new DumpData(byTable);
+        }
+
+        private static void appendDump(Path path, Map<String, List<Row>> byTable) {
             try {
                 String sql = readDumpText(path);
-                Map<String, List<Row>> byTable = new LinkedHashMap<>();
                 for (String statement : splitStatements(sql)) {
                     String t = statement.trim();
                     if (!isSupportedInsertStatement(t)) {
@@ -530,9 +542,45 @@ public class GeneralTablesMigrator implements Migrator {
                     if (parsed == null) continue;
                     byTable.computeIfAbsent(parsed.table(), k -> new ArrayList<>()).addAll(parsed.rows());
                 }
-                return new DumpData(byTable);
             } catch (IOException e) {
                 throw new RuntimeException("Failed to parse dump: " + path, e);
+            }
+        }
+
+        private static List<Path> resolveDumpPaths(Path configuredPath) {
+            Path normalized = configuredPath.toAbsolutePath().normalize();
+            if (Files.exists(normalized)) {
+                if (Files.isDirectory(normalized)) {
+                    try (var stream = Files.list(normalized)) {
+                        return stream
+                                .filter(Files::isRegularFile)
+                                .filter(path -> path.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".sql"))
+                                .sorted()
+                                .toList();
+                    } catch (IOException e) {
+                        throw new RuntimeException("Failed to list dump directory: " + normalized, e);
+                    }
+                }
+                return List.of(normalized);
+            }
+
+            Path parent = normalized.getParent();
+            String pattern = normalized.getFileName() == null ? "" : normalized.getFileName().toString();
+            if (parent == null || !Files.exists(parent)) {
+                return List.of();
+            }
+
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(parent, pattern)) {
+                List<Path> matches = new ArrayList<>();
+                for (Path entry : stream) {
+                    if (Files.isRegularFile(entry)) {
+                        matches.add(entry.toAbsolutePath().normalize());
+                    }
+                }
+                matches.sort(Comparator.naturalOrder());
+                return matches;
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to resolve dump glob path: " + normalized, e);
             }
         }
 

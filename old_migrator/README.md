@@ -6,7 +6,7 @@ This application now performs end-to-end migration directly from an old DB dump 
 
 1. Put `migrator.jar` in a working folder.
 2. Copy `config.template.json` to `config.json` in the same folder and edit values.
-3. Put the old DB dump in the same folder (or provide absolute path in config).
+3. Put the old DB dump in the same folder (or provide absolute path/glob/directory in config).
 4. Put face images into the folder from config.
 5. Run the app.
 
@@ -60,6 +60,11 @@ Rules applied in migration:
 Supported `source.type` values:
 - `mysql_dump`
 - `h2_dump`
+
+`source.dump_path` accepts:
+- a single file (for example `./old_dump.sql`)
+- a glob pattern (for example `./old_dump_part_*.sql`)
+- a directory (all `*.sql` files are loaded in lexical order)
 
 Supported `target.type` values:
 - `postgres`

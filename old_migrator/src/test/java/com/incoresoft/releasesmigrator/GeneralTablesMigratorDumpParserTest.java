@@ -87,6 +87,28 @@ class GeneralTablesMigratorDumpParserTest {
         assertEquals(Map.of("id", 15L, "features", "_binary 'a\u0000b'", "status", 1L), detectionRows.getFirst().values());
     }
 
+    @Test
+    void parseDumpSupportsGlobPatternAcrossMultipleDumpFiles() throws IOException {
+        Files.writeString(
+                tempDir.resolve("old_dump_part_00.sql"),
+                "INSERT INTO videoanalytics.clients (`id`,`name`) VALUES (1,'Acme');\n",
+                StandardCharsets.UTF_8
+        );
+        Files.writeString(
+                tempDir.resolve("old_dump_part_01.sql"),
+                "INSERT INTO videoanalytics.clients (`id`,`name`) VALUES (2,'Beta');\n",
+                StandardCharsets.UTF_8
+        );
+
+        var parsed = GeneralTablesMigrator.DumpParser.parseDump(tempDir.resolve("old_dump_part_*.sql"));
+
+        List<GeneralTablesMigrator.DumpParser.Row> clientsRows = parsed.rowsByTable().get("clients");
+        assertNotNull(clientsRows);
+        assertEquals(2, clientsRows.size());
+        assertEquals(Map.of("id", 1L, "name", "Acme"), clientsRows.get(0).values());
+        assertEquals(Map.of("id", 2L, "name", "Beta"), clientsRows.get(1).values());
+    }
+
     private static byte[] prependUtf16LeBom(byte[] payload) {
         byte[] out = new byte[payload.length + 2];
         out[0] = (byte) 0xFF;

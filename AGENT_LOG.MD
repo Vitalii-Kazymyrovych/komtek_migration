@@ -152,3 +152,12 @@
 - 10:17 UTC+00 — Refactored migrator flow to map source->target columns dynamically (including `users.role_id -> role_ids`, lookup-based mappings like `analytics.stream_id -> stream_uuid`, and face notification enrichment from `face_detections`).
 - 10:17 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` (pass, no tests discovered) and `./helper_scripts/pre_commit_checks.sh` (pass).
 - 10:18 UTC+00 — Re-ran `./helper_scripts/pre_commit_checks.sh` after final mapping-driven migrator updates; full checks passed before commit.
+
+## 2026-02-22
+
+- 12:40 UTC+00 — Investigated dump ingestion issue and confirmed runtime expected one dump file while repository now provides split files (`old_dump_part_*.sql`).
+- 12:41 UTC+00 — Updated `GeneralTablesMigrator.DumpParser` to accept single file, glob pattern, or directory dump path and merge SQL files in deterministic lexical order.
+- 12:41 UTC+00 — Added regression test in `GeneralTablesMigratorDumpParserTest` for multi-file glob parsing (`old_dump_part_*.sql`).
+- 12:42 UTC+00 — Updated `old_migrator/README.md` to document supported `source.dump_path` modes (single file / glob / directory).
+- 12:41 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after dump-path parser change; all tests passed (5/5).
+- 12:41 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit; full verification passed.
