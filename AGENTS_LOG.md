@@ -54,3 +54,6 @@
 - 17:01 UTC+00 — Added `old_migrator/config.json` with postgres target defaults (`jdbc:postgresql://127.0.0.1:5432/new_db`).
 - 17:01 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after postgres-target code/config updates (build successful; no tests discovered).
 - 17:02 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+- 17:07 UTC+00 — Investigated PostgreSQL startup failure on missing `cleaning_settings` relation and updated `GeneralTablesMigrator` to pre-check `information_schema.tables`; migrator now logs WARN and skips tables absent in target schema instead of aborting.
+- 17:07 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after missing-table guard change (build successful; no tests discovered).
+- 17:08 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (verification successful).
