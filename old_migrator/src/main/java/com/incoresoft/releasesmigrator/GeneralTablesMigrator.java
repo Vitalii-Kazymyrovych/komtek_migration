@@ -18,6 +18,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -510,6 +512,8 @@ public class GeneralTablesMigrator implements Migrator {
     }
 
     static final class DumpParser {
+        private static final Pattern INSERT_PREFIX = Pattern.compile("(?is)^\\s*(?:INSERT(?:\\s+IGNORE)?|REPLACE)\\s+INTO\\s+");
+
         static DumpData parseDump(Path path) {
             try {
                 String sql = readDumpText(path);
@@ -557,10 +561,7 @@ public class GeneralTablesMigrator implements Migrator {
         }
 
         private static boolean isSupportedInsertStatement(String statement) {
-            String normalized = statement.trim().toUpperCase(Locale.ROOT);
-            return normalized.startsWith("INSERT INTO")
-                    || normalized.startsWith("INSERT IGNORE INTO")
-                    || normalized.startsWith("REPLACE INTO");
+            return INSERT_PREFIX.matcher(statement).find();
         }
 
         private static List<String> splitStatements(String sql) {
@@ -585,12 +586,11 @@ public class GeneralTablesMigrator implements Migrator {
         }
 
         private static ParsedInsert parseInsert(String statement) {
-            String upper = statement.toUpperCase(Locale.ROOT);
-            int intoKeywordIdx = upper.indexOf(" INTO ");
-            if (intoKeywordIdx < 0) {
+            Matcher matcher = INSERT_PREFIX.matcher(statement);
+            if (!matcher.find()) {
                 return null;
             }
-            int intoIdx = intoKeywordIdx + " INTO ".length();
+            int intoIdx = matcher.end();
             int firstParen = statement.indexOf('(', intoIdx);
             if (firstParen < 0) return null;
             String tableRaw = statement.substring(intoIdx, firstParen).trim().replace("`", "");

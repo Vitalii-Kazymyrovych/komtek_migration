@@ -57,3 +57,11 @@
 - 11:13 UTC+00 — Added `GeneralTablesMigratorDumpParserTest` coverage for `INSERT IGNORE` parsing and UTF-16LE dump parsing regressions.
 - 11:14 UTC+00 — Ran `mvn -f old_migrator/pom.xml test`; fixed parser BOM handling after an initial UTF-16 regression test failure, then reran with all tests passing (2/2).
 - 11:14 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh`; full verification completed successfully.
+
+## 2026-02-22
+
+- 11:27 UTC+00 — Investigated report of `Loaded dump ... with 0 tables` and identified dump parser strict whitespace matching (`" INTO "`) as likely root cause for some SQL dump formats.
+- 11:27 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/GeneralTablesMigrator.java` dump INSERT detection/parsing to support flexible whitespace/newlines between `INSERT|INSERT IGNORE|REPLACE` and `INTO`.
+- 11:27 UTC+00 — Added regression test `parseDumpSupportsFlexibleInsertWhitespace` in `old_migrator/src/test/java/com/incoresoft/releasesmigrator/GeneralTablesMigratorDumpParserTest.java` for multi-space and newline-formatted INSERT statements.
+- 11:27 UTC+00 — Ran `mvn -f old_migrator/pom.xml test`; all dump parser tests passed (3/3).
+- 11:28 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit; full verification passed.
