@@ -38,3 +38,14 @@
 - 14:23 UTC+00 — Extended `old_migrator/extractor.ps1` to produce filtered old DDL by copying full per-table definition sections from a DDL source file without reformatting, matching source formatting conventions.
 - 14:24 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after extractor update (build successful; no tests discovered).
 - 14:24 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+
+## 2026-02-22
+
+- 14:30 UTC+00 — Added `helper_scripts/extract_old_ddl.py` to extract DDL statements (CREATE/ALTER/INDEX/VIEW/DROP TABLE) from original `videoanalytics.sql` into `OLD_DDL.txt`; needed because OLD_DDL generation script was missing.
+- 14:30 UTC+00 — Validated the new extractor with `python3 helper_scripts/extract_old_ddl.py --input new_dataset/dump-videoanalytics-202601121700.sql --output /tmp/OLD_DDL_extracted.txt` (400 DDL statements extracted).
+- 14:31 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after adding DDL extractor script (build successful; no tests discovered).
+- 14:31 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+- 14:33 UTC+00 — Reworked `old_migrator/extractor.ps1` so DDL extraction can run directly from original `videoanalytics.sql` when `OLD_DDL.txt` is absent; kept backward compatibility with existing OLD_DDL-formatted inputs.
+- 14:33 UTC+00 — Removed `helper_scripts/extract_old_ddl.py` per review request to keep DDL extraction logic consolidated in `extractor.ps1`.
+- 14:34 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after `extractor.ps1` changes (build successful; no tests discovered).
+- 14:34 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
