@@ -72,6 +72,21 @@ class GeneralTablesMigratorDumpParserTest {
         assertEquals(Map.of("id", 9L, "name", "Operator"), rolesRows.getFirst().values());
     }
 
+    @Test
+    void parseDumpKeepsUtf8WhenBinaryLiteralContainsNullByte() throws IOException {
+        Path dump = tempDir.resolve("dump-utf8-binary.sql");
+        String sql = "INSERT INTO videoanalytics.face_detections (`id`,`features`,`status`) VALUES "
+                + "(15,_binary 'a\u0000b',1);\n";
+        Files.writeString(dump, sql, StandardCharsets.UTF_8);
+
+        var parsed = GeneralTablesMigrator.DumpParser.parseDump(dump);
+
+        List<GeneralTablesMigrator.DumpParser.Row> detectionRows = parsed.rowsByTable().get("face_detections");
+        assertNotNull(detectionRows);
+        assertEquals(1, detectionRows.size());
+        assertEquals(Map.of("id", 15L, "features", "_binary 'a\u0000b'", "status", 1L), detectionRows.getFirst().values());
+    }
+
     private static byte[] prependUtf16LeBom(byte[] payload) {
         byte[] out = new byte[payload.length + 2];
         out[0] = (byte) 0xFF;

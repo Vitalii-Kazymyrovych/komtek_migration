@@ -65,3 +65,8 @@
 - 11:27 UTC+00 — Added regression test `parseDumpSupportsFlexibleInsertWhitespace` in `old_migrator/src/test/java/com/incoresoft/releasesmigrator/GeneralTablesMigratorDumpParserTest.java` for multi-space and newline-formatted INSERT statements.
 - 11:27 UTC+00 — Ran `mvn -f old_migrator/pom.xml test`; all dump parser tests passed (3/3).
 - 11:28 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit; full verification passed.
+- 12:32 UTC+00 — Investigated new large dump format and identified UTF-8 `_binary` literals containing embedded NUL bytes causing false UTF-16 fallback in dump decoding.
+- 12:32 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/GeneralTablesMigrator.java` dump decoding to use strict UTF-8 decode first, UTF-16 heuristic fallback, and avoid NUL-triggered mis-decoding.
+- 12:32 UTC+00 — Added regression test `parseDumpKeepsUtf8WhenBinaryLiteralContainsNullByte` in `old_migrator/src/test/java/com/incoresoft/releasesmigrator/GeneralTablesMigratorDumpParserTest.java`.
+- 12:33 UTC+00 — Ran `mvn -f old_migrator/pom.xml test`; dump parser tests passed (4/4).
+- 12:33 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit; full verification passed.
