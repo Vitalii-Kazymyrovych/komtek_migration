@@ -6,6 +6,7 @@ com\incoresoft\releasesmigrator\GeneralTablesMigrator$1.class
 com\incoresoft\releasesmigrator\GeneralTablesMigrator$LookupIndex.class
 com\incoresoft\releasesmigrator\GeneralTablesMigrator$TableMigrationStats.class
 com\incoresoft\releasesmigrator\MigrationConfig$SourceConfig.class
+com\incoresoft\releasesmigrator\GeneralTablesMigrator$DumpParser$ParsedCreateTable.class
 com\incoresoft\releasesmigrator\MigrationConfig$TargetConfig.class
 com\incoresoft\releasesmigrator\MigrationConfig$ImagesConfig.class
 com\incoresoft\releasesmigrator\Migrator.class
