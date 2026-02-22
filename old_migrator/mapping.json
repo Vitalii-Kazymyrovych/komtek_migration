@@ -19,7 +19,6 @@
       "allowed_server_ids": "allowed_server_ids",
       "restrictions": "restrictions",
       "events_holder": "events_holder",
-      "start_at": "start_at",
       "stream_id": {
         "target": "stream_uuid",
         "lookup": {
