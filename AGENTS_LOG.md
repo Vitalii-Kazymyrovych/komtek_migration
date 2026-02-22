@@ -75,3 +75,17 @@
 - 12:45 UTC+00 — Updated `GeneralTablesMigratorDumpParserTest` glob test to pass a string pattern (`<tempDir>/old_dump_part_*.sql`) instead of constructing an invalid wildcard `Path`.
 - 12:46 UTC+00 — Ran `mvn -f old_migrator/pom.xml test`; dump parser test suite passed (5/5), confirming Windows-safe glob handling.
 - 12:46 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit; full verification checklist passed including jar packaging.
+- 12:56 UTC+00 — Investigated parser regression: dump INSERT statements in repository use `INSERT INTO <table> VALUES (...)` without explicit column lists, so existing parser skipped all rows.
+- 12:56 UTC+00 — Updated `GeneralTablesMigrator.DumpParser.parseInsert` to support inserts with and without column lists and to detect `VALUES` outside quoted content safely.
+- 12:56 UTC+00 — Added regression tests covering no-column INSERT parsing and repository split-dump ingestion (`old_dump_part_*.sql`).
+- 12:56 UTC+00 — Ran `mvn -f old_migrator/pom.xml test`; initial run failed due test path assumption, then adjusted repository-dump test path for module working directory.
+- 12:57 UTC+00 — Re-ran `mvn -f old_migrator/pom.xml test` after parser/test updates; all tests passed (7/7).
+- 12:57 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit; full verification completed successfully.
+- 13:11 UTC+00 — Reworked dump ingestion flow: migrator now loads mapping config first and passes source-column hints into dump parsing (`parseDump(..., columnHints)`) so no-column INSERT rows are mapped to meaningful fields instead of positional placeholders.
+- 13:11 UTC+00 — Improved schema column discovery for no-column INSERT support by adding line-based `CREATE TABLE` parser for `newDB.txt`/sibling schema files and keeping deterministic fallback behavior.
+- 13:11 UTC+00 — Added regression test `parseDumpUsesSchemaColumnsForInsertWithoutColumnList` to verify schema-driven column mapping for `INSERT INTO <table> VALUES (...)`.
+- 13:11 UTC+00 — Ran MySQL environment validation: installed MySQL packages, started isolated local instance on `/tmp/mysql-local/run/mysqld.sock` (port 3307), created `incoreanalytics`, loaded `old_migrator/newDB.txt`, and executed migrator jar with MySQL config to validate parser behavior against real dump files.
+- 13:11 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` and `./helper_scripts/pre_commit_checks.sh` after fixes; checks passed.
+- 13:31 UTC+00 — Ran iterative MySQL migration cycles against isolated local MySQL (`/tmp/mysql-local`, port 3307) and addressed parser/value-shape issues discovered at runtime (`analytics.created_at/client_id/disable_balancing` constraint failures).
+- 13:31 UTC+00 — Updated mapping/parsing behavior: removed analytics `start_at` source mapping, refined source-column hint generation, prioritized mapping hints over fallback schema columns, and added no-column tuple ID-prefix handling for oversized tuples.
+- 13:31 UTC+00 — Added defensive normalization/defaults for datetime-like fields and analytics required values to reduce legacy-value type violations during MySQL insert execution.

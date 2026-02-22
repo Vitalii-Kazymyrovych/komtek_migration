@@ -34,8 +34,8 @@ public class GeneralTablesMigrator implements Migrator {
     @Override
     public void migrate() {
         MigrationConfig config = loadConfig();
-        DumpData dumpData = DumpParser.parseDump(config.getSource().getDumpPath());
         LinkedHashMap<String, TableMapping> mappingConfig = loadMappingConfig();
+        DumpData dumpData = DumpParser.parseDump(config.getSource().getDumpPath(), buildSourceColumnHints(mappingConfig));
         JdbcTemplate targetJdbc = new JdbcTemplate(buildTargetDataSource(config));
         TransactionTemplate tx = new TransactionTemplate(new org.springframework.jdbc.datasource.DataSourceTransactionManager(buildTargetDataSource(config)));
 
@@ -95,6 +95,33 @@ public class GeneralTablesMigrator implements Migrator {
                 log.warn("No new rows were inserted for table {} although {} rows were prepared. Existing target rows may already conflict (ON CONFLICT DO NOTHING / ON DUPLICATE KEY no-op).", tableKey, stats.preparedRows());
             }
         }
+    }
+
+
+    private Map<String, List<String>> buildSourceColumnHints(LinkedHashMap<String, TableMapping> mappingConfig) {
+        Map<String, List<String>> hints = new LinkedHashMap<>();
+        for (TableMapping mapping : mappingConfig.values()) {
+            if (blank(mapping.sourceTable())) {
+                continue;
+            }
+            LinkedHashSet<String> columns = new LinkedHashSet<>();
+            columns.addAll(mapping.columnMappings().keySet());
+            columns.add("status");
+
+            for (Map<String, Object> lookup : mapping.lookups()) {
+                for (Map.Entry<String, String> join : castStringMap(lookup.get("join_on")).entrySet()) {
+                    String left = join.getKey();
+                    if (left.contains(".")) {
+                        columns.add(left.substring(left.indexOf('.') + 1));
+                    }
+                }
+            }
+
+            if (!columns.isEmpty()) {
+                hints.put(mapping.sourceTable().toLowerCase(Locale.ROOT), new ArrayList<>(columns));
+            }
+        }
+        return hints;
     }
 
     private PrepareRowsResult prepareRows(TableMapping mapping, List<DumpParser.Row> rows, Map<String, LookupIndex> lookupIndexes) {
@@ -337,6 +364,30 @@ public class GeneralTablesMigrator implements Migrator {
             return;
         }
 
+
+        if ("analytics".equals(table)) {
+            if (values.get("created_at") == null) {
+                values.put("created_at", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS").format(LocalDateTime.now(ZoneOffset.UTC)));
+            }
+            if (values.get("status") == null || asIntegerOrNull(values.get("status")) != null) {
+                values.put("status", "started");
+            }
+            Integer clientId = asIntegerOrNull(values.get("client_id"));
+            values.put("client_id", clientId == null ? 0 : clientId);
+            Integer groupId = asIntegerOrNull(values.get("group_id"));
+            values.put("group_id", groupId == null ? 0 : groupId);
+            Integer lastGpuId = asIntegerOrNull(values.get("last_gpu_id"));
+            values.put("last_gpu_id", lastGpuId);
+            Object disableBalancing = values.get("disable_balancing");
+            if (disableBalancing != null) {
+                String db = String.valueOf(disableBalancing).trim().toLowerCase(Locale.ROOT);
+                if (!("0".equals(db) || "1".equals(db) || "true".equals(db) || "false".equals(db))) {
+                    values.put("disable_balancing", null);
+                }
+            }
+            return;
+        }
+
         if ("users".equals(table)) {
             if (values.get("email") == null) values.put("email", "");
             if (values.get("fullname") == null) values.put("fullname", "");
@@ -345,6 +396,17 @@ public class GeneralTablesMigrator implements Migrator {
             if (values.get("ip_params") == null) values.put("ip_params", "{}");
             if (values.get("role_ids") == null) values.put("role_ids", "[]");
         }
+    }
+
+
+    private Integer asIntegerOrNull(Object value) {
+        if (value == null) return null;
+        if (value instanceof Number n) return n.intValue();
+        String s = String.valueOf(value).trim();
+        if (s.matches("-?\\d+")) {
+            try { return Integer.parseInt(s); } catch (NumberFormatException ignored) { return null; }
+        }
+        return null;
     }
 
     private int insertRows(JdbcTemplate jdbcTemplate, String targetType, String table, List<DumpParser.Row> rows) {
@@ -428,10 +490,23 @@ public class GeneralTablesMigrator implements Migrator {
         if (trimmed.isEmpty() || "-".equals(trimmed) || "NULL".equalsIgnoreCase(trimmed)) {
             return null;
         }
+        if (isDateTimeColumn(column) && !isDateTimeLike(trimmed)) {
+            return null;
+        }
         if (isSensitive(column)) {
             return trimmed;
         }
         return normalizeAscii(trimmed);
+    }
+
+    private boolean isDateTimeColumn(String column) {
+        String c = column.toLowerCase(Locale.ROOT);
+        return c.endsWith("_at") || c.contains("timestamp") || c.contains("date");
+    }
+
+    private boolean isDateTimeLike(String value) {
+        return value.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?")
+                || value.matches("\\d{4}-\\d{2}-\\d{2}");
     }
 
     private boolean isSensitive(String column) {
@@ -516,16 +591,27 @@ public class GeneralTablesMigrator implements Migrator {
 
     static final class DumpParser {
         private static final Pattern INSERT_PREFIX = Pattern.compile("(?is)^\\s*(?:INSERT(?:\\s+IGNORE)?|REPLACE)\\s+INTO\\s+");
+        private static final Pattern CREATE_TABLE_PREFIX = Pattern.compile("(?is)^\\s*CREATE\\s+TABLE(?:\\s+IF\\s+NOT\\s+EXISTS)?\\s+");
 
         static DumpData parseDump(String configuredPath) {
+            return parseDump(configuredPath, Map.of());
+        }
+
+        static DumpData parseDump(String configuredPath, Map<String, List<String>> columnHints) {
             List<Path> dumpPaths = resolveDumpPaths(configuredPath);
             if (dumpPaths.isEmpty()) {
                 throw new RuntimeException("No dump files found for path: " + configuredPath);
             }
 
             Map<String, List<Row>> byTable = new LinkedHashMap<>();
+            Map<String, List<String>> tableColumns = loadSchemaColumnOrders(configuredPath, dumpPaths);
+            for (Map.Entry<String, List<String>> hint : columnHints.entrySet()) {
+                if (hint.getValue() != null && !hint.getValue().isEmpty()) {
+                    tableColumns.put(hint.getKey().toLowerCase(Locale.ROOT), hint.getValue());
+                }
+            }
             for (Path dumpPath : dumpPaths) {
-                appendDump(dumpPath, byTable);
+                appendDump(dumpPath, byTable, tableColumns);
             }
             return new DumpData(byTable);
         }
@@ -534,15 +620,22 @@ public class GeneralTablesMigrator implements Migrator {
             return parseDump(path.toString());
         }
 
-        private static void appendDump(Path path, Map<String, List<Row>> byTable) {
+        private static void appendDump(Path path, Map<String, List<Row>> byTable, Map<String, List<String>> tableColumns) {
             try {
                 String sql = readDumpText(path);
                 for (String statement : splitStatements(sql)) {
                     String t = statement.trim();
+                    if (isCreateTableStatement(t)) {
+                        ParsedCreateTable createTable = parseCreateTable(t);
+                        if (createTable != null && !createTable.columns().isEmpty()) {
+                            tableColumns.putIfAbsent(createTable.table(), createTable.columns());
+                        }
+                        continue;
+                    }
                     if (!isSupportedInsertStatement(t)) {
                         continue;
                     }
-                    ParsedInsert parsed = parseInsert(t);
+                    ParsedInsert parsed = parseInsert(t, tableColumns);
                     if (parsed == null) continue;
                     byTable.computeIfAbsent(parsed.table(), k -> new ArrayList<>()).addAll(parsed.rows());
                 }
@@ -677,6 +770,10 @@ public class GeneralTablesMigrator implements Migrator {
             return INSERT_PREFIX.matcher(statement).find();
         }
 
+        private static boolean isCreateTableStatement(String statement) {
+            return CREATE_TABLE_PREFIX.matcher(statement).find();
+        }
+
         private static List<String> splitStatements(String sql) {
             List<String> out = new ArrayList<>();
             StringBuilder current = new StringBuilder();
@@ -698,26 +795,48 @@ public class GeneralTablesMigrator implements Migrator {
             return out;
         }
 
-        private static ParsedInsert parseInsert(String statement) {
+        private static ParsedInsert parseInsert(String statement, Map<String, List<String>> tableColumns) {
             Matcher matcher = INSERT_PREFIX.matcher(statement);
             if (!matcher.find()) {
                 return null;
             }
             int intoIdx = matcher.end();
-            int firstParen = statement.indexOf('(', intoIdx);
-            if (firstParen < 0) return null;
-            String tableRaw = statement.substring(intoIdx, firstParen).trim().replace("`", "");
+            int cursor = intoIdx;
+            while (cursor < statement.length() && Character.isWhitespace(statement.charAt(cursor))) {
+                cursor++;
+            }
+            int tableEnd = cursor;
+            while (tableEnd < statement.length()) {
+                char current = statement.charAt(tableEnd);
+                if (Character.isWhitespace(current) || current == '(') {
+                    break;
+                }
+                tableEnd++;
+            }
+            if (tableEnd <= cursor) {
+                return null;
+            }
+            String tableRaw = statement.substring(cursor, tableEnd).trim().replace("`", "");
             if (tableRaw.contains(".")) {
                 tableRaw = tableRaw.substring(tableRaw.lastIndexOf('.') + 1);
             }
 
-            int colEnd = findMatchingParen(statement, firstParen);
-            List<String> columns = Arrays.stream(statement.substring(firstParen + 1, colEnd).split(","))
-                    .map(s -> s.replace("`", "").trim())
-                    .toList();
+            int valuesIdx = indexOfKeywordOutsideQuotes(statement, "VALUES", tableEnd);
+            if (valuesIdx < 0) {
+                return null;
+            }
 
-            int valuesIdx = statement.toUpperCase(Locale.ROOT).indexOf("VALUES", colEnd);
-            if (valuesIdx < 0) return null;
+            String table = tableRaw.toLowerCase(Locale.ROOT);
+            List<String> columns = List.of();
+            int firstParen = statement.indexOf('(', tableEnd);
+            if (firstParen >= 0 && firstParen < valuesIdx) {
+                int colEnd = findMatchingParen(statement, firstParen);
+                if (colEnd > firstParen && colEnd < valuesIdx) {
+                    columns = Arrays.stream(statement.substring(firstParen + 1, colEnd).split(","))
+                            .map(s -> s.replace("`", "").trim())
+                            .toList();
+                }
+            }
             String valuesPart = statement.substring(valuesIdx + 6).trim();
             if (valuesPart.endsWith(";")) valuesPart = valuesPart.substring(0, valuesPart.length() - 1);
 
@@ -725,12 +844,175 @@ public class GeneralTablesMigrator implements Migrator {
             for (String tuple : splitTuples(valuesPart)) {
                 List<String> valueTokens = splitTopLevel(tuple.substring(1, tuple.length() - 1));
                 Map<String, Object> values = new LinkedHashMap<>();
-                for (int i = 0; i < columns.size() && i < valueTokens.size(); i++) {
-                    values.put(columns.get(i), parseValue(valueTokens.get(i).trim()));
+                if (columns.isEmpty()) {
+                    for (int i = 0; i < valueTokens.size(); i++) {
+                        values.put("col" + (i + 1), parseValue(valueTokens.get(i).trim()));
+                    }
+                } else {
+                    for (int i = 0; i < columns.size() && i < valueTokens.size(); i++) {
+                        values.put(columns.get(i), parseValue(valueTokens.get(i).trim()));
+                    }
                 }
-                rows.add(new Row(tableRaw.toLowerCase(Locale.ROOT), values));
+                if (columns.isEmpty()) {
+                    List<String> resolvedColumns = tableColumns.getOrDefault(table, List.of());
+                    if (!resolvedColumns.isEmpty()) {
+                        List<String> effectiveColumns = resolvedColumns;
+                        if (valueTokens.size() == resolvedColumns.size() + 1 && !resolvedColumns.contains("id")
+                                && valueTokens.getFirst().trim().matches("-?\\d+")) {
+                            List<String> withId = new ArrayList<>(resolvedColumns.size() + 1);
+                            withId.add("id");
+                            withId.addAll(resolvedColumns);
+                            effectiveColumns = withId;
+                        }
+                        values.clear();
+                        for (int i = 0; i < effectiveColumns.size() && i < valueTokens.size(); i++) {
+                            values.put(effectiveColumns.get(i), parseValue(valueTokens.get(i).trim()));
+                        }
+                    }
+                }
+                rows.add(new Row(table, values));
             }
-            return new ParsedInsert(tableRaw.toLowerCase(Locale.ROOT), rows);
+            return new ParsedInsert(table, rows);
+        }
+
+
+        private static Map<String, List<String>> loadSchemaColumnOrders(String configuredPath, List<Path> dumpPaths) {
+            Map<String, List<String>> tableColumns = new LinkedHashMap<>();
+            for (Path dumpPath : dumpPaths) {
+                Path siblingSchema = dumpPath.getParent() == null ? null : dumpPath.getParent().resolve("newDB.txt").normalize();
+                addSchemaColumnsIfExists(siblingSchema, tableColumns);
+            }
+
+            addSchemaColumnsIfExists(Path.of("newDB.txt").toAbsolutePath().normalize(), tableColumns);
+            addSchemaColumnsIfExists(Path.of("old_migrator", "newDB.txt").toAbsolutePath().normalize(), tableColumns);
+
+            Path configured = resolveConfiguredBasePath(configuredPath);
+            if (configured != null) {
+                Path configuredSiblingSchema = configured.getParent() == null ? null : configured.getParent().resolve("newDB.txt").normalize();
+                addSchemaColumnsIfExists(configuredSiblingSchema, tableColumns);
+            }
+            return tableColumns;
+        }
+
+        private static Path resolveConfiguredBasePath(String configuredPath) {
+            if (containsGlob(configuredPath)) {
+                int slashIndex = Math.max(configuredPath.lastIndexOf('/'), configuredPath.lastIndexOf('\\'));
+                String parentPart = slashIndex >= 0 ? configuredPath.substring(0, slashIndex) : ".";
+                return Path.of(parentPart).toAbsolutePath().normalize();
+            }
+            return Path.of(configuredPath).toAbsolutePath().normalize();
+        }
+
+        private static void addSchemaColumnsIfExists(Path schemaPath, Map<String, List<String>> tableColumns) {
+            if (schemaPath == null || !Files.exists(schemaPath) || !Files.isRegularFile(schemaPath)) {
+                return;
+            }
+            try {
+                List<String> lines = Files.readAllLines(schemaPath, StandardCharsets.UTF_8);
+                String currentTable = null;
+                List<String> currentColumns = new ArrayList<>();
+                for (String rawLine : lines) {
+                    String line = rawLine.trim();
+                    if (currentTable == null) {
+                        if (!line.toUpperCase(Locale.ROOT).startsWith("CREATE TABLE")) {
+                            continue;
+                        }
+                        int firstTick = line.indexOf('`');
+                        int secondTick = firstTick >= 0 ? line.indexOf('`', firstTick + 1) : -1;
+                        if (firstTick >= 0 && secondTick > firstTick) {
+                            currentTable = line.substring(firstTick + 1, secondTick).toLowerCase(Locale.ROOT);
+                            currentColumns = new ArrayList<>();
+                        }
+                        continue;
+                    }
+
+                    if (line.startsWith("`")) {
+                        int secondTick = line.indexOf('`', 1);
+                        if (secondTick > 1) {
+                            currentColumns.add(line.substring(1, secondTick));
+                        }
+                    }
+
+                    if (line.startsWith(")")) {
+                        if (!currentColumns.isEmpty()) {
+                            tableColumns.putIfAbsent(currentTable, currentColumns);
+                        }
+                        currentTable = null;
+                        currentColumns = new ArrayList<>();
+                    }
+                }
+            } catch (IOException ignored) {
+            }
+        }
+
+        private static int indexOfKeywordOutsideQuotes(String input, String keyword, int fromIndex) {
+            String upper = input.toUpperCase(Locale.ROOT);
+            String target = keyword.toUpperCase(Locale.ROOT);
+            boolean inQuote = false;
+            for (int i = Math.max(0, fromIndex); i <= upper.length() - target.length(); i++) {
+                char current = input.charAt(i);
+                if (current == '\'' && (i == 0 || input.charAt(i - 1) != '\\')) {
+                    inQuote = !inQuote;
+                }
+                if (inQuote) {
+                    continue;
+                }
+                if (upper.startsWith(target, i)) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+
+        private static ParsedCreateTable parseCreateTable(String statement) {
+            Matcher matcher = CREATE_TABLE_PREFIX.matcher(statement);
+            if (!matcher.find()) {
+                return null;
+            }
+            int start = matcher.end();
+            int cursor = start;
+            while (cursor < statement.length() && Character.isWhitespace(statement.charAt(cursor))) {
+                cursor++;
+            }
+            int tableEnd = cursor;
+            while (tableEnd < statement.length()) {
+                char current = statement.charAt(tableEnd);
+                if (Character.isWhitespace(current) || current == '(') {
+                    break;
+                }
+                tableEnd++;
+            }
+            if (tableEnd <= cursor) {
+                return null;
+            }
+            String table = statement.substring(cursor, tableEnd).trim().replace("`", "");
+            if (table.contains(".")) {
+                table = table.substring(table.lastIndexOf('.') + 1);
+            }
+            int openParen = statement.indexOf('(', tableEnd);
+            if (openParen < 0) {
+                return null;
+            }
+            int closeParen = findMatchingParen(statement, openParen);
+            if (closeParen <= openParen) {
+                return null;
+            }
+
+            List<String> columns = new ArrayList<>();
+            String definition = statement.substring(openParen + 1, closeParen);
+            for (String line : definition.split("\n")) {
+                String trimmed = line.trim();
+                if (!trimmed.startsWith("`")) {
+                    continue;
+                }
+                int secondTick = trimmed.indexOf('`', 1);
+                if (secondTick <= 1) {
+                    continue;
+                }
+                columns.add(trimmed.substring(1, secondTick));
+            }
+            return new ParsedCreateTable(table.toLowerCase(Locale.ROOT), columns);
         }
 
         private static int findMatchingParen(String s, int openPos) {
@@ -820,6 +1102,9 @@ public class GeneralTablesMigrator implements Migrator {
         }
 
         record ParsedInsert(String table, List<Row> rows) {
+        }
+
+        record ParsedCreateTable(String table, List<String> columns) {
         }
 
         record Row(String table, Map<String, Object> values) {

@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GeneralTablesMigratorDumpParserTest {
 
@@ -109,6 +111,59 @@ class GeneralTablesMigratorDumpParserTest {
         assertEquals(2, clientsRows.size());
         assertEquals(Map.of("id", 1L, "name", "Acme"), clientsRows.get(0).values());
         assertEquals(Map.of("id", 2L, "name", "Beta"), clientsRows.get(1).values());
+    }
+
+    @Test
+    void parseDumpSupportsInsertStatementsWithoutColumnList() throws IOException {
+        Path dump = tempDir.resolve("dump-no-columns.sql");
+        Files.writeString(
+                dump,
+                "INSERT INTO `videoanalytics`.`clients` VALUES (11,'Acme');\n",
+                StandardCharsets.UTF_8
+        );
+
+        var parsed = GeneralTablesMigrator.DumpParser.parseDump(dump);
+
+        List<GeneralTablesMigrator.DumpParser.Row> clientsRows = parsed.rowsByTable().get("clients");
+        assertNotNull(clientsRows);
+        assertEquals(1, clientsRows.size());
+        assertEquals(Map.of("id", 11L, "client_name", "Acme"), clientsRows.getFirst().values());
+    }
+
+    @Test
+    void parseDumpReadsRepositorySplitDumpFiles() {
+        var parsed = GeneralTablesMigrator.DumpParser.parseDump("old_dump_part_*.sql");
+
+        assertFalse(parsed.rowsByTable().isEmpty());
+        List<GeneralTablesMigrator.DumpParser.Row> analyticsRows = parsed.rowsByTable().get("analytics");
+        assertNotNull(analyticsRows);
+        assertTrue(analyticsRows.size() > 0);
+    }
+
+
+    @Test
+    void parseDumpUsesSchemaColumnsForInsertWithoutColumnList() throws IOException {
+        Files.writeString(
+                tempDir.resolve("newDB.txt"),
+                "CREATE TABLE `clients` (\n"
+                        + "  `id` int NOT NULL,\n"
+                        + "  `name` varchar(64) DEFAULT NULL\n"
+                        + ");\n",
+                StandardCharsets.UTF_8
+        );
+        Files.writeString(
+                tempDir.resolve("old_dump_part_00.sql"),
+                "INSERT INTO `clients` VALUES (15,'SchemaMapped');\n",
+                StandardCharsets.UTF_8
+        );
+
+        String dumpGlob = tempDir + File.separator + "old_dump_part_*.sql";
+        var parsed = GeneralTablesMigrator.DumpParser.parseDump(dumpGlob);
+
+        List<GeneralTablesMigrator.DumpParser.Row> clientsRows = parsed.rowsByTable().get("clients");
+        assertNotNull(clientsRows);
+        assertEquals(1, clientsRows.size());
+        assertEquals(Map.of("id", 15L, "name", "SchemaMapped"), clientsRows.getFirst().values());
     }
 
     private static byte[] prependUtf16LeBom(byte[] payload) {
