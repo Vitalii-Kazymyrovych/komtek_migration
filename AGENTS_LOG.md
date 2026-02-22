@@ -45,3 +45,7 @@
 - 10:43 UTC+00 — Updated `GeneralTablesMigrator.TableMapping` deserialization to ignore unknown mapping config fields (e.g., `notes`) so `mapping.json` can include metadata without startup failure.
 - 10:44 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after TableMapping deserialization update (build successful; no tests discovered).
 - 10:44 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+- 11:04 UTC+00 — Investigated "migration completed successfully but no data migrated" behavior in `GeneralTablesMigrator`: existing summary log only reported source row counts, masking cases where all rows were filtered (`status=-1`) or inserts were no-op conflicts.
+- 11:04 UTC+00 — Updated `GeneralTablesMigrator` with detailed per-table migration telemetry (source/prepared/excluded/inserted counts, empty-source notices, and no-op conflict warnings) plus chunk-level debug logging for inserted batches.
+- 11:04 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after logging improvements (build successful; no tests discovered).
+- 11:04 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).

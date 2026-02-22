@@ -34,6 +34,9 @@ public class GeneralTablesMigrator implements Migrator {
         JdbcTemplate targetJdbc = new JdbcTemplate(buildTargetDataSource(config));
         TransactionTemplate tx = new TransactionTemplate(new org.springframework.jdbc.datasource.DataSourceTransactionManager(buildTargetDataSource(config)));
 
+        log.info("Loaded dump from {} with {} tables", config.getSource().getDumpPath(), dumpData.rowsByTable().size());
+        log.info("Loaded mapping config with {} table definitions", mappingConfig.size());
+
         Map<String, LookupIndex> lookupIndexes = buildLookupIndexes(dumpData.rowsByTable());
 
         for (Map.Entry<String, TableMapping> entry : mappingConfig.entrySet()) {
@@ -52,27 +55,52 @@ public class GeneralTablesMigrator implements Migrator {
 
             List<DumpParser.Row> rows = dumpData.rowsByTable().getOrDefault(sourceTable, List.of());
             if (rows.isEmpty()) {
+                log.info("Skipping table {} (source={}) because source table has no rows in dump", tableKey, sourceTable);
                 continue;
             }
-            tx.execute(status -> {
-                List<DumpParser.Row> prepared = prepareRows(tableMapping, rows, lookupIndexes);
-                if (!prepared.isEmpty()) {
-                    insertRows(targetJdbc, config.getTarget().getType(), targetTable, prepared);
+
+            TableMigrationStats stats = tx.execute(status -> {
+                PrepareRowsResult preparedResult = prepareRows(tableMapping, rows, lookupIndexes);
+                int insertedRows = 0;
+                if (!preparedResult.rows().isEmpty()) {
+                    insertedRows = insertRows(targetJdbc, config.getTarget().getType(), targetTable, preparedResult.rows());
                     syncSequence(targetJdbc, config.getTarget().getType(), targetTable);
                 }
-                return null;
+                return new TableMigrationStats(rows.size(), preparedResult.rows().size(), preparedResult.excludedByStatus(), insertedRows);
             });
-            log.info("Migrated table {} (source={}) -> {} rows: {}", tableKey, sourceTable, targetTable, rows.size());
+
+            if (stats == null) {
+                log.warn("Migration transaction returned no stats for table {} (source={})", tableKey, sourceTable);
+                continue;
+            }
+
+            log.info("Migration summary for {} (source={} -> target={}): sourceRows={}, preparedRows={}, excludedByStatus={}, insertedOrUpdatedRows={}",
+                    tableKey,
+                    sourceTable,
+                    targetTable,
+                    stats.sourceRows(),
+                    stats.preparedRows(),
+                    stats.excludedByStatus(),
+                    stats.insertedRows());
+
+            if (stats.preparedRows() == 0) {
+                log.warn("Prepared 0 rows for table {}. Most likely all source rows were filtered out (e.g. status=-1) or mapping produced empty values.", tableKey);
+            }
+            if (stats.preparedRows() > 0 && stats.insertedRows() == 0) {
+                log.warn("No new rows were inserted for table {} although {} rows were prepared. Existing target rows may already conflict (ON CONFLICT DO NOTHING / ON DUPLICATE KEY no-op).", tableKey, stats.preparedRows());
+            }
         }
     }
 
-    private List<DumpParser.Row> prepareRows(TableMapping mapping, List<DumpParser.Row> rows, Map<String, LookupIndex> lookupIndexes) {
+    private PrepareRowsResult prepareRows(TableMapping mapping, List<DumpParser.Row> rows, Map<String, LookupIndex> lookupIndexes) {
         List<DumpParser.Row> out = new ArrayList<>();
+        int excludedByStatus = 0;
         int rowNumber = 0;
         for (DumpParser.Row row : rows) {
             rowNumber++;
             Map<String, Object> sourceValues = new LinkedHashMap<>(row.values());
             if (isExcludedByStatus(sourceValues)) {
+                excludedByStatus++;
                 continue;
             }
 
@@ -108,7 +136,7 @@ public class GeneralTablesMigrator implements Migrator {
             applyRequiredDefaults(mapping.targetTable(), values, rowNumber);
             out.add(new DumpParser.Row(row.table(), values));
         }
-        return out;
+        return new PrepareRowsResult(out, excludedByStatus);
     }
 
     private Object mapWithLookup(String sourceColumn, Object sourceValue, Map<?, ?> mappedObject, Map<String, LookupIndex> lookupIndexes) {
@@ -314,9 +342,10 @@ public class GeneralTablesMigrator implements Migrator {
         }
     }
 
-    private void insertRows(JdbcTemplate jdbcTemplate, String targetType, String table, List<DumpParser.Row> rows) {
+    private int insertRows(JdbcTemplate jdbcTemplate, String targetType, String table, List<DumpParser.Row> rows) {
         List<String> columns = new ArrayList<>(rows.getFirst().values().keySet());
         int chunkSize = 200;
+        int affectedRows = 0;
         for (int i = 0; i < rows.size(); i += chunkSize) {
             List<DumpParser.Row> chunk = rows.subList(i, Math.min(i + chunkSize, rows.size()));
             String placeholders = "(" + String.join(",", Collections.nCopies(columns.size(), "?")) + ")";
@@ -329,8 +358,11 @@ public class GeneralTablesMigrator implements Migrator {
                     params.add(row.values().get(col));
                 }
             }
-            jdbcTemplate.update(sql, params.toArray());
+            int chunkAffected = jdbcTemplate.update(sql, params.toArray());
+            affectedRows += Math.max(chunkAffected, 0);
+            log.debug("Inserted chunk for table {}: chunkSize={}, affectedRows={}", table, chunk.size(), chunkAffected);
         }
+        return affectedRows;
     }
 
     private void syncSequence(JdbcTemplate jdbcTemplate, String targetType, String table) {
@@ -469,6 +501,12 @@ public class GeneralTablesMigrator implements Migrator {
     }
 
     private record DumpData(Map<String, List<DumpParser.Row>> rowsByTable) {
+    }
+
+    private record PrepareRowsResult(List<DumpParser.Row> rows, int excludedByStatus) {
+    }
+
+    private record TableMigrationStats(int sourceRows, int preparedRows, int excludedByStatus, int insertedRows) {
     }
 
     private static final class DumpParser {
