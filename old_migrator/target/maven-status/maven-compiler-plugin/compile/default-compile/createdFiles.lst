@@ -1,5 +1,8 @@
+com\incoresoft\releasesmigrator\GeneralTablesMigrator$TableMapping.class
 com\incoresoft\releasesmigrator\MigrationConfig.class
 com\incoresoft\releasesmigrator\MigratorsManager.class
+com\incoresoft\releasesmigrator\GeneralTablesMigrator$1.class
+com\incoresoft\releasesmigrator\GeneralTablesMigrator$LookupIndex.class
 com\incoresoft\releasesmigrator\MigrationConfig$SourceConfig.class
 com\incoresoft\releasesmigrator\MigrationConfig$TargetConfig.class
 com\incoresoft\releasesmigrator\MigrationConfig$ImagesConfig.class
