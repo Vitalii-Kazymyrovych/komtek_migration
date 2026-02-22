@@ -10,6 +10,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.text.Normalizer;
@@ -209,12 +210,36 @@ public class GeneralTablesMigrator implements Migrator {
     }
 
     private LinkedHashMap<String, TableMapping> loadMappingConfig() {
-        Path path = Path.of("old_migrator", "mapping.json");
+        Path path = resolveMappingConfigPath();
         try {
             return new ObjectMapper().readValue(path.toFile(), new com.fasterxml.jackson.core.type.TypeReference<>() {});
         } catch (IOException e) {
             throw new RuntimeException("Cannot read mapping config from " + path, e);
         }
+    }
+
+    private Path resolveMappingConfigPath() {
+        Path appPath;
+        try {
+            appPath = Path.of(GeneralTablesMigrator.class
+                    .getProtectionDomain()
+                    .getCodeSource()
+                    .getLocation()
+                    .toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException("Cannot resolve application location for mapping.json", e);
+        }
+
+        Path baseDir = Files.isDirectory(appPath) ? appPath : appPath.getParent();
+        if (baseDir == null) {
+            throw new RuntimeException("Cannot determine application directory for mapping.json lookup");
+        }
+
+        Path mappingPath = baseDir.resolve("mapping.json");
+        if (!Files.exists(mappingPath)) {
+            throw new RuntimeException("Cannot find mapping config in application directory: " + mappingPath);
+        }
+        return mappingPath;
     }
 
     private Map<String, LookupIndex> buildLookupIndexes(Map<String, List<DumpParser.Row>> rowsByTable) {

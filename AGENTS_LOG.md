@@ -34,3 +34,6 @@
 - 12:33 UTC+00 — Updated `old_migrator/README.md` migration order and face-table behavior notes to match the new exclusion rule.
 - 12:33 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after face-table exclusion update (build successful; no tests discovered).
 - 12:33 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+- 10:32 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/GeneralTablesMigrator.java` so `mapping.json` is resolved from the application location (jar directory) instead of hardcoded `old_migrator/mapping.json`.
+- 10:33 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after mapping-path update (build successful; no tests discovered).
+- 10:33 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
