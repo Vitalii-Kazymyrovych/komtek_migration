@@ -1,2 +1,0 @@
-|id |name|events_holder|comment|selected_sites|selected_tags|schedule|enable_system_notifications|triggered_by_parking_pass|selected_streams|client_id|
-|---|----|-------------|-------|--------------|-------------|--------|---------------------------|-------------------------|----------------|---------|

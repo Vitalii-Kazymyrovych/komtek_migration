@@ -1,2 +1,0 @@
-|id |person|reg_addr_koatuu|oper_code|d_reg|dep_code|brand|model|make_year|color|kind|body|purpose|fuel|capacity|own_weight|total_weight|n_reg_new|
-|---|------|---------------|---------|-----|--------|-----|-----|---------|-----|----|----|-------|----|--------|----------|------------|---------|

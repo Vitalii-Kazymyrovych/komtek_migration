@@ -1,2 +1,0 @@
-|id |row_id|status|accepted_by|rule_id|
-|---|------|------|-----------|-------|

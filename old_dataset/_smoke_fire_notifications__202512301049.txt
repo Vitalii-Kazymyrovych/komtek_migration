@@ -1,2 +1,0 @@
-|id |status|accepted_by|objects|stream_id|va_id|frame_image|thumbnail_image|zone|created_at|client_id|
-|---|------|-----------|-------|---------|-----|-----------|---------------|----|----------|---------|
