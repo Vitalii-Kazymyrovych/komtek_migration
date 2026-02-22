@@ -209,27 +209,27 @@ public class GeneralTablesMigrator implements Migrator {
     }
 
     private String duplicateClause(String targetType, List<String> columns) {
-        if ("postgres".equalsIgnoreCase(targetType)) {
-            return " ON CONFLICT DO NOTHING";
+        if (!isPostgresTarget(targetType)) {
+            throw new IllegalArgumentException("Unsupported target type: " + targetType + ". Only postgres is supported.");
         }
-        String noOpColumn = columns.getFirst();
-        return " ON DUPLICATE KEY UPDATE " + noOpColumn + "=" + noOpColumn;
+        return " ON CONFLICT DO NOTHING";
     }
 
     private DataSource buildTargetDataSource(MigrationConfig config) {
         DriverManagerDataSource ds = new DriverManagerDataSource();
         String type = config.getTarget().getType();
-        if ("postgres".equalsIgnoreCase(type)) {
-            ds.setDriverClassName("org.postgresql.Driver");
-        } else if ("mysql".equalsIgnoreCase(type)) {
-            ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        } else {
-            throw new IllegalArgumentException("Unsupported target type: " + type);
+        if (!isPostgresTarget(type)) {
+            throw new IllegalArgumentException("Unsupported target type: " + type + ". Only postgres is supported.");
         }
+        ds.setDriverClassName("org.postgresql.Driver");
         ds.setUrl(config.getTarget().getJdbcUrl());
         ds.setUsername(config.getTarget().getUser());
         ds.setPassword(config.getTarget().getPassword());
         return ds;
+    }
+
+    private boolean isPostgresTarget(String targetType) {
+        return targetType == null || targetType.isBlank() || "postgres".equalsIgnoreCase(targetType);
     }
 
     private MigrationConfig loadConfig() {
