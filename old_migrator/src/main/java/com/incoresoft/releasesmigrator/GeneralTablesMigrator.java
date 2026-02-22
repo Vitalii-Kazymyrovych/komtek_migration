@@ -12,6 +12,9 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.CharsetDecoder;
 import java.nio.file.*;
 import java.text.Normalizer;
 import java.time.LocalDateTime;
@@ -546,11 +549,49 @@ public class GeneralTablesMigrator implements Migrator {
                 }
             }
 
-            String utf8 = new String(bytes, StandardCharsets.UTF_8);
-            if (utf8.indexOf('\0') >= 0) {
+            String strictUtf8 = tryDecodeStrictUtf8(bytes);
+            if (strictUtf8 != null) {
+                return stripBom(strictUtf8);
+            }
+
+            if (looksLikeUtf16(bytes)) {
                 return stripBom(new String(bytes, StandardCharsets.UTF_16LE));
             }
-            return stripBom(utf8);
+
+            return stripBom(new String(bytes, StandardCharsets.UTF_8));
+        }
+
+        private static String tryDecodeStrictUtf8(byte[] bytes) {
+            CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder()
+                    .onMalformedInput(CodingErrorAction.REPORT)
+                    .onUnmappableCharacter(CodingErrorAction.REPORT);
+            try {
+                return decoder.decode(java.nio.ByteBuffer.wrap(bytes)).toString();
+            } catch (CharacterCodingException ex) {
+                return null;
+            }
+        }
+
+        private static boolean looksLikeUtf16(byte[] bytes) {
+            if (bytes.length < 4 || bytes.length % 2 != 0) {
+                return false;
+            }
+
+            int zeroEven = 0;
+            int zeroOdd = 0;
+            int pairs = bytes.length / 2;
+            for (int i = 0; i + 1 < bytes.length; i += 2) {
+                if (bytes[i] == 0) {
+                    zeroEven++;
+                }
+                if (bytes[i + 1] == 0) {
+                    zeroOdd++;
+                }
+            }
+
+            double evenRatio = (double) zeroEven / pairs;
+            double oddRatio = (double) zeroOdd / pairs;
+            return evenRatio > 0.30 || oddRatio > 0.30;
         }
 
         private static String stripBom(String value) {
