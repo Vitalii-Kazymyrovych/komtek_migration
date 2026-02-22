@@ -23,131 +23,226 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class GeneralTablesMigrator implements Migrator {
-    private static final List<String> TABLE_ORDER = List.of(
-            "analytics_groups", "api_tokens", "cleaning_settings", "clients", "event_manager",
-            "face_lists", "plugin_configurations", "roles",
-            "servers", "sounds_settings", "stats_traffic_minutely", "stream_groups", "streams",
-            "system_settings", "traffic_counters", "traffic_stat", "users", "analytics", "heatmap_plans"
-    );
-
-    private static final Set<String> DROPPED_TABLES = Set.of(
-            "gender_age_stat", "gun_notifications", "gun_type_mapping", "hardhats_notifications",
-            "object_in_zone_notifications", "smoke_fire_notifications", "smoke_fire_type_mapping",
-            "zone_exit_notifications", "zone_exit_notifications_object_type", "object_in_zone_object_type",
-            "face_list_items", "face_list_items_images"
-    );
+    private static final Set<String> IGNORED_TABLES = Set.of("face_list_items", "face_list_items_images");
 
     @Override
     public void migrate() {
         MigrationConfig config = loadConfig();
         DumpData dumpData = DumpParser.parseDump(Path.of(config.getSource().getDumpPath()));
+        LinkedHashMap<String, TableMapping> mappingConfig = loadMappingConfig();
         JdbcTemplate targetJdbc = new JdbcTemplate(buildTargetDataSource(config));
         TransactionTemplate tx = new TransactionTemplate(new org.springframework.jdbc.datasource.DataSourceTransactionManager(buildTargetDataSource(config)));
 
-        Map<Object, String> streamUuidByRef = buildStreamUuidMap(dumpData.rowsByTable().getOrDefault("streams", List.of()));
+        Map<String, LookupIndex> lookupIndexes = buildLookupIndexes(dumpData.rowsByTable());
 
-        for (String table : TABLE_ORDER) {
-            if (DROPPED_TABLES.contains(table)) {
+        for (Map.Entry<String, TableMapping> entry : mappingConfig.entrySet()) {
+            String tableKey = entry.getKey();
+            TableMapping tableMapping = entry.getValue();
+            if ("skip".equalsIgnoreCase(String.valueOf(tableMapping.action())) || IGNORED_TABLES.contains(tableKey)) {
                 continue;
             }
-            String targetTable = table.equals("heatmap_plans") ? "smart_va_heatmap_plans" : table;
-            List<DumpParser.Row> rows = dumpData.rowsByTable().getOrDefault(table, List.of());
+
+            String sourceTable = tableMapping.sourceTable();
+            String targetTable = tableMapping.targetTable();
+            if (blank(targetTable)) {
+                log.info("Skipping {} because target table is empty", tableKey);
+                continue;
+            }
+
+            List<DumpParser.Row> rows = dumpData.rowsByTable().getOrDefault(sourceTable, List.of());
             if (rows.isEmpty()) {
                 continue;
             }
             tx.execute(status -> {
-                List<DumpParser.Row> prepared = prepareRows(table, rows, streamUuidByRef);
+                List<DumpParser.Row> prepared = prepareRows(tableMapping, rows, lookupIndexes);
                 if (!prepared.isEmpty()) {
                     insertRows(targetJdbc, config.getTarget().getType(), targetTable, prepared);
                     syncSequence(targetJdbc, config.getTarget().getType(), targetTable);
                 }
                 return null;
             });
-            log.info("Migrated table {} -> {} rows: {}", table, targetTable, rows.size());
+            log.info("Migrated table {} (source={}) -> {} rows: {}", tableKey, sourceTable, targetTable, rows.size());
         }
-
-        migrateFaceListImages(config, dumpData);
     }
 
-    private List<DumpParser.Row> prepareRows(String table, List<DumpParser.Row> rows, Map<Object, String> streamUuidByRef) {
+    private List<DumpParser.Row> prepareRows(TableMapping mapping, List<DumpParser.Row> rows, Map<String, LookupIndex> lookupIndexes) {
         List<DumpParser.Row> out = new ArrayList<>();
         int rowNumber = 0;
         for (DumpParser.Row row : rows) {
             rowNumber++;
-            Map<String, Object> values = new LinkedHashMap<>(row.values());
-            if (isExcludedByStatus(values)) {
+            Map<String, Object> sourceValues = new LinkedHashMap<>(row.values());
+            if (isExcludedByStatus(sourceValues)) {
                 continue;
             }
-            if (table.equals("streams") && blank(values.get("uuid"))) {
-                values.put("uuid", deterministicUuid("stream", values.get("id")));
+
+            Map<String, Object> values = new LinkedHashMap<>();
+            for (Map.Entry<String, Object> columnMappingEntry : mapping.columnMappings().entrySet()) {
+                String sourceColumn = columnMappingEntry.getKey();
+                Object mappingSpec = columnMappingEntry.getValue();
+                Object sourceValue = sourceValues.get(sourceColumn);
+                if (mappingSpec instanceof String targetColumn) {
+                    values.put(targetColumn, normalizeValue(targetColumn, sourceValue));
+                    continue;
+                }
+
+                if (!(mappingSpec instanceof Map<?, ?> mappedObject)) {
+                    continue;
+                }
+
+                String targetColumn = asString(mappedObject.get("target"));
+                if (blank(targetColumn)) {
+                    continue;
+                }
+
+                Object mappedValue = mapWithLookup(sourceColumn, sourceValue, mappedObject, lookupIndexes);
+                if ("users".equals(mapping.sourceTable()) && "role_id".equals(sourceColumn) && mappedValue != null) {
+                    mappedValue = String.valueOf(mappedValue);
+                }
+                values.put(targetColumn, normalizeValue(targetColumn, mappedValue));
             }
-            if (table.equals("analytics")) {
-                if (blank(values.get("uuid"))) {
-                    values.put("uuid", deterministicUuid("analytics", values.get("id")));
-                }
-                String streamUuid = resolveAnalyticsStreamUuid(values, streamUuidByRef);
-                if (streamUuid != null) {
-                    values.put("stream_uuid", streamUuid);
-                }
-                values.putIfAbsent("group_id", 0L);
-                if (values.get("group_id") == null) {
-                    values.put("group_id", 0L);
-                }
-            }
+
+            applyLookupEnrichment(mapping, sourceValues, values, lookupIndexes);
+            applyDefaults(mapping, values);
             values.replaceAll((k, v) -> normalizeValue(k, v));
-            applyRequiredDefaults(table, values, rowNumber);
+            applyRequiredDefaults(mapping.targetTable(), values, rowNumber);
             out.add(new DumpParser.Row(row.table(), values));
         }
         return out;
     }
 
-    private String resolveAnalyticsStreamUuid(Map<String, Object> analyticsValues, Map<Object, String> streamUuidByRef) {
-        Object streamRef = analyticsValues.get("stream");
-        String streamUuid = lookupStreamUuid(streamUuidByRef, streamRef);
-        if (streamUuid != null) {
-            return streamUuid;
+    private Object mapWithLookup(String sourceColumn, Object sourceValue, Map<?, ?> mappedObject, Map<String, LookupIndex> lookupIndexes) {
+        Object lookupObj = mappedObject.get("lookup");
+        if (!(lookupObj instanceof Map<?, ?> lookupMap)) {
+            return sourceValue;
         }
 
-        Object analyticsName = analyticsValues.get("name");
-        streamUuid = lookupStreamUuid(streamUuidByRef, analyticsName);
-        if (streamUuid != null) {
-            log.debug("Resolved analytics stream by name fallback: analytics_name={} stream_ref={}", analyticsName, streamRef);
+        String table = asString(lookupMap.get("table"));
+        String sourceKey = asString(lookupMap.get("source_key"));
+        String targetKey = asString(lookupMap.get("target_key"));
+        if (blank(table) || blank(sourceKey) || blank(targetKey)) {
+            return sourceValue;
         }
-        return streamUuid;
-    }
 
-    private String lookupStreamUuid(Map<Object, String> streamUuidByRef, Object key) {
-        if (key == null) {
+        LookupIndex index = lookupIndexes.get(table);
+        if (index == null) {
             return null;
         }
-        String direct = streamUuidByRef.get(key);
-        if (direct != null) {
-            return direct;
+
+        List<Object> resolved = new ArrayList<>();
+        for (String token : splitTokens(sourceValue)) {
+            resolved.addAll(index.lookup(sourceKey, token, targetKey));
         }
 
-        String asString = String.valueOf(key);
-        String fromString = streamUuidByRef.get(asString);
-        if (fromString != null) {
-            return fromString;
+        if (resolved.isEmpty()) {
+            return null;
         }
 
-        String trimmed = asString.trim();
-        if (!trimmed.equals(asString)) {
-            String fromTrimmed = streamUuidByRef.get(trimmed);
-            if (fromTrimmed != null) {
-                return fromTrimmed;
-            }
+        if (resolved.size() == 1) {
+            return resolved.getFirst();
         }
 
-        String normalized = normalizeAscii(trimmed);
-        if (!normalized.equals(trimmed)) {
-            String fromNormalized = streamUuidByRef.get(normalized);
-            if (fromNormalized != null) {
-                return fromNormalized;
-            }
-        }
-        return streamUuidByRef.get(normalized.toLowerCase(Locale.ROOT));
+        LinkedHashSet<String> merged = resolved.stream()
+                .filter(Objects::nonNull)
+                .map(String::valueOf)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        return merged.isEmpty() ? null : String.join(",", merged);
     }
+
+    private void applyDefaults(TableMapping mapping, Map<String, Object> values) {
+        for (Map.Entry<String, Object> defaultEntry : mapping.defaults().entrySet()) {
+            String targetColumn = defaultEntry.getKey();
+            if (!values.containsKey(targetColumn) || values.get(targetColumn) == null) {
+                values.put(targetColumn, defaultEntry.getValue());
+            }
+        }
+    }
+
+    private void applyLookupEnrichment(TableMapping mapping,
+                                       Map<String, Object> sourceValues,
+                                       Map<String, Object> targetValues,
+                                       Map<String, LookupIndex> lookupIndexes) {
+        for (Map<String, Object> lookup : mapping.lookups()) {
+            String sourceTable = asString(lookup.get("source_table"));
+            LookupIndex lookupIndex = lookupIndexes.get(sourceTable);
+            if (lookupIndex == null) {
+                continue;
+            }
+
+            Map<String, String> joins = castStringMap(lookup.get("join_on"));
+            if (joins.isEmpty()) {
+                continue;
+            }
+
+            for (Map.Entry<String, String> join : joins.entrySet()) {
+                String left = join.getKey();
+                String right = join.getValue();
+                String sourceColumn = left.substring(left.indexOf('.') + 1);
+                String lookupColumn = right.substring(right.indexOf('.') + 1);
+                Object joinValue = sourceValues.get(sourceColumn);
+                Map<String, Object> matched = lookupIndex.lookupFirstRow(lookupColumn, joinValue);
+                if (matched == null) {
+                    continue;
+                }
+                Map<String, String> targetFields = castStringMap(lookup.get("target_fields"));
+                for (Map.Entry<String, String> field : targetFields.entrySet()) {
+                    Object value = matched.get(field.getValue());
+                    if (!targetValues.containsKey(field.getKey()) || targetValues.get(field.getKey()) == null) {
+                        targetValues.put(field.getKey(), value);
+                    }
+                }
+            }
+        }
+    }
+
+    private List<String> splitTokens(Object sourceValue) {
+        if (sourceValue == null) {
+            return List.of();
+        }
+        String raw = String.valueOf(sourceValue);
+        if (raw.isBlank()) {
+            return List.of();
+        }
+        return Arrays.stream(raw.split(","))
+                .map(String::trim)
+                .filter(token -> !token.isEmpty())
+                .toList();
+    }
+
+    private LinkedHashMap<String, TableMapping> loadMappingConfig() {
+        Path path = Path.of("old_migrator", "mapping.json");
+        try {
+            return new ObjectMapper().readValue(path.toFile(), new com.fasterxml.jackson.core.type.TypeReference<>() {});
+        } catch (IOException e) {
+            throw new RuntimeException("Cannot read mapping config from " + path, e);
+        }
+    }
+
+    private Map<String, LookupIndex> buildLookupIndexes(Map<String, List<DumpParser.Row>> rowsByTable) {
+        Map<String, LookupIndex> out = new HashMap<>();
+        for (Map.Entry<String, List<DumpParser.Row>> entry : rowsByTable.entrySet()) {
+            out.put(entry.getKey(), new LookupIndex(entry.getValue()));
+        }
+        return out;
+    }
+
+    private String asString(Object value) {
+        return value == null ? null : String.valueOf(value);
+    }
+
+    @SuppressWarnings("unchecked")
+    private Map<String, String> castStringMap(Object value) {
+        if (!(value instanceof Map<?, ?> source)) {
+            return Map.of();
+        }
+        Map<String, String> out = new LinkedHashMap<>();
+        for (Map.Entry<?, ?> entry : source.entrySet()) {
+            if (entry.getKey() != null && entry.getValue() != null) {
+                out.put(String.valueOf(entry.getKey()), String.valueOf(entry.getValue()));
+            }
+        }
+        return out;
+    }
+
 
     private void applyRequiredDefaults(String table, Map<String, Object> values, int rowNumber) {
         if ("face_lists".equals(table)) {
@@ -241,57 +336,6 @@ public class GeneralTablesMigrator implements Migrator {
         }
     }
 
-    private Map<Object, String> buildStreamUuidMap(List<DumpParser.Row> streamRows) {
-        Map<Object, String> map = new HashMap<>();
-        long nextGeneratedId = 1L;
-        for (DumpParser.Row row : streamRows) {
-            Map<String, Object> values = row.values();
-            Object id = values.get("id");
-            Long numericId = parseLong(id);
-            if (numericId == null) {
-                numericId = nextGeneratedId;
-            }
-            nextGeneratedId = numericId + 1;
-            String uuid = values.get("uuid") == null || String.valueOf(values.get("uuid")).isBlank()
-                    ? deterministicUuid("stream", numericId)
-                    : String.valueOf(values.get("uuid"));
-            map.put(numericId, uuid);
-            map.put(String.valueOf(numericId), uuid);
-            if (id != null) {
-                map.put(id, uuid);
-                map.put(String.valueOf(id), uuid);
-            }
-            addMap(values.get("path"), uuid, map);
-            addMap(values.get("name"), uuid, map);
-            addMap(values.get("file_name"), uuid, map);
-        }
-        return map;
-    }
-
-    private Long parseLong(Object value) {
-        if (value == null) {
-            return null;
-        }
-        try {
-            return Long.parseLong(String.valueOf(value));
-        } catch (NumberFormatException ignored) {
-            return null;
-        }
-    }
-
-    private void addMap(Object key, String value, Map<Object, String> map) {
-        if (key == null) return;
-        String s = String.valueOf(key);
-        map.put(s, value);
-        String trimmed = s.trim();
-        if (!trimmed.equals(s)) {
-            map.put(trimmed, value);
-        }
-        String normalized = normalizeAscii(trimmed);
-        map.put(normalized, value);
-        map.put(normalized.toLowerCase(Locale.ROOT), value);
-    }
-
     private boolean isExcludedByStatus(Map<String, Object> values) {
         Object status = values.get("status");
         if (status == null) return false;
@@ -327,128 +371,59 @@ public class GeneralTablesMigrator implements Migrator {
         return value == null || String.valueOf(value).isBlank();
     }
 
-    private String deterministicUuid(String scope, Object id) {
-        return UUID.nameUUIDFromBytes((scope + ":" + String.valueOf(id)).getBytes(StandardCharsets.UTF_8)).toString();
+    private record TableMapping(@com.fasterxml.jackson.annotation.JsonProperty("source_table") String sourceTable,
+                                @com.fasterxml.jackson.annotation.JsonProperty("target_table") String targetTable,
+                                @com.fasterxml.jackson.annotation.JsonProperty("action") String action,
+                                @com.fasterxml.jackson.annotation.JsonProperty("column_mappings") LinkedHashMap<String, Object> columnMappings,
+                                @com.fasterxml.jackson.annotation.JsonProperty("defaults") LinkedHashMap<String, Object> defaults,
+                                @com.fasterxml.jackson.annotation.JsonProperty("lookups") List<Map<String, Object>> lookups) {
+        TableMapping {
+            if (columnMappings == null) {
+                columnMappings = new LinkedHashMap<>();
+            }
+            if (defaults == null) {
+                defaults = new LinkedHashMap<>();
+            }
+            if (lookups == null) {
+                lookups = List.of();
+            }
+        }
     }
 
-    private void migrateFaceListImages(MigrationConfig config, DumpData dumpData) {
-        List<DumpParser.Row> lists = dumpData.rowsByTable().getOrDefault("face_lists", List.of());
-        List<DumpParser.Row> items = dumpData.rowsByTable().getOrDefault("face_list_items", List.of());
-        List<DumpParser.Row> images = dumpData.rowsByTable().getOrDefault("face_list_items_images", List.of());
-        if (lists.isEmpty()) {
-            log.info("Skipping face image move: missing face_lists table data in dump.");
-            return;
+    private static final class LookupIndex {
+        private final List<Map<String, Object>> rows;
+
+        private LookupIndex(List<DumpParser.Row> rows) {
+            this.rows = rows.stream().map(DumpParser.Row::values).toList();
         }
 
-        Path sourceDir = Path.of(Optional.ofNullable(config.getImages()).map(MigrationConfig.ImagesConfig::getSourceDir).orElse("./face_lists"));
-        Path targetDir = Path.of(Optional.ofNullable(config.getImages()).map(MigrationConfig.ImagesConfig::getTargetDir).orElse("./face_lists_new"));
-
-        Map<Object, String> listNames = new LinkedHashMap<>();
-        for (DumpParser.Row list : lists) {
-            if (isExcludedByStatus(list.values())) {
-                continue;
+        private List<Object> lookup(String sourceKey, String sourceValue, String targetKey) {
+            if (sourceValue == null) {
+                return List.of();
             }
-            Object listId = list.values().get("id");
-            String listName = String.valueOf(normalizeValue("name", list.values().get("name")));
-            if (blank(listName) || "null".equalsIgnoreCase(listName)) {
-                listName = "Unnamed face list " + listId;
-            }
-            String listFolder = safeFolderName(listName);
-            listNames.putIfAbsent(listId, listFolder);
-            try {
-                Files.createDirectories(targetDir.resolve(listFolder));
-            } catch (IOException e) {
-                log.warn("Failed to create face list folder {}: {}", listFolder, e.getMessage());
-            }
-        }
-
-        if (items.isEmpty() || images.isEmpty()) {
-            log.info("Skipping face image move: missing face item/image rows in dump. Created list folders only.");
-            return;
-        }
-
-        Map<Object, DumpParser.Row> itemById = items.stream().collect(Collectors.toMap(r -> r.values().get("id"), r -> r, (a, b) -> a));
-
-        int moved = 0;
-        for (DumpParser.Row imageRow : images) {
-            Object listItemId = imageRow.values().get("list_item_id");
-            DumpParser.Row item = itemById.get(listItemId);
-            if (item == null || isExcludedByStatus(item.values())) {
-                continue;
-            }
-            Object listId = item.values().get("list_id");
-            String listFolder = listNames.getOrDefault(listId, "list_" + listId);
-            String personName = safeFileName(String.valueOf(item.values().getOrDefault("name", "unknown")));
-            String rawPath = String.valueOf(imageRow.values().getOrDefault("path", ""));
-            String fileName = Path.of(rawPath).getFileName().toString();
-            String extension = fileName.contains(".") ? fileName.substring(fileName.lastIndexOf('.')) : "";
-
-            Path src = resolveSourceImagePath(sourceDir, rawPath);
-            Path dstDir = targetDir.resolve(listFolder);
-            Path dst = uniquePath(dstDir, personName + extension);
-
-            try {
-                Files.createDirectories(dstDir);
-                if (Files.exists(src)) {
-                    Files.move(src, dst, StandardCopyOption.REPLACE_EXISTING);
-                    moved++;
-                } else {
-                    log.warn("Face image source not found: {}", src);
+            List<Object> out = new ArrayList<>();
+            for (Map<String, Object> row : rows) {
+                Object candidate = row.get(sourceKey);
+                if (candidate != null && sourceValue.equals(String.valueOf(candidate).trim())) {
+                    out.add(row.get(targetKey));
                 }
-            } catch (Exception e) {
-                log.warn("Failed to move image {} -> {}: {}", src, dst, e.getMessage());
             }
-        }
-        log.info("Face list image move completed. moved={}", moved);
-    }
-
-
-    private Path resolveSourceImagePath(Path sourceDir, String rawPath) {
-        String normalizedRaw = rawPath == null ? "" : rawPath.trim();
-        if (normalizedRaw.isEmpty()) {
-            return sourceDir.resolve("missing_image");
+            return out;
         }
 
-        String withoutLeadingSlash = normalizedRaw.replaceFirst("^/+", "");
-        String fileName = Path.of(withoutLeadingSlash).getFileName().toString();
-        Path candidate = sourceDir.resolve(fileName);
-
-        if (Files.exists(candidate)) {
-            return candidate;
+        private Map<String, Object> lookupFirstRow(String sourceKey, Object sourceValue) {
+            if (sourceValue == null) {
+                return null;
+            }
+            String keyValue = String.valueOf(sourceValue).trim();
+            for (Map<String, Object> row : rows) {
+                Object candidate = row.get(sourceKey);
+                if (candidate != null && keyValue.equals(String.valueOf(candidate).trim())) {
+                    return row;
+                }
+            }
+            return null;
         }
-
-        return candidate;
-    }
-
-    private Path uniquePath(Path dir, String baseName) {
-        Path candidate = dir.resolve(baseName);
-        if (!Files.exists(candidate)) {
-            return candidate;
-        }
-        String name = baseName;
-        String ext = "";
-        if (baseName.contains(".")) {
-            ext = baseName.substring(baseName.lastIndexOf('.'));
-            name = baseName.substring(0, baseName.lastIndexOf('.'));
-        }
-        int i = 1;
-        while (Files.exists(candidate)) {
-            candidate = dir.resolve(name + "_" + i + ext);
-            i++;
-        }
-        return candidate;
-    }
-
-    private String safeFolderName(String input) {
-        return safeFileName(input == null ? "unknown_list" : input).replace(' ', '_');
-    }
-
-    private String safeFileName(String input) {
-        String normalized = normalizeAscii(input == null ? "unknown" : input).trim();
-        if (normalized.isEmpty()) {
-            normalized = "unknown";
-        }
-        return normalized.replaceAll("[\\\\/:*?\"<>|]", "_");
     }
 
     private record DumpData(Map<String, List<DumpParser.Row>> rowsByTable) {
