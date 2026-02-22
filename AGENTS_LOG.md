@@ -34,3 +34,7 @@
 - 12:33 UTC+00 — Updated `old_migrator/README.md` migration order and face-table behavior notes to match the new exclusion rule.
 - 12:33 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after face-table exclusion update (build successful; no tests discovered).
 - 12:33 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+- 14:23 UTC+00 — Updated `old_migrator/extractor.ps1` to extract only requested table data from large SQL dumps while preserving original SQL line formatting exactly (including multi-line INSERT blocks and LOCK/UNLOCK sections).
+- 14:23 UTC+00 — Extended `old_migrator/extractor.ps1` to produce filtered old DDL by copying full per-table definition sections from a DDL source file without reformatting, matching source formatting conventions.
+- 14:24 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after extractor update (build successful; no tests discovered).
+- 14:24 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).

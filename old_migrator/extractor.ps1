@@ -1,121 +1,140 @@
-# extractor.ps1
-# Output:
-#   C:\Scripts\ddl_all.sql
-#   C:\Scripts\inserts_selected.sql
+[CmdletBinding()]
+param(
+    [string]$BasePath = "C:\Scripts",
+    [string]$DumpPath,
+    [string]$TablesPath,
+    [string]$DdlSourcePath,
+    [string]$DataOutPath,
+    [string]$OldDdlOutPath
+)
 
 $ErrorActionPreference = "Stop"
 
-$base = "C:\Scripts"
-$dump = "$base\videoanalytics.sql"
-$list = "$base\tables.txt"
+if (-not $DumpPath) { $DumpPath = Join-Path $BasePath "videoanalytics.sql" }
+if (-not $TablesPath) { $TablesPath = Join-Path $BasePath "tables.txt" }
+if (-not $DdlSourcePath) { $DdlSourcePath = Join-Path $BasePath "OLD_DDL.txt" }
+if (-not $DataOutPath) { $DataOutPath = Join-Path $BasePath "inserts_selected.sql" }
+if (-not $OldDdlOutPath) { $OldDdlOutPath = Join-Path $BasePath "oldDDL_selected.txt" }
 
-$ddlOut  = "$base\ddl_all.sql"
-$dataOut = "$base\inserts_selected.sql"
+if (!(Test-Path $DumpPath)) { throw "Dump not found: $DumpPath" }
+if (!(Test-Path $DdlSourcePath)) { throw "DDL source not found: $DdlSourcePath" }
 
-if (!(Test-Path $dump)) { throw "Dump not found: $dump" }
-if (!(Test-Path $list)) { throw "Table list not found: $list" }
+$defaultTables = @(
+    "analytics",
+    "clients",
+    "event_manager",
+    "face_detections",
+    "face_encodings",
+    "face_list_items",
+    "face_list_items_images",
+    "face_lists",
+    "face_notifications",
+    "face_unique_person_mapping",
+    "roles",
+    "servers",
+    "settings",
+    "stats_traffic_minutely",
+    "stream_groups",
+    "streams",
+    "traffic_stat",
+    "users"
+)
 
-$wanted = Get-Content $list | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" }
-$wantedSet = @{}
-$wanted | ForEach-Object { $wantedSet[$_] = $true }
+if (Test-Path $TablesPath) {
+    $wanted = Get-Content $TablesPath | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" }
+} else {
+    $wanted = $defaultTables
+}
 
-Write-Host "Dump:     $dump"
-Write-Host "DDL out:  $ddlOut"
-Write-Host "DATA out: $dataOut"
-Write-Host ("Wanted tables: {0}" -f $wanted.Count)
+$wantedSet = New-Object "System.Collections.Generic.HashSet[string]" ([System.StringComparer]::OrdinalIgnoreCase)
+$wanted | ForEach-Object { [void]$wantedSet.Add($_) }
 
-$reDrop   = '^DROP TABLE IF EXISTS `([^`]+)`;'
-$reCreate = '^CREATE TABLE `'
-$reCreateEnd = '^\)\s*ENGINE=|^\)\s*;'
-$reLock   = '^LOCK TABLES '
-$reInsert = '^INSERT INTO '
-$reUnlock = '^UNLOCK TABLES;'
+$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 
-$reader = New-Object System.IO.StreamReader($dump)
-$ddlW   = New-Object System.IO.StreamWriter($ddlOut, $false, [System.Text.Encoding]::UTF8)
-$dataW  = New-Object System.IO.StreamWriter($dataOut, $false, [System.Text.Encoding]::UTF8)
+Write-Host "Dump in:      $DumpPath"
+Write-Host "DDL source:   $DdlSourcePath"
+Write-Host "Data out:     $DataOutPath"
+Write-Host "Old DDL out:  $OldDdlOutPath"
+Write-Host ("Tables:       {0}" -f (($wanted | Sort-Object) -join ", "))
 
-$currentTable = $null
-$inCreate = $false
-$writingDDL = $false
-$includeData = $false
+function Get-InsertTable([string]$line) {
+    if ($line -match '^INSERT\s+INTO\s+`?([^`\s\(]+)`?') {
+        return $Matches[1]
+    }
+    return $null
+}
+
+function Get-LockTable([string]$line) {
+    if ($line -match '^LOCK\s+TABLES\s+`?([^`\s]+)`?\s+WRITE;') {
+        return $Matches[1]
+    }
+    return $null
+}
+
+# 1) Extract table data exactly as present in source dump.
+$reader = New-Object System.IO.StreamReader($DumpPath)
+$dataWriter = New-Object System.IO.StreamWriter($DataOutPath, $false, $utf8NoBom)
+$includeCurrentLock = $false
 
 try {
-  while (($line = $reader.ReadLine()) -ne $null) {
-
-    # Before first table: copy header to both files
-    if ($null -eq $currentTable -and ($line -notmatch $reDrop)) {
-      $ddlW.WriteLine($line)
-      $dataW.WriteLine($line)
-      continue
-    }
-
-    # New table
-    if ($line -match $reDrop) {
-      $currentTable = $Matches[1]
-      $inCreate = $false
-      $writingDDL = $true
-      $includeData = $wantedSet.ContainsKey($currentTable)
-
-      $ddlW.WriteLine($line)
-      continue
-    }
-
-    # CREATE TABLE
-    if ($line -match $reCreate) {
-      $inCreate = $true
-      $writingDDL = $true
-      $ddlW.WriteLine($line)
-      continue
-    }
-
-    # DDL block
-    if ($writingDDL) {
-      $ddlW.WriteLine($line)
-      if ($inCreate -and ($line -match $reCreateEnd)) {
-        $inCreate = $false
-        $writingDDL = $false
-      }
-      continue
-    }
-
-    # DATA block
-    if ($line -match $reLock) {
-      if ($includeData) {
-        $dataW.WriteLine($line)
-        while (($l2 = $reader.ReadLine()) -ne $null) {
-          $dataW.WriteLine($l2)
-          if ($l2 -match $reUnlock) { break }
+    while (($line = $reader.ReadLine()) -ne $null) {
+        $lockTable = Get-LockTable $line
+        if ($null -ne $lockTable) {
+            $includeCurrentLock = $wantedSet.Contains($lockTable)
+            if ($includeCurrentLock) {
+                $dataWriter.WriteLine($line)
+            }
+            continue
         }
-      }
-      else {
-        while (($l2 = $reader.ReadLine()) -ne $null) {
-          if ($l2 -match $reUnlock) { break }
+
+        if ($line -match '^UNLOCK\s+TABLES;') {
+            if ($includeCurrentLock) {
+                $dataWriter.WriteLine($line)
+            }
+            $includeCurrentLock = $false
+            continue
         }
-      }
-      $currentTable = $null
-      continue
-    }
 
-    # Handle dumps without LOCK/UNLOCK (pure INSERT style)
-    if ($includeData -and $line -match $reInsert) {
-      $dataW.WriteLine($line)
-      continue
-    }
+        if ($includeCurrentLock) {
+            $dataWriter.WriteLine($line)
+            continue
+        }
 
-    if ($line -match $reUnlock) {
-      $currentTable = $null
-      continue
+        $insertTable = Get-InsertTable $line
+        if ($null -ne $insertTable -and $wantedSet.Contains($insertTable)) {
+            $dataWriter.WriteLine($line)
+            while ($line -notmatch ';\s*$') {
+                $line = $reader.ReadLine()
+                if ($null -eq $line) { break }
+                $dataWriter.WriteLine($line)
+            }
+        }
     }
-  }
 }
 finally {
-  $ddlW.Flush();  $ddlW.Close()
-  $dataW.Flush(); $dataW.Close()
-  $reader.Close()
+    $dataWriter.Flush(); $dataWriter.Close()
+    $reader.Close()
+}
+
+# 2) Extract DDL blocks from an existing DDL file in the exact original formatting.
+$ddlLines = Get-Content -Path $DdlSourcePath
+$ddlWriter = New-Object System.IO.StreamWriter($OldDdlOutPath, $false, $utf8NoBom)
+
+try {
+    $inside = $false
+    foreach ($line in $ddlLines) {
+        if ($line -match '^--\s+.+\.(?:"|`)?([^"`\s]+)(?:"|`)?\s+definition\s*$') {
+            $tableName = $Matches[1]
+            $inside = $wantedSet.Contains($tableName)
+        }
+
+        if ($inside) {
+            $ddlWriter.WriteLine($line)
+        }
+    }
+}
+finally {
+    $ddlWriter.Flush(); $ddlWriter.Close()
 }
 
 Write-Host "Done."
-Write-Host "Created:"
-Write-Host "  $ddlOut"
-Write-Host "  $dataOut"
