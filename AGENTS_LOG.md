@@ -49,3 +49,11 @@
 - 11:04 UTC+00 — Updated `GeneralTablesMigrator` with detailed per-table migration telemetry (source/prepared/excluded/inserted counts, empty-source notices, and no-op conflict warnings) plus chunk-level debug logging for inserted batches.
 - 11:04 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after logging improvements (build successful; no tests discovered).
 - 11:04 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+
+## 2026-02-22
+
+- 11:13 UTC+00 — Investigated report that non-empty `old_dump.sql` was parsed as 0 tables and identified dump parser assumptions around statement type/encoding as likely causes for newer dumps.
+- 11:13 UTC+00 — Updated `GeneralTablesMigrator.DumpParser` to support `INSERT IGNORE INTO`/`REPLACE INTO` and to decode UTF-16 dump files (BOM-aware with UTF-8 fallback) before SQL splitting.
+- 11:13 UTC+00 — Added `GeneralTablesMigratorDumpParserTest` coverage for `INSERT IGNORE` parsing and UTF-16LE dump parsing regressions.
+- 11:14 UTC+00 — Ran `mvn -f old_migrator/pom.xml test`; fixed parser BOM handling after an initial UTF-16 regression test failure, then reran with all tests passing (2/2).
+- 11:14 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh`; full verification completed successfully.
