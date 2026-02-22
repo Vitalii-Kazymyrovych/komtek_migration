@@ -49,3 +49,8 @@
 - 14:33 UTC+00 — Removed `helper_scripts/extract_old_ddl.py` per review request to keep DDL extraction logic consolidated in `extractor.ps1`.
 - 14:34 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after `extractor.ps1` changes (build successful; no tests discovered).
 - 14:34 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
+- 17:01 UTC+00 — Started postgres-target switch task; reviewed current config templates and `GeneralTablesMigrator` target-specific SQL/driver handling.
+- 17:01 UTC+00 — Updated `old_migrator/src/main/java/com/incoresoft/releasesmigrator/GeneralTablesMigrator.java` to enforce postgres-only target support (`ON CONFLICT DO NOTHING` and postgres JDBC driver only).
+- 17:01 UTC+00 — Added `old_migrator/config.json` with postgres target defaults (`jdbc:postgresql://127.0.0.1:5432/new_db`).
+- 17:01 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` after postgres-target code/config updates (build successful; no tests discovered).
+- 17:02 UTC+00 — Ran `./helper_scripts/pre_commit_checks.sh` before commit (full verification successful).
