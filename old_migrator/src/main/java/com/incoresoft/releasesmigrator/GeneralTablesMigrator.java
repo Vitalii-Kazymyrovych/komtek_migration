@@ -51,6 +51,10 @@ public class GeneralTablesMigrator implements Migrator {
                 continue;
             }
             String targetTable = table.equals("heatmap_plans") ? "smart_va_heatmap_plans" : table;
+            if (!tableExists(targetJdbc, targetTable)) {
+                log.warn("Skipping table {} because target table {} does not exist", table, targetTable);
+                continue;
+            }
             List<DumpParser.Row> rows = dumpData.rowsByTable().getOrDefault(table, List.of());
             if (rows.isEmpty()) {
                 continue;
@@ -206,6 +210,28 @@ public class GeneralTablesMigrator implements Migrator {
         } catch (Exception e) {
             log.debug("Sequence sync skipped for {}: {}", table, e.getMessage());
         }
+    }
+
+    private boolean tableExists(JdbcTemplate jdbcTemplate, String table) {
+        if (table == null || table.isBlank()) {
+            return false;
+        }
+
+        String schema = "public";
+        String tableName = table;
+        if (table.contains(".")) {
+            String[] parts = table.split("\\.", 2);
+            schema = parts[0];
+            tableName = parts[1];
+        }
+
+        Integer exists = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = ? AND table_name = ?",
+                Integer.class,
+                schema,
+                tableName
+        );
+        return exists != null && exists > 0;
     }
 
     private String duplicateClause(String targetType, List<String> columns) {
