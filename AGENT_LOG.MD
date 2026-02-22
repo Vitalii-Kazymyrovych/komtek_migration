@@ -146,3 +146,8 @@
 - 09:33 UTC+00 — Reviewed `old_migrator/old_dump.sql` and `old_migrator/newDB.txt` for `cleaning_settings`; confirmed table uses unique `category_id` and has no `id` column, matching runtime SQL error.
 - 09:33 UTC+00 — Updated `GeneralTablesMigrator` duplicate-key SQL generation to use a deterministic no-op on the first inserted column instead of hardcoded `id=id`, preventing MySQL failures on tables without `id`.
 - 09:33 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` (build success; no tests discovered) and `./helper_scripts/pre_commit_checks.sh` (success) before commit.
+
+## 2026-02-22
+
+- 14:38 UTC+00 — Fixed PowerShell parser errors in `old_migrator/extractor.ps1` by replacing interpolated regex strings with format-based patterns that safely include quoted identifiers for schema/table detection.
+- 14:39 UTC+00 — Ran `mvn -f old_migrator/pom.xml test` and `./helper_scripts/pre_commit_checks.sh` after extractor fix; both passed.

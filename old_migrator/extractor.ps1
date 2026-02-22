@@ -76,14 +76,17 @@ function Get-LockTable([string]$line) {
 function StatementMentionsSchema([string]$statement, [string]$schema) {
     if ([string]::IsNullOrWhiteSpace($schema)) { return $true }
     $s = [Regex]::Escape($schema.Trim().Trim('"','`').ToLowerInvariant())
-    return [Regex]::IsMatch($statement.ToLowerInvariant(), "(?i)(`$s`|\"$s\"|$s)\s*\.")
+    $pattern = '(?i)(`{0}`|"{0}"|{0})\s*\.' -f $s
+    return [Regex]::IsMatch($statement.ToLowerInvariant(), $pattern)
 }
 
 function StatementMentionsWantedTable([string]$statement, $wantedTableNames) {
     foreach ($tableName in $wantedTableNames) {
         $t = [Regex]::Escape($tableName)
-        if ([Regex]::IsMatch($statement, "(?i)\.(?:`$t`|\"$t\"|$t)\b") -or
-            [Regex]::IsMatch($statement, "(?i)\b(?:`$t`|\"$t\"|$t)\b")) {
+        $qualifiedPattern = '(?i)\.(?:`{0}`|"{0}"|{0})\b' -f $t
+        $barePattern = '(?i)\b(?:`{0}`|"{0}"|{0})\b' -f $t
+        if ([Regex]::IsMatch($statement, $qualifiedPattern) -or
+            [Regex]::IsMatch($statement, $barePattern)) {
             return $true
         }
     }
