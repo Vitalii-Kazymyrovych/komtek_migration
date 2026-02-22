@@ -17,3 +17,8 @@
 15. Added PostgreSQL-safe typing/UUID coercion and table cleanup before insert to support repeated runs.
 16. Validated shaded jar execution (`java -jar ...`) and verified migrated row counts in PostgreSQL.
 17. Removed generated JAR artifacts from `target/` before commit.
+18. Excluded `settings` from the migration table set in runtime and mapping generation paths.
+19. Added `FACE_LIST_ANALYTICS_IDS` mapping strategy to populate `face_lists.analytics_ids` from legacy `face_lists.streams` via analytics linked by `stream_id`.
+20. Updated `mapping.json` and README implementation notes for the new behavior.
+21. Ran `mvn clean package` successfully after implementing changes.
+22. Attempted runtime migration via `java -jar target/migrator-1.0.0.jar`; run failed due to PostgreSQL connection refusal at 127.0.0.1:5432 in this environment.

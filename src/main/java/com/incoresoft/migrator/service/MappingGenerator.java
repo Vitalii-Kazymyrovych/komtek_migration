@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class MappingGenerator {
     private static final List<String> TABLES = List.of(
-            "analytics", "clients", "event_manager", "face_lists", "roles", "servers", "settings",
+            "analytics", "clients", "event_manager", "face_lists", "roles", "servers",
             "stats_traffic_minutely", "stream_groups", "streams", "traffic_stat", "traffic_counters", "users"
     );
 
@@ -87,6 +87,11 @@ public class MappingGenerator {
                 if (table.equals("users") && tgt.equals("role_ids")) {
                     cm.strategy = "ROLE_TO_ARRAY";
                     cm.source = "role_id";
+                    tm.columnMappings.add(cm);
+                    continue;
+                }
+                if (table.equals("face_lists") && tgt.equals("analytics_ids")) {
+                    cm.strategy = "FACE_LIST_ANALYTICS_IDS";
                     tm.columnMappings.add(cm);
                     continue;
                 }

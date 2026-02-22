@@ -304,8 +304,14 @@
       "source" : "list_permissions",
       "value" : null,
       "lookup" : null
+    }, {
+      "target" : "analytics_ids",
+      "strategy" : "FACE_LIST_ANALYTICS_IDS",
+      "source" : null,
+      "value" : null,
+      "lookup" : null
     } ],
-    "unmappedTargetColumns" : [ "analytics_ids", "show_popup_for_internal_notifications" ]
+    "unmappedTargetColumns" : [ "show_popup_for_internal_notifications" ]
   }, {
     "sourceTable" : "roles",
     "targetTable" : "roles",
@@ -352,23 +358,6 @@
       "lookup" : null
     } ],
     "unmappedTargetColumns" : [ "is_external_address_enabled", "address", "port" ]
-  }, {
-    "sourceTable" : "settings",
-    "targetTable" : "system_settings",
-    "columnMappings" : [ {
-      "target" : "variable_name",
-      "strategy" : "DIRECT",
-      "source" : "Variable_name",
-      "value" : null,
-      "lookup" : null
-    }, {
-      "target" : "value",
-      "strategy" : "DIRECT",
-      "source" : "Value",
-      "value" : null,
-      "lookup" : null
-    } ],
-    "unmappedTargetColumns" : [ "id" ]
   }, {
     "sourceTable" : "stats_traffic_minutely",
     "targetTable" : "stats_traffic_minutely",
